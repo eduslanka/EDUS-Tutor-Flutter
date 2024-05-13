@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/screens/fees/model/Fee.dart';
-import 'package:infixedu/utils/widget/ScaleRoute.dart';
-import 'package:infixedu/screens/fees/widgets/fees_payment_row_widget.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/screens/fees/model/Fee.dart';
+import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
+import 'package:edus_tutor/screens/fees/widgets/fees_payment_row_widget.dart';
 
 // ignore: must_be_immutable
 class RazorPayment extends StatefulWidget {

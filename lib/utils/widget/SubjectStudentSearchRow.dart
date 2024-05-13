@@ -1,12 +1,12 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:infixedu/config/app_config.dart';
+import 'package:edus_tutor/config/app_config.dart';
 
 // Project imports:
-import 'package:infixedu/screens/student/Profile.dart';
-import 'package:infixedu/screens/student/SubjectStudentAttendance.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/model/Student.dart';
+import 'package:edus_tutor/screens/student/Profile.dart';
+import 'package:edus_tutor/screens/student/SubjectStudentAttendance.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/model/Student.dart';
 import 'ScaleRoute.dart';
 
 // ignore: must_be_immutable

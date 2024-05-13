@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:infixedu/screens/chat/models/ChatUser.dart';
+import 'package:edus_tutor/screens/chat/models/ChatUser.dart';
 
 SearchChatUserModel searchChatUserModelFromJson(String str) =>
     SearchChatUserModel.fromJson(json.decode(str));

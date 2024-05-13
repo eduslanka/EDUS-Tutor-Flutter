@@ -17,15 +17,15 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
 // Project imports:
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/exception/DioException.dart';
-import 'package:infixedu/utils/model/Classes.dart';
-import 'package:infixedu/utils/model/Section.dart';
-import 'package:infixedu/utils/model/TeacherSubject.dart';
-import 'package:infixedu/utils/permission_check.dart';
-import 'package:infixedu/utils/widget/image_pick_dialog.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/exception/DioException.dart';
+import 'package:edus_tutor/utils/model/Classes.dart';
+import 'package:edus_tutor/utils/model/Section.dart';
+import 'package:edus_tutor/utils/model/TeacherSubject.dart';
+import 'package:edus_tutor/utils/permission_check.dart';
+import 'package:edus_tutor/utils/widget/image_pick_dialog.dart';
 
 class AddHomeworkScrren extends StatefulWidget {
   const AddHomeworkScrren({Key? key}) : super(key: key);

@@ -8,15 +8,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 // Project imports:
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/controller/user_controller.dart';
-import 'package:infixedu/screens/fees/controller/student_fees_controller.dart';
-import 'package:infixedu/utils/StudentRecordWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/screens/fees/model/FeesRecord.dart';
-import 'package:infixedu/utils/model/StudentRecord.dart';
-import 'package:infixedu/utils/server/LogoutService.dart';
-import 'package:infixedu/screens/fees/fees_student/fees_student_new/fees_new_row_layout.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/controller/user_controller.dart';
+import 'package:edus_tutor/screens/fees/controller/student_fees_controller.dart';
+import 'package:edus_tutor/utils/StudentRecordWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/screens/fees/model/FeesRecord.dart';
+import 'package:edus_tutor/utils/model/StudentRecord.dart';
+import 'package:edus_tutor/utils/server/LogoutService.dart';
+import 'package:edus_tutor/screens/fees/fees_student/fees_student_new/fees_new_row_layout.dart';
 
 class StudentFeesNew extends StatefulWidget {
   final String? id;

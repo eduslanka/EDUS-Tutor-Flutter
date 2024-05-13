@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
-import 'package:infixedu/utils/model/Dormitory.dart';
+import 'package:edus_tutor/utils/model/Dormitory.dart';
 
 // ignore: must_be_immutable
 class DormitoryRow extends StatefulWidget {

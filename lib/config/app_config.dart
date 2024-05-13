@@ -5,7 +5,7 @@ class AppConfig {
 
   static String domainName = 'https://app.edustutor.com'; //** Replace with your domain name
 
-  static String appName = "InfixEdu";
+  static String appName = "EDUS Tutor";
 
   static String appLogo = 'assets/config/app_logo.png';
 

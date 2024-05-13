@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // Project imports:
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/screens/fees/model/Fee.dart';
-import 'package:infixedu/utils/model/PaymentMethod.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/screens/fees/model/Fee.dart';
+import 'package:edus_tutor/utils/model/PaymentMethod.dart';
 
 class XenditPaymentScreen extends StatefulWidget {
   final Function? onFinish;

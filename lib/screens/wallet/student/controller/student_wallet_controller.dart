@@ -5,17 +5,17 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:get/get.dart';
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/controller/user_controller.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/controller/user_controller.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:infixedu/screens/fees/paymentGateway/RazorPay/razorpay_service.dart';
-import 'package:infixedu/screens/fees/paymentGateway/khaltiPayment/khalti_payment_screen.dart';
-import 'package:infixedu/screens/fees/paymentGateway/paypal/paypal_payment.dart';
-import 'package:infixedu/screens/fees/paymentGateway/stripe/stripe_payment.dart';
-import 'package:infixedu/screens/wallet/student/model/Wallet.dart';
-import 'package:infixedu/utils/CustomSnackBars.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/RazorPay/razorpay_service.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/khaltiPayment/khalti_payment_screen.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/paypal/paypal_payment.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/stripe/stripe_payment.dart';
+import 'package:edus_tutor/screens/wallet/student/model/Wallet.dart';
+import 'package:edus_tutor/utils/CustomSnackBars.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:http/http.dart' as http;
 
 class StudentWalletController extends GetxController {

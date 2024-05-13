@@ -5,11 +5,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/model/LeaveAdmin.dart';
-import 'package:infixedu/utils/model/LibraryCategoryMember.dart';
-import 'package:infixedu/utils/model/Staff.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/model/LeaveAdmin.dart';
+import 'package:edus_tutor/utils/model/LibraryCategoryMember.dart';
+import 'package:edus_tutor/utils/model/Staff.dart';
 
 class StaffApiProvider {
   String token = '';

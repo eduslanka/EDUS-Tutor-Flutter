@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 // Project imports:
-import 'package:infixedu/utils/model/Subject.dart';
+import 'package:edus_tutor/utils/model/Subject.dart';
 
 // ignore: must_be_immutable
 class SubjectRowLayout extends StatelessWidget {

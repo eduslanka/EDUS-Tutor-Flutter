@@ -1,5 +1,5 @@
-import 'package:infixedu/screens/chat/models/FromToUser.dart';
-import 'package:infixedu/screens/chat/models/ReplyMessage.dart';
+import 'package:edus_tutor/screens/chat/models/FromToUser.dart';
+import 'package:edus_tutor/screens/chat/models/ReplyMessage.dart';
 
 class ChatMessage {
   ChatMessage({

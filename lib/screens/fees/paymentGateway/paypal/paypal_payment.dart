@@ -4,16 +4,16 @@ import 'dart:core';
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:infixedu/screens/fees/controller/student_fees_controller.dart';
-import 'package:infixedu/utils/CustomSnackBars.dart';
+import 'package:edus_tutor/screens/fees/controller/student_fees_controller.dart';
+import 'package:edus_tutor/utils/CustomSnackBars.dart';
 
 // Package imports:
 import 'package:webview_flutter/webview_flutter.dart';
 
 // Project imports:
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/model/PaymentMethod.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/model/PaymentMethod.dart';
 import 'paypal_service.dart';
 
 class PaypalPayment extends StatefulWidget {

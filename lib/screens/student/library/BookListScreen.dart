@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/model/Book.dart';
-import 'package:infixedu/utils/widget/BookRowLayout.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/model/Book.dart';
+import 'package:edus_tutor/utils/widget/BookRowLayout.dart';
 
 class BookListScreen extends StatefulWidget {
   const BookListScreen({Key? key}) : super(key: key);

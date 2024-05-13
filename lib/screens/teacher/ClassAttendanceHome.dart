@@ -12,11 +12,11 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/model/Classes.dart';
-import 'package:infixedu/utils/model/Section.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/model/Classes.dart';
+import 'package:edus_tutor/utils/model/Section.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'attendance/AttendanceStudentList.dart';
 

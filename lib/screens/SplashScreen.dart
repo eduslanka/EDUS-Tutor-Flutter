@@ -4,11 +4,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // Project imports:
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/controller/system_controller.dart';
-import 'package:infixedu/screens/Login.dart';
-import 'package:infixedu/utils/FunctinsData.dart';
-import 'package:infixedu/utils/Utils.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/controller/system_controller.dart';
+import 'package:edus_tutor/screens/Login.dart';
+import 'package:edus_tutor/utils/FunctinsData.dart';
+import 'package:edus_tutor/utils/Utils.dart';
 // Package imports:
 import 'package:shared_preferences/shared_preferences.dart';
 

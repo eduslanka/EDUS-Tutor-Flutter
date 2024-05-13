@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import 'package:infixedu/screens/fees/paymentGateway/khalti/core/khalti_core.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/khalti/core/khalti_core.dart';
 
 class KhaltiHttpClient extends KhaltiClient {
   @override

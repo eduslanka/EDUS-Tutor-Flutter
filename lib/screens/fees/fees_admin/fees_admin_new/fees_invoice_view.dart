@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
 import 'package:http/http.dart' as http;
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/screens/fees/model/FeeInvoiceDetailsModel.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/screens/fees/model/FeeInvoiceDetailsModel.dart';
 import 'package:intl/intl.dart';
 
 class FeeInvoiceDetailsView extends StatefulWidget {

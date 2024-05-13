@@ -1,8 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:infixedu/utils/CardItem.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/FunctinsData.dart';
+import 'package:edus_tutor/utils/CardItem.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/FunctinsData.dart';
 
 // Project imports:
 

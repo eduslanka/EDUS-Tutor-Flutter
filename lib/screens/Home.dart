@@ -16,24 +16,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:infixedu/controller/settings_controller.dart';
-import 'package:infixedu/controller/system_controller.dart';
-import 'package:infixedu/screens/chat/views/ChatPageMain.dart';
+import 'package:edus_tutor/controller/settings_controller.dart';
+import 'package:edus_tutor/controller/system_controller.dart';
+import 'package:edus_tutor/screens/chat/views/ChatPageMain.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 // Project imports:
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/screens/student/Profile.dart';
-import 'package:infixedu/utils/CardItem.dart';
-import 'package:infixedu/utils/FunctinsData.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/model/ReceivedSms.dart';
-import 'package:infixedu/utils/model/UserNotifications.dart';
-import 'package:infixedu/utils/server/About.dart';
-import 'package:infixedu/utils/server/LogoutService.dart';
-import 'package:infixedu/utils/widget/ScaleRoute.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/screens/student/Profile.dart';
+import 'package:edus_tutor/utils/CardItem.dart';
+import 'package:edus_tutor/utils/FunctinsData.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/model/ReceivedSms.dart';
+import 'package:edus_tutor/utils/model/UserNotifications.dart';
+import 'package:edus_tutor/utils/server/About.dart';
+import 'package:edus_tutor/utils/server/LogoutService.dart';
+import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import '../main.dart';
 import 'ChangePassword.dart';
 

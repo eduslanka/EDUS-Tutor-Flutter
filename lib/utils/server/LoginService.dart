@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 // ignore: library_prefixes
 import 'package:dio/dio.dart' as DIO;
 import 'package:get/get.dart';
-import 'package:infixedu/controller/system_controller.dart';
+import 'package:edus_tutor/controller/system_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Project imports:
-import 'package:infixedu/utils/FunctinsData.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/exception/DioException.dart';
+import 'package:edus_tutor/utils/FunctinsData.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/exception/DioException.dart';
 
 class Login {
   final String email;

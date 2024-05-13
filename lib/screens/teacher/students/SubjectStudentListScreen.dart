@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/model/Student.dart';
-import 'package:infixedu/utils/widget/SubjectStudentSearchRow.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/model/Student.dart';
+import 'package:edus_tutor/utils/widget/SubjectStudentSearchRow.dart';
 
 // ignore: must_be_immutable
 class SubjectStudentListScreen extends StatefulWidget {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Project imports:
-import 'package:infixedu/utils/model/Teacher.dart';
+import 'package:edus_tutor/utils/model/Teacher.dart';
 
 // ignore: must_be_immutable
 class StudentTeacherRowLayout extends StatefulWidget {

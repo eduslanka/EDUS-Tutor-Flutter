@@ -15,24 +15,24 @@ import 'package:get/get.dart' as GETx;
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/controller/user_controller.dart';
-import 'package:infixedu/screens/fees/paymentGateway/RazorPay/razorpay_service.dart';
-import 'package:infixedu/screens/fees/paymentGateway/paypal/paypal_payment.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/exception/DioException.dart';
-import 'package:infixedu/utils/model/Bank.dart';
-import 'package:infixedu/screens/fees/model/Fee.dart';
-import 'package:infixedu/utils/model/PaymentMethod.dart';
-import 'package:infixedu/utils/model/UserDetails.dart';
-import 'package:infixedu/utils/widget/ScaleRoute.dart';
-import 'package:infixedu/screens/fees/widgets/fees_payment_row_widget.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/controller/user_controller.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/RazorPay/razorpay_service.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/paypal/paypal_payment.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/exception/DioException.dart';
+import 'package:edus_tutor/utils/model/Bank.dart';
+import 'package:edus_tutor/screens/fees/model/Fee.dart';
+import 'package:edus_tutor/utils/model/PaymentMethod.dart';
+import 'package:edus_tutor/utils/model/UserDetails.dart';
+import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
+import 'package:edus_tutor/screens/fees/widgets/fees_payment_row_widget.dart';
 import 'khalti/KhaltiPaymentScreen.dart';
 import 'xendit/XenditScreen.dart';
 
-import 'package:infixedu/screens/fees/paymentGateway/stripe/stripe_payment.dart'
+import 'package:edus_tutor/screens/fees/paymentGateway/stripe/stripe_payment.dart'
     as StripePage;
 // import 'package:flutter_stripe/flutter_stripe.dart' as FlutterStripe;
 

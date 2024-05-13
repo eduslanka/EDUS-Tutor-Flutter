@@ -6,10 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 // Project imports:
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/utils/CardItem.dart';
-import 'package:infixedu/utils/FunctinsData.dart';
-import 'package:infixedu/utils/server/LogoutService.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/utils/CardItem.dart';
+import 'package:edus_tutor/utils/FunctinsData.dart';
+import 'package:edus_tutor/utils/server/LogoutService.dart';
 
 // ignore: must_be_immutable
 class DBTeacherHW extends StatefulWidget {

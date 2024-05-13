@@ -5,7 +5,7 @@ import 'package:eko_jitsi/eko_jitsi_listener.dart';
 import 'package:eko_jitsi/feature_flag/feature_flag_enum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
 
 class JitsiMeetClass extends StatefulWidget {
   final String? meetingId;

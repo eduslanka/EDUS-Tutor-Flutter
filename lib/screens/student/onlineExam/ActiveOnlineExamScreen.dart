@@ -8,16 +8,16 @@ import 'package:get/get.dart';
 
 // Package imports:
 import 'package:http/http.dart' as http;
-import 'package:infixedu/controller/user_controller.dart';
+import 'package:edus_tutor/controller/user_controller.dart';
 
 // Project imports:
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/StudentRecordWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/model/ActiveOnlineExam.dart';
-import 'package:infixedu/utils/model/StudentRecord.dart';
-import 'package:infixedu/utils/widget/ActiveOnlineExam.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/StudentRecordWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/model/ActiveOnlineExam.dart';
+import 'package:edus_tutor/utils/model/StudentRecord.dart';
+import 'package:edus_tutor/utils/widget/ActiveOnlineExam.dart';
 
 // ignore: must_be_immutable
 class ActiveOnlineExamScreen extends StatefulWidget {

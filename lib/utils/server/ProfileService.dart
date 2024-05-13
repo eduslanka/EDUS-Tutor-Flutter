@@ -8,9 +8,9 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 // Project imports:
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/model/InfixMap.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/model/InfixMap.dart';
 
 class ProfileService {
   String? email;

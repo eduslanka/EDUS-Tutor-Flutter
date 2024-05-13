@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:infixedu/utils/model/Leave.dart';
+import 'package:edus_tutor/utils/model/Leave.dart';
 
 // ignore: must_be_immutable
 class LeaveRow extends StatelessWidget {

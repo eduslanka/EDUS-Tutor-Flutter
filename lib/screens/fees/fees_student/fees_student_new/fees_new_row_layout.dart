@@ -1,11 +1,11 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:infixedu/screens/fees/fees_student/fees_student_new/fees_add_payment_screen.dart';
-import 'package:infixedu/screens/fees/fees_student/fees_student_new/fees_invoice_view.dart';
+import 'package:edus_tutor/screens/fees/fees_student/fees_student_new/fees_add_payment_screen.dart';
+import 'package:edus_tutor/screens/fees/fees_student/fees_student_new/fees_invoice_view.dart';
 
 // Project imports:
-import 'package:infixedu/screens/fees/model/FeesRecord.dart';
+import 'package:edus_tutor/screens/fees/model/FeesRecord.dart';
 
 // ignore: must_be_immutable
 class FeesRowNew extends StatefulWidget {

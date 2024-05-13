@@ -2,15 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:infixedu/screens/chat/controller/pusher_controller.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/screens/chat/models/ChatActiveStatus.dart';
-import 'package:infixedu/screens/chat/models/ChatModelMain.dart';
+import 'package:edus_tutor/screens/chat/controller/pusher_controller.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/screens/chat/models/ChatActiveStatus.dart';
+import 'package:edus_tutor/screens/chat/models/ChatModelMain.dart';
 import 'package:http/http.dart' as http;
-import 'package:infixedu/screens/chat/models/ChatSettingsModel.dart';
-import 'package:infixedu/screens/chat/models/ChatUser.dart';
-import 'package:infixedu/screens/chat/models/SearchChatUserModel.dart';
+import 'package:edus_tutor/screens/chat/models/ChatSettingsModel.dart';
+import 'package:edus_tutor/screens/chat/models/ChatUser.dart';
+import 'package:edus_tutor/screens/chat/models/SearchChatUserModel.dart';
 
 class ChatController extends GetxController {
   Rx<bool> isLoading = false.obs;

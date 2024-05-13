@@ -8,16 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/screens/teacher/attendance/subject_attendance_controller.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/screens/teacher/attendance/subject_attendance_controller.dart';
 
 // Project imports:
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/custom_widgets/CustomRadioButton/CustomButton/ButtonTextStyle.dart';
-import 'package:infixedu/utils/custom_widgets/CustomRadioButton/custom_radio_button.dart';
-import 'package:infixedu/utils/model/SubjectAttendance.dart';
-import 'package:infixedu/utils/model/GlobalClass.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/custom_widgets/CustomRadioButton/CustomButton/ButtonTextStyle.dart';
+import 'package:edus_tutor/utils/custom_widgets/CustomRadioButton/custom_radio_button.dart';
+import 'package:edus_tutor/utils/model/SubjectAttendance.dart';
+import 'package:edus_tutor/utils/model/GlobalClass.dart';
 
 // ignore: must_be_immutable
 class SubjectStudentAttendanceRow extends StatefulWidget {

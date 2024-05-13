@@ -1,5 +1,5 @@
-import 'package:infixedu/screens/chat/models/GroupThread.dart';
-import 'package:infixedu/screens/chat/models/ChatUser.dart';
+import 'package:edus_tutor/screens/chat/models/GroupThread.dart';
+import 'package:edus_tutor/screens/chat/models/ChatUser.dart';
 
 class ChatGroup {
   ChatGroup({

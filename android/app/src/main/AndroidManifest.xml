@@ -12,7 +12,7 @@
         tools:node="remove" />
 
     <application
-        android:label="AMSC"
+        android:label="EDUS Tutor"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"

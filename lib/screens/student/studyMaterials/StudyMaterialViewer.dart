@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:pdf_flutter/pdf_flutter.dart';
 
 // Project imports:
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
 
-// import 'package:infixedu/utils/pdf_flutter.dart';
+// import 'package:edus_tutor/utils/pdf_flutter.dart';
 
 class DownloadViewer extends StatefulWidget {
   final String? title;

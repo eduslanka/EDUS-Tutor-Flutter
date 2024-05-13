@@ -11,10 +11,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/exception/DioException.dart';
-import 'package:infixedu/utils/model/StudentHomework.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/exception/DioException.dart';
+import 'package:edus_tutor/utils/model/StudentHomework.dart';
 
 class UploadHomework extends StatefulWidget {
   final Homework? homework;

@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:infixedu/utils/StudentRecordWidget.dart';
-import 'package:infixedu/utils/model/StudentRecord.dart';
+import 'package:edus_tutor/utils/StudentRecordWidget.dart';
+import 'package:edus_tutor/utils/model/StudentRecord.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 

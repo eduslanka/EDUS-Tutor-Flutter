@@ -8,10 +8,10 @@ import 'package:dio/dio.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 // Project imports:
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/exception/DioException.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/exception/DioException.dart';
 
 // ignore: must_be_immutable
 class AddFeeType extends StatefulWidget {

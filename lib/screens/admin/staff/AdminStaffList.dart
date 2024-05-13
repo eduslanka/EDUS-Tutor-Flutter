@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:infixedu/screens/admin/Bloc/StaffBloc.dart';
-import 'package:infixedu/utils/CardItem.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/model/LibraryCategoryMember.dart';
-import 'package:infixedu/utils/widget/ScaleRoute.dart';
+import 'package:edus_tutor/screens/admin/Bloc/StaffBloc.dart';
+import 'package:edus_tutor/utils/CardItem.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/model/LibraryCategoryMember.dart';
+import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import 'StaffListScreen.dart';
 
 class AdminStaffList extends StatefulWidget {

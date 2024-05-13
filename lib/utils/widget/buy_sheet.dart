@@ -12,11 +12,11 @@
 // import 'package:uuid/uuid.dart';
 //
 // // Project imports:
-// import 'package:infixedu/paymentGateway/transaction_service.dart';
-// import 'package:infixedu/utils/CustomAppBarWidget.dart';
-// import 'package:infixedu/utils/Utils.dart';
-// import 'package:infixedu/utils/apis/Config.dart';
-// import 'package:infixedu/utils/model/Fee.dart';
+// import 'package:edus_tutor/paymentGateway/transaction_service.dart';
+// import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+// import 'package:edus_tutor/utils/Utils.dart';
+// import 'package:edus_tutor/utils/apis/Config.dart';
+// import 'package:edus_tutor/utils/model/Fee.dart';
 // import 'ScaleRoute.dart';
 // import 'dialog_modal.dart';
 // import 'fees_payment_row_widget.dart';

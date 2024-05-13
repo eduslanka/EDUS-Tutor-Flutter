@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:infixedu/screens/chat/models/ChatMessage.dart';
+import 'package:edus_tutor/screens/chat/models/ChatMessage.dart';
 
 ChatMessageCheckModel chatMessageCheckModelFromJson(String str) => ChatMessageCheckModel.fromJson(json.decode(str));
 

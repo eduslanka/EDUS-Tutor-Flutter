@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // Project imports:
-import 'package:infixedu/controller/system_controller.dart';
-import 'package:infixedu/screens/fees/fees_student/StudentFeesNew.dart';
-import 'package:infixedu/screens/fees/fees_student/StudentFeesOld.dart';
+import 'package:edus_tutor/controller/system_controller.dart';
+import 'package:edus_tutor/screens/fees/fees_student/StudentFeesNew.dart';
+import 'package:edus_tutor/screens/fees/fees_student/StudentFeesOld.dart';
 
 class DBStudentFees extends StatefulWidget {
   final String? id;

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:infixedu/utils/model/ClassExamList.dart';
+import 'package:edus_tutor/utils/model/ClassExamList.dart';
 import '../FunctinsData.dart';
 
 // ignore: must_be_immutable

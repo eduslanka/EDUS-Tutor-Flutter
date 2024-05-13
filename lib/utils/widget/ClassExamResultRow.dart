@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:infixedu/utils/model/ClassExam.dart';
+import 'package:edus_tutor/utils/model/ClassExam.dart';
 
 // ignore: must_be_immutable
 class ClassExamResultRow extends StatefulWidget {

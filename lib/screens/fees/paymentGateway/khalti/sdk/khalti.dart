@@ -5,11 +5,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 // Project imports:
-import 'package:infixedu/screens/fees/paymentGateway/khalti/core/src/config/khalti_config.dart';
-import 'package:infixedu/screens/fees/paymentGateway/khalti/core/src/data/khalti_service.dart';
-import 'package:infixedu/screens/fees/paymentGateway/khalti/sdk/src/khalti_http_client.dart';
-import 'package:infixedu/screens/fees/paymentGateway/khalti/sdk/src/util/device_util.dart';
-import 'package:infixedu/screens/fees/paymentGateway/khalti/sdk/src/util/package_util.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/khalti/core/src/config/khalti_config.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/khalti/core/src/data/khalti_service.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/khalti/sdk/src/khalti_http_client.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/khalti/sdk/src/util/device_util.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/khalti/sdk/src/util/package_util.dart';
 
 class Khalti {
   static Future<void> init({

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:infixedu/screens/chat/models/ChatGroup.dart';
-import 'package:infixedu/screens/chat/models/GroupThread.dart';
-import 'package:infixedu/screens/chat/models/ChatUser.dart';
+import 'package:edus_tutor/screens/chat/models/ChatGroup.dart';
+import 'package:edus_tutor/screens/chat/models/GroupThread.dart';
+import 'package:edus_tutor/screens/chat/models/ChatUser.dart';
 
 ChatGroupOpenModel chatGroupOpenModelFromJson(String str) =>
     ChatGroupOpenModel.fromJson(json.decode(str));

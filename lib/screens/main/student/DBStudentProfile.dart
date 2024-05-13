@@ -13,20 +13,20 @@ import 'package:file_utils/file_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:infixedu/utils/model/StudentDetailsModel.dart';
+import 'package:edus_tutor/utils/model/StudentDetailsModel.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Project imports:
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/screens/student/EditProfile.dart';
-import 'package:infixedu/screens/student/studyMaterials/StudyMaterialViewer.dart';
-import 'package:infixedu/utils/FunctinsData.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/server/ProfileService.dart';
-import 'package:infixedu/utils/widget/ProfileListRow.dart';
-import 'package:infixedu/utils/widget/ScaleRoute.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/screens/student/EditProfile.dart';
+import 'package:edus_tutor/screens/student/studyMaterials/StudyMaterialViewer.dart';
+import 'package:edus_tutor/utils/FunctinsData.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/server/ProfileService.dart';
+import 'package:edus_tutor/utils/widget/ProfileListRow.dart';
+import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 
 // ignore: must_be_immutable
 class DBStudentProfile extends StatefulWidget {

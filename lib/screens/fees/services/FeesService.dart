@@ -6,8 +6,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/screens/fees/model/Fee.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/screens/fees/model/Fee.dart';
 import '../../../utils/Utils.dart';
 
 // import 'dart:developer';

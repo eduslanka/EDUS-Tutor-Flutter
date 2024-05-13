@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:infixedu/screens/fees/paymentGateway/khalti/core/src/config/url.dart';
-import 'package:infixedu/screens/fees/paymentGateway/khalti/core/src/core/http_client/http_response.dart'
+import 'package:edus_tutor/screens/fees/paymentGateway/khalti/core/src/config/url.dart';
+import 'package:edus_tutor/screens/fees/paymentGateway/khalti/core/src/core/http_client/http_response.dart'
     as HTTPResponse;
 import '../../khalti_core.dart';
 

@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:infixedu/screens/chat/models/ChatGroup.dart';
-import 'package:infixedu/screens/chat/models/ChatUser.dart';
+import 'package:edus_tutor/screens/chat/models/ChatGroup.dart';
+import 'package:edus_tutor/screens/chat/models/ChatUser.dart';
 
 ChatModelMain chatModelMainFromJson(String str) =>
     ChatModelMain.fromJson(json.decode(str));

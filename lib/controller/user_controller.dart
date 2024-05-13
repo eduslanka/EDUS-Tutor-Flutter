@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:infixedu/utils/Utils.dart';
+import 'package:edus_tutor/utils/Utils.dart';
 import 'package:http/http.dart' as http;
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/model/StudentRecord.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/model/StudentRecord.dart';
 
 class UserController extends GetxController {
   final Rx<int> _studentId = 0.obs;

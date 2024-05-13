@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:infixedu/screens/fees/model/Fee.dart';
+import 'package:edus_tutor/screens/fees/model/Fee.dart';
 
 // ignore: must_be_immutable
 class FeePaymentRow extends StatelessWidget {

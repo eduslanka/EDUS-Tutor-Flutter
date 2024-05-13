@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
-import 'package:infixedu/utils/model/ONlineExamResult.dart';
+import 'package:edus_tutor/utils/model/ONlineExamResult.dart';
 
 // ignore: must_be_immutable
 class OnlineExamResultRow extends StatefulWidget {

@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 // Project imports:
-import 'package:infixedu/localization/application.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/server/About.dart';
-import 'package:infixedu/utils/widget/Line.dart';
+import 'package:edus_tutor/localization/application.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/server/About.dart';
+import 'package:edus_tutor/utils/widget/Line.dart';
 import '../../main.dart';
 
 class AdminSettings extends StatefulWidget {

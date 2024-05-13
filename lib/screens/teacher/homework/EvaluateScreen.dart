@@ -12,13 +12,13 @@ import 'package:http/http.dart' as http;
 import 'package:pdf_flutter/pdf_flutter.dart';
 
 // Project imports:
-import 'package:infixedu/screens/student/studyMaterials/StudyMaterialViewer.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/custom_widgets/CustomRadioButton/CustomButton/ButtonTextStyle.dart';
-import 'package:infixedu/utils/custom_widgets/CustomRadioButton/custom_radio_button.dart';
-import 'package:infixedu/utils/widget/Line.dart';
+import 'package:edus_tutor/screens/student/studyMaterials/StudyMaterialViewer.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/custom_widgets/CustomRadioButton/CustomButton/ButtonTextStyle.dart';
+import 'package:edus_tutor/utils/custom_widgets/CustomRadioButton/custom_radio_button.dart';
+import 'package:edus_tutor/utils/widget/Line.dart';
 
 class EvaluateScreen extends StatefulWidget {
   final String? studentName;

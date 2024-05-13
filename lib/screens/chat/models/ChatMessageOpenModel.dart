@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:infixedu/screens/chat/models/ChatMessage.dart';
-import 'package:infixedu/screens/chat/models/ChatUser.dart';
+import 'package:edus_tutor/screens/chat/models/ChatMessage.dart';
+import 'package:edus_tutor/screens/chat/models/ChatUser.dart';
 
 ChatMessageOpenModel chatMessageOpenModelFromJson(String str) =>
     ChatMessageOpenModel.fromJson(json.decode(str));

@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/model/Dormitory.dart';
-import 'package:infixedu/utils/widget/Dormitory_row.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/model/Dormitory.dart';
+import 'package:edus_tutor/utils/widget/Dormitory_row.dart';
 
 class DormitoryScreen extends StatefulWidget {
   const DormitoryScreen({Key? key}) : super(key: key);

@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:infixedu/utils/CardItem.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/FunctinsData.dart';
+import 'package:edus_tutor/utils/CardItem.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/FunctinsData.dart';
 
 // ignore: must_be_immutable
 class HomeworkHomeScreen extends StatefulWidget {

@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // Project imports:
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
 
 class KhaltiPayment extends StatefulWidget {
   final String? checkoutUrl;

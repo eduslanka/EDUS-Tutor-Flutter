@@ -9,22 +9,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:infixedu/config/app_config.dart';
-import 'package:infixedu/screens/chat/controller/chat_controller.dart';
-import 'package:infixedu/screens/chat/controller/chat_group_open_controller.dart';
-import 'package:infixedu/screens/chat/controller/pusher_controller.dart';
-import 'package:infixedu/screens/chat/views/Group/ChatGroupLoadMore.dart';
-import 'package:infixedu/screens/chat/views/FilePreview/ChatFilesPage.dart';
-import 'package:infixedu/screens/chat/views/Group/GroupMessageWidget.dart';
-import 'package:infixedu/utils/CustomSnackBars.dart';
-import 'package:infixedu/utils/LoadMoreIndicator.dart';
-import 'package:infixedu/utils/MediaUtils.dart';
-import 'package:infixedu/utils/Utils.dart';
+import 'package:edus_tutor/config/app_config.dart';
+import 'package:edus_tutor/screens/chat/controller/chat_controller.dart';
+import 'package:edus_tutor/screens/chat/controller/chat_group_open_controller.dart';
+import 'package:edus_tutor/screens/chat/controller/pusher_controller.dart';
+import 'package:edus_tutor/screens/chat/views/Group/ChatGroupLoadMore.dart';
+import 'package:edus_tutor/screens/chat/views/FilePreview/ChatFilesPage.dart';
+import 'package:edus_tutor/screens/chat/views/Group/GroupMessageWidget.dart';
+import 'package:edus_tutor/utils/CustomSnackBars.dart';
+import 'package:edus_tutor/utils/LoadMoreIndicator.dart';
+import 'package:edus_tutor/utils/MediaUtils.dart';
+import 'package:edus_tutor/utils/Utils.dart';
 
-import 'package:infixedu/screens/chat/models/ChatGroup.dart';
+import 'package:edus_tutor/screens/chat/models/ChatGroup.dart';
 
-import 'package:infixedu/screens/chat/models/GroupThread.dart';
-import 'package:infixedu/screens/chat/models/ChatUser.dart';
+import 'package:edus_tutor/screens/chat/models/GroupThread.dart';
+import 'package:edus_tutor/screens/chat/models/ChatUser.dart';
 
 import 'package:loading_more_list/loading_more_list.dart';
 

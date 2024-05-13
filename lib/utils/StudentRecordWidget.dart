@@ -1,5 +1,5 @@
-import 'package:infixedu/controller/user_controller.dart';
-import 'package:infixedu/utils/model/StudentRecord.dart';
+import 'package:edus_tutor/controller/user_controller.dart';
+import 'package:edus_tutor/utils/model/StudentRecord.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

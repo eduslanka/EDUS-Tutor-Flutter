@@ -10,14 +10,14 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import 'package:infixedu/utils/CustomAppBarWidget.dart';
-import 'package:infixedu/utils/Utils.dart';
-import 'package:infixedu/utils/apis/Apis.dart';
-import 'package:infixedu/utils/download_dialog.dart';
-import 'package:infixedu/utils/model/LeaveAdmin.dart';
-import 'package:infixedu/utils/model/StudentLeave.dart';
-import 'package:infixedu/utils/permission_check.dart';
-import 'package:infixedu/utils/widget/Line.dart';
+import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:edus_tutor/utils/Utils.dart';
+import 'package:edus_tutor/utils/apis/Apis.dart';
+import 'package:edus_tutor/utils/download_dialog.dart';
+import 'package:edus_tutor/utils/model/LeaveAdmin.dart';
+import 'package:edus_tutor/utils/model/StudentLeave.dart';
+import 'package:edus_tutor/utils/permission_check.dart';
+import 'package:edus_tutor/utils/widget/Line.dart';
 
 // ignore: must_be_immutable
 class LeaveListStudent extends StatefulWidget {
