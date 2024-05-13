@@ -69,7 +69,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
-  final _titles;
+  final  _titles;
 
   // ignore: prefer_typing_uninitialized_variables
   final _images;
@@ -77,7 +77,7 @@ class Home extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   var rule;
 
-  Home(this._titles, this._images, this.rule, {Key? key}) : super(key: key);
+  Home( this._titles, this._images, this.rule, {Key? key}) : super(key: key);
 
   @override
   // ignore: no_logic_in_create_state
@@ -396,9 +396,11 @@ class _HomeState extends State<Home> {
                   crossAxisCount: 3,
                 ),
                 itemBuilder: (context, index) {
+                    print(_rule);
                   return CustomWidget(
                     index: index,
                     isSelected: currentSelectedIndex == index,
+                  
                     onSelect: () {
                       setState(() {
                         currentSelectedIndex = index;

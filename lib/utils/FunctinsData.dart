@@ -94,7 +94,7 @@ class AppFunction {
   static var students = [
     'Homework',
     'Study Materials',
-    'Timeline',
+   // 'Timeline',
     'Attendance',
     'Wallet',
     'Examination',
@@ -103,10 +103,10 @@ class AppFunction {
     'Leave',
     'Notice',
     'Subjects',
-    'Teacher',
-    'Library',
-    'Transport',
-    'Dormitory',
+    //'Teacher',
+   // 'Library',
+   // 'Transport',
+  //  'Dormitory',
     'Class',
     'Settings',
   ];
@@ -488,12 +488,12 @@ class AppFunction {
                 page: LeaveStudentHome(studentLeaves, studentLeavesIcons,
                     id: id)));
         break;
-      case 'Dormitory':
-        Navigator.push(context, ScaleRoute(page: const DormitoryScreen()));
-        break;
-      case 'Transport':
-        Navigator.push(context, ScaleRoute(page: const TransportScreen()));
-        break;
+      // case 'Dormitory':
+      //   Navigator.push(context, ScaleRoute(page: const DormitoryScreen()));
+      //   break;
+      // case 'Transport':
+      //   Navigator.push(context, ScaleRoute(page: const TransportScreen()));
+      //   break;
       case 'Subjects':
         Navigator.push(
           context,
@@ -504,35 +504,35 @@ class AppFunction {
           ),
         );
         break;
-      case 'Teacher':
-        Navigator.push(
-          context,
-          ScaleRoute(
-            page: StudentTeacher(
-              id: id,
-              token: token,
-            ),
-          ),
-        );
-        break;
-      case 'Library':
-        Navigator.push(
-          context,
-          ScaleRoute(
-            page: LibraryHome(
-              librarys,
-              libraryIcons,
-              id: id,
-            ),
-          ),
-        );
-        break;
+      // case 'Teacher':
+      //   Navigator.push(
+      //     context,
+      //     ScaleRoute(
+      //       page: StudentTeacher(
+      //         id: id,
+      //         token: token,
+      //       ),
+      //     ),
+      //   );
+      //   break;
+      // case 'Library':
+      //   Navigator.push(
+      //     context,
+      //     ScaleRoute(
+      //       page: LibraryHome(
+      //         librarys,
+      //         libraryIcons,
+      //         id: id,
+      //       ),
+      //     ),
+      //   );
+      //   break;
       case 'Notice':
         Navigator.push(context, ScaleRoute(page: const NoticeScreen()));
         break;
-      case 'Timeline':
-        Navigator.push(context, ScaleRoute(page: TimelineScreen(id: id)));
-        break;
+      // case 'Timeline':
+      //   Navigator.push(context, ScaleRoute(page: TimelineScreen(id: id)));
+      //   break;
       case 'Examination':
         Navigator.push(
           context,
