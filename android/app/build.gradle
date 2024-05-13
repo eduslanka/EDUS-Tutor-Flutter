@@ -65,7 +65,7 @@ android {
     rootProject.ext.ffmpegKitPackage = "video"
 
     defaultConfig {
-        applicationId "com.edu.infix.infixedu"
+        applicationId "com.edus.edustutor"
         minSdkVersion 23
         targetSdkVersion 33
         versionCode 51
