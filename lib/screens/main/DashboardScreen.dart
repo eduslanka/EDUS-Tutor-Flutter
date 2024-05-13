@@ -209,7 +209,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           // badgeAnimation: BadgeAnimationType.fade,
                           // toAnimate: false,
-                          badgeAnimation: bz.BadgeAnimation.fade(
+                          badgeAnimation: const bz.BadgeAnimation.fade(
                             animationDuration: Duration(seconds: 1),
                             loopAnimation: false,
                           ),
@@ -229,11 +229,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ?.copyWith(color: Colors.white),
                         ),
                         // badgeColor: Colors.deepPurple,
-                        badgeStyle: bz.BadgeStyle(
+                        badgeStyle: const bz.BadgeStyle(
                           badgeColor: Colors.deepPurple,
                         ),
                         // animationType: bz.BadgeAnimationType.fade,
-                        badgeAnimation: bz.BadgeAnimation.fade(
+                        badgeAnimation: const bz.BadgeAnimation.fade(
                           // animationDuration: Duration(seconds: 1),
                         ),
                         child: Icon(
@@ -255,7 +255,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           // badgeAnimation: BadgeAnimationType.fade,
                           // toAnimate: false,
-                          badgeAnimation: bz.BadgeAnimation.fade(
+                          badgeAnimation: const bz.BadgeAnimation.fade(
                             animationDuration: Duration(seconds: 1),
                             loopAnimation: false,
                           ),
@@ -276,10 +276,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                         // badgeColor: Colors.deepPurple,
                         // animationType: bz.BadgeAnimationType.fade,
-                        badgeStyle: bz.BadgeStyle(
+                        badgeStyle: const bz.BadgeStyle(
                           badgeColor: Colors.deepPurple,
                         ),
-                        badgeAnimation: bz.BadgeAnimation.fade(),
+                        badgeAnimation: const bz.BadgeAnimation.fade(),
                         child: Icon(
                           Themify.bell,
                           size: 22.sp,
