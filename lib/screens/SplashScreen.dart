@@ -12,6 +12,8 @@ import 'package:edus_tutor/utils/Utils.dart';
 // Package imports:
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'onbording_screen.dart';
+
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
 
@@ -45,7 +47,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
           });
         } else {
           if (mounted) {
-            route = MaterialPageRoute(builder: (context) => const LoginScreen());
+            route = MaterialPageRoute(builder: (context) => const OnbordingScreen());
             Navigator.pushReplacement(context, route);
           }
         }

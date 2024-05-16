@@ -92,22 +92,29 @@ import '../screens/virtual_class/virtual_class_main.dart';
 
 class AppFunction {
   static var students = [
-    'Homework',
-    'Study Materials',
-   // 'Timeline',
-    'Attendance',
-    'Wallet',
-    'Examination',
-    'Online Exam',
-    'Lesson',
-    'Leave',
+    'Class',
     'Notice',
     'Subjects',
+    'Study Materials',
+    'Homework',
+    'Lesson',
+    'Examination',
+    'Online Exam',
+   // 'Timeline',
+    'Attendance',
+     'Leave',
+    'Wallet',
+    
+    
+    
+   
+   
+    
     //'Teacher',
    // 'Library',
    // 'Transport',
   //  'Dormitory',
-    'Class',
+    
     'Settings',
   ];
   static var studentIcons = [
