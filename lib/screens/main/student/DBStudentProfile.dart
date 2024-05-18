@@ -125,7 +125,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                 image: AssetImage(AppConfig.appToolbarBackground),
                 fit: BoxFit.fill,
               ),
-              color: Colors.deepPurple,
+              color: Color(0xff053EFF),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -199,7 +199,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                             alignment: Alignment.center,
                             child: CircleAvatar(
                               radius: 25,
-                              backgroundColor: Colors.deepPurpleAccent,
+                              backgroundColor: Colors.blueAccent,
                               child: CachedNetworkImage(
                                 imageUrl:
                                     "${InfixApi.root}/${_studentDetails.studentData?.user?.studentPhoto}",
@@ -267,11 +267,11 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                 appBar: AppBar(
                                   automaticallyImplyLeading: false,
                                   backgroundColor: Colors.white,
-                                  // shadowColor: Colors.purple,
+                                  // shadowColor: Color(0xff053EFF),
                                   elevation: 0,
                                   title: TabBar(
                                     labelColor: const Color(0xff415094),
-                                    indicatorColor: Colors.purple,
+                                    indicatorColor: Color(0xff053EFF),
                                     indicatorWeight: 3,
                                     tabs: tabs,
                                     isScrollable: true,
@@ -785,7 +785,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                       const Icon(
                         Icons.file_present,
                         size: 20,
-                        color: Colors.deepPurple,
+                        color: Color(0xff053EFF),
                       ),
                       const SizedBox(
                         width: 10,
@@ -826,7 +826,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                       const Icon(
                         Icons.file_present,
                         size: 20,
-                        color: Colors.deepPurple,
+                        color: Color(0xff053EFF),
                       ),
                       const SizedBox(
                         width: 10,
@@ -867,7 +867,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                       const Icon(
                         Icons.file_present,
                         size: 20,
-                        color: Colors.deepPurple,
+                        color: Color(0xff053EFF),
                       ),
                       const SizedBox(
                         width: 10,
@@ -908,7 +908,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                       const Icon(
                         Icons.file_present,
                         size: 20,
-                        color: Colors.deepPurple,
+                        color: Color(0xff053EFF),
                       ),
                       const SizedBox(
                         width: 10,

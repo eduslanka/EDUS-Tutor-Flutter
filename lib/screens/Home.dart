@@ -245,7 +245,7 @@ class _HomeState extends State<Home> {
               title: message.notification?.title ?? '',
               description: message.notification?.body ?? '',
               gravity: Gravity.top,
-              backgroundColor: Colors.deepPurple,
+              backgroundColor: const Color(0xff053EFF),
               icon: Icons.notifications_active,
               duration: 5,
             );
@@ -282,7 +282,7 @@ class _HomeState extends State<Home> {
             title: message.notification?.title ?? '',
             description: message.notification?.body ?? '',
             gravity: Gravity.top,
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: const Color(0xff053EFF),
             icon: Icons.notifications_active,
             duration: 5,
           );
@@ -307,7 +307,7 @@ class _HomeState extends State<Home> {
                 image: AssetImage(AppConfig.appToolbarBackground),
                 fit: BoxFit.fill,
               ),
-              color: Colors.deepPurple,
+              color: const Color(0xff053EFF),
             ),
             child: Row(
               children: [
@@ -350,7 +350,7 @@ class _HomeState extends State<Home> {
                 ),
                 IconButton(
                   onPressed: () {
-                    Get.to(() => ChatPageMain());
+                    Get.to(() => const ChatPageMain());
                   },
                   icon: Icon(
                     FontAwesomeIcons.facebookMessenger,
@@ -483,7 +483,7 @@ class _HomeState extends State<Home> {
                       shape: BoxShape.rectangle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.deepPurple,
+                          color: Color(0xff053EFF),
                           blurRadius: 20.0,
                         ),
                       ]),
@@ -532,8 +532,8 @@ class _HomeState extends State<Home> {
                                                           end: Alignment
                                                               .bottomCenter,
                                                           colors: [
-                                                        Colors.purpleAccent,
-                                                        Colors.deepPurpleAccent
+                                                        Color(0xff053EFF),
+                                                        Colors.blueAccent
                                                       ]),
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -602,7 +602,7 @@ class _HomeState extends State<Home> {
                                                 children: [
                                                   Icon(
                                                     FontAwesomeIcons.solidBell,
-                                                    color: Colors.deepPurple,
+                                                    color: const Color(0xff053EFF),
                                                     size:
                                                         ScreenUtil().setSp(15),
                                                   ),
@@ -695,7 +695,7 @@ class _HomeState extends State<Home> {
                                             ),
                                       ),
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.deepPurple,
+                                        backgroundColor: const Color(0xff053EFF),
                                       ),
                                     ),
                                   ],
@@ -794,7 +794,7 @@ class _HomeState extends State<Home> {
                       //color: const Color(0xFF66BB6A),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.deepPurple,
+                          color: Color(0xff053EFF),
                           blurRadius: 20.0,
                         ),
                       ]),
@@ -884,13 +884,13 @@ class _HomeState extends State<Home> {
                 child: Container(
                   height: MediaQuery.of(context).size.height / 6,
                   width: MediaQuery.of(context).size.width / 1.2,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       shape: BoxShape
                           .rectangle, // BoxShape.circle or BoxShape.retangle
                       //color: const Color(0xFF66BB6A),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.deepPurple.shade300,
+                          color: Color(0xff053EFF),
                           blurRadius: 20.0,
                         ),
                       ]),

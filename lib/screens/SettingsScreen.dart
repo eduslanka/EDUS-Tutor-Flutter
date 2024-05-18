@@ -1,9 +1,9 @@
+import 'package:edus_tutor/webview/launch_webview.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:edus_tutor/controller/settings_controller.dart';
 import 'package:edus_tutor/language/language_selection.dart';
 import 'package:edus_tutor/language/translation.dart';
 
@@ -14,7 +14,6 @@ import 'package:edus_tutor/utils/widget/Line.dart';
 import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
-import '../utils/widget/account_delete_dialogue.dart';
 import 'ChangePassword.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -46,7 +45,7 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarWidget(title: 'Settings'.tr),
+      appBar: CustomAppBarWidget(title: 'More'.tr),
       backgroundColor: Colors.white,
       key: _scaffold,
       body: ListView(
@@ -61,56 +60,56 @@ class _SettingScreenState extends State<SettingScreen> {
           //     elevation: 5.0,
           //   ),
           // ),
-          // BottomLine(),
+          BottomLine(),
           const SizedBox(
             height: 10,
           ),
-          ListTile(
-            onTap: () {
-              showChangeLanguageAlert(_scaffold.currentContext!);
-              // if (_scaffold.currentContext != null) {
-              //   showChangeLanguageAlert(context);
-              // }
-            },
-            leading: CircleAvatar(
-              backgroundColor: Colors.deepPurpleAccent,
-              child: Icon(
-                Icons.language,
-                color: Colors.white,
-                size: ScreenUtil().setSp(16),
-              ),
-            ),
-            title: Text(
-              'Change Language'.tr,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            trailing: GetBuilder<LanguageController>(
-                init: LanguageController(),
-                builder: (controller) {
-                  return Container(
-                      decoration: BoxDecoration(
-                          color: Colors.redAccent,
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          controller.langName.value,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.copyWith(color: Colors.white),
-                        ),
-                      ));
-                }),
-            dense: true,
-          ),
-          const BottomLine(),
+          // ListTile(
+          //   onTap: () {
+          //     showChangeLanguageAlert(_scaffold.currentContext!);
+          //     // if (_scaffold.currentContext != null) {
+          //     //   showChangeLanguageAlert(context);
+          //     // }
+          //   },
+          //   leading: CircleAvatar(
+          //     backgroundColor: Colors.blueAccent,
+          //     child: Icon(
+          //       Icons.language,
+          //       color: Colors.white,
+          //       size: ScreenUtil().setSp(16),
+          //     ),
+          //   ),
+          //   title: Text(
+          //     'Change Language'.tr,
+          //     style: Theme.of(context).textTheme.titleLarge,
+          //   ),
+          //   trailing: GetBuilder<LanguageController>(
+          //       init: LanguageController(),
+          //       builder: (controller) {
+          //         return Container(
+          //             decoration: BoxDecoration(
+          //                 color: Colors.redAccent,
+          //                 borderRadius: BorderRadius.circular(8)),
+          //             child: Padding(
+          //               padding: const EdgeInsets.all(5.0),
+          //               child: Text(
+          //                 controller.langName.value,
+          //                 style: Theme.of(context)
+          //                     .textTheme
+          //                     .titleLarge
+          //                     ?.copyWith(color: Colors.white),
+          //               ),
+          //             ));
+          //       }),
+          //   dense: true,
+          // ),
+          // const BottomLine(),
           ListTile(
             onTap: () {
               Navigator.of(context).push(ScaleRoute(page: const ChangePassword()));
             },
             leading: CircleAvatar(
-              backgroundColor: Colors.deepPurpleAccent,
+              backgroundColor: Colors.blueAccent,
               child: Icon(
                 Icons.lock,
                 color: Colors.white,
@@ -124,35 +123,73 @@ class _SettingScreenState extends State<SettingScreen> {
             dense: true,
           ),
           const BottomLine(),
-
           ListTile(
             onTap: () {
-              Get.dialog(
-                AccountDeleteDialogue(
-                  onYesTap: () {
-                    Get.back();
-                    settingsController.deleteAccount(context);
-                    // settingsController.deleteAccount(context).then((value) => Navigator.pop(context));
-                  },
-                ),
-                // backgroundColor: Colors.white,
-              );
+              Navigator.of(context).push(ScaleRoute(page: const LaunchWebView(launchUrl: 'https://edustutor.com/terms-conditions/',title: 'Terms & Conditions',)));
             },
             leading: CircleAvatar(
-              backgroundColor: Colors.deepPurpleAccent,
+              backgroundColor: Colors.blueAccent,
               child: Icon(
-                Icons.delete,
+                Icons.note_alt,
                 color: Colors.white,
                 size: ScreenUtil().setSp(16),
               ),
             ),
             title: Text(
-              'Account Delete'.tr,
+              'Terms & Conditions'.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             dense: true,
           ),
           const BottomLine(),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).push(ScaleRoute(page: const LaunchWebView(launchUrl: 'https://edustutor.com/privacy-policy/',title: 'Privacy Policy',)));
+            },
+            leading: CircleAvatar(
+              backgroundColor: Colors.blueAccent,
+              child: Icon(
+                Icons.security,
+                color: Colors.white,
+                size: ScreenUtil().setSp(16),
+              ),
+            ),
+            title: Text(
+              'Privacy Policy'.tr,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            dense: true,
+          ),
+          const BottomLine(),
+
+          // ListTile(
+          //   onTap: () {
+          //     Get.dialog(
+          //       AccountDeleteDialogue(
+          //         onYesTap: () {
+          //           Get.back();
+          //           settingsController.deleteAccount(context);
+          //           // settingsController.deleteAccount(context).then((value) => Navigator.pop(context));
+          //         },
+          //       ),
+          //       // backgroundColor: Colors.white,
+          //     );
+          //   },
+          //   leading: CircleAvatar(
+          //     backgroundColor: Colors.blueAccent,
+          //     child: Icon(
+          //       Icons.delete,
+          //       color: Colors.white,
+          //       size: ScreenUtil().setSp(16),
+          //     ),
+          //   ),
+          //   title: Text(
+          //     'Account Delete'.tr,
+          //     style: Theme.of(context).textTheme.titleLarge,
+          //   ),
+          //   dense: true,
+          // ),
+          // const BottomLine(),
 
         ],
       ),
@@ -172,10 +209,10 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           ),
           ToggleButtons(
-            borderColor: Colors.deepPurple,
-            fillColor: Colors.deepPurple.shade200,
+            borderColor: Color(0xff053EFF),
+            fillColor: Color(0xff053EFF),
             borderWidth: 2,
-            selectedBorderColor: Colors.deepPurple,
+            selectedBorderColor: Color(0xff053EFF),
             selectedColor: Colors.white,
             borderRadius: BorderRadius.circular(0),
             children: const <Widget>[

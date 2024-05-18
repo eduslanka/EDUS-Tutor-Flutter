@@ -143,7 +143,7 @@ class ShapesPainter extends CustomPainter {
     var rect = Rect.fromLTWH(0, 0, size.width, size.height);
     // draw the rectangle using the paint
     canvas.drawRect(rect, paint);
-    paint.color = Colors.deepPurpleAccent.withOpacity(0.6);
+    paint.color = Colors.blueAccent.withOpacity(0.6);
     // create a path
     var path = Path();
     path.lineTo(0, size.height);
@@ -152,14 +152,14 @@ class ShapesPainter extends CustomPainter {
     path.close();
     canvas.drawPath(path, paint);
 
-    paint.color = Colors.deepPurpleAccent.withOpacity(0.4);
+    paint.color = Colors.blueAccent.withOpacity(0.4);
     var path2 = Path();
     path2.lineTo(size.width + 50, 0);
     path2.lineTo(0, size.height / 1.5);
     path2.close();
     canvas.drawPath(path2, paint);
 
-    paint.color = Colors.deepPurpleAccent.withOpacity(0.8);
+    paint.color = Colors.blueAccent.withOpacity(0.8);
     var path3 = Path();
     path3.lineTo(size.width + 50, 0);
     path3.lineTo(0, size.height / 2);

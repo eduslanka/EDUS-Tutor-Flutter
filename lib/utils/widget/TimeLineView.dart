@@ -37,7 +37,7 @@ class TimeLineView extends StatelessWidget {
                 width: 14,
                 height: 16,
                 decoration: const BoxDecoration(
-                  color: Colors.purple,
+                  color: Color(0xff053EFF),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -45,7 +45,7 @@ class TimeLineView extends StatelessWidget {
                 width: 0.5,
                 height: 150,
                 decoration: const BoxDecoration(
-                  color: Colors.deepPurple,
+                  color: Color(0xff053EFF),
                   shape: BoxShape.rectangle,
                 ),
               ),

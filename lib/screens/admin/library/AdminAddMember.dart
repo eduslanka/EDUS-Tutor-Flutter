@@ -188,7 +188,7 @@ class _AddMemberState extends State<AddMember> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurpleAccent,
+                  backgroundColor: Colors.blueAccent,
                 ),
                 onPressed: () {
                   if (selectedCategoryId == 2) {

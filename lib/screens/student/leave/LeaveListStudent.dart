@@ -191,7 +191,7 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                             bottom: TabBar(
                               labelColor: Colors.black,
                               labelPadding: EdgeInsets.zero,
-                              indicatorColor: Colors.purple,
+                              indicatorColor: Color(0xff053EFF),
                               tabs: tabs,
                               indicatorPadding: EdgeInsets.zero,
                               labelStyle: Theme.of(context).textTheme.headlineMedium,
@@ -259,7 +259,7 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                                       .textTheme
                                       .headlineMedium
                                       ?.copyWith(
-                                          color: Colors.deepPurpleAccent,
+                                          color: Colors.blueAccent,
                                           decoration: TextDecoration.underline,
                                           fontWeight: FontWeight.bold),
                                 ),
@@ -375,7 +375,7 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                               gradient: LinearGradient(
                                   begin: Alignment.centerRight,
                                   end: Alignment.centerLeft,
-                                  colors: [Colors.purple, Colors.deepPurple]),
+                                  colors: [Color(0xff053EFF), Color(0xff053EFF)]),
                             ),
                           ),
                         ],

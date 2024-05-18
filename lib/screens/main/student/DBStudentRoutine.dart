@@ -129,7 +129,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                 image: AssetImage(AppConfig.appToolbarBackground),
                 fit: BoxFit.fill,
               ),
-              color: Colors.deepPurple,
+              color: Color(0xff053EFF),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -211,8 +211,8 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                                     borderRadius: BorderRadius.circular(2.0),
                                     gradient: const LinearGradient(
                                       colors: [
-                                        Color(0xff7C32FF),
-                                        Color(0xffC738D8),
+                                        Colors.lightBlue,
+                                        Color(0xff053EFF),
                                       ],
                                     )),
                                 labelColor: Colors.white,
@@ -263,8 +263,8 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                                                           Alignment.centerRight,
                                                       end: Alignment.centerLeft,
                                                       colors: [
-                                                        Colors.purple,
-                                                        Colors.deepPurple
+                                                        Color(0xff053EFF),
+                                                        Color(0xff053EFF)
                                                       ]),
                                                 ),
                                               );

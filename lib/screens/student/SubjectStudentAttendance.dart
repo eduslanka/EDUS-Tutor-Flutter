@@ -384,8 +384,8 @@ class _SubjectStudentAttendanceScreenState
                       bottomDesign('Present'.tr, 'P', Colors.green),
                       bottomDesign('Absent'.tr, 'A', Colors.red),
                       bottomDesign('Late'.tr, 'L', const Color(0xFFEDD200)),
-                      bottomDesign('Halfday'.tr, 'F', Colors.purpleAccent),
-                      bottomDesign('Holiday'.tr, 'H', Colors.deepPurpleAccent),
+                      bottomDesign('Halfday'.tr, 'F', Color(0xff053EFF)),
+                      bottomDesign('Holiday'.tr, 'H', Colors.blueAccent),
                     ],
                   ),
                 ),
@@ -480,10 +480,10 @@ class _SubjectStudentAttendanceScreenState
         return const Color(0xFFEDD200);
         break;
       case 'F':
-        return Colors.purpleAccent;
+        return Color(0xff053EFF);
         break;
       case 'H':
-        return Colors.deepPurpleAccent;
+        return Colors.blueAccent;
         break;
       default:
         return Colors.transparent;

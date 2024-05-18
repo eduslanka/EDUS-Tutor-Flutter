@@ -63,7 +63,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
                   return const Padding(
                     padding: EdgeInsets.only(left: 12.0, right: 12.0),
                     child: Divider(
-                      color: Colors.deepPurple,
+                      color: Color(0xff053EFF),
                       thickness: 0.5,
                     ),
                   );

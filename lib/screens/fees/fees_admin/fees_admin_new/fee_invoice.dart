@@ -74,7 +74,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                 image: AssetImage(AppConfig.appToolbarBackground),
                 fit: BoxFit.fill,
               ),
-              color: Colors.deepPurple,
+              color: Color(0xff053EFF),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -189,7 +189,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                                 PopupMenuButton(
                                   child: const Icon(
                                     Icons.more_vert,
-                                    color: Colors.deepPurple,
+                                    color: Color(0xff053EFF),
                                     size: 20,
                                   ),
                                   itemBuilder: (context) {
@@ -435,7 +435,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                               PopupMenuButton(
                                 child: const Icon(
                                   Icons.more_vert,
-                                  color: Colors.deepPurple,
+                                  color: Color(0xff053EFF),
                                   size: 20,
                                 ),
                                 itemBuilder: (context) {

@@ -50,7 +50,7 @@ class _RadioWidgetState extends State<RadioWidget> {
               Text(
                 widget.headline,
                 style: TextStyle(
-                  color: widget.isSelected ? Colors.deepPurple : Colors.grey,
+                  color: widget.isSelected ? Color(0xff053EFF) : Colors.grey,
                   fontSize: 10.0,
                 ),
                 maxLines: 1,

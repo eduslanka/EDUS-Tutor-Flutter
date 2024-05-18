@@ -131,7 +131,7 @@ class _DormitoryScreenState extends State<ClassExamResultRow> {
             gradient: LinearGradient(
                 begin: Alignment.centerRight,
                 end: Alignment.centerLeft,
-                colors: [Colors.purple, Colors.deepPurple]),
+                colors: [Color(0xff053EFF), Color(0xff053EFF)]),
           ),
         ),
       ],

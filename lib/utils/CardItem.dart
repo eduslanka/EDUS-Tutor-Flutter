@@ -40,14 +40,14 @@ class _CustomWidgetState extends State<CustomWidget> {
         child: Container(
           height: 100.0,
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color:
-                    widget.isSelected ? const Color(0xffc8abfc) : const Color(0xffc8abfc),
-                blurRadius: 10.0,
-                offset: const Offset(2, 4),
-              ),
-            ],
+            // boxShadow: [
+            //   BoxShadow(
+            //     color:
+            //         widget.isSelected ? const Color(0xffc8abfc) : const Color(0xffc8abfc),
+            //     blurRadius: 10.0,
+            //     offset: const Offset(2, 4),
+            //   ),
+            // ],
           ),
           child: Container(
             decoration: BoxDecoration(
@@ -55,7 +55,7 @@ class _CustomWidgetState extends State<CustomWidget> {
                   ? const LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.purpleAccent, Colors.deepPurpleAccent])
+                      colors: [Color(0xff053EFF), Colors.blueAccent])
                   : const LinearGradient(colors: [Colors.white, Colors.white]),
               borderRadius: BorderRadius.circular(10.0),
             ),
@@ -64,7 +64,7 @@ class _CustomWidgetState extends State<CustomWidget> {
               children: <Widget>[
                 Image.asset(
                   widget.icon.toString(),
-                  color: widget.isSelected ? Colors.white : Colors.purpleAccent,
+                  color: widget.isSelected ? Colors.white : Color(0xff053EFF),
                   width: 35.w,
                   height: 35.h,
                 ),

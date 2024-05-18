@@ -112,8 +112,8 @@ class _StudentAttendanceRowState extends State<StudentAttendanceRow>
                         ? null
                         : attendanceStudents?.attendanceType,
                 elevation: 0,
-                unSelectedColor: Colors.deepPurple.shade100,
-                selectedColor: Colors.deepPurple,
+                unSelectedColor: Color(0xff053EFF),
+                selectedColor: Color(0xff053EFF),
                 buttonLables: const [
                   'Present',
                   'Late',
@@ -165,7 +165,7 @@ class _StudentAttendanceRowState extends State<StudentAttendanceRow>
             gradient: LinearGradient(
                 begin: Alignment.centerRight,
                 end: Alignment.centerLeft,
-                colors: [Colors.purple, Colors.deepPurple]),
+                colors: [Color(0xff053EFF), Color(0xff053EFF)]),
           ),
         )
       ],

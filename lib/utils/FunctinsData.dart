@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 // Project imports:
 import 'package:edus_tutor/screens/AboutScreen.dart';
@@ -40,9 +39,7 @@ import 'package:edus_tutor/screens/student/Dormitory.dart';
 import 'package:edus_tutor/screens/student/Profile.dart';
 import 'package:edus_tutor/screens/student/Routine.dart';
 import 'package:edus_tutor/screens/student/StudentAttendance.dart';
-import 'package:edus_tutor/screens/student/StudentTeacher.dart';
 import 'package:edus_tutor/screens/student/SubjectScreen.dart';
-import 'package:edus_tutor/screens/student/TimeLineScreen.dart';
 import 'package:edus_tutor/screens/student/TransportScreen.dart';
 import 'package:edus_tutor/screens/student/attendance/StudentAttenHome.dart';
 import 'package:edus_tutor/screens/student/attendance/StudentSubjectListScreen.dart';
@@ -55,7 +52,6 @@ import 'package:edus_tutor/screens/student/leave/LeaveStudentApply.dart';
 import 'package:edus_tutor/screens/student/leave/LeaveStudentHome.dart';
 import 'package:edus_tutor/screens/student/library/BookIssuedScreen.dart';
 import 'package:edus_tutor/screens/student/library/BookListScreen.dart';
-import 'package:edus_tutor/screens/student/library/LibraryScreen.dart';
 import 'package:edus_tutor/screens/student/notice/NoticeScreen.dart';
 import 'package:edus_tutor/screens/student/onlineExam/ActiveOnlineExamScreen.dart';
 import 'package:edus_tutor/screens/student/onlineExam/OnlineExamResultScreen.dart';
@@ -86,7 +82,6 @@ import 'package:edus_tutor/utils/model/SystemSettings.dart';
 import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import '../controller/system_controller.dart';
 import '../screens/teacher/students/SubjectStudentSearch.dart';
 import '../screens/virtual_class/virtual_class_main.dart';
 
@@ -115,7 +110,7 @@ class AppFunction {
    // 'Transport',
   //  'Dormitory',
     
-    'Settings',
+    'More',
   ];
   static var studentIcons = [
     'assets/images/homework.png',
@@ -148,7 +143,7 @@ class AppFunction {
     'Homework',
     'About',
     'Class',
-    'Settings',
+    'More',
   ];
 
   static var teachersIcons = [
@@ -177,7 +172,7 @@ class AppFunction {
     'Library',
     'Transport',
     'Class',
-    'Settings',
+    'More',
   ];
   static var adminIcons = [
     'assets/images/students.png',
@@ -197,7 +192,7 @@ class AppFunction {
   static var parent = [
     'Child',
     'About',
-    'Settings',
+    'More',
   ];
   static var parentIcons = [
     'assets/images/mychild.png',
@@ -208,7 +203,7 @@ class AppFunction {
   static var parent2 = [
     'Child',
     'About',
-    'Settings',
+    'More',
   ];
 
   static var parentIcons2 = [
@@ -403,7 +398,7 @@ class AppFunction {
   static var driver = [
     'Transport',
     'About',
-    'Settings',
+    'More',
   ];
   static var driverIcons = [
     'assets/images/transport.png',
@@ -577,7 +572,7 @@ class AppFunction {
           ),
         );
         break;
-      case 'Settings':
+      case 'More':
         Navigator.push(context, ScaleRoute(page: const SettingScreen()));
         break;
       case 'Lesson':
@@ -650,7 +645,7 @@ class AppFunction {
       case 'Leave':
         Navigator.push(context, ScaleRoute(page: const LeaveAdminHomeScreen()));
         break;
-      case 'Settings':
+      case 'More':
         Navigator.push(context, ScaleRoute(page: const SettingScreen()));
         break;
       case 'Class':
@@ -715,7 +710,7 @@ class AppFunction {
       case 'Leave':
         Navigator.push(context, ScaleRoute(page: const LeaveAdminHomeScreen()));
         break;
-      case 'Settings':
+      case 'More':
         Navigator.push(context, ScaleRoute(page: const SettingScreen()));
         break;
 
@@ -868,7 +863,7 @@ class AppFunction {
       case 'About':
         Navigator.push(context, ScaleRoute(page: const AboutScreen()));
         break;
-      case 'Settings':
+      case 'More':
         Navigator.push(context, ScaleRoute(page: const SettingScreen()));
         break;
       case 'Class':
@@ -890,7 +885,7 @@ class AppFunction {
       case 'About':
         Navigator.push(context, ScaleRoute(page: const AboutScreen()));
         break;
-      case 'Settings':
+      case 'More':
         Navigator.push(context, ScaleRoute(page: const SettingScreen()));
         break;
       // case 'Zoom':
@@ -1180,7 +1175,7 @@ class AppFunction {
       case 'About':
         Navigator.push(context, ScaleRoute(page: const AboutScreen()));
         break;
-      case 'Settings':
+      case 'More':
         Navigator.push(context, ScaleRoute(page: const SettingScreen()));
         break;
     }

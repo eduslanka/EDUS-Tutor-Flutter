@@ -180,7 +180,7 @@ class AddPaypalAmount extends StatelessWidget {
                               '${absoluteAmount(amountController.text)}', id)));
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purpleAccent,
+                  backgroundColor: Color(0xff053EFF),
                 ),
                 child: Text(
                   "Enter amount",

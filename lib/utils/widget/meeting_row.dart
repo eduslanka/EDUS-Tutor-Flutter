@@ -131,7 +131,7 @@ class _DormitoryScreenState extends State<ZoomMeetingRow> {
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       // borderSide:
-                      //     BorderSide(width: 1, color: Colors.deepPurple),
+                      //     BorderSide(width: 1, color: Color(0xff053EFF)),
                       onPressed: () async {
                         final _url = InfixApi.getJoinMeetingUrlApp(
                             mid: zoomMeeting.meetingId);
@@ -162,7 +162,7 @@ class _DormitoryScreenState extends State<ZoomMeetingRow> {
               gradient: LinearGradient(
                   begin: Alignment.centerRight,
                   end: Alignment.centerLeft,
-                  colors: [Colors.purple, Colors.deepPurple]),
+                  colors: [Color(0xff053EFF), Color(0xff053EFF)]),
             ),
           ),
         ],

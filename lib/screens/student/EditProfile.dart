@@ -227,7 +227,7 @@ class _EditProfileState extends State<EditProfile> {
                                     },
                                     icon: const Icon(
                                       Icons.save_as,
-                                      color: Colors.deepPurpleAccent,
+                                      color: Colors.blueAccent,
                                     ),
                                   ),
                                 ],
@@ -280,7 +280,7 @@ class _EditProfileState extends State<EditProfile> {
                                     },
                                     icon: const Icon(
                                       Icons.save_as,
-                                      color: Colors.deepPurpleAccent,
+                                      color: Colors.blueAccent,
                                     ),
                                   ),
                                 ],
@@ -326,7 +326,7 @@ class _EditProfileState extends State<EditProfile> {
                                     },
                                     icon: const Icon(
                                       Icons.save_as,
-                                      color: Colors.deepPurpleAccent,
+                                      color: Colors.blueAccent,
                                     ),
                                   ),
                                 ],
@@ -391,7 +391,7 @@ class _EditProfileState extends State<EditProfile> {
                                     },
                                     icon: const Icon(
                                       Icons.save_as,
-                                      color: Colors.deepPurpleAccent,
+                                      color: Colors.blueAccent,
                                     ),
                                   ),
                                 ],
@@ -438,7 +438,7 @@ class _EditProfileState extends State<EditProfile> {
                                     },
                                     icon: const Icon(
                                       Icons.save_as,
-                                      color: Colors.deepPurpleAccent,
+                                      color: Colors.blueAccent,
                                     ),
                                   ),
                                 ],

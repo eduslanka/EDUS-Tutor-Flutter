@@ -256,7 +256,7 @@
 //                       }
 //                     },
 //                     style: ElevatedButton.styleFrom(
-//                       primary: Colors.purpleAccent,
+//                       primary: Color(0xff053EFF),
 //                     ),
 //                     child: Text(
 //                       "Continue",

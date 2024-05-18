@@ -214,14 +214,14 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           borderSide: const BorderSide(
-                            color: Colors.deepPurpleAccent,
+                            color: Colors.blueAccent,
                             width: 0.5,
                           ),
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           borderSide: const BorderSide(
-                              color: Colors.deepPurpleAccent, width: 0.5),
+                              color: Colors.blueAccent, width: 0.5),
                         ),
                       ),
                     ),
@@ -242,7 +242,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                               .headlineMedium
                               ?.copyWith(fontSize: ScreenUtil().setSp(12))),
                       value: 'admin',
-                      activeColor: Colors.purple,
+                      activeColor: Color(0xff053EFF),
                       selected: radioStr == 'admin' ? true : false,
                       enableFeedback: false,
                       dense: true,
@@ -264,7 +264,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                               .headlineMedium
                               ?.copyWith(fontSize: ScreenUtil().setSp(12))),
                       value: 'student',
-                      activeColor: Colors.purple,
+                      activeColor: Color(0xff053EFF),
                       enableFeedback: false,
                       selected: radioStr == 'student' ? true : false,
                       dense: true,
@@ -289,7 +289,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(
-                          color: Colors.deepPurpleAccent,
+                          color: Colors.blueAccent,
                           width: 0.5,
                         ),
                       ),
@@ -356,7 +356,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(
-                          color: Colors.deepPurpleAccent,
+                          color: Colors.blueAccent,
                           width: 0.5,
                         ),
                       ),
@@ -405,14 +405,14 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           borderSide: const BorderSide(
-                            color: Colors.deepPurpleAccent,
+                            color: Colors.blueAccent,
                             width: 0.5,
                           ),
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           borderSide: const BorderSide(
-                              color: Colors.deepPurpleAccent, width: 0.5),
+                              color: Colors.blueAccent, width: 0.5),
                         ),
                       ),
                     ),
@@ -434,7 +434,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         border: Border.all(
-          color: Colors.deepPurpleAccent,
+          color: Colors.blueAccent,
           width: 0.5,
         ),
       ),
@@ -593,7 +593,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
               CheckboxListTile(
                   contentPadding: EdgeInsets.zero,
                   value: allStudent,
-                  activeColor: Colors.purple,
+                  activeColor: Color(0xff053EFF),
                   controlAffinity: ListTileControlAffinity.leading,
                   title: Text("All Student".tr,
                       style: Theme.of(context)
@@ -629,7 +629,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(
-                          color: Colors.deepPurpleAccent,
+                          color: Colors.blueAccent,
                           width: 0.5,
                         ),
                       ),
@@ -705,7 +705,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 border: Border.all(
-                                  color: Colors.deepPurpleAccent,
+                                  color: Colors.blueAccent,
                                   width: 0.5,
                                 ),
                               ),

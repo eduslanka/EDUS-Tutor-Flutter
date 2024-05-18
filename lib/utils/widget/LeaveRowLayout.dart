@@ -81,7 +81,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                     'View',
                     textAlign: TextAlign.end,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Colors.deepPurpleAccent,
+                        color: Colors.blueAccent,
                         decoration: TextDecoration.underline),
                   ),
                 ),
@@ -190,7 +190,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
               gradient: LinearGradient(
                   begin: Alignment.centerRight,
                   end: Alignment.centerLeft,
-                  colors: [Colors.purple, Colors.deepPurple]),
+                  colors: [Color(0xff053EFF), Color(0xff053EFF)]),
             ),
           ),
         ],
@@ -437,7 +437,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                     radioStr = '$val';
                                   });
                                 },
-                                activeColor: Colors.purple,
+                                activeColor: Color(0xff053EFF),
                                 selected: true,
                                 dense: true,
                               ),
@@ -455,7 +455,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                     radioStr = '$val';
                                   });
                                 },
-                                activeColor: Colors.purple,
+                                activeColor: Color(0xff053EFF),
                                 selected: true,
                                 dense: true,
                               ),
@@ -473,7 +473,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                     radioStr = '$val';
                                   });
                                 },
-                                activeColor: Colors.purple,
+                                activeColor: Color(0xff053EFF),
                                 selected: true,
                                 dense: true,
                               ),
@@ -486,7 +486,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                     height: 50.0,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20.0),
-                                      color: Colors.purple,
+                                      color: Color(0xff053EFF),
                                     ),
                                     child: Text(
                                       "Save",

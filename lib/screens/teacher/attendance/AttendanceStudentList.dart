@@ -160,7 +160,7 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
               TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor:
-                      _isHoliday ? Colors.red : Colors.deepPurpleAccent,
+                      _isHoliday ? Colors.red : Colors.blueAccent,
                 ),
                 onPressed: () async {
                   Map data = {

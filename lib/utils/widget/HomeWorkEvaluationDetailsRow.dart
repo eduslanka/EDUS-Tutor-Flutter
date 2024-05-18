@@ -157,7 +157,7 @@ class _HomeWorkEvaluationDetailsRowState
                 child: const Icon(
                   FontAwesomeIcons.download,
                   size: 15,
-                  color: Colors.deepPurpleAccent,
+                  color: Colors.blueAccent,
                 ),
               ),
             ],

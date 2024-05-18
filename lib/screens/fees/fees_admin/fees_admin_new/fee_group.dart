@@ -87,7 +87,7 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
                           },
                           icon: const Icon(
                             Icons.edit,
-                            color: Colors.deepPurple,
+                            color: Color(0xff053EFF),
                           ),
                         ),
                         IconButton(
@@ -129,8 +129,8 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
         onPressed: () {
           showAddDialog();
         },
-        backgroundColor: Colors.deepPurple,
-        foregroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Color(0xff053EFF),
+        foregroundColor: Colors.blueAccent,
         child: const Icon(
           Icons.add,
           color: Colors.white,
@@ -180,7 +180,7 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.deepPurpleAccent,
+                                backgroundColor: Colors.blueAccent,
                               ),
                               onPressed: () async {
                                 final response = await http.post(
@@ -274,7 +274,7 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.deepPurpleAccent,
+                                backgroundColor: Colors.blueAccent,
                               ),
                               onPressed: () async {
                                 final response = await http.post(

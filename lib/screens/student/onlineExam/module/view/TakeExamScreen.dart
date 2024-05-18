@@ -145,8 +145,8 @@ class QuestionSelectorWidget extends StatelessWidget {
                             shape: BoxShape.circle,
                             gradient: LinearGradient(
                               colors: [
-                                Color(0xff7C32FF),
-                                Color(0xffC738D8),
+                                Colors.lightBlue,
+                                Color(0xff053EFF),
                               ],
                             ),
                           ),
@@ -164,8 +164,8 @@ class QuestionSelectorWidget extends StatelessWidget {
                             gradient: qnController.checkSelected(index)
                                 ? const LinearGradient(
                                     colors: [
-                                      Color(0xff7C32FF),
-                                      Color(0xffC738D8),
+                                      Colors.lightBlue,
+                                      Color(0xff053EFF),
                                     ],
                                   )
                                 : const LinearGradient(
@@ -419,8 +419,8 @@ class _QuestionCardState extends State<QuestionCard>
                                   borderRadius: BorderRadius.circular(5.0),
                                   gradient: const LinearGradient(
                                     colors: [
-                                      Color(0xff7C32FF),
-                                      Color(0xffC738D8),
+                                      Colors.lightBlue,
+                                      Color(0xff053EFF),
                                     ],
                                   ),
                                 ),
@@ -545,8 +545,8 @@ class _QuestionCardState extends State<QuestionCard>
                                   borderRadius: BorderRadius.circular(5.0),
                                   gradient: const LinearGradient(
                                     colors: [
-                                      Color(0xff7C32FF),
-                                      Color(0xffC738D8),
+                                      Colors.lightBlue,
+                                      Color(0xff053EFF),
                                     ],
                                   ),
                                 ),
@@ -671,8 +671,8 @@ class _QuestionCardState extends State<QuestionCard>
                                   borderRadius: BorderRadius.circular(5.0),
                                   gradient: const LinearGradient(
                                     colors: [
-                                      Color(0xff7C32FF),
-                                      Color(0xffC738D8),
+                                      Colors.lightBlue,
+                                      Color(0xff053EFF),
                                     ],
                                   ),
                                 ),
@@ -766,7 +766,7 @@ class _QuestionCardState extends State<QuestionCard>
                                 value: item.value,
                                 onChanged: (value) => onItemClicked(item),
                                 checkColor: Colors.white,
-                                activeColor: const Color(0xff7C32FF),
+                                activeColor:  Colors.lightBlue,
                               ),
                               title: Transform.translate(
                                   offset: const Offset(-16, 0),
@@ -843,7 +843,7 @@ class _QuestionCardState extends State<QuestionCard>
                                               color: assignIds.contains(
                                                       multipleImageList[index]
                                                           .id)
-                                                  ? Colors.purpleAccent
+                                                  ? Color(0xff053EFF)
                                                   : Colors.transparent,
                                               width: assignIds.contains(
                                                       multipleImageList[index]
@@ -974,7 +974,7 @@ class _QuestionCardState extends State<QuestionCard>
                                         border: Border.all(
                                           color: assignIds.contains(
                                                   imageQuestionList[index].id)
-                                              ? Colors.purpleAccent
+                                              ? Color(0xff053EFF)
                                               : Colors.transparent,
                                           width: assignIds.contains(
                                                   imageQuestionList[index].id)
@@ -1100,7 +1100,7 @@ class _QuestionCardState extends State<QuestionCard>
                                             ),
                                       ),
                                       selected: defaultChoiceIndex == index,
-                                      selectedColor: const Color(0xff7C32FF),
+                                      selectedColor:  Colors.lightBlue,
                                       onSelected: (value) async {
                                         setState(() {
                                           defaultChoiceIndex = value
@@ -1291,8 +1291,8 @@ class ContinueSkipSubmitBtn extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5.0),
                         gradient: const LinearGradient(
                           colors: [
-                            Color(0xff7C32FF),
-                            Color(0xffC738D8),
+                            Colors.lightBlue,
+                            Color(0xff053EFF),
                           ],
                         ),
                       ),
@@ -1329,8 +1329,8 @@ class ContinueSkipSubmitBtn extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5.0),
                         gradient: const LinearGradient(
                           colors: [
-                            Color(0xff7C32FF),
-                            Color(0xffC738D8),
+                            Colors.lightBlue,
+                            Color(0xff053EFF),
                           ],
                         ),
                       ),
@@ -1442,8 +1442,8 @@ class QuestionTypeWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(5.0),
               gradient: const LinearGradient(
                 colors: [
-                  Color(0xff7C32FF),
-                  Color(0xffC738D8),
+                  Colors.lightBlue,
+                  Color(0xff053EFF),
                 ],
               ),
             ),

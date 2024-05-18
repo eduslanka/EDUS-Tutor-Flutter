@@ -429,7 +429,7 @@
 //                     height: 40.0,
 //                     margin: EdgeInsets.symmetric(horizontal: 20.0),
 //                     decoration: BoxDecoration(
-//                       color: Colors.deepPurple,
+//                       color: Color(0xff053EFF),
 //                       borderRadius: BorderRadius.circular(5),
 //                     ),
 //                     child: Center(
@@ -603,7 +603,7 @@
 //                       }
 //                     },
 //                     style: ElevatedButton.styleFrom(
-//                       primary: Colors.purpleAccent,
+//                       primary: Color(0xff053EFF),
 //                     ),
 //                     child: Text(
 //                       "Continue",

@@ -117,7 +117,7 @@ class _AdminFeesListRowState extends State<AdminFeesListRow> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.deepPurpleAccent,
+                                  backgroundColor: Colors.blueAccent,
                                 ),
                                 onPressed: () {
                                   updateFeeData(

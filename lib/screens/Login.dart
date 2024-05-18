@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:edus_tutor/config/app_size.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,11 +50,12 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: <Widget>[
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.40,
+                  height: screenHeight(400, context),
                   decoration: BoxDecoration(
+                   // color: Color(0xff053EFF),
                       image: DecorationImage(
                     image: AssetImage(AppConfig.loginBackground),
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   )),
                   child: Center(
                     child: Container(
@@ -88,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.purpleAccent,
+                                    backgroundColor: Color(0xff053EFF),
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(8.0),
@@ -120,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.purpleAccent,
+                                    backgroundColor: Color(0xff053EFF),
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(0.0),
@@ -147,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.purpleAccent,
+                                    backgroundColor: Color(0xff053EFF),
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(8.0),

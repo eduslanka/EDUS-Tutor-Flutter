@@ -314,7 +314,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                                     children: [
                                       const Icon(
                                         Icons.picture_as_pdf,
-                                        color: Colors.deepPurple,
+                                        color: Color(0xff053EFF),
                                       ),
                                       Text(
                                         'View',

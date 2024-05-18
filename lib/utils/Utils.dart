@@ -73,7 +73,7 @@ class Utils extends GetxController {
     Fluttertoast.showToast(
       msg: message,
       textColor: Colors.white,
-      backgroundColor: Colors.purple,
+      backgroundColor: Color(0xff053EFF),
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
     );
@@ -83,8 +83,8 @@ class Utils extends GetxController {
       borderRadius: BorderRadius.circular(25.0),
       gradient: const LinearGradient(
         colors: [
-          Color(0xff7C32FF),
-          Color(0xffC738D8),
+          Color.fromARGB(255, 2, 87, 255),
+          Color(0xff053EFF),
         ],
       ));
 

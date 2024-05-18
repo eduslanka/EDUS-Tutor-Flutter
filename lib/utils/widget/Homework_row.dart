@@ -86,7 +86,7 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
                     'View'.tr,
                     textAlign: TextAlign.end,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Colors.deepPurpleAccent,
+                        color: Colors.blueAccent,
                         decoration: TextDecoration.underline),
                   ),
                 ),
@@ -244,7 +244,7 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
                 gradient: LinearGradient(
                     begin: Alignment.centerRight,
                     end: Alignment.centerLeft,
-                    colors: [Colors.purple, Colors.deepPurple]),
+                    colors: [Color(0xff053EFF), Color(0xff053EFF)]),
               ),
             ),
           ],

@@ -101,7 +101,7 @@ class _AddDormitoryState extends State<AddDormitory> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurpleAccent,
+                  backgroundColor: Colors.blueAccent,
                 ),
                 onPressed: () {
                   addDormitoryData(

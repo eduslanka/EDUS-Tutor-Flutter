@@ -67,7 +67,7 @@ class _RazorPaymentState extends State<RazorPayment> {
                   height: 40.0,
                   margin: const EdgeInsets.symmetric(horizontal: 20.0),
                   decoration: BoxDecoration(
-                    color: Colors.deepPurple,
+                    color: Color(0xff053EFF),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Center(
@@ -160,7 +160,7 @@ class _AddRazorAmountState extends State<AddRazorAmount> {
                   },
                   child: Container(
                     height: 40.0,
-                    color: Colors.purpleAccent,
+                    color: Color(0xff053EFF),
                     child: Center(
                       child: Text(
                         "Enter amount",

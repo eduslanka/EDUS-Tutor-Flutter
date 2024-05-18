@@ -91,7 +91,7 @@ class _AddRouteState extends State<AddRoute> {
                   title: TabBar(
                     labelColor: Colors.black,
                     labelPadding: EdgeInsets.zero,
-                    indicatorColor: Colors.purple,
+                    indicatorColor: Color(0xff053EFF),
                     tabs: tabs,
                     indicatorPadding: EdgeInsets.zero,
                     labelStyle: Theme.of(context).textTheme.headlineMedium,
@@ -214,7 +214,7 @@ class _AddRouteState extends State<AddRoute> {
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurpleAccent,
+                backgroundColor: Colors.blueAccent,
               ),
               onPressed: () {
                 addRouteData(titleController.text, fareController.text, id)
