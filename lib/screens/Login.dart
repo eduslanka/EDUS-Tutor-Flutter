@@ -243,7 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                contactUs()
+                
               ],
             ),
           ),
@@ -293,6 +293,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
               ),
+           h16,
+             contactUs(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: isResponse == true
@@ -320,7 +322,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
   Widget contactUs(){
   return Column(children: [
-    const Text('Trouble to login ? Contact Us'),
+    const Text('Trouble to login ?   Contact Us'),
     h16,
     Row(
   crossAxisAlignment: CrossAxisAlignment.center,
@@ -329,13 +331,13 @@ class _LoginScreenState extends State<LoginScreen> {
       GestureDetector(
         onTap: (){
           // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
-          UrlLauncher.launch('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+          UrlLauncher.launch('https://wa.me/+94701677488?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
         },
         child: SvgPicture.asset('assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',height: 30,width: 40,)),
       w16,
       GestureDetector(
         onTap: (){
-          UrlLauncher.launch("tel:+94774487774");
+          UrlLauncher.launch("tel:+94701677488");
         },
         child: SvgPicture.asset('assets/config/phone-call-svgrepo-com.svg',height: 30,width: 40,))
     ],)

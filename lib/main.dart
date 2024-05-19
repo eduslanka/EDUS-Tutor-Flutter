@@ -30,6 +30,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
     statusBarColor:
          Utils.baseBlue, //or set color with: Color(0xFF0000FF)
+        
   ));
   HttpOverrides.global = MyHttpOverrides();
   final sharedPref = await SharedPreferences.getInstance();

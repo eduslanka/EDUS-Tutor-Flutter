@@ -68,11 +68,11 @@ class _CustomWidgetState extends State<CustomWidget> {
                 Text(
                   widget.headline.tr,
                   style: TextStyle(
-                    color: widget.isSelected ? Colors.white : Colors.grey,
+                    color:  Colors.grey,
                     fontSize: ScreenUtil().setSp(14),
                     fontWeight: FontWeight.w500,
                   ),
-                  // maxLines: 1,
+                   maxLines: 2,
                   textAlign: TextAlign.center,
                 )
               ],

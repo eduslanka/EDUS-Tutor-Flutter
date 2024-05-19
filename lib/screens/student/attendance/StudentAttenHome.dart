@@ -40,7 +40,7 @@ class _StudentAttenHomeState extends State<StudentAttenHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBarWidget(title: 'Attendance'),
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 246, 246, 246),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: GridView.builder(

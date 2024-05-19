@@ -139,6 +139,24 @@ String _id='XXXX';
               style: Theme.of(context).textTheme.titleLarge,
             ),
             dense: true,
+          ),h16,
+          ListTile(
+            onTap: () {
+              Navigator.of(context).push(ScaleRoute(page:  HelpDeskMenu(stName: _fullName, stId: _id,) ));
+            },
+            leading: CircleAvatar(
+              backgroundColor: Colors.blueAccent,
+              child: Icon(
+                Icons.contact_page,
+                color: Colors.white,
+                size: ScreenUtil().setSp(16),
+              ),
+            ),
+            title: Text(
+              'Help Desk'.tr,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            dense: true,
           ),
        //   const BottomLine(),
         h16,
@@ -182,26 +200,9 @@ String _id='XXXX';
           ),
       //    const BottomLine(),
        h16,
- ListTile(
-            onTap: () {
-              Navigator.of(context).push(ScaleRoute(page:  HelpDeskMenu(stName: _fullName, stId: _id,) ));
-            },
-            leading: CircleAvatar(
-              backgroundColor: Colors.blueAccent,
-              child: Icon(
-                Icons.contact_page,
-                color: Colors.white,
-                size: ScreenUtil().setSp(16),
-              ),
-            ),
-            title: Text(
-              'Help Desk'.tr,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            dense: true,
-          ),
+ 
      //     const BottomLine(),
-      h16,
+      
          
           // ListTile(
           //   onTap: () {

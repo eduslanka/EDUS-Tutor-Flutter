@@ -347,15 +347,15 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    Get.to(() => const ChatPageMain());
-                  },
-                  icon: Icon(
-                    FontAwesomeIcons.facebookMessenger,
-                    size: 25.sp,
-                  ),
-                ),
+                // IconButton(
+                //   onPressed: () {
+                //     Get.to(() => const ChatPageMain());
+                //   },
+                //   icon: Icon(
+                //     FontAwesomeIcons.facebookMessenger,
+                //     size: 25.sp,
+                //   ),
+                // ),
                 IconButton(
                   onPressed: () {
                     Get.dialog(LogoutService().logoutDialog());
