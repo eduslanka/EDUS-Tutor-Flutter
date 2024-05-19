@@ -16,7 +16,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:edus_tutor/controller/settings_controller.dart';
 import 'package:edus_tutor/controller/system_controller.dart';
 import 'package:edus_tutor/screens/chat/views/ChatPageMain.dart';
 import 'package:rxdart/rxdart.dart';

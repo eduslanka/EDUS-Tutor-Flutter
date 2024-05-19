@@ -153,13 +153,13 @@ class PaymentMethod {
         id: json["id"],
         method: json["method"],
         type: json["type"],
-        activeStatus: int.tryParse(json["active_status"]),
+        activeStatus: int.tryParse(json["active_status"].toString()),
         createdAt: DateTime.parse(json["created_at"]),
         // updatedAt: DateTime.parse(json["updated_at"]),
         gatewayId: json["gateway_id"],
-        createdBy: int.tryParse(json["created_by"]),
-        updatedBy: int.tryParse(json["updated_by"]),
-        schoolId: int.tryParse(json["school_id"]),
+        createdBy: int.tryParse(json["created_by"].toString()),
+        updatedBy: int.tryParse(json["updated_by"].toString()),
+        schoolId: int.tryParse(json["school_id"].toString()),
       );
 
   Map<String, dynamic> toJson() => {
@@ -307,9 +307,9 @@ class WalletTransaction {
 
     return WalletTransaction(
       id: json["id"],
-      amount: num.tryParse(json["amount"]),
+      amount: num.tryParse(json["amount"].toString()),
       paymentMethod: json["payment_method"],
-      userId: int.tryParse(json["user_id"]),
+      userId: int.tryParse(json["user_id"].toString()),
       bankId: json["bank_id"],
       note: json["note"],
       type: json["type"],
@@ -318,8 +318,8 @@ class WalletTransaction {
       expense: json["expense"],
       status: json["status"],
       createdBy: json["created_by"],
-      academicId: int.tryParse(json["academic_id"]),
-      schoolId: int.tryParse(json["school_id"]),
+      academicId: int.tryParse(json["academic_id"].toString()),
+      schoolId: int.tryParse(json["school_id"].toString()),
       createdAt: DateTime.parse(json["created_at"]),
       updatedAt: DateTime.parse(json["updated_at"]),
     );

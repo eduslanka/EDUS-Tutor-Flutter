@@ -51,12 +51,9 @@ class _CustomWidgetState extends State<CustomWidget> {
           ),
           child: Container(
             decoration: BoxDecoration(
-              gradient: widget.isSelected
-                  ? const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Color(0xff053EFF), Colors.blueAccent])
-                  : const LinearGradient(colors: [Colors.white, Colors.white]),
+              gradient: 
+              
+              const LinearGradient(colors: [Colors.white, Colors.white]),
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Column(

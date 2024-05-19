@@ -17,7 +17,7 @@ class HelpDeskMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: CustomAppBarWidget(
-        title: 'Contact us',
+        title: 'Help Desk',
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

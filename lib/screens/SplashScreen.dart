@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 // Project imports:
 import 'package:edus_tutor/config/app_config.dart';
 import 'package:edus_tutor/controller/system_controller.dart';
-import 'package:edus_tutor/screens/Login.dart';
 import 'package:edus_tutor/utils/FunctinsData.dart';
 import 'package:edus_tutor/utils/Utils.dart';
 // Package imports:
@@ -21,26 +20,17 @@ class Splash extends StatefulWidget {
   _SplashState createState() => _SplashState();
 }
 
-class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
-  Animation? animation;
-  AnimationController? controller;
-
+class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-
-    controller =
-        AnimationController(duration: const Duration(seconds: 3), vsync: this);
-    animation = Tween(begin: 60.0, end: 120.0).animate(controller!);
-    controller?.forward();
 
     Route route;
 
     Future.delayed(const Duration(seconds: 3), () {
       getBooleanValue('isLogged').then((value) {
         if (value) {
-          final SystemController _systemController =
-              Get.put(SystemController());
+          final SystemController _systemController = Get.put(SystemController());
           _systemController.getSystemSettings();
           Utils.getStringValue('rule').then((rule) {
             AppFunction.getFunctions(context, rule ?? '');
@@ -53,12 +43,6 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         }
       });
     });
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
   }
 
   @override
@@ -90,32 +74,29 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                     child: Text(
                       'Welcome to'.tr,
                       style: Get.textTheme.titleMedium?.copyWith(
-                        fontSize: 20,
-                        color: Colors.grey,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                   ),
-                  AnimatedBuilder(
-                    animation: animation!,
-                    builder: (context, child) {
-                      return Container(
-                        height: animation?.value,
-                        width: animation?.value,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: ExactAssetImage(AppConfig.appLogo),
-                          ),
-                        ),
-                      );
-                    },
+                  Container(
+                    height: 100.0, // Fixed height
+                    width: 100.0,  // Fixed width
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: ExactAssetImage(AppConfig.appLogo),
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 60.0),
                     child: Text(
                       AppConfig.appName,
                       style: Get.textTheme.titleMedium?.copyWith(
-                        fontSize: 18,
-                        color: Colors.grey,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -126,8 +107,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 80.0, left: 40, right: 40),
+              padding: const EdgeInsets.only(bottom: 80.0, left: 40, right: 40),
               child: Container(
                 alignment: Alignment.bottomCenter,
                 child: const LinearProgressIndicator(

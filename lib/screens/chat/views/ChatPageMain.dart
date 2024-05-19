@@ -332,7 +332,7 @@ class _ChatListPageState extends State<ChatListPage> {
                             () => ChatOpenPage(
                                 avatarUrl: chatUser.avatarUrl ?? '',
                                 userId: chatUser.id ?? 0,
-                                onlineStatus: int.tryParse(chatUser.activeStatus),
+                                onlineStatus: int.tryParse('${chatUser.activeStatus}'),
                                 chatTitle:
                                     chatUser.fullName ?? chatUser.email ?? ""),
                           );

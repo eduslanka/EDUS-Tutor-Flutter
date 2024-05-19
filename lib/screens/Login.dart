@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Container(
                       height: 150.0,
                       width: 150.0,
-                      margin: EdgeInsets.only(bottom: 80),
+                      margin: const EdgeInsets.only(bottom: 80),
                       decoration: BoxDecoration(
                           image: DecorationImage(
                         image: AssetImage(AppConfig.appLogo),
@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff053EFF),
+                                    backgroundColor: const Color(0xff053EFF),
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(8.0),
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff053EFF),
+                                    backgroundColor: const Color(0xff053EFF),
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(0.0),
@@ -153,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff053EFF),
+                                    backgroundColor: const Color(0xff053EFF),
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(8.0),
@@ -320,7 +320,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
   Widget contactUs(){
   return Column(children: [
-    Text('Trouble to login ? Contact Us'),
+    const Text('Trouble to login ? Contact Us'),
     h16,
     Row(
   crossAxisAlignment: CrossAxisAlignment.center,

@@ -195,7 +195,7 @@ String _id='XXXX';
               ),
             ),
             title: Text(
-              'Contact Us'.tr,
+              'Help Desk'.tr,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             dense: true,
