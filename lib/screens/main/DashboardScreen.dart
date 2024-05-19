@@ -294,29 +294,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   PersistentBottomNavBarItem(
                     inactiveIcon: widget.role == "4"
                         ? Image.asset(
-                            "assets/images/classattendance.png",
+                            "assets/images/classattendance (2).png",
                             width: 25.w,
                             height: 25.h,
-                        //    color: Colors.white,
+                            color: Colors.white,
                           )
                         : Image.asset(
-                            "assets/images/fees_icon.png",
+                            "assets/images/fees_icon (2).png",
                             width: 25.w,
                             height: 25.h,
-                         //   color: Colors.white,
+                            color: Colors.white,
                           ),
                     icon: widget.role == "4"
                         ? Image.asset(
-                            "assets/images/classattendance.png",
+                            "assets/images/classattendance (2).png",
                             width: 25.w,
                             height: 25.h,
-                         //   color: Colors.white,
+                            color: Colors.white,
                           )
                         : Image.asset(
-                            "assets/images/fees_icon.png",
+                            "assets/images/fees_icon (2).png",
                             width: 25.w,
                             height: 25.h,
-                         //   color: Colors.white,
+                            color: Colors.white,
                           ),
                     title: widget.role == "4" ? "Attendance".tr : "Fees".tr,
                     activeColorPrimary: Color(0xff053EFF).withOpacity(0.9),
@@ -325,29 +325,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   PersistentBottomNavBarItem(
                     inactiveIcon: widget.role == "4"
                         ? Image.asset(
-                            "assets/images/academics.png",
+                            "assets/images/academics (2).png",
                             width: 30.w,
                             height: 30.h,
-                         //   color: Colors.grey.withOpacity(0.9),
+                           color: Colors.grey.withOpacity(0.9),
                           )
                         : Image.asset(
-                            "assets/images/routine.png",
+                            "assets/images/routine (2).png",
                             width: 30.w,
                             height: 30.h,
-                        //    color: Colors.grey.withOpacity(0.9),
+                           color: Colors.grey.withOpacity(0.9),
                           ),
                     icon: widget.role == "4"
                         ? Image.asset(
-                            "assets/images/academics.png",
+                            "assets/images/academics (2).png",
                             width: 30.w,
                             height: 30.h,
-                        //    color: Color(0xff053EFF).withOpacity(0.9),
+                            color: Color(0xff053EFF).withOpacity(0.9),
                           )
                         : Image.asset(
-                            "assets/images/routine.png",
+                            "assets/images/routine (2).png",
                             width: 30.w,
                             height: 30.h,
-                           // color: Color(0xff053EFF).withOpacity(0.9),
+                            color: Color(0xff053EFF).withOpacity(0.9),
                           ),
                     title: widget.role == "4" ? "Academic".tr : "Routine".tr,
                     activeColorPrimary: Color(0xff053EFF).withOpacity(0.9),
@@ -359,26 +359,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             "assets/images/homework.png",
                             width: 25.w,
                             height: 25.h,
-                          //  color: Colors.grey.withOpacity(0.9),
+                            color: Colors.grey.withOpacity(0.9),
                           )
                         : Image.asset(
-                            "assets/images/profile.png",
+                            "assets/images/profile (2).png",
                             width: 25.w,
                             height: 25.h,
-                          //  color: Colors.grey.withOpacity(0.9),
+                            color: Colors.grey.withOpacity(0.9),
                           ),
                     icon: widget.role == "4"
                         ? Image.asset(
-                            "assets/images/homework.png",
+                            "assets/images/homework (2).png",
                             width: 25.w,
                             height: 25.h,
-                          //  color: Color(0xff053EFF).withOpacity(0.9),
+                            color: Color(0xff053EFF).withOpacity(0.9),
                           )
                         : Image.asset(
-                            "assets/images/profile.png",
+                            "assets/images/profile (2).png",
                             width: 25.w,
                             height: 25.h,
-                          //  color: Color(0xff053EFF).withOpacity(0.9),
+                            color: Color(0xff053EFF).withOpacity(0.9),
                           ),
                     title: widget.role == "4" ? "Homework".tr : "Profile".tr,
                     activeColorPrimary: Color(0xff053EFF).withOpacity(0.9),
