@@ -77,7 +77,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   decoration: InputDecoration(
                     hintText: "Current Password".tr,
                     labelText: "Current Password".tr,
-                    labelStyle: Theme.of(context).textTheme.headlineMedium,
+                   // labelStyle: Theme.of(context).textTheme.headlineMedium,
                     errorStyle:
                         const TextStyle(color: Colors.blue, fontSize: 15.0),
                     border: OutlineInputBorder(
@@ -106,7 +106,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   decoration: InputDecoration(
                     hintText: "New Password".tr,
                     labelText: "New Password".tr,
-                    labelStyle: Theme.of(context).textTheme.headlineMedium,
+                   // labelStyle: Theme.of(context).textTheme.headlineMedium,
                     errorStyle:
                         const TextStyle(color: Colors.blue, fontSize: 15.0),
                     border: OutlineInputBorder(
@@ -139,7 +139,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   decoration: InputDecoration(
                     hintText: "Confirm Password".tr,
                     labelText: "Confirm Password".tr,
-                    labelStyle: Theme.of(context).textTheme.headlineMedium,
+                  //  labelStyle: Theme.of(context).textTheme.headlineMedium,
                     errorStyle:
                         const TextStyle(color: Colors.blue, fontSize: 15.0),
                     border: OutlineInputBorder(

@@ -332,7 +332,7 @@ class _HomeState extends State<Home> {
                           height: 10,
                         ),
                         Text(
-                          "Welcome".tr + " $_fullName",
+                          "Welcome".tr + " $_fullName"+" 🎓",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context)
