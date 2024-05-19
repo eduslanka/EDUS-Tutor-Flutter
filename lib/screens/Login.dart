@@ -64,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Container(
                       height: 150.0,
                       width: 150.0,
+                      margin: EdgeInsets.only(bottom: 80),
                       decoration: BoxDecoration(
                           image: DecorationImage(
                         image: AssetImage(AppConfig.appLogo),
