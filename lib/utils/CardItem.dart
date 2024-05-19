@@ -39,7 +39,7 @@ class _CustomWidgetState extends State<CustomWidget> {
         padding: const EdgeInsets.all(8.0),
         child: Container(
           height: 100.0,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             // boxShadow: [
             //   BoxShadow(
             //     color:
@@ -64,7 +64,7 @@ class _CustomWidgetState extends State<CustomWidget> {
               children: <Widget>[
                 Image.asset(
                   widget.icon.toString(),
-                  color: widget.isSelected ? Colors.white : Color(0xff053EFF),
+                 // color: widget.isSelected ? Colors.white : Color(0xff053EFF),
                   width: 35.w,
                   height: 35.h,
                 ),
