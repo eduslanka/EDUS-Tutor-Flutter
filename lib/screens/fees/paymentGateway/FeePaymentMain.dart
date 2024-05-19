@@ -736,7 +736,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
                             labelText: "Amount",
                             labelStyle: Theme.of(context).textTheme.headlineMedium,
                             errorStyle: const TextStyle(
-                                color: Colors.pinkAccent, fontSize: 15.0),
+                                color: Colors.blue, fontSize: 15.0),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),

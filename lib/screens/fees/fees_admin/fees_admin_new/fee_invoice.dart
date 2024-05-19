@@ -72,7 +72,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppConfig.appToolbarBackground),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
               color: Color(0xff053EFF),
             ),

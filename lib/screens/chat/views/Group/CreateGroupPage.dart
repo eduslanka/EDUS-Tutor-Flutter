@@ -102,7 +102,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                   },
                   decoration: InputDecoration(
                     errorStyle:
-                        const TextStyle(color: Colors.pinkAccent, fontSize: 15.0),
+                        const TextStyle(color: Colors.blue, fontSize: 15.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -133,7 +133,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                           ? 'Select image'
                           : _file?.path.split('/').last,
                       errorStyle:
-                          const TextStyle(color: Colors.pinkAccent, fontSize: 15.0),
+                          const TextStyle(color: Colors.blue, fontSize: 15.0),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),

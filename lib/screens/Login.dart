@@ -188,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: "Email".tr,
                       labelStyle: textStyle,
                       errorStyle:
-                          const TextStyle(color: Colors.pinkAccent, fontSize: 15.0),
+                          const TextStyle(color: Colors.blue, fontSize: 15.0),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -219,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: "Password".tr,
                       labelStyle: textStyle,
                       errorStyle:
-                          const TextStyle(color: Colors.pinkAccent, fontSize: 15.0),
+                          const TextStyle(color: Colors.blue, fontSize: 15.0),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),

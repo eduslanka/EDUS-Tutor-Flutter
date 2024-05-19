@@ -210,7 +210,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                       decoration: InputDecoration(
                         labelStyle: Theme.of(context).textTheme.headlineMedium,
                         errorStyle: const TextStyle(
-                            color: Colors.pinkAccent, fontSize: 12),
+                            color: Colors.blue, fontSize: 12),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           borderSide: const BorderSide(
@@ -401,7 +401,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                         labelText: "Description".tr,
                         labelStyle: Theme.of(context).textTheme.headlineMedium,
                         errorStyle: const TextStyle(
-                            color: Colors.pinkAccent, fontSize: 15.0),
+                            color: Colors.blue, fontSize: 15.0),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           borderSide: const BorderSide(

@@ -82,7 +82,7 @@ class _UploadedFilesViewState extends State<UploadedFilesView> {
                   )
                   : ExtendedImage.network(
                       InfixApi.root + '${widget.files?[index]}',
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       cache: true,
                       mode: ExtendedImageMode.gesture,
                       initGestureConfigHandler: (state) {

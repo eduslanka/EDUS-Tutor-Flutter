@@ -82,6 +82,7 @@ import 'package:edus_tutor/utils/model/SystemSettings.dart';
 import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../screens/student/exam/exam_home.dart';
 import '../screens/teacher/students/SubjectStudentSearch.dart';
 import '../screens/virtual_class/virtual_class_main.dart';
 
@@ -93,42 +94,41 @@ class AppFunction {
     'Study Materials',
     'Homework',
     'Lesson',
-    'Examination',
-    'Online Exam',
-   // 'Timeline',
+    'Exams',
+    // 'Online Exam',
+    // 'Timeline',
     'Attendance',
-     'Leave',
+    'Leave',
     'Wallet',
-    
-    
-    
-   
-   
-    
+
     //'Teacher',
-   // 'Library',
-   // 'Transport',
-  //  'Dormitory',
-    
+    // 'Library',
+    // 'Transport',
+    //  'Dormitory',
+
     'More',
   ];
   static var studentIcons = [
-    'assets/images/homework.png',
-    'assets/images/downloads.png',
-    'assets/images/timeline.png',
-    'assets/images/attendance.png',
-    'assets/images/fees_icon.png',
-    'assets/images/examination.png',
-    'assets/images/onlineexam.png',
     'assets/images/routine.png',
-    'assets/images/leave.png',
     'assets/images/notice.png',
     'assets/images/subjects.png',
-    'assets/images/teacher.png',
-    'assets/images/library.png',
-    'assets/images/transport.png',
-    'assets/images/dormitory.png',
+    'assets/images/downloads.png',
+    // 'assets/images/timeline.png',
+
+    'assets/images/homework.png',
     'assets/images/myroutine.png',
+    'assets/images/examination.png',
+    // 'assets/images/onlineexam.png',
+    'assets/images/attendance.png',
+
+    'assets/images/leave.png',
+
+    //  'assets/images/teacher.png',
+    // 'assets/images/library.png',
+    //  'assets/images/transport.png',
+    //  'assets/images/dormitory.png',
+
+    'assets/images/fees_icon.png',
     'assets/images/addhw.png',
   ];
 
@@ -251,6 +251,14 @@ class AppFunction {
   static var examinationIcons = [
     'assets/images/examination.png',
     'assets/images/examination.png',
+  ];
+  static var exams = [
+    'Examination',
+    'Online Exam',
+  ];
+  static var examsIcons = [
+    'assets/images/examination.png',
+    'assets/images/onlineexam.png',
   ];
 
   static var onlineExaminations = [
@@ -535,30 +543,30 @@ class AppFunction {
       // case 'Timeline':
       //   Navigator.push(context, ScaleRoute(page: TimelineScreen(id: id)));
       //   break;
-      case 'Examination':
+      case 'Exams':
         Navigator.push(
           context,
           ScaleRoute(
-            page: ExaminationHome(
-              examinations,
-              examinationIcons,
+            page: ExamHome(
+              exams,
+              examsIcons,
               id: id,
             ),
           ),
         );
         break;
-      case 'Online Exam':
-        Navigator.push(
-          context,
-          ScaleRoute(
-            page: OnlineExaminationHome(
-              onlineExaminations,
-              onlineExaminationIcons,
-              id: id,
-            ),
-          ),
-        );
-        break;
+      // case 'Online Exam':
+      //   Navigator.push(
+      //     context,
+      //     ScaleRoute(
+      //       page: OnlineExaminationHome(
+      //         onlineExaminations,
+      //         onlineExaminationIcons,
+      //         id: id,
+      //       ),
+      //     ),
+      //   );
+      //   break;
       case 'Attendance':
         Navigator.push(
           context,
@@ -583,7 +591,6 @@ class AppFunction {
         );
         break;
       case 'Class':
-
         PersistentNavBarNavigator.pushNewScreen(
           context,
           screen: VirtualClassMain(),
@@ -1136,6 +1143,33 @@ class AppFunction {
                 page: OnlineExamResultScreen(
               id: id,
             )));
+        break;
+    }
+  }
+
+  static void examDashboardPage(BuildContext context, String title, {var id}) {
+    switch (title) {
+      case 'Examination':
+        Navigator.push(
+            context,
+            ScaleRoute(
+              page: ExaminationHome(
+                examinations,
+                examinationIcons,
+                id: id,
+              ),
+            ));
+        break;
+      case 'Online Exam':
+        Navigator.push(
+            context,
+            ScaleRoute(
+              page: OnlineExaminationHome(
+                onlineExaminations,
+                onlineExaminationIcons,
+                id: id,
+              ),
+            ));
         break;
     }
   }

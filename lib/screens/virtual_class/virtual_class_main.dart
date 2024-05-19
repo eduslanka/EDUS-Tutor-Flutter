@@ -191,7 +191,7 @@ class VirtualClassMain extends StatelessWidget {
                       'Class no available',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Colors.pinkAccent, fontSize: 24.0),
+                          color: Colors.blue, fontSize: 24.0),
                     ),
                   ),
               ],

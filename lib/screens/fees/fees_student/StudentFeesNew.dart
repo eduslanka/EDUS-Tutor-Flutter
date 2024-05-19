@@ -52,7 +52,7 @@ class _StudentFeesNewState extends State<StudentFeesNew> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppConfig.appToolbarBackground),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
               color: Color(0xff053EFF),
             ),

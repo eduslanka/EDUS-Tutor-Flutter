@@ -305,7 +305,7 @@ class _HomeState extends State<Home> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppConfig.appToolbarBackground),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
               color: const Color(0xff053EFF),
             ),

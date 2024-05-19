@@ -8,6 +8,8 @@ class AppConfig {
   static String appName = "EDUS Tutor";
 
   static String appLogo = 'assets/config/app_logo.png';
+  
+  static String appLogoBlue = 'assets/config/app_logo1.png';
 
   static String splashScreenBackground = 'assets/config/splash_bg.png';
 

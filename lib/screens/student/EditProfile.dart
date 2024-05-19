@@ -208,7 +208,7 @@ class _EditProfileState extends State<EditProfile> {
                                               ? 'Select image'.tr
                                               : _file?.path.split('/').last ?? '',
                                           errorStyle: const TextStyle(
-                                              color: Colors.pinkAccent,
+                                              color: Colors.blue,
                                               fontSize: 15.0),
                                           border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(5.0),
@@ -262,7 +262,7 @@ class _EditProfileState extends State<EditProfile> {
                                         labelStyle:
                                             Theme.of(context).textTheme.headlineMedium,
                                         errorStyle: const TextStyle(
-                                          color: Colors.pinkAccent,
+                                          color: Colors.blue,
                                           fontSize: 15.0,
                                         ),
                                         border: OutlineInputBorder(
@@ -308,7 +308,7 @@ class _EditProfileState extends State<EditProfile> {
                                         labelStyle:
                                             Theme.of(context).textTheme.headlineMedium,
                                         errorStyle: const TextStyle(
-                                          color: Colors.pinkAccent,
+                                          color: Colors.blue,
                                           fontSize: 15.0,
                                         ),
                                         border: OutlineInputBorder(
@@ -350,7 +350,7 @@ class _EditProfileState extends State<EditProfile> {
                                         labelStyle:
                                             Theme.of(context).textTheme.headlineMedium,
                                         errorStyle: const TextStyle(
-                                          color: Colors.pinkAccent,
+                                          color: Colors.blue,
                                           fontSize: 15.0,
                                         ),
                                         border: OutlineInputBorder(
@@ -420,7 +420,7 @@ class _EditProfileState extends State<EditProfile> {
                                         labelStyle:
                                             Theme.of(context).textTheme.headlineMedium,
                                         errorStyle: const TextStyle(
-                                          color: Colors.pinkAccent,
+                                          color: Colors.blue,
                                           fontSize: 15.0,
                                         ),
                                         border: OutlineInputBorder(

@@ -146,7 +146,7 @@ class _AddRazorAmountState extends State<AddRazorAmount> {
                       labelText: "amount",
                       labelStyle: Theme.of(context).textTheme.headlineMedium,
                       errorStyle:
-                          const TextStyle(color: Colors.pinkAccent, fontSize: 15.0),
+                          const TextStyle(color: Colors.blue, fontSize: 15.0),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       )),

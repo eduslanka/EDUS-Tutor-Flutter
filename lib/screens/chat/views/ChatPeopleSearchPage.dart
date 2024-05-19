@@ -83,7 +83,7 @@ class _ChatPeopleSearchPageState extends State<ChatPeopleSearchPage> {
                 hintText: "Search by name or email",
                 labelText: "Search by name or email",
                 labelStyle: Theme.of(context).textTheme.titleLarge,
-                errorStyle: const TextStyle(color: Colors.pinkAccent, fontSize: 15.0),
+                errorStyle: const TextStyle(color: Colors.blue, fontSize: 15.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                 ),

@@ -68,6 +68,7 @@ class StudentWalletController extends GetxController {
           userController.token.value.toString(),
         ),
       );
+      
       if (response.statusCode == 200) {
         var data = walletFromJson(response.body);
 

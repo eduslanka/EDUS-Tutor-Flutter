@@ -1,9 +1,4 @@
-// To parse this JSON data, do
-//
-//     final studentAddPaymentModel = studentAddPaymentModelFromJson(jsonString);
-
 import 'dart:convert';
-
 import 'package:get/get.dart';
 
 StudentAddPaymentModel studentAddPaymentModelFromJson(String str) =>
@@ -42,7 +37,8 @@ class StudentAddPaymentModel {
   Map<String, dynamic> toJson() => {
         "paymentMethods":
             List<dynamic>.from(paymentMethods?.map((x) => x.toJson()) ?? []),
-        "bankAccounts": List<dynamic>.from(bankAccounts?.map((x) => x.toJson()) ?? []),
+        "bankAccounts":
+            List<dynamic>.from(bankAccounts?.map((x) => x.toJson()) ?? []),
         "invoiceInfo": invoiceInfo?.toJson(),
         "invoiceDetails":
             List<dynamic>.from(invoiceDetails?.map((x) => x.toJson()) ?? []),
@@ -98,8 +94,8 @@ class InvoiceDetail {
         feesTypeName: json["fees_type_name"],
         amount: num.tryParse(json["amount"].toString()),
         dueAmount: num.tryParse(json["due_amount"].toString()),
-        weaver: num.tryParse(json["weaver"].toString())??0,
-        fine: num.tryParse(json["fine"])??0,
+        weaver: num.tryParse(json["weaver"].toString()) ?? 0,
+        fine: num.tryParse(json["fine"].toString()) ?? 0,
         note: json["note"] ?? "",
       );
 
@@ -156,19 +152,19 @@ class InvoiceInfo {
       return InvoiceInfo(
         id: json["id"],
         invoiceId: json["invoice_id"],
-        studentId: int.tryParse(json["student_id"]),
-        classId: int.tryParse(json["class_id"]),
+        studentId: int.tryParse(json["student_id"].toString()),
+        classId: int.tryParse(json["class_id"].toString()),
         createDate: DateTime.parse(json["create_date"]),
         dueDate: DateTime.parse(json["due_date"]),
         paymentStatus: json["payment_status"],
         paymentMethod: json["payment_method"],
         bankId: json["bank_id"],
         type: json["type"],
-        schoolId: int.tryParse(json["school_id"]),
-        academicId: int.tryParse(json["academic_id"]),
+        schoolId: int.tryParse(json["school_id"].toString()),
+        academicId: int.tryParse(json["academic_id"].toString()),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        recordId: int.tryParse(json["record_id"]),
+        recordId: int.tryParse(json["record_id"].toString()),
         studentInfo: StudentInfo.fromJson(json["student_info"]),
       );
     } catch (e, tr) {
@@ -178,33 +174,34 @@ class InvoiceInfo {
     }
   }
 
-    Map<String, dynamic> toJson() => {
-      "id": id,
-      "invoice_id": invoiceId,
-      "student_id": studentId,
-      "class_id": classId,
-      "create_date":
-      "${createDate?.year.toString().padLeft(4, '0')}-${createDate?.month.toString().padLeft(2, '0')}-${createDate?.day.toString().padLeft(2, '0')}",
-      "due_date":
-      "${dueDate?.year.toString().padLeft(4, '0')}-${dueDate?.month.toString().padLeft(2, '0')}-${dueDate?.day.toString().padLeft(2, '0')}",
-      "payment_status": paymentStatus,
-      "payment_method": paymentMethod,
-      "bank_id": bankId,
-      "type": type,
-      "school_id": schoolId,
-      "academic_id": academicId,
-      "created_at": createdAt?.toIso8601String(),
-      "updated_at": updatedAt?.toIso8601String(),
-      "record_id": recordId,
-      "student_info": studentInfo?.toJson(),
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "invoice_id": invoiceId,
+        "student_id": studentId,
+        "class_id": classId,
+        "create_date":
+            "${createDate?.year.toString().padLeft(4, '0')}-${createDate?.month.toString().padLeft(2, '0')}-${createDate?.day.toString().padLeft(2, '0')}",
+        "due_date":
+            "${dueDate?.year.toString().padLeft(4, '0')}-${dueDate?.month.toString().padLeft(2, '0')}-${dueDate?.day.toString().padLeft(2, '0')}",
+        "payment_status": paymentStatus,
+        "payment_method": paymentMethod,
+        "bank_id": bankId,
+        "type": type,
+        "school_id": schoolId,
+        "academic_id": academicId,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
+        "record_id": recordId,
+        "student_info": studentInfo?.toJson(),
+      };
+}
 
 class StudentInfo {
   StudentInfo({
     this.id,
     this.user,
   });
+
   int? id;
   User? user;
 

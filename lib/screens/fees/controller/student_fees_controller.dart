@@ -330,11 +330,16 @@ class StudentFeesController extends GetxController {
       final response = await http.get(
           Uri.parse(InfixApi.studentFeesAddPayment(invoiceId)),
           headers: Utils.setHeader(userController.token.toString()));
+//print(InfixApi.studentFeesAddPayment(invoiceId));
+//print(Utils.setHeader(userController.token.toString()));
+//print(response.body);
 
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
-
+print(response.statusCode);
+ print('addPaymentModel.value.paymentMethods${addPaymentModel.value.paymentMethods}');
         addPaymentModel.value = StudentAddPaymentModel.fromJson(jsonData);
+       
 
         if (addPaymentModel.value.bankAccounts!.isNotEmpty) {
           selectedBank.value = addPaymentModel.value.bankAccounts?.first ?? BankAccount();

@@ -49,7 +49,7 @@ class _HomeState extends State<DBTeacherAcademic> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppConfig.appToolbarBackground),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
               color: Color(0xff053EFF),
             ),

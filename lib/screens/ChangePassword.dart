@@ -79,7 +79,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     labelText: "Current Password".tr,
                     labelStyle: Theme.of(context).textTheme.headlineMedium,
                     errorStyle:
-                        const TextStyle(color: Colors.pinkAccent, fontSize: 15.0),
+                        const TextStyle(color: Colors.blue, fontSize: 15.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -108,7 +108,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     labelText: "New Password".tr,
                     labelStyle: Theme.of(context).textTheme.headlineMedium,
                     errorStyle:
-                        const TextStyle(color: Colors.pinkAccent, fontSize: 15.0),
+                        const TextStyle(color: Colors.blue, fontSize: 15.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -141,7 +141,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     labelText: "Confirm Password".tr,
                     labelStyle: Theme.of(context).textTheme.headlineMedium,
                     errorStyle:
-                        const TextStyle(color: Colors.pinkAccent, fontSize: 15.0),
+                        const TextStyle(color: Colors.blue, fontSize: 15.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),

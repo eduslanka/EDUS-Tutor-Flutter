@@ -75,7 +75,7 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image.asset(
-                          AppConfig.appLogo,
+                          AppConfig.appLogoBlue,
                           width: Get.width * 0.2,
                           height: Get.width * 0.2,
                         ),

@@ -15,9 +15,11 @@ import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
 import 'ChangePassword.dart';
+import 'contact_us.dart';
 
 class SettingScreen extends StatefulWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+  
+  const SettingScreen({Key? key, }) : super(key: key);
 
   @override
   _SettingScreenState createState() => _SettingScreenState();
@@ -29,7 +31,8 @@ class _SettingScreenState extends State<SettingScreen> {
 
   List<bool> isSelected = [false, false];
   final GlobalKey _scaffold = GlobalKey();
-
+String _fullName='';
+String _id='XXXX';
   @override
   void initState() {
     super.initState();
@@ -40,6 +43,19 @@ class _SettingScreenState extends State<SettingScreen> {
         //Utils.showToast('$value');
       });
     });
+     Utils.getStringValue('full_name').then((value) {
+      setState(() {
+        _fullName=value??'Mr/s x';
+      });
+      
+    });
+     Utils.getStringValue('id').then((value) {
+      setState(() {
+        _id=value??'XXXX';
+      });
+      
+    });
+    print(_fullName);
   }
 
   @override
@@ -161,7 +177,26 @@ class _SettingScreenState extends State<SettingScreen> {
             dense: true,
           ),
           const BottomLine(),
-
+ ListTile(
+            onTap: () {
+              Navigator.of(context).push(ScaleRoute(page:  HelpDeskMenu(stName: _fullName, stId: _id,) ));
+            },
+            leading: CircleAvatar(
+              backgroundColor: Colors.blueAccent,
+              child: Icon(
+                Icons.contact_page,
+                color: Colors.white,
+                size: ScreenUtil().setSp(16),
+              ),
+            ),
+            title: Text(
+              'Contact Us'.tr,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            dense: true,
+          ),
+          const BottomLine(),
+         
           // ListTile(
           //   onTap: () {
           //     Get.dialog(

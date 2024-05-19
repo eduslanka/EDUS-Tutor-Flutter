@@ -27,7 +27,7 @@ class _ErrorPageState extends State<ErrorPage> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(AppConfig.loginBackground),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     )),
                 child: Center(
                   child: Container(
@@ -56,7 +56,7 @@ class _ErrorPageState extends State<ErrorPage> {
                         '${widget.message ?? 'Invalid Purchase. Please activate from your server.'}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Colors.pinkAccent, fontSize: 24.0),
+                            color: Colors.blue, fontSize: 24.0),
                       ),
                     ),
                     SizedBox(

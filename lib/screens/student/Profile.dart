@@ -41,7 +41,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   bool isPersonal = false;
   bool isParents = false;
-  bool isTransport = false;
+ // bool isTransport = false;
   bool isOthers = false;
   String section = 'personal';
   String? id;
@@ -61,9 +61,9 @@ class _ProfileState extends State<Profile> {
     Tab(
       text: 'Parents'.tr,
     ),
-    Tab(
-      text: 'Transport'.tr,
-    ),
+    // Tab(
+    //   text: 'Transport'.tr,
+    // ),
     Tab(
       text: 'Others'.tr,
     ),
@@ -253,7 +253,7 @@ class _ProfileState extends State<Profile> {
                                         children: [
                                           getProfileList(),
                                           getParentDetails(),
-                                          getTransportList(),
+                                         // getTransportList(),
                                           getOthersList(),
                                           getDocumentsList(),
                                           // getParentDetails(),

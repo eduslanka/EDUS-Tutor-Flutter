@@ -41,7 +41,8 @@ class _FeesRowNewState extends State<FeesRowNew> {
                 maxLines: 1,
               ),
             ),
-            PopupMenuButton(
+            PopupMenuButton(color: Colors.white,
+            surfaceTintColor: Colors.white,
               child: Row(
                 children: [
                   Text(
@@ -397,7 +398,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                                 labelStyle:
                                     Theme.of(context).textTheme.headlineMedium,
                                 errorStyle: const TextStyle(
-                                    color: Colors.pinkAccent, fontSize: 15.0),
+                                    color: Colors.blue, fontSize: 15.0),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),

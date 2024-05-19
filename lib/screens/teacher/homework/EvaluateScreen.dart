@@ -126,7 +126,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                     labelText: "Set Marks out of ${widget.totalMarks}",
                     labelStyle: Theme.of(context).textTheme.headlineMedium,
                     errorStyle:
-                        const TextStyle(color: Colors.pinkAccent, fontSize: 15.0),
+                        const TextStyle(color: Colors.blue, fontSize: 15.0),
                     errorMaxLines: 3,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
@@ -333,7 +333,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                           )
                           : ExtendedImage.network(
                               InfixApi.root + '${widget.files?[index]}',
-                              fit: BoxFit.fill,
+                              fit: BoxFit.cover,
                               cache: true,
                               mode: ExtendedImageMode.gesture,
                               initGestureConfigHandler: (state) {

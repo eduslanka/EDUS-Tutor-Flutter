@@ -63,9 +63,9 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
     Tab(
       text: 'Parents'.tr,
     ),
-    Tab(
-      text: 'Transport'.tr,
-    ),
+    // Tab(
+    //   text: 'Transport'.tr,
+    // ),
     Tab(
       text: 'Others'.tr,
     ),
@@ -123,7 +123,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppConfig.appToolbarBackground),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
               color: Color(0xff053EFF),
             ),
@@ -314,7 +314,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                         children: [
                                           getProfileList(),
                                           getParentDetails(),
-                                          getTransportList(),
+                                      //    getTransportList(),
                                           getOthersList(),
                                           getDocumentsList(),
                                           // getParentDetails(),
@@ -690,38 +690,38 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
     );
   }
 
-  Widget getTransportList() {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      margin: const EdgeInsets.symmetric(horizontal: 22),
-      color: Colors.white,
-      child: _studentDetails.studentData?.transport != null
-          ? ListView(
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              children: [
-                  ProfileRowList(
-                    "Drivers name".tr,
-                    _studentDetails.studentData?.transport?.driverName.toString() ?? '',
-                  ),
-                  ProfileRowList(
-                    "Car no".tr,
-                    _studentDetails.studentData?.transport?.vehicleNo.toString() ?? '',
-                  ),
-                  ProfileRowList(
-                    "Car model".tr,
-                    _studentDetails.studentData?.transport?.vehicleModel
-                        .toString() ?? '',
-                  ),
-                  ProfileRowList(
-                    "Car info".tr,
-                    _studentDetails.studentData?.transport?.note.toString() ?? '',
-                  ),
-                ])
-          : const SizedBox.shrink(),
-    );
-  }
-
+  // Widget getTransportList() {
+  //   return Container(
+  //     height: MediaQuery.of(context).size.height,
+  //     margin: const EdgeInsets.symmetric(horizontal: 22),
+  //     color: Colors.white,
+  //     child: _studentDetails.studentData?.transport != null
+  //         ? ListView(
+  //             physics: const BouncingScrollPhysics(),
+  //             padding: const EdgeInsets.symmetric(vertical: 30),
+  //             children: [
+  //                 ProfileRowList(
+  //                   "Drivers name".tr,
+  //                   _studentDetails.studentData?.transport?.driverName.toString() ?? '',
+  //                 ),
+  //                 ProfileRowList(
+  //                   "Car no".tr,
+  //                   _studentDetails.studentData?.transport?.vehicleNo.toString() ?? '',
+  //                 ),
+  //                 ProfileRowList(
+  //                   "Car model".tr,
+  //                   _studentDetails.studentData?.transport?.vehicleModel
+  //                       .toString() ?? '',
+  //                 ),
+  //                 ProfileRowList(
+  //                   "Car info".tr,
+  //                   _studentDetails.studentData?.transport?.note.toString() ?? '',
+  //                 ),
+  //               ])
+  //         : const SizedBox.shrink(),
+  //   );
+  // }
+// 
   Widget getOthersList() {
     return Container(
       height: MediaQuery.of(context).size.height,
