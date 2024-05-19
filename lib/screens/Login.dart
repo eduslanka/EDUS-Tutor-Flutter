@@ -12,6 +12,9 @@ import 'package:edus_tutor/config/app_config.dart';
 import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/server/LoginService.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -239,6 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
+                contactUs()
               ],
             ),
           ),
@@ -313,4 +317,28 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return jsonData['data'][user]['email'];
   }
+  Widget contactUs(){
+  return Column(children: [
+    Text('Trouble to login ? Contact Us'),
+    h16,
+    Row(
+  crossAxisAlignment: CrossAxisAlignment.center,
+  mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+      GestureDetector(
+        onTap: (){
+          // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+          UrlLauncher.launch('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+        },
+        child: SvgPicture.asset('assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',height: 30,width: 40,)),
+      w16,
+      GestureDetector(
+        onTap: (){
+          UrlLauncher.launch("tel:+94774487774");
+        },
+        child: SvgPicture.asset('assets/config/phone-call-svgrepo-com.svg',height: 30,width: 40,))
+    ],)
+  ],);
+}
+
 }

@@ -78,7 +78,7 @@ class Utils extends GetxController {
       gravity: ToastGravity.BOTTOM,
     );
   }
-
+static Color baseBlue= Color(0xff053EFF);
   static BoxDecoration gradientBtnDecoration = BoxDecoration(
       borderRadius: BorderRadius.circular(25.0),
       gradient: const LinearGradient(

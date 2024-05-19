@@ -82,7 +82,7 @@ Widget getWidget(int index){
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               h8,
-              leaniarBar(),
+           //   leaniarBar(),
               h8,
               Expanded(
                 child: Swiper(

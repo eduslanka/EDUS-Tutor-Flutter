@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:edus_tutor/config/app_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/fees/paymentGateway/khalti/sdk/khalti.dart';
+import 'utils/Utils.dart';
 import 'utils/widget/page.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -28,7 +29,7 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
     statusBarColor:
-        const Color(0xff280073), //or set color with: Color(0xFF0000FF)
+         Utils.baseBlue, //or set color with: Color(0xFF0000FF)
   ));
   HttpOverrides.global = MyHttpOverrides();
   final sharedPref = await SharedPreferences.getInstance();

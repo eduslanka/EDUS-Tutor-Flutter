@@ -54,9 +54,11 @@ class LogoutService {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
+      backgroundColor: Colors.white,
+      surfaceTintColor: Colors.white,
       title: Text(
         "Logout",
-        style: Get.textTheme.headlineSmall,
+        style:TextStyle(color: Utils.baseBlue),
       ),
       content: const Text("Would you like to logout?"),
       actions: [

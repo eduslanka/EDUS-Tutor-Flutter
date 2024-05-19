@@ -1,3 +1,4 @@
+import 'package:edus_tutor/config/app_size.dart';
 import 'package:edus_tutor/webview/launch_webview.dart';
 import 'package:flutter/material.dart';
 
@@ -76,10 +77,11 @@ String _id='XXXX';
           //     elevation: 5.0,
           //   ),
           // ),
-          BottomLine(),
-          const SizedBox(
-            height: 10,
-          ),
+    //      BottomLine(),
+          // const SizedBox(
+          //   height: 10,
+          // ),
+          h16,
           // ListTile(
           //   onTap: () {
           //     showChangeLanguageAlert(_scaffold.currentContext!);
@@ -138,7 +140,8 @@ String _id='XXXX';
             ),
             dense: true,
           ),
-          const BottomLine(),
+       //   const BottomLine(),
+        h16,
           ListTile(
             onTap: () {
               Navigator.of(context).push(ScaleRoute(page: const LaunchWebView(launchUrl: 'https://edustutor.com/terms-conditions/',title: 'Terms & Conditions',)));
@@ -157,7 +160,8 @@ String _id='XXXX';
             ),
             dense: true,
           ),
-          const BottomLine(),
+       //   const BottomLine(),
+        h16,
           ListTile(
             onTap: () {
               Navigator.of(context).push(ScaleRoute(page: const LaunchWebView(launchUrl: 'https://edustutor.com/privacy-policy/',title: 'Privacy Policy',)));
@@ -176,7 +180,8 @@ String _id='XXXX';
             ),
             dense: true,
           ),
-          const BottomLine(),
+      //    const BottomLine(),
+       h16,
  ListTile(
             onTap: () {
               Navigator.of(context).push(ScaleRoute(page:  HelpDeskMenu(stName: _fullName, stId: _id,) ));
@@ -195,7 +200,8 @@ String _id='XXXX';
             ),
             dense: true,
           ),
-          const BottomLine(),
+     //     const BottomLine(),
+      h16,
          
           // ListTile(
           //   onTap: () {

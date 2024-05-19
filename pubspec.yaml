@@ -124,7 +124,7 @@ flutter_icons:
 
 # flutter pub run flutter_native_splash:create
 flutter_native_splash:
-  image: assets/config/splash_logo.png
+  image: assets/config/app_logo1.png
   fullscreen: true
   color: "FFFFFF"
 
