@@ -2,6 +2,8 @@
 import 'dart:convert';
 
 // Flutter imports:
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:edus_tutor/config/app_size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +13,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 // import 'package:edge_alert/edge_alert.dart';
 import 'package:edge_alerts/edge_alerts.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:edus_tutor/controller/system_controller.dart';
-import 'package:edus_tutor/screens/chat/views/ChatPageMain.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -34,6 +38,7 @@ import 'package:edus_tutor/utils/server/About.dart';
 import 'package:edus_tutor/utils/server/LogoutService.dart';
 import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import '../main.dart';
+import '../widget/quates_widget.dart';
 import 'ChangePassword.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -68,7 +73,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
-  final  _titles;
+  final _titles;
 
   // ignore: prefer_typing_uninitialized_variables
   final _images;
@@ -76,7 +81,7 @@ class Home extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   var rule;
 
-  Home( this._titles, this._images, this.rule, {Key? key}) : super(key: key);
+  Home(this._titles, this._images, this.rule, {Key? key}) : super(key: key);
 
   @override
   // ignore: no_logic_in_create_state
@@ -174,7 +179,7 @@ class _HomeState extends State<Home> {
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
     flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-        onDidReceiveNotificationResponse: (NotificationResponse? payload) async {
+      onDidReceiveNotificationResponse: (NotificationResponse? payload) async {
         if (payload != null) {
           debugPrint('notification payload: $payload');
         }
@@ -332,7 +337,7 @@ class _HomeState extends State<Home> {
                           height: 10,
                         ),
                         Text(
-                          "Welcome".tr + " $_fullName"+" 🎓",
+                          "Welcome".tr + " $_fullName" + " 🎓",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context)
@@ -383,7 +388,17 @@ class _HomeState extends State<Home> {
               const SizedBox(
                 height: 10,
               ),
-              GridView.builder(
+              Padding(
+                padding: const EdgeInsets.only(left: 24.0, right: 24),
+                child: Text(
+                  DateFormat('yMd').format(DateTime.now()),
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            QuoteOfTheDayWidget(),  GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 padding: const EdgeInsets.symmetric(
@@ -395,11 +410,10 @@ class _HomeState extends State<Home> {
                   crossAxisCount: 3,
                 ),
                 itemBuilder: (context, index) {
-                    print(_rule);
+                  print(_rule);
                   return CustomWidget(
                     index: index,
                     isSelected: currentSelectedIndex == index,
-                  
                     onSelect: () {
                       setState(() {
                         currentSelectedIndex = index;
@@ -601,7 +615,8 @@ class _HomeState extends State<Home> {
                                                 children: [
                                                   Icon(
                                                     FontAwesomeIcons.solidBell,
-                                                    color: const Color(0xff053EFF),
+                                                    color:
+                                                        const Color(0xff053EFF),
                                                     size:
                                                         ScreenUtil().setSp(15),
                                                   ),
@@ -694,7 +709,8 @@ class _HomeState extends State<Home> {
                                             ),
                                       ),
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color(0xff053EFF),
+                                        backgroundColor:
+                                            const Color(0xff053EFF),
                                       ),
                                     ),
                                   ],
