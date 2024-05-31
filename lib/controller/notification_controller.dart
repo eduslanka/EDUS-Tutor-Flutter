@@ -32,6 +32,8 @@ class NotificationController extends GetxController {
       isLoading(true);
       final response = await http.get(Uri.parse(InfixApi.getMyNotifications(_id)),
           headers: Utils.setHeader(_token.toString()));
+          print(InfixApi.getMyNotifications(_id));
+          print(_token.toString());
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         userNotificationList.value =

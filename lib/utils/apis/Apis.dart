@@ -351,11 +351,13 @@ class InfixApi {
   //NEW APIs
 
   static String getMyNotifications(dynamic id) {
-    return baseApi + "myNotification/$id";
+    return baseApi + "my-notifications";
+   //return baseApi + "my-notifications";
   }
 
   static String readMyNotifications(dynamic userID, notificationID) {
-    return baseApi + "viewNotification/$userID/$notificationID";
+   // return baseApi + "viewNotification/$userID/$notificationID";
+   return baseApi + "read-notification";
   }
 
   static String readAllNotification(dynamic userID) {

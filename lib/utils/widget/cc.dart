@@ -21,11 +21,12 @@ class CustomController extends GetxController {
       isLoading(true);
 
       final response = await http.get(Uri.parse(InfixApi.service),
+    
           headers: {'Accept': 'application/json'});
       print('Service Check Response::::::: ${response.statusCode}');
       var decode = jsonDecode(response.body);
       print('Service Check Response::::::: ${response.body}');
-
+  print(Uri.parse(InfixApi.service));
       if (response.statusCode == 200) {
         isLoading(false);
         connected.value = decode;

@@ -793,10 +793,10 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
             flexibleSpace: Container(
               padding: EdgeInsets.only(top: 20.h),
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(AppConfig.appToolbarBackground),
-                  fit: BoxFit.cover,
-                ),
+                // image: DecorationImage(
+                //   image: AssetImage(AppConfig.appToolbarBackground),
+                //   fit: BoxFit.cover,
+                // ),
                 color: Color(0xff053EFF),
               ),
               child: Row(

@@ -52,8 +52,8 @@ class _QuoteOfTheDayWidgetState extends State<QuoteOfTheDayWidget> {
                         fontWeight: FontWeight.bold,
                       ),
                       maxFontSize: 24,
-                      maxLines: 2,
-                      minFontSize: 14,
+                      maxLines:isToggled?3: 2,
+                      minFontSize: 12,
                     ),
                   ),
                   Padding(
@@ -65,7 +65,7 @@ class _QuoteOfTheDayWidgetState extends State<QuoteOfTheDayWidget> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Text(isToggled?'- Thirukkural -' :'- திருக்குறள் -'),
+                         Text(isToggled?'- Thirukkural -' :'- திருக்குறள் -',style: TextStyle(fontSize: 12),),
                         GestureDetector(
                           onTap: _toggleImage,
                           child: SvgPicture.asset(

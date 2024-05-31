@@ -3,8 +3,9 @@ class AppConfig {
   /// To test the app
   /// Please use this base url : https://spn11.freeschoolsoftware.in/infixedu_v8
 
-  static String domainName = 'https://app.edustutor.com'; //** Replace with your domain name
-
+ //static String domainName = 'https://app.edustutor.com'; //** Replace with your domain name
+ static String domainName = 'https://school.quickmartshop.com';
+ //http://edustutorapp.test
   static String appName = "EDUS Tutor";
 
   static String appLogo = 'assets/config/app_logo.png';

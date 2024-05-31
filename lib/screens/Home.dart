@@ -2,8 +2,6 @@
 import 'dart:convert';
 
 // Flutter imports:
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:edus_tutor/config/app_size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +11,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 // import 'package:edge_alert/edge_alert.dart';
 import 'package:edge_alerts/edge_alerts.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -298,182 +294,199 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:Color(0xff053EFF) ,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80.h),
         child: AppBar(
           centerTitle: false,
           automaticallyImplyLeading: false,
-          flexibleSpace: Container(
-            height: 110.h,
-            padding: EdgeInsets.only(top: 20.h),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppConfig.appToolbarBackground),
-                fit: BoxFit.cover,
-              ),
-              color: const Color(0xff053EFF),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    width: 200.h,
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
+          flexibleSpace:   Column(
+            children: [
+               const SizedBox(
+                                  height: 10,
+                                ),
+              Container(
+                    height: 110.h,
+                    padding: EdgeInsets.only(top: 20.h),
+                    decoration: BoxDecoration(
+                      // image: DecorationImage(
+                      //  // image: AssetImage(AppConfig.appToolbarBackground),
+                      //   fit: BoxFit.cover,
+                      // ),
+                      color: const Color(0xff053EFF),
+                    ),
+                    child: Row(
                       children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Flexible(
-                          child: Image.asset(
-                            AppConfig.appLogo,
-                            height: 30,
+                        Expanded(
+                          child: Container(
+                            width: 200.h,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Flexible(
+                                  child: Image.asset(
+                                    AppConfig.appLogo,
+                                    height: 30,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Welcome".tr + " $_fullName" + " 🎓",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(color: Colors.white, fontSize: 15),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Welcome".tr + " $_fullName" + " 🎓",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.copyWith(color: Colors.white, fontSize: 15),
-                        ),
-                        const SizedBox(
-                          height: 10,
+                       
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                             const SizedBox(
+                                  height: 10,
+                                ),
+                            IconButton(
+                              onPressed: () {
+                                Get.dialog(LogoutService().logoutDialog());
+                              },
+                              icon: Icon(
+                                Icons.exit_to_app,
+                                size: 25.sp,
+                              ),
+                            ), const SizedBox(
+                                  height: 8,
+                                ),
+                             Padding(
+                               padding: const EdgeInsets.only(right:12.0),
+                               child: Text(
+                                 DateFormat('yMd').format(DateTime.now()),
+                                 style: const TextStyle(
+                                     color: Colors.white,
+                                     fontSize: 14,
+                                     fontWeight: FontWeight.bold),
+                               ),
+                             ),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                ),
-                // IconButton(
-                //   onPressed: () {
-                //     Get.to(() => const ChatPageMain());
-                //   },
-                //   icon: Icon(
-                //     FontAwesomeIcons.facebookMessenger,
-                //     size: 25.sp,
-                //   ),
-                // ),
-                IconButton(
-                  onPressed: () {
-                    Get.dialog(LogoutService().logoutDialog());
-                  },
-                  icon: Icon(
-                    Icons.exit_to_app,
-                    size: 25.sp,
-                  ),
-                ),
-              ],
-            ),
+            ],
           ),
           backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
       ),
-      body: Obx(() {
-        if (_systemController.isLoading.value) {
-          return const Center(child: CupertinoActivityIndicator());
-        } else {
-          return ListView(
-            shrinkWrap: false,
-            physics: const BouncingScrollPhysics(),
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 24.0, right: 24),
-                child: Text(
-                  DateFormat('yMd').format(DateTime.now()),
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            QuoteOfTheDayWidget(),  GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
-                ),
-                itemCount: _titles.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                ),
-                itemBuilder: (context, index) {
-                  print(_rule);
-                  return CustomWidget(
-                    index: index,
-                    isSelected: currentSelectedIndex == index,
-                    onSelect: () {
-                      setState(() {
-                        currentSelectedIndex = index;
-                        if (_rule == '2') {
-                          AppFunction.getDashboardPage(
-                            context,
-                            _titles[index],
-                            id: _id,
-                            token: _token,
-                          );
-                        } else if (_rule == '4') {
-                          AppFunction.getTeacherDashboardPage(
-                            context,
-                            _titles[index],
-                            _id ?? '',
-                          );
-                        } else if (_rule == '3') {
-                          AppFunction.getParentDashboardPage(
-                            context,
-                            _titles[index],
-                            _id ?? '',
-                          );
-                        } else if (_rule == '1' || _rule == '5') {
-                          if (isAdministrator == 'yes') {
-                            AppFunction.getSaasAdminDashboardPage(
-                              context,
-                              _titles[index],
-                              _id ?? '',
-                              _systemController.systemSettings.value,
-                            );
-                          } else {
-                            AppFunction.getAdminDashboardPage(
-                              context,
-                              _titles[index],
-                              _id ?? '',
-                              _systemController.systemSettings.value,
-                            );
-                          }
-                        } else if (_rule == '9') {
-                          AppFunction.getDriverDashboard(
-                            context,
-                            _titles[index],
-                            _id ?? '',
-                            _systemController.systemSettings.value,
-                          );
-                        }
-                      });
+      body: SafeArea(
+        child: Container(
+          color: Color.fromARGB(255, 239, 239, 239),
+          child: Obx(() {
+            if (_systemController.isLoading.value) {
+              return const Center(child: CupertinoActivityIndicator());
+            } else {
+              return ListView(
+                shrinkWrap: false,
+                physics: const BouncingScrollPhysics(),
+                children: [
+                
+                  const SizedBox(
+                    height: 10,
+                  ),
+                 
+                QuoteOfTheDayWidget(),  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                    itemCount: _titles.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                    ),
+                    itemBuilder: (context, index) {
+                      print(_rule);
+                      return CustomWidget(
+                        index: index,
+                        isSelected: currentSelectedIndex == index,
+                        onSelect: () {
+                          setState(() {
+                            currentSelectedIndex = index;
+                            if (_rule == '2') {
+                              AppFunction.getDashboardPage(
+                                context,
+                                _titles[index],
+                                id: _id,
+                                token: _token,
+                              );
+                            } else if (_rule == '4') {
+                              AppFunction.getTeacherDashboardPage(
+                                context,
+                                _titles[index],
+                                _id ?? '',
+                              );
+                            } else if (_rule == '3') {
+                              AppFunction.getParentDashboardPage(
+                                context,
+                                _titles[index],
+                                _id ?? '',
+                              );
+                            } else if (_rule == '1' || _rule == '5') {
+                              if (isAdministrator == 'yes') {
+                                AppFunction.getSaasAdminDashboardPage(
+                                  context,
+                                  _titles[index],
+                                  _id ?? '',
+                                  _systemController.systemSettings.value,
+                                );
+                              } else {
+                                AppFunction.getAdminDashboardPage(
+                                  context,
+                                  _titles[index],
+                                  _id ?? '',
+                                  _systemController.systemSettings.value,
+                                );
+                              }
+                            } else if (_rule == '9') {
+                              AppFunction.getDriverDashboard(
+                                context,
+                                _titles[index],
+                                _id ?? '',
+                                _systemController.systemSettings.value,
+                              );
+                            }
+                          });
+                        },
+                        headline: _titles[index],
+                        icon: _images[index],
+                      );
                     },
-                    headline: _titles[index],
-                    icon: _images[index],
-                  );
-                },
-              ),
-              SizedBox(
-                height: 50.h,
-              ),
-            ],
-          );
-        }
-      }),
+                  ),
+                  SizedBox(
+                    height: 50.h,
+                  ),
+                ],
+              );
+            }
+          }),
+        ),
+      ),
     );
   }
 

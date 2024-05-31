@@ -15,6 +15,8 @@ import 'package:edus_tutor/utils/server/LoginService.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../webview/launch_webview.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -294,6 +296,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               ),
            h16,
+           registerButton(),
+            h16,
              contactUs(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -303,6 +307,28 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     : const Text(''),
               ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+   Widget registerButton() {
+    return GestureDetector(
+      onTap: (){
+        Route route;
+          route = MaterialPageRoute(builder: (context) => const LaunchWebView(launchUrl: 'https://edustutor.com/register/',title: 'Register',));
+            Navigator.push(context, route);
+      },
+      child: Container(
+        width: double.infinity,
+        child: Center(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Don\'t have an account ?',style: TextStyle(color: Colors.black),),
+              Text('  Register Now',style: TextStyle(color: Color(0xff053EFF)),),
             ],
           ),
         ),
