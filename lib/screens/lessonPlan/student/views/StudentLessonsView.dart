@@ -35,7 +35,7 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
   Future<LessonPlan> getLessonPlan(int recordId, studentId) async {
     try {
       final response = await http.get(
-        Uri.parse(InfixApi.studentLessonPlan + "/${widget.id}/$recordId"),
+        Uri.parse(EdusApi.studentLessonPlan + "/${widget.id}/$recordId"),
         headers: Utils.setHeader(
           _userController.token.value.toString(),
         ),
@@ -58,7 +58,7 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
       int recordId, studentId, date, dayId) async {
     try {
       final response = await http.get(
-        Uri.parse(InfixApi.studentLessonPlanByDate +
+        Uri.parse(EdusApi.studentLessonPlanByDate +
             "/${widget.id}/$recordId/$date/$dayId"),
         headers: Utils.setHeader(
           _userController.token.value.toString(),
@@ -79,7 +79,7 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
   Future<LessonPlan> getPreviousWeek(int recordId, studentId, startDate) async {
     try {
       final response = await http.get(
-        Uri.parse(InfixApi.studentLessonPreviousWeek +
+        Uri.parse(EdusApi.studentLessonPreviousWeek +
             "/${widget.id}/$recordId/$startDate"),
         headers: Utils.setHeader(
           _userController.token.value.toString(),
@@ -99,7 +99,7 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
   Future<LessonPlan> getNextWeek(int recordId, studentId, endDate) async {
     try {
       final response = await http.get(
-        Uri.parse(InfixApi.studentLessonNextWeek +
+        Uri.parse(EdusApi.studentLessonNextWeek +
             "/${widget.id}/$recordId/$endDate"),
         headers: Utils.setHeader(
           _userController.token.value.toString(),

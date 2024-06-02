@@ -19,10 +19,10 @@ class ExamController extends GetxController {
 
   Future getAllActiveExam(var id, int recordId) async {
     try {
-      log("URL => ${InfixApi.getOnlineExamModule(id, recordId, _userController.schoolId.value)}");
+      log("URL => ${EdusApi.getOnlineExamModule(id, recordId, _userController.schoolId.value)}");
       isLoading(true);
       final response = await http.get(
-          Uri.parse(InfixApi.getOnlineExamModule(
+          Uri.parse(EdusApi.getOnlineExamModule(
               id, recordId, _userController.schoolId.value)),
           headers: Utils.setHeader(_userController.token.value.toString()));
       if (response.statusCode == 200) {

@@ -73,7 +73,7 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
                 sections?.then((sectionValue) {
                   _selectedSection = sectionValue.sections[0].name;
                   sectionId = sectionValue.sections[0].id;
-                  url = InfixApi.getStudentByClassAndSection(classId, sectionId);
+                  url = EdusApi.getStudentByClassAndSection(classId, sectionId);
                 });
               });
             });
@@ -288,7 +288,7 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
             sections?.then((sectionValue) {
               _selectedSection = sectionValue.sections[0].name;
               sectionId = sectionValue.sections[0].id;
-              url = InfixApi.getStudentByClassAndSection(classId, sectionId);
+              url = EdusApi.getStudentByClassAndSection(classId, sectionId);
             });
           });
         },
@@ -324,7 +324,7 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
 
             sectionId = getCode(sectionlist, '$value');
 
-            url = InfixApi.getStudentByClassAndSection(classId, sectionId);
+            url = EdusApi.getStudentByClassAndSection(classId, sectionId);
 
             debugPrint('User select section $sectionId');
           });
@@ -350,7 +350,7 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
   }
 
   Future getAllClass(int id) async {
-    final response = await http.get(Uri.parse(InfixApi.getClassById(id)),
+    final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -367,7 +367,7 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
 
   Future<SectionList> getAllSection(int id, int classId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getSectionById(id, classId)),
+        Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

@@ -303,7 +303,7 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
 
   Future<AttendanceList> getAttendance() async {
     final response = await http.get(
-        Uri.parse(InfixApi.attendanceCheck(
+        Uri.parse(EdusApi.attendanceCheck(
           widget.date ?? '',
           classCode,
           sectionCode,
@@ -349,7 +349,7 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
 
   void sentNotificationToSection() async {
     final response = await http.get(Uri.parse(
-        InfixApi.sentNotificationToSection('Attendance', 'Attendance sunmitted',
+        EdusApi.sentNotificationToSection('Attendance', 'Attendance sunmitted',
             '$classCode', '$sectionCode')));
     if (response.statusCode == 200) {}
   }
@@ -358,7 +358,7 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
     setState(() {
       isLoading = true;
     });
-    final response = await http.post(Uri.parse(InfixApi.attendanceDefaultSent),
+    final response = await http.post(Uri.parse(EdusApi.attendanceDefaultSent),
         headers: Utils.setHeader(token ?? ''), body: jsonEncode(data));
     if (response.statusCode == 200) {
       newStudents = getAttendance();

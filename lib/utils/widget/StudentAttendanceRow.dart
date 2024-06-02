@@ -74,7 +74,7 @@ class _StudentAttendanceRowState extends State<StudentAttendanceRow>
     final String image =
         attendanceStudents?.photo == null || attendanceStudents?.photo == ''
             ? '${AppConfig.domainName}/public/uploads/staff/demo/staff.jpg'
-            : InfixApi.root + '${attendanceStudents?.photo}';
+            : EdusApi.root + '${attendanceStudents?.photo}';
     return Column(
       children: <Widget>[
         ListTile(
@@ -185,7 +185,7 @@ class _StudentAttendanceRowState extends State<StudentAttendanceRow>
       schoolId = value;
     });
     final response = await http.get(
-        Uri.parse(InfixApi.attendanceCheck(
+        Uri.parse(EdusApi.attendanceCheck(
           date ?? '',
           mClass,
           mSection,

@@ -49,9 +49,9 @@ class _LeaveAdminHomeScreenState extends State<LeaveAdminHomeScreen> {
         pageChanged(index);
       },
       children: <Widget>[
-        AdminLeavePage(InfixApi.pendingLeave, "pending_request"),
-        AdminLeavePage(InfixApi.approvedLeave, "approved_request"),
-        AdminLeavePage(InfixApi.rejectedLeave, "rejected_request"),
+        AdminLeavePage(EdusApi.pendingLeave, "pending_request"),
+        AdminLeavePage(EdusApi.approvedLeave, "approved_request"),
+        AdminLeavePage(EdusApi.rejectedLeave, "rejected_request"),
       ],
     );
   }

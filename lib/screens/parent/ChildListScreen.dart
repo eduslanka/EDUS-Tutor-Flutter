@@ -68,7 +68,7 @@ class _ChildListScreenState extends State<ChildListScreen> {
   }
 
   Future<ChildList> getAllStudent(String id) async {
-    final response = await http.get(Uri.parse(InfixApi.getParentChildList(id)),
+    final response = await http.get(Uri.parse(EdusApi.getParentChildList(id)),
         headers: Utils.setHeader(_token.toString()));
     print(id);
 

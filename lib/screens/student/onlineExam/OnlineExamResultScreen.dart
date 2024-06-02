@@ -170,7 +170,7 @@ class _OnlineExamResultScreenState extends State<OnlineExamResultScreen> {
       var id, dynamic code, int recordId) async {
     final response = await http.get(
         Uri.parse(
-            InfixApi.getStudentOnlineActiveExamResult(id, code, recordId)),
+            EdusApi.getStudentOnlineActiveExamResult(id, code, recordId)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -182,7 +182,7 @@ class _OnlineExamResultScreenState extends State<OnlineExamResultScreen> {
 
   Future<OnlineExamNameList> getAllOnlineExam(var id, int recordId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getStudentOnlineActiveExamName(id, recordId)),
+        Uri.parse(EdusApi.getStudentOnlineActiveExamName(id, recordId)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

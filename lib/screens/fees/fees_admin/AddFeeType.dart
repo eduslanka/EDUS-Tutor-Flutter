@@ -91,7 +91,7 @@ class _AddFeeTypeState extends State<AddFeeType> {
   Future<bool> addFeeData(String title, String des) async {
     response = await dio
         .get(
-      InfixApi.feesDataSend(title, des),
+      EdusApi.feesDataSend(title, des),
       options: Options(
         headers: {
           "Accept": "application/json",

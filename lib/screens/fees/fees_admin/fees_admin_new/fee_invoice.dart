@@ -43,7 +43,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
   Future<FeesRecordList> getFeesInvoice() async {
 
 
-      final response = await http.get(Uri.parse(InfixApi.adminFeesInvoiceList),
+      final response = await http.get(Uri.parse(EdusApi.adminFeesInvoiceList),
           headers: Utils.setHeader(_token.toString()));
 
       if (response.statusCode == 200) {
@@ -241,7 +241,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                                     } else if (value == 'delete') {
                                       final response = await http.post(
                                         Uri.parse(
-                                            InfixApi.adminFeesInvoiceDelete),
+                                            EdusApi.adminFeesInvoiceDelete),
                                         headers: Utils.setHeader(_token ?? ''),
                                         body: jsonEncode({
                                           'id': record.id ?? 0,
@@ -491,7 +491,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                                   } else if (value == 'delete') {
                                     final response = await http.post(
                                       Uri.parse(
-                                          InfixApi.adminFeesInvoiceDelete),
+                                          EdusApi.adminFeesInvoiceDelete),
                                       headers: Utils.setHeader(_token ?? ''),
                                       body: jsonEncode({
                                         'id': feeRecord.id,

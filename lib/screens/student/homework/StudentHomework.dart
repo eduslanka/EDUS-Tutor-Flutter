@@ -131,7 +131,7 @@ class _StudentHomeworkState extends State<StudentHomework> {
 
   Future<HomeworkList> fetchHomework(int userId, recordId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getStudenthomeWorksUrl(userId, recordId)),
+        Uri.parse(EdusApi.getStudenthomeWorksUrl(userId, recordId)),
         headers: Utils.setHeader(_token.toString()));
     log(response.request?.url.path ?? '');
     if (response.statusCode == 200) {

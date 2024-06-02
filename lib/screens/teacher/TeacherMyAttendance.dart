@@ -227,7 +227,7 @@ class _TeacherAttendanceScreenState extends State<TeacherAttendanceScreen> {
   Future<StudentAttendanceList> getTeacherAttendance(
       dynamic id, dynamic month, dynamic year) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getTeacherAttendence(id, month, year)),
+        Uri.parse(EdusApi.getTeacherAttendence(id, month, year)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

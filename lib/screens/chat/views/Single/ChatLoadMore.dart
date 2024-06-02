@@ -58,7 +58,7 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
       if (isEmpty) {
         result = await _dio
             .get(
-          "${InfixApi.getChatOpen}/$userId",
+          "${EdusApi.getChatOpen}/$userId",
           options: Options(
             headers: Utils.setHeader(chatOpenController.token.value.toString()),
           ),
@@ -70,7 +70,7 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
       } else {
         result = await _dio
             .post(
-          InfixApi.chatMsgLoadMore,
+          EdusApi.chatMsgLoadMore,
           data: jsonEncode(
             {
               "ids": chatOpenController.msgIds.toSet().toList().toString(),
@@ -175,7 +175,7 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
         "last_conversation_id": chatOpenController.lastConversationId.value,
       };
       final response = await _dio.post(
-        InfixApi.newChatMsgCheck,
+        EdusApi.newChatMsgCheck,
         options: Options(
           headers: Utils.setHeader(chatOpenController.token.toString()),
         ),
@@ -217,7 +217,7 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
 
 
       final response = await _dio.post(
-        InfixApi.chatSingleMsgDelete,
+        EdusApi.chatSingleMsgDelete,
         options: Options(
           headers: Utils.setHeader(chatOpenController.token.toString()),
         ),
@@ -249,7 +249,7 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
     EasyLoading.show();
     try {
       final response = await _dio.post(
-        InfixApi.submitChatText,
+        EdusApi.submitChatText,
         options: Options(
           headers: Utils.setHeader(chatOpenController.token.toString()),
         ),

@@ -447,7 +447,7 @@ class _AddMemberState extends State<AddMember> {
 
   Future<LibraryMemberList> getAllCategory() async {
     final response = await http.get(
-        Uri.parse(InfixApi.getLibraryMemberCategory),
+        Uri.parse(EdusApi.getLibraryMemberCategory),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -482,7 +482,7 @@ class _AddMemberState extends State<AddMember> {
 
   Future<SectionList> getAllSection(dynamic id, dynamic classId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getSectionById(
+        Uri.parse(EdusApi.getSectionById(
           id,
           classId,
         )),
@@ -499,7 +499,7 @@ class _AddMemberState extends State<AddMember> {
 
   Future getAllClass(dynamic id) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getClassById(
+        Uri.parse(EdusApi.getClassById(
           id,
         )),
         headers: Utils.setHeader(_token.toString()));
@@ -518,7 +518,7 @@ class _AddMemberState extends State<AddMember> {
 
   Future<StudentList> getAllStudent() async {
     final response = await http.get(
-        Uri.parse(InfixApi.getStudentByClassAndSection(
+        Uri.parse(EdusApi.getStudentByClassAndSection(
           selectedClassId,
           selectedSectionId,
         )),
@@ -535,7 +535,7 @@ class _AddMemberState extends State<AddMember> {
 
   Future<StaffList> getAllStaff(dynamic staffId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getAllStaff(
+        Uri.parse(EdusApi.getAllStaff(
           staffId,
         )),
         headers: Utils.setHeader(_token.toString()));
@@ -560,7 +560,7 @@ class _AddMemberState extends State<AddMember> {
     Dio dio = Dio();
     response = await dio
         .post(
-      InfixApi.addLibraryMember(
+      EdusApi.addLibraryMember(
         categoryId,
         uID,
         classId,

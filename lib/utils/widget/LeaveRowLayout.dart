@@ -595,7 +595,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
       Utils.showToast("Downloading...");
 
       await dio.download(
-          InfixApi.root + url, dirloc + AppFunction.getExtention(url),
+          EdusApi.root + url, dirloc + AppFunction.getExtention(url),
           options: Options(headers: {HttpHeaders.acceptEncodingHeader: "*"}),
           onReceiveProgress: (receivedBytes, totalBytes) async {
         received = ((receivedBytes / totalBytes) * 100);
@@ -611,10 +611,10 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                 context,
                 ScaleRoute(
                     page: DownloadViewer(
-                        title: title, filePath: InfixApi.root + url)));
+                        title: title, filePath: EdusApi.root + url)));
           } else {
             var file =
-                await DefaultCacheManager().getSingleFile(InfixApi.root + url);
+                await DefaultCacheManager().getSingleFile(EdusApi.root + url);
             OpenFilex.open(file.path);
 
             Utils.showToast(
@@ -632,7 +632,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
   Future<bool> addUpdateData(dynamic id, String status) async {
     response = await dio
         .get(
-      InfixApi.setLeaveStatus(id, status),
+      EdusApi.setLeaveStatus(id, status),
       options: Options(
         headers: {
           "Accept": "application/json",

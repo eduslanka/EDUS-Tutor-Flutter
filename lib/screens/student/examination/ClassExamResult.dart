@@ -159,9 +159,9 @@ class _ClassExamResultScreenState extends State<ClassExamResultScreen> {
 
   Future<ClassExamResultList> getAllClassExamResult(
       var id, dynamic examId, int recordId) async {
-    print(Uri.parse(InfixApi.getStudentClassExamResult(id, examId, recordId)));
+    print(Uri.parse(EdusApi.getStudentClassExamResult(id, examId, recordId)));
     final response = await http.get(
-        Uri.parse(InfixApi.getStudentClassExamResult(id, examId, recordId)),
+        Uri.parse(EdusApi.getStudentClassExamResult(id, examId, recordId)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -186,7 +186,7 @@ class _ClassExamResultScreenState extends State<ClassExamResultScreen> {
 
   Future<ExamSchedule> getStudentExamSchedule(var id) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getStudentExamSchedule(id)),
+        Uri.parse(EdusApi.getStudentExamSchedule(id)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       return examScheduleFromJson(response.body);

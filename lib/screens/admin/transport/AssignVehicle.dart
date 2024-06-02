@@ -257,7 +257,7 @@ class _AssignVehicleState extends State<AssignVehicle> {
   // ignore: missing_return
   Future<VehicleRouteList> getRouteList() async {
     final response = await http.get(
-        Uri.parse(InfixApi.transportRoute),
+        Uri.parse(EdusApi.transportRoute),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
@@ -268,7 +268,7 @@ class _AssignVehicleState extends State<AssignVehicle> {
   }
 
   Future<AssignVehicleList> getAllVehicles() async {
-    final response = await http.get(Uri.parse(InfixApi.vehicles),
+    final response = await http.get(Uri.parse(EdusApi.vehicles),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -289,7 +289,7 @@ class _AssignVehicleState extends State<AssignVehicle> {
 
     response = await dio
         .post(
-      InfixApi.assignVehicle,
+      EdusApi.assignVehicle,
       data: formData,
       options: Options(
         headers: {

@@ -39,7 +39,7 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
       });
     }).then((value) async {
       final response = await http.get(
-          Uri.parse(InfixApi.routineView(_id, "teacher", mine: true)),
+          Uri.parse(EdusApi.routineView(_id, "teacher", mine: true)),
           headers: Utils.setHeader(_token.toString()));
       if (response.statusCode == 200) {
         data = teacherRoutineFromJson(response.body);

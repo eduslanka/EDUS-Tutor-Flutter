@@ -31,7 +31,7 @@ class FeeService {
 
       //Utils.showToast(InfixApi.getFeesUrl(_id));
 
-      final response = await http.get(Uri.parse(InfixApi.getFeesUrl(_id)),
+      final response = await http.get(Uri.parse(EdusApi.getFeesUrl(_id)),
           headers: Utils.setHeader(_token.toString()));
 
       var jsonData = json.decode(response.body);
@@ -70,7 +70,7 @@ class FeeService {
       double _paid = 0;
       double _balance = 0;
 
-      final response = await http.get(Uri.parse(InfixApi.getFeesUrl(_id)),
+      final response = await http.get(Uri.parse(EdusApi.getFeesUrl(_id)),
           headers: Utils.setHeader(_token.toString()));
 
       var jsonData = json.decode(response.body);

@@ -91,7 +91,7 @@ class _ContentListScreenState extends State<ContentListScreen> {
   }
 
   Future<ContentList> fetchContent() async {
-    final response = await http.get(Uri.parse(InfixApi.getAllContent()),
+    final response = await http.get(Uri.parse(EdusApi.getAllContent()),
         headers: Utils.setHeader(_token ?? ''));
 
     if (response.statusCode == 200) {

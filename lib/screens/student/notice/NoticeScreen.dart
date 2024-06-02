@@ -83,7 +83,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
   }
 
   Future<NoticeList> getNotices(dynamic id) async {
-    final response = await http.get(Uri.parse(InfixApi.getNoticeUrl(id)),
+    final response = await http.get(Uri.parse(EdusApi.getNoticeUrl(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

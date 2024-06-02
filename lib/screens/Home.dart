@@ -2,6 +2,8 @@
 import 'dart:convert';
 
 // Flutter imports:
+import 'package:edus_tutor/config/app_size.dart';
+import 'package:edus_tutor/widget/today_class_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -294,99 +296,99 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Color(0xff053EFF) ,
+      backgroundColor: Color(0xff053EFF),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80.h),
         child: AppBar(
           centerTitle: false,
           automaticallyImplyLeading: false,
-          flexibleSpace:   Column(
+          flexibleSpace: Column(
             children: [
-               const SizedBox(
-                                  height: 10,
-                                ),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
-                    height: 110.h,
-                    padding: EdgeInsets.only(top: 20.h),
-                    decoration: BoxDecoration(
-                      // image: DecorationImage(
-                      //  // image: AssetImage(AppConfig.appToolbarBackground),
-                      //   fit: BoxFit.cover,
-                      // ),
-                      color: const Color(0xff053EFF),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: 200.h,
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Flexible(
-                                  child: Image.asset(
-                                    AppConfig.appLogo,
-                                    height: 30,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Welcome".tr + " $_fullName" + " 🎓",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(color: Colors.white, fontSize: 15),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                height: 110.h,
+                padding: EdgeInsets.only(top: 20.h),
+                decoration: BoxDecoration(
+                  // image: DecorationImage(
+                  //  // image: AssetImage(AppConfig.appToolbarBackground),
+                  //   fit: BoxFit.cover,
+                  // ),
+                  color: const Color(0xff053EFF),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: 200.h,
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            const SizedBox(
+                              height: 10,
                             ),
+                            Flexible(
+                              child: Image.asset(
+                                AppConfig.appLogo,
+                                height: 30,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Welcome".tr + " $_fullName" + " 🎓",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(color: Colors.white, fontSize: 15),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Get.dialog(LogoutService().logoutDialog());
+                          },
+                          icon: Icon(
+                            Icons.exit_to_app,
+                            size: 25.sp,
                           ),
                         ),
-                       
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                             const SizedBox(
-                                  height: 10,
-                                ),
-                            IconButton(
-                              onPressed: () {
-                                Get.dialog(LogoutService().logoutDialog());
-                              },
-                              icon: Icon(
-                                Icons.exit_to_app,
-                                size: 25.sp,
-                              ),
-                            ), const SizedBox(
-                                  height: 8,
-                                ),
-                             Padding(
-                               padding: const EdgeInsets.only(right:12.0),
-                               child: Text(
-                                 DateFormat('yMd').format(DateTime.now()),
-                                 style: const TextStyle(
-                                     color: Colors.white,
-                                     fontSize: 14,
-                                     fontWeight: FontWeight.bold),
-                               ),
-                             ),
-                          ],
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 12.0),
+                          child: Text(
+                            DateFormat('yMd').format(DateTime.now()),
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                  ],
+                ),
+              ),
             ],
           ),
           backgroundColor: Colors.transparent,
@@ -394,97 +396,103 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: SafeArea(
-        child: Container(
-          color: Color.fromARGB(255, 239, 239, 239),
-          child: Obx(() {
-            if (_systemController.isLoading.value) {
-              return const Center(child: CupertinoActivityIndicator());
-            } else {
-              return ListView(
-                shrinkWrap: false,
-                physics: const BouncingScrollPhysics(),
-                children: [
-                
-                  const SizedBox(
-                    height: 10,
-                  ),
-                 
-                QuoteOfTheDayWidget(),  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
+        child: RefreshIndicator(
+          onRefresh: () async{_systemController.fetchTodayClasses();  },
+          child: Container(
+            color: Color.fromARGB(255, 239, 239, 239),
+            child: Obx(() {
+              if (_systemController.isLoading.value) {
+                return const Center(child: CupertinoActivityIndicator());
+              } else {
+                return ListView(
+                  shrinkWrap: false,
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    const SizedBox(
+                      height: 10,
                     ),
-                    itemCount: _titles.length,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                    ),
-                    itemBuilder: (context, index) {
-                      print(_rule);
-                      return CustomWidget(
-                        index: index,
-                        isSelected: currentSelectedIndex == index,
-                        onSelect: () {
-                          setState(() {
-                            currentSelectedIndex = index;
-                            if (_rule == '2') {
-                              AppFunction.getDashboardPage(
-                                context,
-                                _titles[index],
-                                id: _id,
-                                token: _token,
-                              );
-                            } else if (_rule == '4') {
-                              AppFunction.getTeacherDashboardPage(
-                                context,
-                                _titles[index],
-                                _id ?? '',
-                              );
-                            } else if (_rule == '3') {
-                              AppFunction.getParentDashboardPage(
-                                context,
-                                _titles[index],
-                                _id ?? '',
-                              );
-                            } else if (_rule == '1' || _rule == '5') {
-                              if (isAdministrator == 'yes') {
-                                AppFunction.getSaasAdminDashboardPage(
+                  
+                    QuoteOfTheDayWidget(quote:   _systemController.quote.value),
+                    
+                      TodayClassScreen(response: _systemController.todayClassResponse.value,),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      itemCount: _titles.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                      ),
+                      itemBuilder: (context, index) {
+                        print(_rule);
+                        return CustomWidget(
+                          index: index,
+                          isSelected: currentSelectedIndex == index,
+                          onSelect: () {
+                            setState(() {
+                              currentSelectedIndex = index;
+                              if (_rule == '2') {
+                                AppFunction.getDashboardPage(
+                                  context,
+                                  _titles[index],
+                                  id: _id,
+                                  token: _token,
+                                );
+                              } else if (_rule == '4') {
+                                AppFunction.getTeacherDashboardPage(
                                   context,
                                   _titles[index],
                                   _id ?? '',
-                                  _systemController.systemSettings.value,
                                 );
-                              } else {
-                                AppFunction.getAdminDashboardPage(
+                              } else if (_rule == '3') {
+                                AppFunction.getParentDashboardPage(
+                                  context,
+                                  _titles[index],
+                                  _id ?? '',
+                                );
+                              } else if (_rule == '1' || _rule == '5') {
+                                if (isAdministrator == 'yes') {
+                                  AppFunction.getSaasAdminDashboardPage(
+                                    context,
+                                    _titles[index],
+                                    _id ?? '',
+                                    _systemController.systemSettings.value,
+                                  );
+                                } else {
+                                  AppFunction.getAdminDashboardPage(
+                                    context,
+                                    _titles[index],
+                                    _id ?? '',
+                                    _systemController.systemSettings.value,
+                                  );
+                                }
+                              } else if (_rule == '9') {
+                                AppFunction.getDriverDashboard(
                                   context,
                                   _titles[index],
                                   _id ?? '',
                                   _systemController.systemSettings.value,
                                 );
                               }
-                            } else if (_rule == '9') {
-                              AppFunction.getDriverDashboard(
-                                context,
-                                _titles[index],
-                                _id ?? '',
-                                _systemController.systemSettings.value,
-                              );
-                            }
-                          });
-                        },
-                        headline: _titles[index],
-                        icon: _images[index],
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 50.h,
-                  ),
-                ],
-              );
-            }
-          }),
+                            });
+                          },
+                          headline: _titles[index],
+                          icon: _images[index],
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      height: 50.h,
+                    ),
+                  ],
+                );
+              }
+            }),
+          ),
         ),
       ),
     );
@@ -578,7 +586,7 @@ class _HomeState extends State<Home> {
                                               ),
                                               onDismissed: (direction) async {
                                                 var response = await http.get(
-                                                    Uri.parse(InfixApi
+                                                    Uri.parse(EdusApi
                                                         .readMyNotifications(
                                                             int.parse(id),
                                                             snapshot
@@ -686,7 +694,7 @@ class _HomeState extends State<Home> {
                                       onPressed: () async {
                                         var response = await http.get(
                                             Uri.parse(
-                                                InfixApi.readAllNotification(
+                                                EdusApi.readAllNotification(
                                               int.parse(id),
                                             )),
                                             headers: Utils.setHeader(
@@ -772,7 +780,7 @@ class _HomeState extends State<Home> {
         Route route = MaterialPageRoute(builder: (context) => const MyApp());
         Navigator.pushAndRemoveUntil(context, route, ModalRoute.withName('/'));
 
-        var response = await http.post(Uri.parse(InfixApi.logout()),
+        var response = await http.post(Uri.parse(EdusApi.logout()),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
         } else {
@@ -987,7 +995,7 @@ class _HomeState extends State<Home> {
               child: CircleAvatar(
                 radius: ScreenUtil().setSp(22),
                 child: CachedNetworkImage(
-                  imageUrl: InfixApi.root + (snapshot.data ?? ''),
+                  imageUrl: EdusApi.root + (snapshot.data ?? ''),
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -1001,7 +1009,7 @@ class _HomeState extends State<Home> {
                       const CupertinoActivityIndicator(),
                   errorWidget: (context, url, error) => CachedNetworkImage(
                     imageUrl:
-                        InfixApi.root + 'public/uploads/staff/demo/staff.jpg',
+                        EdusApi.root + 'public/uploads/staff/demo/staff.jpg',
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -1058,19 +1066,19 @@ class _HomeState extends State<Home> {
   Future<String> getImageUrl(String email, String password, String rule) async {
     var image = 'http://saskolhmg.com/images/studentprofile.png';
 
-    var response = await http.get(Uri.parse(InfixApi.login(email, password)));
+    var response = await http.get(Uri.parse(EdusApi.login(email, password)));
 
     if (response.statusCode == 200) {
       Map user = jsonDecode(response.body) as Map;
       if (rule == '2') {
-        image = InfixApi.root + user['data']['userDetails']['student_photo'];
+        image = EdusApi.root + user['data']['userDetails']['student_photo'];
       } else if (rule == '3') {
-        image = InfixApi.root + user['data']['userDetails']['fathers_photo'];
+        image = EdusApi.root + user['data']['userDetails']['fathers_photo'];
       } else {
-        image = InfixApi.root + user['data']['userDetails']['staff_photo'];
+        image = EdusApi.root + user['data']['userDetails']['staff_photo'];
       }
     }
-    return image == InfixApi.root
+    return image == EdusApi.root
         ? 'http://saskolhmg.com/images/studentprofile.png'
         : image;
   }
@@ -1078,7 +1086,7 @@ class _HomeState extends State<Home> {
   Future<int> getNotificationCount(int id) async {
     var count = 0;
 
-    var response = await http.get(Uri.parse(InfixApi.getMyNotifications(id)),
+    var response = await http.get(Uri.parse(EdusApi.getMyNotifications(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -1096,7 +1104,7 @@ class _HomeState extends State<Home> {
   }
 
   Future<UserNotificationList> getNotifications(int id) async {
-    final response = await http.get(Uri.parse(InfixApi.getMyNotifications(id)),
+    final response = await http.get(Uri.parse(EdusApi.getMyNotifications(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -1113,7 +1121,7 @@ class _HomeState extends State<Home> {
 
   void sendTokenToServer(String token) async {
     final response = await http.get(
-        Uri.parse(InfixApi.setToken(_id ?? '', token)),
+        Uri.parse(EdusApi.setToken(_id ?? '', token)),
         headers: Utils.setHeader(_token));
 
     if (response.statusCode == 200) {

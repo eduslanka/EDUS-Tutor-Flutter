@@ -360,7 +360,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   Future<ExamSchedule> getStudentExamSchedule(var id) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getStudentExamSchedule(id)),
+        Uri.parse(EdusApi.getStudentExamSchedule(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -374,7 +374,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Future<ExamRoutineReport> getExamRoutineReport(id) async {
     print("Exam type Id $id");
     final response =
-        await http.post(Uri.parse(InfixApi.getStudentRoutineReport),
+        await http.post(Uri.parse(EdusApi.getStudentRoutineReport),
             headers: Utils.setHeader(_token.toString()),
             body: jsonEncode({
               'exam': id,

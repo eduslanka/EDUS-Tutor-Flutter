@@ -40,7 +40,7 @@ class _StudentRoutineState extends State<StudentRoutine>
   Future<DayWiseRoutine>? routine;
 
   Future<DayWiseRoutine> getRoutine(day) async {
-    final response = await http.post(Uri.parse(InfixApi.getDayWiseRoutine),
+    final response = await http.post(Uri.parse(EdusApi.getDayWiseRoutine),
         headers: Utils.setHeader(_token.toString()),
         body: jsonEncode({
           'day_id': day,
@@ -202,7 +202,7 @@ class RoutineListWidget extends StatelessWidget {
     await Utils.getStringValue('token').then((value) {
       _token = value ?? '';
     });
-    final response = await http.post(Uri.parse(InfixApi.getDayWiseRoutine),
+    final response = await http.post(Uri.parse(EdusApi.getDayWiseRoutine),
         headers: Utils.setHeader(_token.toString()),
         body: jsonEncode({
           'day_id': dayId,

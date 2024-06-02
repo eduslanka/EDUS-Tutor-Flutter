@@ -61,7 +61,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     leading: CachedNetworkImage(
                       height: 50.h,
                       width: 100.w,
-                      imageUrl: InfixApi.root + (snapshot.data?.logo ?? ''),
+                      imageUrl: EdusApi.root + (snapshot.data?.logo ?? ''),
                       imageBuilder: (context, imageProvider) => Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
@@ -73,7 +73,7 @@ class _AboutScreenState extends State<AboutScreen> {
                       placeholder: (context, url) => const CupertinoActivityIndicator(),
                       errorWidget: (context, url, error) => CachedNetworkImage(
                         imageUrl:
-                            InfixApi.root + 'public/uploads/staff/demo/staff.jpg',
+                            EdusApi.root + 'public/uploads/staff/demo/staff.jpg',
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(

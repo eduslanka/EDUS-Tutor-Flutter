@@ -162,7 +162,7 @@ class _OnlineExamResultsState extends State<OnlineExamResults> {
 
   Future<OnlineExamResultModel> getAllActiveExam(var id, int recordId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getOnlineExamResultModule(id, recordId)),
+        Uri.parse(EdusApi.getOnlineExamResultModule(id, recordId)),
         headers: Utils.setHeader(_userController.token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);

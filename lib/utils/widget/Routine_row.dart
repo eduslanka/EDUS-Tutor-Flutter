@@ -137,7 +137,7 @@ class _ClassRoutineState extends State<RoutineRow> {
 
   Future<ScheduleList> fetchRoutine(dynamic id,String title) async {
     final response =
-    await http.get(Uri.parse(InfixApi.getRoutineUrl(id)),headers: Utils.setHeader(_token.toString()));
+    await http.get(Uri.parse(EdusApi.getRoutineUrl(id)),headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
 
@@ -153,7 +153,7 @@ class _ClassRoutineState extends State<RoutineRow> {
 
   Future<ScheduleList> fetchRoutineByClsSec(dynamic id,String title) async {
     final response =
-    await http.get(Uri.parse(InfixApi.getRoutineByClassAndSection(id,classCode,sectionCode)),headers: Utils.setHeader(_token.toString()));
+    await http.get(Uri.parse(EdusApi.getRoutineByClassAndSection(id,classCode,sectionCode)),headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
       var jsonData = json.decode(response.body);

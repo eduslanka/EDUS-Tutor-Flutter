@@ -70,7 +70,7 @@ class _TransportState extends State<TransportScreen> {
   }
 
   Future<TransportList> getAllTransport() async {
-    final response = await http.get(Uri.parse(InfixApi.studentTransportList),
+    final response = await http.get(Uri.parse(EdusApi.studentTransportList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

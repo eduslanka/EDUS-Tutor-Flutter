@@ -503,7 +503,7 @@ class _ApplyLeaveScreenState extends State<ApplyLeaveScreen> {
   }
 
   Future<LeaveList> getAllLeaveType(id) async {
-    final response = await http.get(Uri.parse(InfixApi.userLeaveType(_id)),
+    final response = await http.get(Uri.parse(EdusApi.userLeaveType(_id)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -514,7 +514,7 @@ class _ApplyLeaveScreenState extends State<ApplyLeaveScreen> {
   }
 
   void sentNotificationTo() async {
-    final response = await http.get(Uri.parse(InfixApi.sentNotificationForAll(
+    final response = await http.get(Uri.parse(EdusApi.sentNotificationForAll(
         1, 'Leave', 'New leave request has come')));
     if (response.statusCode == 200) {}
   }
@@ -530,7 +530,7 @@ class _ApplyLeaveScreenState extends State<ApplyLeaveScreen> {
       "attach_file": await MultipartFile.fromFile(_file?.path ?? ''),
     });
     response = await dio.post(
-      InfixApi.userApplyLeaveStore,
+      EdusApi.userApplyLeaveStore,
       data: formData,
       options: Options(
         headers: {
@@ -579,7 +579,7 @@ class _ApplyLeaveScreenState extends State<ApplyLeaveScreen> {
   }
 
   void addLeaveData() async {
-    response = await dio.get(InfixApi.sendLeaveData(applyDate ?? '', '$leaveId',
+    response = await dio.get(EdusApi.sendLeaveData(applyDate ?? '', '$leaveId',
         fromDate ?? '', toDate ?? '', _id ?? '', reasonController.text, _file?.path ?? ''));
     if (response?.statusCode == 200) {
       Utils.showToast('Leave sent successful'.tr);

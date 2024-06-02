@@ -131,7 +131,7 @@ class _StudentTeacherState extends State<StudentTeacher>
 
   Future<TeacherList> getAllTeacher(dynamic id, int recordId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getStudentTeacherUrl(
+        Uri.parse(EdusApi.getStudentTeacherUrl(
             _userController.schoolId.value, id, recordId)),
         headers: Utils.setHeader(widget.token.toString()));
 

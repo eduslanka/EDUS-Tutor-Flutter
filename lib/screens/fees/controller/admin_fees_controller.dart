@@ -62,7 +62,7 @@ class AdminFeesController extends GetxController {
     await getIdToken().then((value) async {
       try {
         final response = await http.get(
-            Uri.parse(InfixApi.adminFeesAddPayment + '/$invoiceId'),
+            Uri.parse(EdusApi.adminFeesAddPayment + '/$invoiceId'),
             headers: Utils.setHeader(_token.value.toString()));
 
         if (response.statusCode == 200) {
@@ -196,7 +196,7 @@ class AdminFeesController extends GetxController {
       isPaymentProcessing(true);
       Map<String, dynamic> data;
       await _dio
-          .post(InfixApi.adminFeesAddPaymentStore,
+          .post(EdusApi.adminFeesAddPaymentStore,
               data: formData,
               options: dio.Options(
                 headers: Utils.setHeader(_token.value.toString()),

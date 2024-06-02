@@ -127,7 +127,7 @@ class OnlineExamController extends GetxController
       var returnValue = false;
 
       final response = await http.post(
-        Uri.parse(InfixApi.studentSubmitAnswerFinal),
+        Uri.parse(EdusApi.studentSubmitAnswerFinal),
         headers: Utils.setHeader(userController.token.toString()),
         body: jsonEncode(data),
       );
@@ -217,8 +217,8 @@ class OnlineExamController extends GetxController
 
       final response = await http.post(
         Uri.parse(isMultiple
-            ? InfixApi.studentSubmitAnswerMulti
-            : InfixApi.studentSubmitAnswerSubjective),
+            ? EdusApi.studentSubmitAnswerMulti
+            : EdusApi.studentSubmitAnswerSubjective),
         headers: Utils.setHeader(userController.token.toString()),
         body: jsonEncode(data),
       );
@@ -244,7 +244,7 @@ class OnlineExamController extends GetxController
     try {
       isQuizStarting(true);
       final response = await http.get(
-          Uri.parse(InfixApi.takeOnlineExamModule(
+          Uri.parse(EdusApi.takeOnlineExamModule(
               examId, recordId, int.parse(schoolId))),
           headers: Utils.setHeader(userController.token.value.toString()));
       if (response.statusCode == 200) {

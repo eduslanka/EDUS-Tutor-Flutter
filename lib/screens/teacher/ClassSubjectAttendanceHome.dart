@@ -85,7 +85,7 @@ class _StudentSubjectAttendanceHomeState
                       setState(() {
                         _selectedSubject = subjectValue.subjects[0].name;
                         subjectId = subjectValue.subjects[0].id;
-                        url = InfixApi.getStudentByClassAndSection(
+                        url = EdusApi.getStudentByClassAndSection(
                             classId, sectionId);
                       });
                     });
@@ -321,7 +321,7 @@ class _StudentSubjectAttendanceHomeState
             sections?.then((sectionValue) {
               _selectedSection = sectionValue.sections[0].name;
               sectionId = sectionValue.sections[0].id;
-              url = InfixApi.getStudentByClassAndSection(classId, sectionId);
+              url = EdusApi.getStudentByClassAndSection(classId, sectionId);
             });
           });
         },
@@ -361,7 +361,7 @@ class _StudentSubjectAttendanceHomeState
             subjects?.then((subjectValue) {
               _selectedSubject = subjectValue.subjects[0].name;
               subjectId = subjectValue.subjects[0].id;
-              url = InfixApi.getStudentByClassAndSection(classId, sectionId);
+              url = EdusApi.getStudentByClassAndSection(classId, sectionId);
             });
 
             debugPrint('User select section $sectionId');
@@ -399,7 +399,7 @@ class _StudentSubjectAttendanceHomeState
 
             subjectId = getCode(subjectModellist, '$value');
 
-            url = InfixApi.getStudentByClassAndSection(classId, sectionId);
+            url = EdusApi.getStudentByClassAndSection(classId, sectionId);
 
             debugPrint('User select subject $subjectId');
           });
@@ -425,7 +425,7 @@ class _StudentSubjectAttendanceHomeState
   }
 
   Future getAllClass(int id) async {
-    final response = await http.get(Uri.parse(InfixApi.getClassById(id)),
+    final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -442,7 +442,7 @@ class _StudentSubjectAttendanceHomeState
 
   Future<SectionList> getAllSection(int id, int classId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getSectionById(id, classId)),
+        Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -456,7 +456,7 @@ class _StudentSubjectAttendanceHomeState
 
   Future<SubjectModelList> getAllSubject(int classId, int sectionId) async {
     final response = await http.post(
-        Uri.parse(InfixApi.getSubjectById(classId, sectionId)),
+        Uri.parse(EdusApi.getSubjectById(classId, sectionId)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

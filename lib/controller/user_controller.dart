@@ -37,7 +37,7 @@ class UserController extends GetxController {
       isLoading(true);
       await getIdToken().then((value) async {
         final response = await http.get(
-            Uri.parse(InfixApi.studentRecord(_studentId.value)),
+            Uri.parse(EdusApi.studentRecord(_studentId.value)),
             headers: Utils.setHeader(_token.toString()));
 
         if (response.statusCode == 200) {

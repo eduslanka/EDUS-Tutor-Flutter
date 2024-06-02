@@ -128,7 +128,7 @@ class _ActiveOnlineExamScreenState extends State<ActiveOnlineExamScreen> {
 
   Future<ActiveExamList> getAllActiveExam(var id, int recordId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getStudentOnlineActiveExam(id, recordId)),
+        Uri.parse(EdusApi.getStudentOnlineActiveExam(id, recordId)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);

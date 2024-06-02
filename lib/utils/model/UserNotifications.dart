@@ -13,11 +13,11 @@ class UserNotifications {
   String? message;
   String? url;
   DateTime? createdAt;
-  dynamic isRead;
+  String? isRead;
 
   factory UserNotifications.fromJson(Map<String, dynamic> json) => UserNotifications(
     id: json["id"],
-    date: DateTime.parse(json["date"]),
+    date: json["date"] != null ? DateTime.parse(json["date"]) : null,
     message: json["message"],
     url: json["url"],
     createdAt: DateTime.parse(json["created_at"]),
@@ -26,7 +26,7 @@ class UserNotifications {
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "date": "${date?.year.toString().padLeft(4, '0')}-${date?.month.toString().padLeft(2, '0')}-${date?.day.toString().padLeft(2, '0')}",
+    "date": date != null ? "${date?.year.toString().padLeft(4, '0')}-${date?.month.toString().padLeft(2, '0')}-${date?.day.toString().padLeft(2, '0')}" : null,
     "message": message,
     "url": url,
     "created_at": createdAt?.toIso8601String(),
@@ -39,11 +39,13 @@ class UserNotificationList {
 
   UserNotificationList({this.userNotifications});
 
-  factory UserNotificationList.fromJson(List<dynamic> json) {
-    List<UserNotifications> uploadedContent = [];
-
-    uploadedContent = json.map((i) => UserNotifications.fromJson(i)).toList();
-
-    return UserNotificationList(userNotifications: uploadedContent);
+  factory UserNotificationList.fromJson(Map<String, dynamic> json) {
+    List<UserNotifications> notifications = [];
+    if (json['notifications'] != null) {
+      notifications = List<UserNotifications>.from(
+        json['notifications'].map((x) => UserNotifications.fromJson(x))
+      );
+    }
+    return UserNotificationList(userNotifications: notifications);
   }
 }

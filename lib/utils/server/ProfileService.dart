@@ -26,7 +26,7 @@ class ProfileService {
 
     infixMap.clear();
 
-    final response = await http.get(Uri.parse(InfixApi.getChildren(id ?? '')),headers: id == null ? null : Utils.setHeader(token.toString()));
+    final response = await http.get(Uri.parse(EdusApi.getChildren(id ?? '')),headers: id == null ? null : Utils.setHeader(token.toString()));
 
     var jsonData = json.decode(response.body);
 

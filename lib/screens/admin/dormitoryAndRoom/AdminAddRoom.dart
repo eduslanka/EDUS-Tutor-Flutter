@@ -243,7 +243,7 @@ class _AddRoomState extends State<AddRoom> {
     try {
       response = await dio
           .post(
-        InfixApi.dormitoryRoomList,
+        EdusApi.dormitoryRoomList,
         data: formData,
         options: Options(
           headers: {
@@ -282,7 +282,7 @@ class _AddRoomState extends State<AddRoom> {
   }
 
   Future<AdminDormitoryList> getAllDormitory() async {
-    final response = await http.get(Uri.parse(InfixApi.dormitoryList),
+    final response = await http.get(Uri.parse(EdusApi.dormitoryList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -294,7 +294,7 @@ class _AddRoomState extends State<AddRoom> {
   }
 
   Future<AdminRoomTypeList> getAllRoomType() async {
-    final response = await http.get(Uri.parse(InfixApi.roomTypeList),
+    final response = await http.get(Uri.parse(EdusApi.roomTypeList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

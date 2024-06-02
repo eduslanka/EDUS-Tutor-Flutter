@@ -486,7 +486,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
           : "",
     });
     response = await dio.post(
-      InfixApi.uploadContent,
+      EdusApi.uploadContent,
       data: formData,
       options: Options(
         // contentType: Headers.formUrlEncodedContentType,
@@ -530,7 +530,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
   }
 
   Future getAllClass(dynamic id) async {
-    final response = await http.get(Uri.parse(InfixApi.getClassById(id)),
+    final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
 
 
@@ -552,7 +552,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
 
   Future<SectionList> getAllSection(dynamic id, dynamic classId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getSectionById(id, classId)),
+        Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -804,13 +804,13 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
 
   void sentNotificationToSection(dynamic classCode, dynamic sectionCode) async {
     final response = await http.get(Uri.parse(
-        InfixApi.sentNotificationToSection('Content',
+        EdusApi.sentNotificationToSection('Content',
             'New content request has come', '$classCode', '$sectionCode')));
     if (response.statusCode == 200) {}
   }
 
   void sentNotificationTo(dynamic role) async {
-    final response = await http.get(Uri.parse(InfixApi.sentNotificationForAll(
+    final response = await http.get(Uri.parse(EdusApi.sentNotificationForAll(
         role, 'Content', 'New content request has come')));
     if (response.statusCode == 200) {}
   }

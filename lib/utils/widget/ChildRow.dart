@@ -31,7 +31,7 @@ class _ChildRowState extends State<ChildRow> {
   Widget build(BuildContext context) {
     String image = child.photo == null || child.photo == ""
         ? "${AppConfig.domainName}/public/uploads/staff/demo/staff.jpg"
-        : InfixApi.root + '${child.photo}';
+        : EdusApi.root + '${child.photo}';
     return InkWell(
       onTap: () {
         Get.to(() => DashboardScreen(

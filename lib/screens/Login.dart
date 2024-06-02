@@ -337,8 +337,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<String> getEmail(String user) async {
-    final response = await http.get(Uri.parse(InfixApi.getEmail));
-    debugPrint(InfixApi.getEmail);
+    final response = await http.get(Uri.parse(EdusApi.getEmail));
+    debugPrint(EdusApi.getEmail);
     debugPrint(response.body);
     var jsonData = json.decode(response.body);
 

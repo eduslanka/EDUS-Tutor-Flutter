@@ -144,7 +144,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                                 ),
                                                 onDismissed: (direction) async {
                                                   var response = await http.get(
-                                                      Uri.parse(InfixApi
+                                                      Uri.parse(EdusApi
                                                           .readMyNotifications(
                                                               int.parse(id),
                                                               snapshot
@@ -252,7 +252,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                             ?.forEach((element) async {
                                           var response = await http.get(
                                             Uri.parse(
-                                                InfixApi.readMyNotifications(
+                                                EdusApi.readMyNotifications(
                                                     int.parse(id), element.id)),
                                             headers: Utils.setHeader(
                                               _token.toString(),
@@ -337,7 +337,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
         Route route = MaterialPageRoute(builder: (context) => const MyApp());
         Navigator.pushAndRemoveUntil(context, route, ModalRoute.withName('/'));
 
-        var response = await http.post(Uri.parse(InfixApi.logout()),
+        var response = await http.post(Uri.parse(EdusApi.logout()),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
         } else {
@@ -557,7 +557,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
               child: CircleAvatar(
                 radius: ScreenUtil().setSp(22),
                 child: CachedNetworkImage(
-                  imageUrl: InfixApi.root + '${snapshot.data}',
+                  imageUrl: EdusApi.root + '${snapshot.data}',
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -571,7 +571,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                       const CupertinoActivityIndicator(),
                   errorWidget: (context, url, error) => CachedNetworkImage(
                     imageUrl:
-                        InfixApi.root + 'public/uploads/staff/demo/staff.jpg',
+                        EdusApi.root + 'public/uploads/staff/demo/staff.jpg',
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -628,20 +628,20 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
   Future<String> getImageUrl(String email, String password, String rule) async {
     var image = 'http://saskolhmg.com/images/studentprofile.png';
 
-    var response = await http.get(Uri.parse(InfixApi.login(email, password)),
+    var response = await http.get(Uri.parse(EdusApi.login(email, password)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
       Map user = jsonDecode(response.body) as Map;
       if (rule == '2') {
-        image = InfixApi.root + user['data']['userDetails']['student_photo'];
+        image = EdusApi.root + user['data']['userDetails']['student_photo'];
       } else if (rule == '3') {
-        image = InfixApi.root + user['data']['userDetails']['fathers_photo'];
+        image = EdusApi.root + user['data']['userDetails']['fathers_photo'];
       } else {
-        image = InfixApi.root + user['data']['userDetails']['staff_photo'];
+        image = EdusApi.root + user['data']['userDetails']['staff_photo'];
       }
     }
-    return image == InfixApi.root
+    return image == EdusApi.root
         ? 'http://saskolhmg.com/images/studentprofile.png'
         : image;
   }
@@ -649,7 +649,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
   Future<int> getNotificationCount(int id) async {
     var count = 0;
 
-    var response = await http.get(Uri.parse(InfixApi.getMyNotifications(id)),
+    var response = await http.get(Uri.parse(EdusApi.getMyNotifications(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -663,7 +663,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
   }
 
   Future<UserNotificationList> getNotifications(int id) async {
-    final response = await http.get(Uri.parse(InfixApi.getMyNotifications(id)),
+    final response = await http.get(Uri.parse(EdusApi.getMyNotifications(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -734,7 +734,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
             builder: (context) => const MyApp(), fullscreenDialog: true);
         Navigator.of(context, rootNavigator: true)
             .pushAndRemoveUntil(route, ModalRoute.withName('/'));
-        var response = await http.post(Uri.parse(InfixApi.logout()),
+        var response = await http.post(Uri.parse(EdusApi.logout()),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
         } else {

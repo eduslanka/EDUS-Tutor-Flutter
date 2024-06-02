@@ -68,7 +68,7 @@ class _LeaveListScreenState extends State<LeaveListScreen> {
   }
 
   Future<LeaveList> fetchLeave(int id) async {
-    final response = await http.get(Uri.parse(InfixApi.getLeaveList(id)),headers: Utils.setHeader(_token.toString()));
+    final response = await http.get(Uri.parse(EdusApi.getLeaveList(id)),headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
 

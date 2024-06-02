@@ -62,7 +62,7 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
 
   Future<StudentDetailsModel> getProfile(id) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getChildren(id.toString())),
+        Uri.parse(EdusApi.getChildren(id.toString())),
         headers: id == null ? null : Utils.setHeader(token.toString()));
     if (response.statusCode == 200) {
       final studentDetails = studentDetailsFromJson(response.body);
@@ -426,7 +426,7 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
     });
     final response = await http.get(
         Uri.parse(
-            InfixApi.getStudentAttendence(widget.id, recordId, month, year)),
+            EdusApi.getStudentAttendence(widget.id, recordId, month, year)),
         headers: Utils.setHeader(token));
 
     if (response.statusCode == 200) {

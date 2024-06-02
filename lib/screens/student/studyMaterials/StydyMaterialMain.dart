@@ -122,11 +122,11 @@ class _StudentStudyMaterialMainState extends State<StudentStudyMaterialMain> {
     String url;
 
     if (type == 'as') {
-      url = InfixApi.getStudentAssignment(id, recordId);
+      url = EdusApi.getStudentAssignment(id, recordId);
     } else if (type == 'sy') {
-      url = InfixApi.getStudentSyllabus(id, recordId);
+      url = EdusApi.getStudentSyllabus(id, recordId);
     } else {
-      url = InfixApi.getStudentOtherDownloads(id, recordId);
+      url = EdusApi.getStudentOtherDownloads(id, recordId);
     }
 
     final response = await http.get(Uri.parse(url),

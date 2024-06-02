@@ -296,7 +296,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                                               _file?.path ?? ''),
                                     });
                                     var response = await dio.post(
-                                      InfixApi.chatGroupCreate,
+                                      EdusApi.chatGroupCreate,
                                       data: formData,
                                       options: DIO.Options(
                                         headers: {

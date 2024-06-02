@@ -172,7 +172,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       });
 
                       var response = await http.post(
-                          Uri.parse(InfixApi.changePassword(
+                          Uri.parse(EdusApi.changePassword(
                               _currentPasswordController.text,
                               _newPasswordController.text,
                               _confirmPasswordController.text,

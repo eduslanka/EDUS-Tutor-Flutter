@@ -169,7 +169,7 @@ class _UploadHomeworkState extends State<UploadHomework> {
                             var dio = Dio();
 
                             response = await dio.post(
-                              InfixApi.studentUploadHomework,
+                              EdusApi.studentUploadHomework,
                               data: formData,
                               options: Options(
                                 headers: {

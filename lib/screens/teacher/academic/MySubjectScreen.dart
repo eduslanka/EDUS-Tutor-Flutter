@@ -134,7 +134,7 @@ class _MySubjectScreenState extends State<MySubjectScreen> {
 
     try{
 
-      final response = await http.get(Uri.parse(InfixApi.getTeacherSubject(id)),
+      final response = await http.get(Uri.parse(EdusApi.getTeacherSubject(id)),
           headers: Utils.setHeader(_token.toString()));
 
       if (response.statusCode == 200) {

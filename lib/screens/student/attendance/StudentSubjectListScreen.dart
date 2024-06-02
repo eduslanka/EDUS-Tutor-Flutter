@@ -254,7 +254,7 @@ class _StudentSubjectListScreenState extends State<StudentSubjectListScreen> {
 
   Future<SubjectList> getAllSubject(int id, int recordId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getSubjectsUrl(id, recordId)),
+        Uri.parse(EdusApi.getSubjectsUrl(id, recordId)),
         headers: Utils.setHeader(token.toString()));
 
     if (response.statusCode == 200) {

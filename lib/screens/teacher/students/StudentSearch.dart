@@ -176,7 +176,7 @@ class _StudentSearchState extends State<StudentSearch> {
           String roll = rollController.text;
 
           if (name.isNotEmpty) {
-            url = InfixApi.getStudentByName(name, classId, sectionId);
+            url = EdusApi.getStudentByName(name, classId, sectionId);
             Navigator.push(
               context,
               ScaleRoute(
@@ -190,7 +190,7 @@ class _StudentSearchState extends State<StudentSearch> {
               ),
             );
           } else if (roll.isNotEmpty) {
-            url = InfixApi.getStudentByRoll(roll, classId, sectionId);
+            url = EdusApi.getStudentByRoll(roll, classId, sectionId);
             Navigator.push(
                 context,
                 ScaleRoute(
@@ -202,7 +202,7 @@ class _StudentSearchState extends State<StudentSearch> {
                   token: _token,
                 )));
           } else {
-            url = InfixApi.getStudentByClassAndSection(classId, sectionId);
+            url = EdusApi.getStudentByClassAndSection(classId, sectionId);
             Navigator.push(
                 context,
                 ScaleRoute(
@@ -343,7 +343,7 @@ class _StudentSearchState extends State<StudentSearch> {
   }
 
   Future getAllClass(int id) async {
-    final response = await http.get(Uri.parse(InfixApi.getClassById(id)),
+    final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -359,7 +359,7 @@ class _StudentSearchState extends State<StudentSearch> {
 
   Future<SectionList> getAllSection(dynamic id, dynamic classId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getSectionById(id, classId)),
+        Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
 
 

@@ -295,7 +295,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => DownloadViewer(
                                         title: 'PDF',
-                                        filePath: InfixApi.root +
+                                        filePath: EdusApi.root +
                                             '${widget.files?[index]}',
                                       )));
                             },
@@ -303,7 +303,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                               fit: StackFit.loose,
                               children: [
                                 PDF.network(
-                                  InfixApi.root + '${widget.files?[index]}',
+                                  EdusApi.root + '${widget.files?[index]}',
                                   height: 300,
                                   width: double.maxFinite,
                                 ),
@@ -332,7 +332,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                             ),
                           )
                           : ExtendedImage.network(
-                              InfixApi.root + '${widget.files?[index]}',
+                              EdusApi.root + '${widget.files?[index]}',
                               fit: BoxFit.cover,
                               cache: true,
                               mode: ExtendedImageMode.gesture,
@@ -366,7 +366,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
         isResponse = true;
       });
       final response = await http.post(
-        Uri.parse(InfixApi.evaluateHomework),
+        Uri.parse(EdusApi.evaluateHomework),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           "Authorization": _token.toString(),

@@ -20,13 +20,13 @@ class CustomController extends GetxController {
     try {
       isLoading(true);
 
-      final response = await http.get(Uri.parse(InfixApi.service),
+      final response = await http.get(Uri.parse(EdusApi.service),
     
           headers: {'Accept': 'application/json'});
       print('Service Check Response::::::: ${response.statusCode}');
       var decode = jsonDecode(response.body);
       print('Service Check Response::::::: ${response.body}');
-  print(Uri.parse(InfixApi.service));
+  print(Uri.parse(EdusApi.service));
       if (response.statusCode == 200) {
         isLoading(false);
         connected.value = decode;

@@ -63,7 +63,7 @@ class StudentWalletController extends GetxController {
     print('loading :: ${isWalletLoading.value}');
     try {
       final response = await http.get(
-        Uri.parse(InfixApi.studentWallet),
+        Uri.parse(EdusApi.studentWallet),
         headers: Utils.setHeader(
           userController.token.value.toString(),
         ),
@@ -151,7 +151,7 @@ class StudentWalletController extends GetxController {
       isPaymentProcessing(true);
       Map<String, dynamic> data;
       await _dio
-          .post(InfixApi.addToWallet,
+          .post(EdusApi.addToWallet,
               data: formData,
               options: dio.Options(
                 headers: Utils.setHeader(userController.token.value.toString()),
@@ -273,7 +273,7 @@ class StudentWalletController extends GetxController {
     try {
       isPaymentProcessing(true);
       await _dio
-          .post(InfixApi.confirmWalletPayment,
+          .post(EdusApi.confirmWalletPayment,
               data: formData,
               options: dio.Options(
                 headers: Utils.setHeader(userController.token.value.toString()),

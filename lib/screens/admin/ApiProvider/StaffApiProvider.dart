@@ -18,7 +18,7 @@ class StaffApiProvider {
     await Utils.getStringValue('token').then((value) {
       token = value ?? '';
     });
-    final response = await http.get(Uri.parse(InfixApi.getStuffCategory),headers: Utils.setHeader(token));
+    final response = await http.get(Uri.parse(EdusApi.getStuffCategory),headers: Utils.setHeader(token));
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -33,7 +33,7 @@ class StaffApiProvider {
       token = value ?? '';
     });
     final response = await http.get(
-        Uri.parse(InfixApi.getAllStaff(staffId)),
+        Uri.parse(EdusApi.getAllStaff(staffId)),
         headers: Utils.setHeader(token));
 
     if (response.statusCode == 200) {

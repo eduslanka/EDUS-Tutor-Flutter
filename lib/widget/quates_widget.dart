@@ -7,6 +7,9 @@ import '../model/quets_model.dart';
 
 
 class QuoteOfTheDayWidget extends StatefulWidget {
+  final Quote quote;
+  const QuoteOfTheDayWidget({super.key, required this.quote});
+
   @override
   _QuoteOfTheDayWidgetState createState() => _QuoteOfTheDayWidgetState();
 }
@@ -29,24 +32,12 @@ class _QuoteOfTheDayWidgetState extends State<QuoteOfTheDayWidget> {
           borderRadius: BorderRadius.circular(15),
           color: Colors.white,
         ),
-        child: FutureBuilder<Quote>(
-          future: fetchQuoteOfTheDay(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return  Center(child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: CircularProgressIndicator(color: Colors.black12,),
-              ));
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else if (snapshot.hasData) {
-              final quote = snapshot.data!;
-              return Column(
+        child:Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(12),
                     child: AutoSizeText(
-                      '“${isToggled? quote.meaning: quote.quote}”',
+                      '“${isToggled?widget. quote.meaning:widget. quote.quote}”',
                       style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -77,13 +68,8 @@ class _QuoteOfTheDayWidgetState extends State<QuoteOfTheDayWidget> {
                     ),
                   ),
                 ],
-              );
-            } else {
-              return const Center(child: Text('No quote available.'));
-            }
-          },
-        ),
-      ),
+              )
+            ),
     );
   }
 }

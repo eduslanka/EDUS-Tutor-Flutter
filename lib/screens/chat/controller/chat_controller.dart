@@ -68,7 +68,7 @@ class ChatController extends GetxController {
     try {
       await getIdToken().then((value) async {
         final response = await http.get(
-            Uri.parse(InfixApi.changeChatStatus + "/$type"),
+            Uri.parse(EdusApi.changeChatStatus + "/$type"),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
           // status = true;
@@ -87,7 +87,7 @@ class ChatController extends GetxController {
       isStatusLoading(true);
       await getIdToken().then((value) async {
         final response = await http.get(
-            Uri.parse(InfixApi.getChatStatus + "/${id.value}"),
+            Uri.parse(EdusApi.getChatStatus + "/${id.value}"),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
           var jsonData = jsonDecode(response.body);
@@ -122,7 +122,7 @@ class ChatController extends GetxController {
       isSearching(true);
       await getIdToken().then((value) async {
         final response = await http.get(
-            Uri.parse(InfixApi.searchChatUser + "?keywords=$keyword"),
+            Uri.parse(EdusApi.searchChatUser + "?keywords=$keyword"),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
           var jsonData = jsonDecode(response.body);
@@ -144,7 +144,7 @@ class ChatController extends GetxController {
   Future<ChatModelMain> getAllChats() async {
     try {
       final response = await http.get(
-        Uri.parse(InfixApi.getChatOpen),
+        Uri.parse(EdusApi.getChatOpen),
         headers: Utils.setHeader(
           token.value.toString(),
         ),
@@ -177,7 +177,7 @@ class ChatController extends GetxController {
     try {
       isLoading(true);
       await getIdToken().then((value) async {
-        final response = await http.get(Uri.parse(InfixApi.chatPermissionGet),
+        final response = await http.get(Uri.parse(EdusApi.chatPermissionGet),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
           await changeActiveStatus(1);
@@ -220,7 +220,7 @@ class ChatController extends GetxController {
       isBlockedUsersLoading(true);
       await getIdToken().then((value) async {
         final response = await http.get(
-          Uri.parse(InfixApi.chatGetBlockedUsers),
+          Uri.parse(EdusApi.chatGetBlockedUsers),
           headers: Utils.setHeader(
             _token.toString(),
           ),
@@ -249,7 +249,7 @@ class ChatController extends GetxController {
     try {
       final response = await http.get(
         Uri.parse(
-          InfixApi.chatUserBlockAction + "/$action/$userId",
+          EdusApi.chatUserBlockAction + "/$action/$userId",
         ),
         headers: Utils.setHeader(_token.value.toString()),
       );

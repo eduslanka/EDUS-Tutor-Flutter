@@ -71,7 +71,7 @@ class _DormitoryScreenState extends State<DormitoryScreen> {
   }
 
   Future<DormitoryList> getAllDormitory() async {
-    final response = await http.get(Uri.parse(InfixApi.studentDormitoryList),
+    final response = await http.get(Uri.parse(EdusApi.studentDormitoryList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

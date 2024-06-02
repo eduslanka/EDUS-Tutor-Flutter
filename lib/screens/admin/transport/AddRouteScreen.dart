@@ -235,7 +235,7 @@ class _AddRouteState extends State<AddRoute> {
 
   // ignore: missing_return
   Future<VehicleRouteList> getRouteList() async {
-    final response = await http.get(Uri.parse(InfixApi.transportRoute),
+    final response = await http.get(Uri.parse(EdusApi.transportRoute),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
@@ -248,7 +248,7 @@ class _AddRouteState extends State<AddRoute> {
   Future<bool> addRouteData(String title, String fare, String uid) async {
     response = await dio
         .post(
-      InfixApi.addRoute(title, fare, uid),
+      EdusApi.addRoute(title, fare, uid),
       options: Options(
         headers: {
           "Accept": "application/json",

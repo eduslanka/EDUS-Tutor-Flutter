@@ -139,7 +139,7 @@ class _PaytmPaymentState extends State<PaytmPayment> {
 
   Future<bool> isPaymentSuccesful() async {
     print('${widget.fee.feesTypeId}');
-    final response = await http.get(Uri.parse(InfixApi.studentFeePayment(
+    final response = await http.get(Uri.parse(EdusApi.studentFeePayment(
         id, int.parse(widget.fee.feesTypeId.toString()), amount ?? '', id, 'PayTm')));
     var jsonData = json.decode(response.body);
     print('PPAYMENT: $jsonData');

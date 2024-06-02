@@ -45,7 +45,7 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
   }
 
   Future<FeeTypeList> getFeesTypes() async {
-    final response = await http.get(Uri.parse(InfixApi.adminFeesTypeList),
+    final response = await http.get(Uri.parse(EdusApi.adminFeesTypeList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -57,7 +57,7 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
   }
 
   Future<FeeGroupList> getFeesGroups() async {
-    final response = await http.get(Uri.parse(InfixApi.adminFeeList),
+    final response = await http.get(Uri.parse(EdusApi.adminFeeList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -113,7 +113,7 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
                         IconButton(
                           onPressed: () async {
                             final response = await http.post(
-                              Uri.parse(InfixApi.adminFeesTypeDelete),
+                              Uri.parse(EdusApi.adminFeesTypeDelete),
                               headers: Utils.setHeader(_token),
                               body: jsonEncode({
                                 'id': feeType.id,
@@ -243,7 +243,7 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
                                 ),
                                 onPressed: () async {
                                   final response = await http.post(
-                                    Uri.parse(InfixApi.adminFeesTypeStore),
+                                    Uri.parse(EdusApi.adminFeesTypeStore),
                                     headers: Utils.setHeader(_token),
                                     body: jsonEncode({
                                       'name': titleController?.text,
@@ -339,7 +339,7 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
                               ),
                               onPressed: () async {
                                 final response = await http.post(
-                                  Uri.parse(InfixApi.adminFeesTypeUpdate),
+                                  Uri.parse(EdusApi.adminFeesTypeUpdate),
                                   headers: Utils.setHeader(_token),
                                   body: jsonEncode({
                                     'name': titleController?.text,

@@ -478,7 +478,7 @@ class KhaltiPaymentService {
       'school_id': userDetails.schoolId,
     };
     final response = await http.post(
-      Uri.parse(InfixApi.paymentDataSave),
+      Uri.parse(EdusApi.paymentDataSave),
       body: jsonEncode(data),
       headers: {
         "Accept": "application/json",
@@ -498,7 +498,7 @@ class KhaltiPaymentService {
       token = value;
     });
     final response = await http.post(
-      Uri.parse(InfixApi.paymentSuccessCallback(status, reference, amount)),
+      Uri.parse(EdusApi.paymentSuccessCallback(status, reference, amount)),
       headers: {
         "Accept": "application/json",
         "Authorization": token.toString(),
@@ -515,7 +515,7 @@ class KhaltiPaymentService {
     });
     try {
       final response = await http.get(
-          Uri.parse(InfixApi.studentFeePayment(id.toString(),
+          Uri.parse(EdusApi.studentFeePayment(id.toString(),
               int.parse(fee.feesTypeId.toString()), amount, paidBy, 'Khalti')),
           headers: {
             "Accept": "application/json",

@@ -65,7 +65,7 @@ class _AdminFeeListViewState extends State<AdminFeeListView> {
   }
 
   Future<AdminFeesList> getAllFee() async {
-    final response = await http.get(Uri.parse(InfixApi.adminFeeList),
+    final response = await http.get(Uri.parse(EdusApi.adminFeeList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

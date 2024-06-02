@@ -1,7 +1,7 @@
 // Project imports:
 import 'package:edus_tutor/config/app_config.dart';
 
-class InfixApi {
+class EdusApi {
   static String root = AppConfig.domainName + '/';
 
   static String baseApi = root + 'api/';
@@ -22,7 +22,7 @@ class InfixApi {
   static String zoomMakeMeeting = "zoom-make-meeting";
   static String service = baseApi + 'service/check';
   static String zoomMakeMeetingUrl = "zoom-meeting-room";
-
+static String todayClass=baseApi+"student-today-class";
   static String login(String email, String password) {
     return baseApi + 'login?email=' + email + '&password=' + password;
   }
@@ -651,6 +651,7 @@ class InfixApi {
 
   static String feesInvoiceView(int invoiceId) {
     return baseApi + "fees-invoice-view/$invoiceId/view";
+  // return baseApi + "student-fees-all/$invoiceId";
   }
 
   static String adminFeesBankPaymentList = baseApi + "bank-payment";

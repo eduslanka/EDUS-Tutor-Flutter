@@ -55,10 +55,10 @@ class _StaffDetailsScreenState extends State<StaffDetailsScreen> {
                           radius: 70.0,
                           backgroundImage: widget.staff.photo == null ||
                                   widget.staff.photo == ""
-                              ? NetworkImage(InfixApi.root +
+                              ? NetworkImage(EdusApi.root +
                                   "public/uploads/staff/demo/staff.jpg")
                               : NetworkImage(
-                                  InfixApi.root + '${widget.staff.photo}'),
+                                  EdusApi.root + '${widget.staff.photo}'),
                           backgroundColor: Colors.transparent,
                         ),
                       ),

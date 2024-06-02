@@ -90,7 +90,7 @@ class _StaffNoticeScreenState extends State<StaffNoticeScreen> {
     await Utils.getStringValue('schoolId').then((value) {
       _schoolId = value;
     });
-    final response = await http.get(Uri.parse(InfixApi.notice(_schoolId)),
+    final response = await http.get(Uri.parse(EdusApi.notice(_schoolId)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

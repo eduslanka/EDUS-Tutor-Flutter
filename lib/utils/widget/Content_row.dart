@@ -342,7 +342,7 @@ class _ContentRowState extends State<ContentRow> {
   }
 
   Future<void> deleteContent(dynamic cid) async {
-    final response = await http.get(Uri.parse(InfixApi.deleteContent(cid)),
+    final response = await http.get(Uri.parse(EdusApi.deleteContent(cid)),
         headers: Utils.setHeader(_token));
 
     if (response.statusCode == 200) {
@@ -370,7 +370,7 @@ class _ContentRowState extends State<ContentRow> {
       Utils.showToast("Downloading...");
 
       await dio.download(
-          InfixApi.root + url, dirloc + AppFunction.getExtention(url),
+          EdusApi.root + url, dirloc + AppFunction.getExtention(url),
           options: Options(headers: {HttpHeaders.acceptEncodingHeader: "*"}),
           onReceiveProgress: (receivedBytes, totalBytes) async {
         received = ((receivedBytes / totalBytes) * 100);
@@ -386,9 +386,9 @@ class _ContentRowState extends State<ContentRow> {
                 context,
                 ScaleRoute(
                     page: DownloadViewer(
-                        title: title, filePath: InfixApi.root + url)));
+                        title: title, filePath: EdusApi.root + url)));
           } else {
-            var file = await DefaultCacheManager().getSingleFile(InfixApi.root + url);
+            var file = await DefaultCacheManager().getSingleFile(EdusApi.root + url);
             OpenFilex.open(file.path);
             print('File ::::::::: $file');
 

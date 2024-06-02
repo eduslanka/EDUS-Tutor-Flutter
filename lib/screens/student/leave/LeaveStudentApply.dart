@@ -478,7 +478,7 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
   }
 
   Future<LeaveList> getAllLeaveType(id) async {
-    final response = await http.get(Uri.parse(InfixApi.userLeaveType(id)),
+    final response = await http.get(Uri.parse(EdusApi.userLeaveType(id)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -512,7 +512,7 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
     });
 
     response = await dio.post(
-      InfixApi.userApplyLeaveStore,
+      EdusApi.userApplyLeaveStore,
       data: formData,
       options: Options(
 

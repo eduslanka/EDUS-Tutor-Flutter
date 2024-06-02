@@ -16,7 +16,7 @@ class About {
   // static String _token;
 
   Future<AboutData> fetchAboutServices(String token) async {
-    final response = await http.get(Uri.parse(InfixApi.about),
+    final response = await http.get(Uri.parse(EdusApi.about),
         headers: Utils.setHeader(token.toString()));
 
     // print(response.request.url);
@@ -38,7 +38,7 @@ class About {
   }
 
   static Future<int> phonePermission(token) async {
-    final response = await http.get(Uri.parse(InfixApi.currentPermission),
+    final response = await http.get(Uri.parse(EdusApi.currentPermission),
         headers: Utils.setHeader(token.toString()));
     var jsonData = json.decode(response.body);
     int no = jsonData['data']['phone_number_privacy'];

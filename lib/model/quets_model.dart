@@ -1,12 +1,12 @@
 class Quote {
-  final int id;
-  final String quote;
-  final String meaning;
+  final int? id;
+  final String? quote;
+  final String? meaning;
 
   Quote({
-    required this.id,
-    required this.quote,
-    required this.meaning,
+     this.id,
+     this.quote,
+     this.meaning,
   });
 
   // Factory method to create a Quote from a map (e.g., from JSON)

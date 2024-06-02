@@ -87,7 +87,7 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
     });
 
     final response = await http.get(
-        Uri.parse(InfixApi.paymentMethods(_schoolId)),
+        Uri.parse(EdusApi.paymentMethods(_schoolId)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -209,7 +209,7 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
       'school_id': _userDetails.schoolId,
     };
     final response = await http.post(
-      Uri.parse(InfixApi.paymentDataSave),
+      Uri.parse(EdusApi.paymentDataSave),
       body: jsonEncode(data),
       headers: {
         "Accept": "application/json",
@@ -249,7 +249,7 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
       {dynamic reference, dynamic status}) async {
     final response = await http.post(
       Uri.parse(
-          InfixApi.paymentSuccessCallback(status, reference, widget.amount)),
+          EdusApi.paymentSuccessCallback(status, reference, widget.amount)),
       headers: {
         "Accept": "application/json",
         "Authorization": _token.toString(),
@@ -269,7 +269,7 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
       });
 
       final response = await http.get(
-          Uri.parse(InfixApi.studentFeePayment(
+          Uri.parse(EdusApi.studentFeePayment(
               widget.id.toString(),
               int.parse(widget.fee.feesTypeId.toString()),
               widget.amount,
@@ -306,7 +306,7 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
     await Utils.getStringValue('token').then((value) {
       _token = value ?? '';
     });
-    final response = await http.get(Uri.parse(InfixApi.getChildren(id)),
+    final response = await http.get(Uri.parse(EdusApi.getChildren(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -460,7 +460,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
   }
 
   Future<BankList> getBankList() async {
-    final response = await http.get(Uri.parse(InfixApi.bankList),
+    final response = await http.get(Uri.parse(EdusApi.bankList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -508,7 +508,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
     if (_formKey.currentState!.validate()) {
       if (_file != null) {
         if (widget.paymentType == "Bank Payment") {
-          paymentUrl = InfixApi.childFeeBankPayment(
+          paymentUrl = EdusApi.childFeeBankPayment(
               amountController.text,
               _userController.selectedRecord.value.classId,
               _userController.selectedRecord.value.sectionId,
@@ -518,7 +518,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
               paymentDate,
               bankId);
         } else {
-          paymentUrl = InfixApi.childFeeChequePayment(
+          paymentUrl = EdusApi.childFeeChequePayment(
             amountController.text,
             _userController.selectedRecord.value.classId,
             _userController.selectedRecord.value.sectionId,
@@ -850,7 +850,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
   }
 
   Future<UserDetails> fetchUserDetails(id) async {
-    final response = await http.get(Uri.parse(InfixApi.getChildren(id)),
+    final response = await http.get(Uri.parse(EdusApi.getChildren(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

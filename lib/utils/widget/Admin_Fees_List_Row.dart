@@ -165,7 +165,7 @@ class _AdminFeesListRowState extends State<AdminFeesListRow> {
       String title, String des, dynamic id, BuildContext context) async {
     response = await dio
         .get(
-      InfixApi.feesDataUpdate(title, des, id),
+      EdusApi.feesDataUpdate(title, des, id),
       options: Options(
         headers: {
           "Accept": "application/json",

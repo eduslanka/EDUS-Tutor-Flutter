@@ -624,7 +624,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
 
     });
     response = await dio.post(
-      InfixApi.uploadHomework,
+      EdusApi.uploadHomework,
       data: formData,
       options: Options(
         headers: {
@@ -659,7 +659,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
 
   Future getAllClass(int id) async {
 
-    final response = await http.get(Uri.parse(InfixApi.getClassById(id)),
+    final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -676,7 +676,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
 
   Future<SectionList> getAllSection(dynamic id, dynamic classId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getSectionById(id, classId)),
+        Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
 
     print("Section : ${response.body}");
@@ -692,7 +692,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
   Future<TeacherSubjectList> getAllSubject(int id) async {
 
     try{
-      final response = await http.get(Uri.parse(InfixApi.getTeacherSubject(id)),
+      final response = await http.get(Uri.parse(EdusApi.getTeacherSubject(id)),
           headers: Utils.setHeader(_token.toString()));
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
@@ -772,7 +772,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
 
   void sentNotificationToSection(dynamic classCode, dynamic sectionCode) async {
     final response = await http.get(Uri.parse(
-        InfixApi.sentNotificationToSection('Homework',
+        EdusApi.sentNotificationToSection('Homework',
             'New homework has been uploaded', '$classCode', '$sectionCode')));
     if (response.statusCode == 200) {}
   }

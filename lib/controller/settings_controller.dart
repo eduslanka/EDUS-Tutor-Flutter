@@ -25,7 +25,7 @@ class SettingsController extends GetxController {
       'Authorization': _token.toString(),
     };
     var request =
-        http.MultipartRequest('POST', Uri.parse(InfixApi.accountDelete));
+        http.MultipartRequest('POST', Uri.parse(EdusApi.accountDelete));
     request.fields.addAll({
       'id': _userId.toString(),
     });

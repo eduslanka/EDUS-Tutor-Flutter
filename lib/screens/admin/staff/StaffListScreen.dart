@@ -88,8 +88,8 @@ class _StaffListScreenState extends State<StaffListScreen> {
                   backgroundImage: data.staffs[index].photo == null ||
                           data.staffs[index].photo == ""
                       ? NetworkImage(
-                          InfixApi.root + "public/uploads/staff/demo/staff.jpg")
-                      : NetworkImage(InfixApi.root + '${data.staffs[index].photo}'),
+                          EdusApi.root + "public/uploads/staff/demo/staff.jpg")
+                      : NetworkImage(EdusApi.root + '${data.staffs[index].photo}'),
                   backgroundColor: Colors.transparent,
                 ),
                 title: Text(

@@ -81,7 +81,7 @@ class _BookIssuedScreenState extends State<BookIssuedScreen> {
 
   Future<BookIssuedList> getIssuedBooks(dynamic id) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getStudentIssuedBook(id)),
+        Uri.parse(EdusApi.getStudentIssuedBook(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

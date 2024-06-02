@@ -39,7 +39,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
   Future<Routine> getRoutine(int recordId) async {
     try {
       final response = await http.get(
-        Uri.parse(InfixApi.routineView(
+        Uri.parse(EdusApi.routineView(
           widget.id,
           "student",
           recordId: recordId,

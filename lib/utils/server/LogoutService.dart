@@ -43,7 +43,7 @@ class LogoutService {
 
         Get.offNamedUntil("/", ModalRoute.withName('/'));
 
-        var response = await http.post(Uri.parse(InfixApi.logout()),
+        var response = await http.post(Uri.parse(EdusApi.logout()),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
         } else {

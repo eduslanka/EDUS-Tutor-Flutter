@@ -105,8 +105,8 @@ class _JitsiVirtualClassState extends State<JitsiVirtualClass> {
 
   Future<VirtualClass> getAllMeeting({int? recordId}) async {
     final _url = widget.type == "class"
-        ? Uri.parse(InfixApi.getVirtualClass(recordId ?? 0, 'jitsi'))
-        : Uri.parse(InfixApi.getVirtualMeeting('jitsi'));
+        ? Uri.parse(EdusApi.getVirtualClass(recordId ?? 0, 'jitsi'))
+        : Uri.parse(EdusApi.getVirtualMeeting('jitsi'));
 
     final response =
         await http.get(_url, headers: Utils.setHeader(_token.toString()));

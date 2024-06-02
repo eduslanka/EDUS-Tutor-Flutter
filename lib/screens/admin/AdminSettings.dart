@@ -226,7 +226,7 @@ class _AdminSettingsState extends State<AdminSettings> {
   }
 
   Future<void> setPermission(int mPer) async {
-    response = await dio.get(InfixApi.getTeacherPhonePermission(mPer));
+    response = await dio.get(EdusApi.getTeacherPhonePermission(mPer));
     if (response?.statusCode == 200) {
       setState(() {
         Navigator.of(context).pop();

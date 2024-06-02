@@ -73,7 +73,7 @@ class _SubjectStudentAttendanceScreenState
 
   Future<StudentDetailsModel> getProfile(id) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getChildren(id.toString())),
+        Uri.parse(EdusApi.getChildren(id.toString())),
         headers: id == null ? null : Utils.setHeader(token.toString()));
     if (response.statusCode == 200) {
       final studentDetails = studentDetailsFromJson(response.body);
@@ -436,7 +436,7 @@ class _SubjectStudentAttendanceScreenState
       isLoading = true;
     });
     final response = await http.get(
-        Uri.parse(InfixApi.getSubjectAttendence(
+        Uri.parse(EdusApi.getSubjectAttendence(
             widget.id, recordId, month, year, subjectCode)),
         headers: Utils.setHeader(token));
 

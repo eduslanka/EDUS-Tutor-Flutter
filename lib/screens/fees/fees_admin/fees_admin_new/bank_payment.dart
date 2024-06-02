@@ -72,7 +72,7 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
 
   Future<FeeBankPaymentModel> getBankPayments() async {
     final response = await http.get(
-        Uri.parse(InfixApi.adminFeesBankPaymentList),
+        Uri.parse(EdusApi.adminFeesBankPaymentList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -88,7 +88,7 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
   Future<FeeBankPaymentModel> getBankPaymentSearchResult(Map data) async {
     try {
       final response = await http.post(
-          Uri.parse(InfixApi.adminFeesBankPaymentSearch),
+          Uri.parse(EdusApi.adminFeesBankPaymentSearch),
           body: jsonEncode(data),
           headers: Utils.setHeader(_token.toString()));
 
@@ -108,7 +108,7 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
   }
 
   Future getAllClass(int id) async {
-    final response = await http.get(Uri.parse(InfixApi.getClassById(id)),
+    final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -124,7 +124,7 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
 
   Future<SectionList> getAllSection(dynamic id, dynamic classId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getSectionById(id, classId)),
+        Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
 
 
@@ -332,7 +332,7 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                                           onSelected: (String value) async {
                                             if (value == 'approve') {
                                               final response = await http.post(
-                                                Uri.parse(InfixApi
+                                                Uri.parse(EdusApi
                                                     .adminApproveBankPayment),
                                                 headers:
                                                     Utils.setHeader(_token ?? ''),
@@ -355,7 +355,7 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                                               }
                                             } else {
                                               final response = await http.post(
-                                                Uri.parse(InfixApi
+                                                Uri.parse(EdusApi
                                                     .adminRejectBankPayment),
                                                 headers:
                                                     Utils.setHeader(_token ?? ''),
@@ -851,7 +851,7 @@ class _FeesBankPaymentResultScreenState
 
   Future<FeeBankPaymentModel> getFeesGroups() async {
     final response = await http.get(
-        Uri.parse(InfixApi.adminFeesBankPaymentList),
+        Uri.parse(EdusApi.adminFeesBankPaymentList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

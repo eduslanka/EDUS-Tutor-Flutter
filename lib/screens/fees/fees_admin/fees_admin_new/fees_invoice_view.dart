@@ -37,7 +37,7 @@ class _FeeInvoiceDetailsViewState extends State<FeeInvoiceDetailsView> {
 
   Future<FeeInvoiceDetailsModel> getFeesInvoice() async {
     final response = await http.get(
-        Uri.parse(InfixApi.feesInvoiceView(widget.invoiceId ?? 0)),
+        Uri.parse(EdusApi.feesInvoiceView(widget.invoiceId ?? 0)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

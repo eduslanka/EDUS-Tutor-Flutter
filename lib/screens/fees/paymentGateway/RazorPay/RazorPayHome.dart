@@ -250,7 +250,7 @@ class _AddRazorAmountState extends State<AddRazorAmount> {
   }
 
   Future<bool> isPaymentSuccesful() async {
-    final response = await http.get(Uri.parse(InfixApi.studentFeePayment(
+    final response = await http.get(Uri.parse(EdusApi.studentFeePayment(
         widget.id,
         int.parse(widget.fee.feesTypeId.toString()),
         amountController.text,

@@ -79,7 +79,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   StudentDetailsModel _studentDetails = StudentDetailsModel();
 
   Future<StudentDetailsModel> getProfile(id) async {
-    final response = await http.get(Uri.parse(InfixApi.getChildren(id)),
+    final response = await http.get(Uri.parse(EdusApi.getChildren(id)),
         headers: id == null ? null : Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       final studentDetails = studentDetailsFromJson(response.body);
@@ -202,7 +202,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                               backgroundColor: Colors.blueAccent,
                               child: CachedNetworkImage(
                                 imageUrl:
-                                    "${InfixApi.root}/${_studentDetails.studentData?.user?.studentPhoto}",
+                                    "${EdusApi.root}/${_studentDetails.studentData?.user?.studentPhoto}",
                                 imageBuilder: (context, imageProvider) =>
                                     Container(
                                   decoration: BoxDecoration(
@@ -376,7 +376,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                     .studentData?.user?.parents?.fathersPhoto ==
                                 ''
                         ? "https://media.istockphoto.com/id/882447714/vector/businessman-avatar-character-icon.jpg?s=170667a&w=0&k=20&c=EnpvH1RtjWrjboD7DDNONLPStgfG1WrdgD9E-703l1Y="
-                        : "${InfixApi.root}/${_studentDetails.studentData?.user?.parents?.fathersPhoto}",
+                        : "${EdusApi.root}/${_studentDetails.studentData?.user?.parents?.fathersPhoto}",
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -461,7 +461,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                     .studentData?.user?.parents?.mothersPhoto ==
                                 ''
                         ? "https://static.vecteezy.com/system/resources/previews/014/316/636/original/happy-mom-avatar-icon-cartoon-style-vector.jpg"
-                        : "${InfixApi.root}/${_studentDetails.studentData?.user?.parents?.mothersPhoto}",
+                        : "${EdusApi.root}/${_studentDetails.studentData?.user?.parents?.mothersPhoto}",
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -622,21 +622,21 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   String buildGuardianPhoto(Parents parents) {
     if (parents.relation == 'Father') {
       if (parents.fathersPhoto == null || parents.fathersPhoto == '') {
-        return InfixApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
       } else {
-        return "${InfixApi.root}/${parents.fathersPhoto}";
+        return "${EdusApi.root}/${parents.fathersPhoto}";
       }
     } else if (parents.relation == 'Mother') {
       if (parents.mothersPhoto == null || parents.mothersPhoto == '') {
-        return InfixApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
       } else {
-        return "${InfixApi.root}/${parents.mothersPhoto}";
+        return "${EdusApi.root}/${parents.mothersPhoto}";
       }
     } else {
       if (parents.guardiansPhoto == null || parents.guardiansPhoto == '') {
-        return InfixApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
       } else {
-        return "${InfixApi.root}/${parents.guardiansPhoto}";
+        return "${EdusApi.root}/${parents.guardiansPhoto}";
       }
     }
   }
@@ -1037,7 +1037,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
       Utils.showToast("Downloading...");
 
       await dio.download(
-          InfixApi.root + url, dirloc + AppFunction.getExtention(url),
+          EdusApi.root + url, dirloc + AppFunction.getExtention(url),
           options: Options(headers: {HttpHeaders.acceptEncodingHeader: "*"}),
           onReceiveProgress: (receivedBytes, totalBytes) async {
         received = ((receivedBytes / totalBytes) * 100);
@@ -1052,13 +1052,13 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                 context,
                 ScaleRoute(
                     page: DownloadViewer(
-                        title: title, filePath: InfixApi.root + url)));
+                        title: title, filePath: EdusApi.root + url)));
           } else {
             // ignore: deprecated_member_use
-            await canLaunch(InfixApi.root + url)
+            await canLaunch(EdusApi.root + url)
                 // ignore: deprecated_member_use
-                ? await launch(InfixApi.root + url)
-                : throw 'Could not launch ${InfixApi.root + url}';
+                ? await launch(EdusApi.root + url)
+                : throw 'Could not launch ${EdusApi.root + url}';
           }
           Utils.showToast(
               "Download Completed. File is also available in your download folder."

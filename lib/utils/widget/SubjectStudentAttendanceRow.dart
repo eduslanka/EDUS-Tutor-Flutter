@@ -77,7 +77,7 @@ class _SubjectStudentAttendanceRowState
     final String image =
         attendanceStudents.photo == null || attendanceStudents.photo == ''
             ? '${AppConfig.domainName}/public/uploads/staff/demo/staff.jpg'
-            : InfixApi.root + '${attendanceStudents.photo}';
+            : EdusApi.root + '${attendanceStudents.photo}';
     return Column(
       children: <Widget>[
         ListTile(
@@ -190,7 +190,7 @@ class _SubjectStudentAttendanceRowState
     });
     final response = await http.get(
         Uri.parse(
-            InfixApi.subjectattendanceCheck(date, mClass, mSection, mSubject)),
+            EdusApi.subjectattendanceCheck(date, mClass, mSection, mSubject)),
         headers: Utils.setHeader(token));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);

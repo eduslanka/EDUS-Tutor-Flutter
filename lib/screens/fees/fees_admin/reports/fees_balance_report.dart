@@ -26,7 +26,7 @@ class _AdminFeesBalanceReportState extends State<AdminFeesBalanceReport> {
   Future<FeesBalanceReportModel>? searchData;
 
   Future<FeesBalanceReportModel> getSearchData(Map data) async {
-    final response = await http.post(Uri.parse(InfixApi.adminFeesBalanceSearch),
+    final response = await http.post(Uri.parse(EdusApi.adminFeesBalanceSearch),
         body: jsonEncode(data), headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

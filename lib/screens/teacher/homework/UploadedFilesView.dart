@@ -45,14 +45,14 @@ class _UploadedFilesViewState extends State<UploadedFilesView> {
                           builder: (context) => DownloadViewer(
                                 title: 'PDF',
                                 filePath:
-                                    InfixApi.root + '${widget.files?[index]}',
+                                    EdusApi.root + '${widget.files?[index]}',
                               )));
                     },
                     child: Stack(
                       fit: StackFit.loose,
                       children: [
                         PDF.network(
-                          InfixApi.root + '${widget.files?[index]}',
+                          EdusApi.root + '${widget.files?[index]}',
                           height: 300,
                           width: double.maxFinite,
                         ),
@@ -81,7 +81,7 @@ class _UploadedFilesViewState extends State<UploadedFilesView> {
                     ),
                   )
                   : ExtendedImage.network(
-                      InfixApi.root + '${widget.files?[index]}',
+                      EdusApi.root + '${widget.files?[index]}',
                       fit: BoxFit.cover,
                       cache: true,
                       mode: ExtendedImageMode.gesture,

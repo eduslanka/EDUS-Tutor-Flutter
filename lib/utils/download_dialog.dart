@@ -50,7 +50,7 @@ class _DownloadDialogState extends State<DownloadDialog> {
       Utils.showToast("Downloading...");
 
       await dio.download(
-          InfixApi.root + url, dirloc + AppFunction.getExtention(url),
+          EdusApi.root + url, dirloc + AppFunction.getExtention(url),
           options: Options(headers: {HttpHeaders.acceptEncodingHeader: "*"}),
           onReceiveProgress: (receivedBytes, totalBytes) async {
         received = ((receivedBytes / totalBytes) * 100);
@@ -66,10 +66,10 @@ class _DownloadDialogState extends State<DownloadDialog> {
                 context,
                 ScaleRoute(
                     page: DownloadViewer(
-                        title: title, filePath: InfixApi.root + url)));
+                        title: title, filePath: EdusApi.root + url)));
           } else {
             var file =
-                await DefaultCacheManager().getSingleFile(InfixApi.root + url);
+                await DefaultCacheManager().getSingleFile(EdusApi.root + url);
             OpenFilex.open(file.path);
 
             Utils.showToast(

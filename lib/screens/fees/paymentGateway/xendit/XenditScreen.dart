@@ -71,7 +71,7 @@ class XenditScreenState extends State<XenditScreen> {
       'school_id': widget.userDetails?.schoolId,
     };
     final response = await http.post(
-      Uri.parse(InfixApi.paymentDataSave),
+      Uri.parse(EdusApi.paymentDataSave),
       body: jsonEncode(data),
       headers: {
         "Accept": "application/json",
@@ -479,7 +479,7 @@ class XenditScreenState extends State<XenditScreen> {
   Future paymentCallBack({dynamic reference, dynamic status}) async {
     final response = await http.post(
       Uri.parse(
-          InfixApi.paymentSuccessCallback(status, reference, widget.amount)),
+          EdusApi.paymentSuccessCallback(status, reference, widget.amount)),
       headers: {
         "Accept": "application/json",
         "Authorization": _token.toString(),
@@ -497,7 +497,7 @@ class XenditScreenState extends State<XenditScreen> {
       });
 
       final response = await http.get(
-          Uri.parse(InfixApi.studentFeePayment(
+          Uri.parse(EdusApi.studentFeePayment(
               widget.id.toString(),
               int.parse(widget.fee?.feesTypeId.toString() ?? ''),
               widget.amount ?? '',

@@ -106,8 +106,8 @@ class _ZoomVirtualClassState extends State<ZoomVirtualClass> {
 
   Future<VirtualClass> getAllMeeting({int? recordId}) async {
     final _url = widget.type == "class"
-        ? Uri.parse(InfixApi.getVirtualClass(recordId ?? 0, 'zoom'))
-        : Uri.parse(InfixApi.getVirtualMeeting('zoom'));
+        ? Uri.parse(EdusApi.getVirtualClass(recordId ?? 0, 'zoom'))
+        : Uri.parse(EdusApi.getVirtualMeeting('zoom'));
 
     final response =
         await http.get(_url, headers: Utils.setHeader(_token.toString()));
@@ -266,7 +266,7 @@ class JitsiMeetingRow extends StatelessWidget {
                   onPressed: () async {
                     if (meeting.status == "join" ||
                         meeting.status == 'started') {
-                      final _url = InfixApi.getJoinMeetingUrlApp(
+                      final _url = EdusApi.getJoinMeetingUrlApp(
                           mid: meeting.meetingId);
 
                       // ignore: deprecated_member_use
@@ -278,7 +278,7 @@ class JitsiMeetingRow extends StatelessWidget {
                             context,
                             ScaleRoute(
                                 page: LaunchWebView(
-                              launchUrl: InfixApi.getJoinMeetingUrlWeb(
+                              launchUrl: EdusApi.getJoinMeetingUrlWeb(
                                   mid: meeting.meetingId),
                               title: meeting.topic.toString(),
                             )));

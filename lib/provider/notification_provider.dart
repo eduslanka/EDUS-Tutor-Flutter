@@ -21,7 +21,7 @@ class NotificationProvider extends ChangeNotifier{
     Utils.getStringValue('token').then((value) {
       token = value;
     });
-    final response = await http.get(Uri.parse(InfixApi.getMyNotifications(id)),headers: Utils.setHeader(token.toString()));
+    final response = await http.get(Uri.parse(EdusApi.getMyNotifications(id)),headers: Utils.setHeader(token.toString()));
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);

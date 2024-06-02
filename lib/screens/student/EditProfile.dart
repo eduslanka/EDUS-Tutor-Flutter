@@ -63,7 +63,7 @@ class _EditProfileState extends State<EditProfile> {
       _id = value ?? '';
     });
     final response = await http.get(
-        Uri.parse(InfixApi.getChildren(widget.id ?? _id)),
+        Uri.parse(EdusApi.getChildren(widget.id ?? _id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -100,7 +100,7 @@ class _EditProfileState extends State<EditProfile> {
     }
 
     var response = await _dio.post(
-      InfixApi.updateStudent,
+      EdusApi.updateStudent,
       options: DIO.Options(
         headers: Utils.setHeader(_token.toString()),
       ),

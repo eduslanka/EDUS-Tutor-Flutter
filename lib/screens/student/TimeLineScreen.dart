@@ -83,7 +83,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
   }
 
   Future<TimelineList> getAllTimeline(dynamic id) async {
-    final response = await http.get(Uri.parse(InfixApi.getStudentTimeline(id)),
+    final response = await http.get(Uri.parse(EdusApi.getStudentTimeline(id)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);

@@ -468,7 +468,7 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
     // print(InfixApi.homeworkEvaluationList(classId, sectionId, homeworkId));
     final response = await http.get(
         Uri.parse(
-            InfixApi.homeworkEvaluationList(classId, sectionId, homeworkId)),
+            EdusApi.homeworkEvaluationList(classId, sectionId, homeworkId)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -483,7 +483,7 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
       int classId, int sectionId, int homeworkId) async {
     final response = await http.get(
         Uri.parse(
-            InfixApi.homeworkEvaluationList(classId, sectionId, homeworkId)),
+            EdusApi.homeworkEvaluationList(classId, sectionId, homeworkId)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

@@ -133,11 +133,11 @@ class _DormitoryScreenState extends State<ZoomMeetingRow> {
                       // borderSide:
                       //     BorderSide(width: 1, color: Color(0xff053EFF)),
                       onPressed: () async {
-                        final _url = InfixApi.getJoinMeetingUrlApp(
+                        final _url = EdusApi.getJoinMeetingUrlApp(
                             mid: zoomMeeting.meetingId);
 
-                        debugPrint('App URL: ${InfixApi.getJoinMeetingUrlApp(mid: zoomMeeting.meetingId)}');
-                        debugPrint('Web URL: ${InfixApi.getJoinMeetingUrlWeb(mid: zoomMeeting.meetingId)}');
+                        debugPrint('App URL: ${EdusApi.getJoinMeetingUrlApp(mid: zoomMeeting.meetingId)}');
+                        debugPrint('Web URL: ${EdusApi.getJoinMeetingUrlWeb(mid: zoomMeeting.meetingId)}');
                         // ignore: deprecated_member_use
                         if (await canLaunch(_url)) {
                           // ignore: deprecated_member_use
@@ -147,7 +147,7 @@ class _DormitoryScreenState extends State<ZoomMeetingRow> {
                               context,
                               ScaleRoute(
                                   page: LaunchWebView(
-                                      launchUrl: InfixApi.getJoinMeetingUrlWeb(
+                                      launchUrl: EdusApi.getJoinMeetingUrlWeb(
                                           mid: zoomMeeting.meetingId),title: zoomMeeting.topic,)));
                         }
                       }),

@@ -105,8 +105,8 @@ class _BBBVirtualClassState extends State<BBBVirtualClass> {
 
   Future<VirtualClass> getAllMeeting({int? recordId}) async {
     final _url = widget.type == "class"
-        ? Uri.parse(InfixApi.getVirtualClass(recordId ?? 0, 'bbb'))
-        : Uri.parse(InfixApi.getVirtualMeeting('bbb'));
+        ? Uri.parse(EdusApi.getVirtualClass(recordId ?? 0, 'bbb'))
+        : Uri.parse(EdusApi.getVirtualMeeting('bbb'));
 
     final response =
         await http.get(_url, headers: Utils.setHeader(_token.toString()));
@@ -323,7 +323,7 @@ class BBBMeetingRow extends StatelessWidget {
   Future meetingJoin(String meetingId) async {
     final SystemController systemController = Get.find<SystemController>();
     final response = await http.get(
-        Uri.parse(InfixApi.bbbMeetingJoin(meetingId, 'bbb')),
+        Uri.parse(EdusApi.bbbMeetingJoin(meetingId, 'bbb')),
         headers: Utils.setHeader(systemController.token.toString()));
 
     if (response.statusCode == 200) {

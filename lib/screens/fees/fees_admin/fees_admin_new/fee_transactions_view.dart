@@ -32,7 +32,7 @@ class _FeeTransactionViewState extends State<FeeTransactionView> {
   }
 
   Future<FeeTransactionsList> getFeesInvoice() async {
-    final response = await http.post(Uri.parse(InfixApi.adminFeesViewPayment),
+    final response = await http.post(Uri.parse(EdusApi.adminFeesViewPayment),
         body: jsonEncode({'invoiceId': widget.invoiceId}),
         headers: Utils.setHeader(_token.toString()));
 

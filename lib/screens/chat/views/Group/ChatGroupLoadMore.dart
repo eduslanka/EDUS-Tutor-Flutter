@@ -57,14 +57,14 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
 
         if (length == 0) {
           result = await _dio.get(
-            "${InfixApi.chatGroupOpen}/$groupId",
+            "${EdusApi.chatGroupOpen}/$groupId",
             options: Options(
               headers: Utils.setHeader(_token.toString()),
             ),
           );
         } else {
           result = await _dio.post(
-            InfixApi.chatGroupMsgLoadMore,
+            EdusApi.chatGroupMsgLoadMore,
             data: jsonEncode(
               {
                 "ids":
@@ -180,7 +180,7 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
       };
       // Logger.debug('jsonCHECK', jsonData);
       final response = await _dio.post(
-        InfixApi.chatGroupMsgCheck,
+        EdusApi.chatGroupMsgCheck,
         options: Options(
           headers: Utils.setHeader(chatGroupOpenController.token.toString()),
         ),
@@ -223,7 +223,7 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
 
 
       final response = await _dio.post(
-        InfixApi.chatGroupMessageDelete,
+        EdusApi.chatGroupMessageDelete,
         options: Options(
           headers:
               Utils.setHeader(chatGroupOpenController.token.value.toString()),
@@ -249,7 +249,7 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
 
     try {
       final response = await _dio.post(
-        InfixApi.submitChatGroupText,
+        EdusApi.submitChatGroupText,
         options: Options(
           headers:
               Utils.setHeader(chatGroupOpenController.token.value.toString()),

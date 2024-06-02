@@ -369,10 +369,10 @@ class _AddVehicleState extends State<AddVehicle> {
 
   Future<bool> addVehicleData(String vehicleNo, String model, String driverId,
       String note, String year) async {
-    debugPrint(InfixApi.addVehicle(vehicleNo, model, driverId, note, year));
+    debugPrint(EdusApi.addVehicle(vehicleNo, model, driverId, note, year));
     response = await dio
         .post(
-      InfixApi.addVehicle(vehicleNo, model, driverId, note, year),
+      EdusApi.addVehicle(vehicleNo, model, driverId, note, year),
       options: Options(
         headers: {
           "Accept": "application/json",
@@ -404,7 +404,7 @@ class _AddVehicleState extends State<AddVehicle> {
   }
 
   Future<StaffList> getAllStaff() async {
-    final response = await http.get(Uri.parse(InfixApi.driverList),
+    final response = await http.get(Uri.parse(EdusApi.driverList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -416,7 +416,7 @@ class _AddVehicleState extends State<AddVehicle> {
   }
 
   Future<AssignVehicleList> getAllVehicles() async {
-    final response = await http.get(Uri.parse(InfixApi.vehicles),
+    final response = await http.get(Uri.parse(EdusApi.vehicles),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);

@@ -131,7 +131,7 @@ class PusherController extends GetxController {
     log(data.toString());
 
     var result = await http.post(
-      Uri.parse(InfixApi.chatBroadCastAuth),
+      Uri.parse(EdusApi.chatBroadCastAuth),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': _chatController.token.value,

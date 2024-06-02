@@ -78,7 +78,7 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
                     setState(() {
                       _selectedSubject = subjectValue.subjects[0].name;
                       subjectId = subjectValue.subjects[0].id;
-                      url = InfixApi.getStudentByClassAndSection(
+                      url = EdusApi.getStudentByClassAndSection(
                           classId, sectionId);
                     });
                   });
@@ -206,7 +206,7 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
           String roll = rollController.text;
 
           if (name.isNotEmpty) {
-            url = InfixApi.getStudentByName(name, classId, sectionId);
+            url = EdusApi.getStudentByName(name, classId, sectionId);
             Navigator.push(
               context,
               ScaleRoute(
@@ -221,7 +221,7 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
               ),
             );
           } else if (roll.isNotEmpty) {
-            url = InfixApi.getStudentByRoll(roll, classId, sectionId);
+            url = EdusApi.getStudentByRoll(roll, classId, sectionId);
             Navigator.push(
                 context,
                 ScaleRoute(
@@ -234,7 +234,7 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
                         token: _token,
                         subjectName: _selectedSubject)));
           } else {
-            url = InfixApi.getStudentBySubject(classId, sectionId, subjectId);
+            url = EdusApi.getStudentBySubject(classId, sectionId, subjectId);
             Navigator.push(
                 context,
                 ScaleRoute(
@@ -374,7 +374,7 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
   }
 
   Future getAllClass(int id) async {
-    final response = await http.get(Uri.parse(InfixApi.getClassById(id)),
+    final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
     try{
       if (response.statusCode == 200) {
@@ -420,7 +420,7 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
 
             subjectId = getCode(subjectModellist, '$value');
 
-            url = InfixApi.getStudentByClassAndSection(classId, sectionId);
+            url = EdusApi.getStudentByClassAndSection(classId, sectionId);
 
             debugPrint('User select subject $subjectId');
           });
@@ -432,7 +432,7 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
 
   Future<SectionList> getAllSection(dynamic id, dynamic classId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getSectionById(id, classId)),
+        Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
 
 
@@ -446,7 +446,7 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
 
   Future<SubjectModelList> getAllSubject(int classId, int sectionId) async {
     final response = await http.post(
-        Uri.parse(InfixApi.getSubjectById(classId, sectionId)),
+        Uri.parse(EdusApi.getSubjectById(classId, sectionId)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

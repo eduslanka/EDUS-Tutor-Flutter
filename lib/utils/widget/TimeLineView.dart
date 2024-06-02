@@ -179,7 +179,7 @@ class TimeLineView extends StatelessWidget {
       FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
       await dio
-          .download(InfixApi.root + url, dirloc + AppFunction.getExtention(url),
+          .download(EdusApi.root + url, dirloc + AppFunction.getExtention(url),
               onReceiveProgress: (receivedBytes, totalBytes) {
         progress =
             ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";

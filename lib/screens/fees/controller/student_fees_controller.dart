@@ -165,7 +165,7 @@ class StudentFeesController extends GetxController {
       isPaymentProcessing(true);
       Map<String, dynamic> data;
       await _dio
-          .post(InfixApi.studentPaymentStore,
+          .post(EdusApi.studentPaymentStore,
               data: formData,
               options: dio.Options(
                 headers: Utils.setHeader(userController.token.value.toString()),
@@ -277,7 +277,7 @@ class StudentFeesController extends GetxController {
     try {
       Map<String, dynamic> data;
       final response = await _dio.get(
-          InfixApi.studentPaymentSuccessCallback + "/Fees/$transactionId",
+          EdusApi.studentPaymentSuccessCallback + "/Fees/$transactionId",
           options: dio.Options(
             headers: Utils.setHeader(userController.token.value.toString()),
           ));
@@ -328,7 +328,7 @@ class StudentFeesController extends GetxController {
     try {
       isLoading(true);
       final response = await http.get(
-          Uri.parse(InfixApi.studentFeesAddPayment(invoiceId)),
+          Uri.parse(EdusApi.studentFeesAddPayment(invoiceId)),
           headers: Utils.setHeader(userController.token.toString()));
 //print(InfixApi.studentFeesAddPayment(invoiceId));
 //print(Utils.setHeader(userController.token.toString()));
@@ -387,7 +387,7 @@ print(response.statusCode);
     try {
       isFeesLoading(true);
       final response = await http.get(
-          Uri.parse(InfixApi.feesRecordList + "/$studentId/$recordId"),
+          Uri.parse(EdusApi.feesRecordList + "/$studentId/$recordId"),
           headers: Utils.setHeader(userController.token.value.toString()));
 
       if (response.statusCode == 200) {

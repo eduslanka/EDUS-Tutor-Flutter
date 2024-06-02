@@ -174,7 +174,7 @@ class _AddDormitoryState extends State<AddDormitory> {
 
     response = await dio
         .post(
-      InfixApi.adminAddDormitory,
+      EdusApi.adminAddDormitory,
       data: formData,
       options: Options(
         headers: {

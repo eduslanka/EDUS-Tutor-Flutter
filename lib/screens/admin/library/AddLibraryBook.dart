@@ -414,7 +414,7 @@ class _AddAdminBookState extends State<AddAdminBook> {
   }
 
   Future<AdminSubjectList> getAllSubject() async {
-    final response = await http.get(Uri.parse(InfixApi.subjectList),
+    final response = await http.get(Uri.parse(EdusApi.subjectList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -426,7 +426,7 @@ class _AddAdminBookState extends State<AddAdminBook> {
   }
 
   Future<AdminCategoryList> getAllCategory() async {
-    final response = await http.get(Uri.parse(InfixApi.bookCategory),
+    final response = await http.get(Uri.parse(EdusApi.bookCategory),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -473,7 +473,7 @@ class _AddAdminBookState extends State<AddAdminBook> {
     });
     response = await dio
         .post(
-      InfixApi.adminAddBook,
+      EdusApi.adminAddBook,
       data: formData,
       options: Options(
         headers: {

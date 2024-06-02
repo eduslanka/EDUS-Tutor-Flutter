@@ -52,7 +52,7 @@ class ChatOpenController extends GetxController {
       isLoading(true);
       await getIdToken().then((value) async {
         final response = await http.get(
-            Uri.parse(InfixApi.getChatOpen + "/$userId"),
+            Uri.parse(EdusApi.getChatOpen + "/$userId"),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
           var jsonData = jsonDecode(response.body);
@@ -115,8 +115,8 @@ class ChatOpenController extends GetxController {
       final response = await http.post(
         Uri.parse(
           isGroup
-              ? InfixApi.chatGroupForwardMessage
-              : InfixApi.chatSingleForwardMessage,
+              ? EdusApi.chatGroupForwardMessage
+              : EdusApi.chatSingleForwardMessage,
         ),
         body: jsonEncode(data),
         headers: Utils.setHeader(_token.value.toString()),
@@ -139,7 +139,7 @@ class ChatOpenController extends GetxController {
     try {
       final response = await http.get(
         Uri.parse(
-          InfixApi.chatUserBlockAction + "/$action/$userId",
+          EdusApi.chatUserBlockAction + "/$action/$userId",
         ),
         headers: Utils.setHeader(_token.value.toString()),
       );

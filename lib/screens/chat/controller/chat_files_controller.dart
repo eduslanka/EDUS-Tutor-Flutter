@@ -27,12 +27,12 @@ class ChatFilesController extends GetxController {
 
   Future<ChatFilesModel> getSingleFiles() async {
     // Logger.warn(InfixApi.chatFiles + "/$type/$chatId");
-    debugPrint(InfixApi.chatFiles + "/$type/$chatId");
+    debugPrint(EdusApi.chatFiles + "/$type/$chatId");
     try {
       isLoading(true);
       await getIdToken().then((value) async {
         final response = await http.get(
-            Uri.parse(InfixApi.chatFiles + "/$type/$chatId"),
+            Uri.parse(EdusApi.chatFiles + "/$type/$chatId"),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
           var jsonData = jsonDecode(response.body);

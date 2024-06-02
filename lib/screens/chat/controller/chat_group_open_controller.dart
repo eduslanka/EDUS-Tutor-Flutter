@@ -66,7 +66,7 @@ class ChatGroupOpenController extends GetxController {
     ChatGroupOpenModel? sourceData;
     try {
       final result = await http.get(
-        Uri.parse("${InfixApi.chatGroupOpen}/$groupId"),
+        Uri.parse("${EdusApi.chatGroupOpen}/$groupId"),
         headers: Utils.setHeader(token.toString()),
       );
       if (result.statusCode == 200) {
@@ -74,7 +74,7 @@ class ChatGroupOpenController extends GetxController {
 
         sourceData = ChatGroupOpenModel.fromJson(resultData);
 
-        print("Url : ${Uri.parse("${InfixApi.chatGroupOpen}/$groupId")}");
+        print("Url : ${Uri.parse("${EdusApi.chatGroupOpen}/$groupId")}");
         debugPrint("MY ROLE => ${sourceData.group?.toJson().toString()}");
 
         chatGroupModel.value = sourceData;
@@ -134,7 +134,7 @@ class ChatGroupOpenController extends GetxController {
       };
 
       final response = await http.post(
-        Uri.parse(InfixApi.chatGroupSetReadOnly),
+        Uri.parse(EdusApi.chatGroupSetReadOnly),
         body: jsonEncode(jsonData),
         headers: Utils.setHeader(_token.toString()),
       );
@@ -164,7 +164,7 @@ class ChatGroupOpenController extends GetxController {
 
 
       final response = await http.post(
-        Uri.parse(InfixApi.chatGroupAssignRole),
+        Uri.parse(EdusApi.chatGroupAssignRole),
         body: jsonEncode(jsonData),
         headers: Utils.setHeader(_token.toString()),
       );
@@ -184,7 +184,7 @@ class ChatGroupOpenController extends GetxController {
   Future deleteChatGroup(groupId) async {
     try {
       await getIdToken().then((value) async {
-        final response = await http.post(Uri.parse(InfixApi.chatGroupDelete),
+        final response = await http.post(Uri.parse(EdusApi.chatGroupDelete),
             headers: Utils.setHeader(_token.toString()),
             body: jsonEncode(
               {
@@ -219,7 +219,7 @@ class ChatGroupOpenController extends GetxController {
 
 
       final response = await http.post(
-        Uri.parse(InfixApi.groupRemovePeople),
+        Uri.parse(EdusApi.groupRemovePeople),
         body: jsonEncode(jsonData),
         headers: Utils.setHeader(_token.toString()),
       );
@@ -247,7 +247,7 @@ class ChatGroupOpenController extends GetxController {
 
 
       final response = await http.post(
-        Uri.parse(InfixApi.groupAddPeople),
+        Uri.parse(EdusApi.groupAddPeople),
         body: jsonEncode(jsonData),
         headers: Utils.setHeader(_token.toString()),
       );
@@ -275,7 +275,7 @@ class ChatGroupOpenController extends GetxController {
 
 
       final response = await http.post(
-        Uri.parse(InfixApi.chatGroupLeave),
+        Uri.parse(EdusApi.chatGroupLeave),
         body: jsonEncode(jsonData),
         headers: Utils.setHeader(_token.toString()),
       );
@@ -300,8 +300,8 @@ class ChatGroupOpenController extends GetxController {
       final response = await http.post(
         Uri.parse(
           isGroup
-              ? InfixApi.chatGroupForwardMessage
-              : InfixApi.chatSingleForwardMessage,
+              ? EdusApi.chatGroupForwardMessage
+              : EdusApi.chatSingleForwardMessage,
         ),
         body: jsonEncode(data),
         headers: Utils.setHeader(token.value.toString()),

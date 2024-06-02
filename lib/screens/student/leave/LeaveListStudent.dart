@@ -643,7 +643,7 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
   }
 
   Future<StudentMyLeavesList> getMyLeaves(var id) async {
-    final response = await http.get(Uri.parse(InfixApi.studentApplyLeave(id)),
+    final response = await http.get(Uri.parse(EdusApi.studentApplyLeave(id)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -654,7 +654,7 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
   }
 
   Future<LeaveAdminList> getApprovedLeaves(var id) async {
-    final response = await http.get(Uri.parse(InfixApi.approvedLeaves(id)),
+    final response = await http.get(Uri.parse(EdusApi.approvedLeaves(id)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -666,7 +666,7 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
 
   Future<LeaveAdminList>? getPendingLeaves(var id, purpose) async {
     final response = await http.get(
-        Uri.parse(InfixApi.pendingLeaves(id, purpose)),
+        Uri.parse(EdusApi.pendingLeaves(id, purpose)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -677,7 +677,7 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
   }
 
   Future<LeaveAdminList> getRejectedLeaves(var id) async {
-    final response = await http.get(Uri.parse(InfixApi.rejectedLeaves(id)),
+    final response = await http.get(Uri.parse(EdusApi.rejectedLeaves(id)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);

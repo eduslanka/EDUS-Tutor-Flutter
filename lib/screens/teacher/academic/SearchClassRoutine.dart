@@ -236,7 +236,7 @@ class _SearchRoutineScreenState extends State<SearchRoutineScreen> {
 
   Future getAllClass(dynamic id) async {
 
-    final response = await http.get(Uri.parse(InfixApi.getClassById(id)),
+    final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -255,7 +255,7 @@ class _SearchRoutineScreenState extends State<SearchRoutineScreen> {
 
   Future<SectionList> getAllSection(dynamic id, dynamic classId) async {
     final response = await http.get(
-        Uri.parse(InfixApi.getSectionById(id, classId)),
+        Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

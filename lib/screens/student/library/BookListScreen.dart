@@ -71,7 +71,7 @@ class _BookListState extends State<BookListScreen> {
   }
 
   Future<BookList> getAllBooks() async {
-    final response = await http.get(Uri.parse(InfixApi.bookList),
+    final response = await http.get(Uri.parse(EdusApi.bookList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

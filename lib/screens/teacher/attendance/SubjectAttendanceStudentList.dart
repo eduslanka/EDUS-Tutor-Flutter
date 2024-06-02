@@ -304,7 +304,7 @@ class _SubjectStudentListAttendanceState
 
   Future<SubjectAttendanceList> getAttendance() async {
     final response = await http.get(
-        Uri.parse(InfixApi.subjectattendanceCheck(
+        Uri.parse(EdusApi.subjectattendanceCheck(
             widget.date ?? '', classCode, sectionCode, subjectCode)),
         headers: Utils.setHeader(token ?? ''));
     if (response.statusCode == 200) {
@@ -347,7 +347,7 @@ class _SubjectStudentListAttendanceState
 
   void sentNotificationToSection() async {
     final response = await http.get(Uri.parse(
-        InfixApi.sentNotificationToSection('Attendance', 'Attendance sunmitted',
+        EdusApi.sentNotificationToSection('Attendance', 'Attendance sunmitted',
             '$classCode', '$sectionCode')));
     if (response.statusCode == 200) {}
   }
@@ -357,7 +357,7 @@ class _SubjectStudentListAttendanceState
       isLoading = true;
     });
     final response = await http.post(
-        Uri.parse(InfixApi.subjectattendanceDefaultSent),
+        Uri.parse(EdusApi.subjectattendanceDefaultSent),
         headers: Utils.setHeader(token ?? ''),
         body: jsonEncode(data));
     if (response.statusCode == 200) {

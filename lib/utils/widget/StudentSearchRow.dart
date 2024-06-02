@@ -39,7 +39,7 @@ class _StudentRowState extends State<StudentRow> {
   Widget build(BuildContext context) {
     String image = student.photo == null || student.photo == ''
         ? '${AppConfig.domainName}/public/uploads/staff/demo/staff.jpg'
-        : InfixApi.root + '${student.photo}';
+        : EdusApi.root + '${student.photo}';
     return InkWell(
       onTap: () {
         if (status == 'attendance') {

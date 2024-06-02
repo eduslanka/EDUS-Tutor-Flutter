@@ -35,7 +35,7 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
   }
 
   Future<FeeGroupList> getFeesGroups() async {
-    final response = await http.get(Uri.parse(InfixApi.adminFeeList),
+    final response = await http.get(Uri.parse(EdusApi.adminFeeList),
         headers: Utils.setHeader(_token.toString()));
 
 
@@ -93,7 +93,7 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
                         IconButton(
                           onPressed: () async{
                             final response = await http.post(
-                              Uri.parse(InfixApi.adminFeesGroupDelete),
+                              Uri.parse(EdusApi.adminFeesGroupDelete),
                               headers: Utils.setHeader(_token ?? ''),
                               body: jsonEncode({
                                 'id': feeGroup.id,
@@ -184,7 +184,7 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
                               ),
                               onPressed: () async {
                                 final response = await http.post(
-                                  Uri.parse(InfixApi.adminFeesGroupStore),
+                                  Uri.parse(EdusApi.adminFeesGroupStore),
                                   headers: Utils.setHeader(_token ?? ''),
                                   body: jsonEncode({
                                     'name': titleController?.text,
@@ -278,7 +278,7 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
                               ),
                               onPressed: () async {
                                 final response = await http.post(
-                                  Uri.parse(InfixApi.adminFeesGroupUpdate),
+                                  Uri.parse(EdusApi.adminFeesGroupUpdate),
                                   headers: Utils.setHeader(_token ?? ''),
                                   body: jsonEncode({
                                     'name': titleController?.text,

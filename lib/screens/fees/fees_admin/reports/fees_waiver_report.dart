@@ -24,7 +24,7 @@ class _AdminFeesWaiverReportState extends State<AdminFeesWaiverReport> {
   Future<FeeWaiverReportModel>? searchData;
 
   Future<FeeWaiverReportModel> getSearchData(Map data) async {
-    final response = await http.post(Uri.parse(InfixApi.adminFeesWaiverSearch),
+    final response = await http.post(Uri.parse(EdusApi.adminFeesWaiverSearch),
         body: jsonEncode(data), headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
