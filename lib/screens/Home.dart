@@ -349,9 +349,7 @@ class _HomeState extends State<Home> {
                                   .titleMedium
                                   ?.copyWith(color: Colors.white, fontSize: 15),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
+                           
                           ],
                         ),
                       ),
