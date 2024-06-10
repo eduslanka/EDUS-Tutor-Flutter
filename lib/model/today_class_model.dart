@@ -64,7 +64,7 @@ class TodayClassResponse {
   final now = DateTime.now();
   final dayName = DateFormat('EEEE').format(now);
   print(dayName);
-    var classesJson =json['data']['today_class'] !=[]? json['data']['today_class'] as List:[] ;
+    var classesJson =json['data']['today_class'] !=[]? json['data']['today_class'][dayName] as List:[] ;
     List<TodayClass> classesList =
         classesJson.map((i) => TodayClass.fromJson(i)).toList();
 

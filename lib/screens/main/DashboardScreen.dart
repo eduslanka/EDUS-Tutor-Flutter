@@ -167,7 +167,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       : DBStudentRoutine(
                           id: widget.role == "3"
                               ? widget.childUID.toString()
-                              : _id.toString(),
+                              : _id.toString(), isHome: false,
                         ),
                   widget.role == "4"
                       ? DBTeacherHW(
