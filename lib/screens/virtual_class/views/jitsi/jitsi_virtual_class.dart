@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:edus_tutor/screens/virtual_class/views/jitsi/JitsiMeetClass.dart';
 import 'package:edus_tutor/utils/StudentRecordWidget.dart';
 import 'package:edus_tutor/utils/model/StudentRecord.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +12,6 @@ import '../../../../controller/user_controller.dart';
 import '../../../../utils/CustomAppBarWidget.dart';
 import '../../../../utils/Utils.dart';
 import '../../../../utils/apis/Apis.dart';
-import '../../../../utils/widget/ScaleRoute.dart';
 import '../../models/virtual_class_model.dart';
 
 class JitsiVirtualClass extends StatefulWidget {
@@ -265,15 +263,15 @@ class JitsiMeetingRow extends StatelessWidget {
                   onPressed: () async {
                     if (meeting.status == "join" ||
                         meeting.status == 'started') {
-                      Navigator.push(
-                          context,
-                          ScaleRoute(
-                              page: JitsiMeetClass(
-                            meetingId: meeting.meetingId,
-                            meetingSubject: meeting.topic,
-                            userName: "",
-                            userEmail: "",
-                          )));
+                      // Navigator.push(
+                      //     context,
+                      //     ScaleRoute(
+                      //         page: JitsiMeetClass(
+                      //       meetingId: meeting.meetingId,
+                      //       meetingSubject: meeting.topic,
+                      //       userName: "",
+                      //       userEmail: "",
+                      //     )));
                     }
                   },
                 ),
