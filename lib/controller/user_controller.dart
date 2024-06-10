@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:get/get.dart';
@@ -5,6 +6,8 @@ import 'package:edus_tutor/utils/Utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/model/StudentRecord.dart';
+
+import '../model/class_list_model.dart';
 
 class UserController extends GetxController {
   final Rx<int> _studentId = 0.obs;
@@ -30,7 +33,9 @@ class UserController extends GetxController {
   Rx<StudentRecords> get studentRecord => _studentRecord;
 
   Rx<Record> selectedRecord = Record().obs;
-
+final Rx<ClassListResponse> _classListResponse=ClassListResponse(success: false, data: ClassListData(classLists: []), message: '',).obs;
+ Rx<ClassListResponse> get classListResponse=> _classListResponse;
+ 
   Future getStudentRecord() async {
     log('get record ${_studentId.value}');
     try {
@@ -61,7 +66,24 @@ class UserController extends GetxController {
       throw Exception('failed to load $e');
     }
   }
+  Future fetchTodayClasses()async{
+   try {
+   final  response = await http.post(
+      Uri.parse(EdusApi.classList),
+      headers: Utils.setHeader(_token.toString()),
+    );
+    print(EdusApi.todayClass);
 
+    if (response.statusCode == 200) {
+      
+  classListResponse.value=ClassListResponse.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load today classes: ${response.body} ${response.statusCode}');
+    }
+  } catch (e) {
+    throw Exception('Failed to load today classes: $e');
+  }
+}
   Future getIdToken() async {
     await Utils.getStringValue('token').then((value) async {
       _token.value = value ?? '';

@@ -1,55 +1,53 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 // Project imports:
-import 'package:edus_tutor/config/app_config.dart';
 import 'package:edus_tutor/controller/user_controller.dart';
 import 'package:edus_tutor/utils/FunctinsData.dart';
 import 'package:edus_tutor/utils/StudentRecordWidget.dart';
 import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
-import 'package:edus_tutor/utils/model/Routine.dart';
 import 'package:edus_tutor/utils/model/StudentRecord.dart';
 import 'package:edus_tutor/utils/server/LogoutService.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
+import '../../../model/weekly_class_model.dart';
 
-// ignore: must_be_immutable
 class DBStudentRoutine extends StatefulWidget {
-  String? id;
+  final String? id;
 
-  DBStudentRoutine({Key? key, this.id}) : super(key: key);
+  const DBStudentRoutine({Key? key, this.id}) : super(key: key);
 
   @override
-  State<DBStudentRoutine> createState() => _DBStudentRoutineState();
+  _DBStudentRoutineState createState() => _DBStudentRoutineState();
 }
 
-class _DBStudentRoutineState extends State<DBStudentRoutine>
-    with SingleTickerProviderStateMixin {
+class _DBStudentRoutineState extends State<DBStudentRoutine> with SingleTickerProviderStateMixin {
   TabController? _tabController;
   final UserController _userController = Get.put(UserController());
   List<String> weeks = AppFunction.weeks;
   var _token;
-  Future<Routine>? routine;
+  Future<WeeklyClassResponse>? routine;
 
-  Future<Routine> getRoutine(int recordId) async {
+  Future<WeeklyClassResponse> getRoutine(int classId,int sectionId) async {
     try {
-      final response = await http.get(
-        Uri.parse(EdusApi.routineView(
-          widget.id,
-          "student",
-          recordId: recordId,
-        )),
-        headers: Utils.setHeader(
-          _token.toString(),
-        ),
+      final response = await http.post(
+        Uri.parse(EdusApi.routineView(widget.id, "student", recordId: classId)),
+        headers: Utils.setHeader(_token.toString()),
+        body: jsonEncode({
+          'class_id': classId,
+          'section_id': sectionId,
+        }),
       );
+      print(response.body);
+    //  print(EdusApi.routineView(widget.id, "student", recordId: sectionId));
       if (response.statusCode == 200) {
-        var data = routineFromJson(response.body);
+        var jsonResponse = json.decode(response.body);
+        var data = WeeklyClassResponse.fromJson(jsonResponse);
         print('Response: ${response.body}');
         return data;
       } else {
@@ -61,7 +59,8 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
   }
 
   int? initialIndex = 0;
-  getInitialDay() {
+
+  void getInitialDay() {
     DateTime now = DateTime.now();
     final today = DateFormat('EEEE').format(now);
     setState(() {
@@ -94,20 +93,17 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
   @override
   void initState() {
     getInitialDay();
-    _tabController = TabController(
-        length: weeks.length, initialIndex: initialIndex ?? 0, vsync: this);
+    _tabController = TabController(length: weeks.length, initialIndex: initialIndex ?? 0, vsync: this);
     super.initState();
   }
 
   @override
   void didChangeDependencies() async {
-    _userController.selectedRecord.value =
-        _userController.studentRecord.value.records?.first ?? Record();
+    _userController.selectedRecord.value = _userController.studentRecord.value.records?.first ?? Record();
     await Utils.getStringValue('token').then((value) {
       setState(() {
         _token = value ?? '';
-        routine =
-            getRoutine(_userController.studentRecord.value.records?.first.id ?? 0);
+        routine = getRoutine(_userController.studentRecord.value.records?[0].classId??0,_userController.studentRecord.value.records?[0].sectionId??0);
       });
     });
     super.didChangeDependencies();
@@ -124,44 +120,28 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
           automaticallyImplyLeading: false,
           flexibleSpace: Container(
             padding: EdgeInsets.only(top: 20.h),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppConfig.appToolbarBackground),
-                fit: BoxFit.cover,
-              ),
-              color: Color(0xff053EFF),
-            ),
+            decoration: BoxDecoration(color: Color(0xff053EFF)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                Container(
-                  width: 25.w,
-                ),
+                Container(width: 25.w),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 0.0),
                     child: Text(
                       "Routine".tr,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(fontSize: 18.sp, color: Colors.white),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.sp, color: Colors.white),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5),
                 IconButton(
                   onPressed: () {
                     Get.dialog(LogoutService().logoutDialog());
                   },
-                  icon: Icon(
-                    Icons.exit_to_app,
-                    size: 25.sp,
-                  ),
+                  icon: Icon(Icons.exit_to_app, size: 25.sp),
                 ),
               ],
             ),
@@ -179,27 +159,21 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
             StudentRecordWidget(
               onTap: (Record record) {
                 _userController.selectedRecord.value = record;
-                setState(
-                  () {
-                    routine = getRoutine(record.id ?? 0 ?? 0);
-                  },
-                );
+                setState(() {
+                  routine = getRoutine(record.classId ?? 0,record.sectionId??0);
+                });
               },
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Expanded(
-              child: FutureBuilder<Routine>(
+              child: FutureBuilder<WeeklyClassResponse>(
                 future: routine,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CupertinoActivityIndicator(),
-                    );
+                    return const Center(child: CupertinoActivityIndicator());
                   } else {
                     if (snapshot.hasData) {
-                      if (snapshot.data!.classRoutines!.isNotEmpty) {
+                      if (snapshot.data!.data.weeklyClass.isNotEmpty) {
                         return Column(
                           children: [
                             PreferredSize(
@@ -208,14 +182,15 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                                 isScrollable: true,
                                 controller: _tabController,
                                 indicator: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(2.0),
-                                    gradient: const LinearGradient(
-                                      colors: [
-                                        Colors.lightBlue,
-                                        Color(0xff053EFF),
-                                      ],
-                                    )),
+                                  borderRadius: BorderRadius.circular(2.0),
+                                  gradient: const LinearGradient(
+                                    colors: [Colors.lightBlue, Color(0xff053EFF)],
+                                  ),
+                                ),
                                 labelColor: Colors.white,
+                                onTap: (index){ setState(() {
+                  routine = getRoutine( _userController.selectedRecord.value.classId ?? 0, _userController.selectedRecord.value.sectionId??0);
+                });},
                                 unselectedLabelColor: const Color(0xFF415094),
                                 indicatorSize: TabBarIndicatorSize.tab,
                                 automaticIndicatorColorAdjustment: true,
@@ -223,278 +198,213 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                                   weeks.length,
                                   (index) => Tab(
                                     height: 24,
-                                    text:
-                                        weeks[index].substring(0, 3).toUpperCase(),
+                                    text: weeks[index].substring(0, 3).toUpperCase(),
                                   ),
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 20,
-                            ),
+                            const SizedBox(height: 20),
                             Expanded(
-                                child: PreferredSize(
-                              preferredSize: const Size.fromHeight(0),
-                              child: TabBarView(
-                                controller: _tabController,
-                                children: List.generate(weeks.length, (index) {
-                                  List<ClassRoutine>? classRoutines = snapshot
-                                      .data?.classRoutines
-                                      ?.where((element) =>
-                                          element.day == weeks[index])
-                                      .toList();
+                              child: PreferredSize(
+                                preferredSize: const Size.fromHeight(0),
+                                child: TabBarView(
+                                  controller: _tabController,
+                                  children: List.generate(
+                                    weeks.length,
+                                    (index) {
+                                      Map<String, List<ClassDetails>> classRoutines = snapshot.data!.data.weeklyClass;
 
-                                  return classRoutines!.isEmpty
-                                      ? Utils.noDataWidget()
-                                      : Container(
-                                          margin: const EdgeInsets.only(bottom: 10),
-                                          child: ListView.separated(
-                                            physics: const BouncingScrollPhysics(),
-                                            itemCount: classRoutines.length,
-                                            shrinkWrap: true,
-                                            separatorBuilder: (context, index) {
-                                              return Container(
-                                                height: 0.2,
-                                                margin: const EdgeInsets.symmetric(
-                                                    vertical: 10),
-                                                decoration: const BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                      begin:
-                                                          Alignment.centerRight,
-                                                      end: Alignment.centerLeft,
-                                                      colors: [
-                                                        Color(0xff053EFF),
-                                                        Color(0xff053EFF)
-                                                      ]),
-                                                ),
-                                              );
-                                            },
-                                            itemBuilder: (context, rowIndex) {
-
-                                              if(classRoutines[rowIndex].classRoutineBreak == "Yes"){
-                                                return Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
-                                                      children: [
-                                                        Text('Time'.tr + ":",
-                                                            style: Theme.of(
-                                                                context)
-                                                                .textTheme
-                                                                .headlineMedium
-                                                                ?.copyWith(
-                                                                fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                        const SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        Expanded(
-                                                          child: Text(
-                                                              classRoutines[rowIndex]
-                                                                  .startTime !=
-                                                                  null ||
-                                                                  classRoutines[rowIndex]
-                                                                      .startTime !=
-                                                                      null
-                                                                  ? '${classRoutines[rowIndex].startTime}' + ' - ' + '${classRoutines[rowIndex].endTime}'
-                                                                  : "",
-                                                              style: Theme.of(
-                                                                  context)
-                                                                  .textTheme
-                                                                  .headlineMedium
-                                                                  ?.copyWith(
-                                                                  fontWeight:
-                                                                  FontWeight
-                                                                      .normal)),
-                                                        ),
-                                                      ],
+                                      return classRoutines.isEmpty
+                                          ? Utils.noDataWidget()
+                                          : Container(
+                                              margin: const EdgeInsets.only(bottom: 10),
+                                              child: ListView.separated(
+                                                physics: const BouncingScrollPhysics(),
+                                                itemCount: classRoutines[weeks[_tabController!.index]]?.length??0,
+                                                shrinkWrap: true,
+                                                separatorBuilder: (context, index) {
+                                                  return Container(
+                                                    height: 0.2,
+                                                    margin: const EdgeInsets.symmetric(vertical: 10),
+                                                    decoration: const BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        begin: Alignment.centerRight,
+                                                        end: Alignment.centerLeft,
+                                                        colors: [Color(0xff053EFF), Color(0xff053EFF)],
+                                                      ),
                                                     ),
-                                                    SizedBox(height: 10,),
-                                                    Text("Break Time",
-                                                        style: Theme.of(
-                                                            context)
-                                                            .textTheme
-                                                            .headlineMedium
-                                                            ?.copyWith(
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .bold)),
-                                                  ],
-                                                );
-                                              }
-                                              return Column(
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Time'.tr + ":",
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .headlineMedium
-                                                              ?.copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold)),
-                                                      const SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      Expanded(
-                                                        child: Text(
-                                                            classRoutines[rowIndex]
-                                                                            .startTime !=
-                                                                        null ||
-                                                                    classRoutines[rowIndex]
-                                                                            .startTime !=
-                                                                        null
-                                                                ? '${classRoutines[rowIndex].startTime}' + ' - ' + '${classRoutines[rowIndex].endTime}'
-                                                                : "",
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .headlineMedium
-                                                                ?.copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Subject'.tr + ":",
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .headlineMedium
-                                                              ?.copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold)),
-                                                      const SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      Expanded(
-                                                        child: Text(
-                                                            classRoutines[
-                                                                        rowIndex]
-                                                                    .subject ??
-                                                                "",
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .headlineMedium
-                                                                ?.copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Room'.tr + ":",
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .headlineMedium
-                                                              ?.copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold)),
-                                                      const SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      Expanded(
-                                                        child: Text(
-                                                            classRoutines[
-                                                                        rowIndex]
-                                                                    .room ??
-                                                                "",
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .headlineMedium
-                                                                ?.copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('Teacher'.tr + ":",
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .headlineMedium
-                                                              ?.copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold)),
-                                                      const SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      Expanded(
-                                                        child: Text(
-                                                            classRoutines[
-                                                                        rowIndex]
-                                                                    .teacher ??
-                                                                "",
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .headlineMedium
-                                                                ?.copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal)),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                  );
+                                                },
+                                                itemBuilder: (context, rowIndex) {
 
-                                                ],
-                                              );
-                                            },
-                                          ),
-                                        );
-                                }),
+
+                                                 
+                                                  final classDetail= classRoutines[weeks[_tabController!.index]]?[rowIndex];
+                                                  // if (classRoutines[rowIndex]!.classRoutineBreak == "Yes") {
+                                                  //   return Column(
+                                                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                                                  //     children: [
+                                                  //       Row(
+                                                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                                                  //         children: [
+                                                  //           Text(
+                                                  //             'Time'.tr + ":",
+                                                  //             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                  //                   fontWeight: FontWeight.bold,
+                                                  //                 ),
+                                                  //           ),
+                                                  //           const SizedBox(width: 5),
+                                                  //           Expanded(
+                                                  //             child: Text(
+                                                  //               classRoutines[rowIndex].startTime != null
+                                                  //                   ? '${classRoutines[rowIndex].startTime} - ${classRoutines[rowIndex].endTime}'
+                                                  //                   : "",
+                                                  //               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                  //                     fontWeight: FontWeight.normal,
+                                                  //                   ),
+                                                  //             ),
+                                                  //           ),
+                                                  //         ],
+                                                  //       ),
+                                                  //       const SizedBox(height: 10),
+                                                  //       Text(
+                                                  //         "Break Time",
+                                                  //         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                  //               fontWeight: FontWeight.bold,
+                                                  //             ),
+                                                  //       ),
+                                                  //     ],
+                                                  //   );
+                                                  // }
+                                               return  classDetail?.topic==null?  Utils.noDataWidget():  Column(
+                                                    children: [
+                                                      Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text(
+                                                            'Time'.tr + ":",
+                                                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                                  fontWeight: FontWeight.bold,
+                                                                ),
+                                                          ),
+                                                          const SizedBox(width: 5),
+                                                          Expanded(
+                                                            child: Text(
+                                                              classDetail?.startTime != null
+                                                                  ? '${classDetail?.startTime} - ${classDetail?.endTime}'
+                                                                  : "",
+                                                              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                                    fontWeight: FontWeight.normal,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(height: 10),
+                                                      Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text(
+                                                            'Topic'.tr + ":",
+                                                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                                  fontWeight: FontWeight.bold,
+                                                                ),
+                                                          ),
+                                                          const SizedBox(width: 5),
+                                                          Expanded(
+                                                            child: Text(
+                                                              classDetail?.topic ??''
+                                                               ,
+                                                              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                                    fontWeight: FontWeight.normal,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(height: 10),
+                                                      Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text(
+                                                            'Status'.tr + ":",
+                                                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                                  fontWeight: FontWeight.bold,
+                                                                ),
+                                                          ),
+                                                          const SizedBox(width: 5),
+                                                          Expanded(
+                                                            child: Text(
+                                                             classDetail?.status??'',
+                                                              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                                    fontWeight: FontWeight.normal,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(height: 10),
+                                                      Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text(
+                                                            'Teacher'.tr + ":",
+                                                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                                  fontWeight: FontWeight.bold,
+                                                                ),
+                                                          ),
+                                                          const SizedBox(width: 5),
+                                                          Expanded(
+                                                            child: Text(
+                                                              classDetail?.teacher??'',
+                                                              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                                    fontWeight: FontWeight.normal,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(height: 10),
+                                                      // Row(
+                                                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                                                      //   children: [
+                                                      //     Text(
+                                                      //       'Resheduled'.tr + ":",
+                                                      //       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                      //             fontWeight: FontWeight.bold,
+                                                      //           ),
+                                                      //     ),
+                                                      //     const SizedBox(width: 5),
+                                                      //     Expanded(
+                                                      //       child: Text(
+                                                      //        classDetail?.cancelOrRescheduleStatus.toString()??'',
+                                                      //         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                      //               fontWeight: FontWeight.normal,
+                                                      //             ),
+                                                      //       ),
+                                                      //     ),
+                                                      //   ],
+                                                      // ),
+                                               
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                            );
+                                    },
+                                  ),
+                                ),
                               ),
-                            ))
+                            ),
                           ],
                         );
                       } else {
-                        return const SizedBox.shrink();
+                        return Utils.noDataWidget();
                       }
+                    } else if (snapshot.hasError) {
+                      return Utils.noDataWidget();
                     } else {
-                      return const Center(
-                        child: CupertinoActivityIndicator(),
-                      );
+                      return Utils.noDataWidget();
                     }
                   }
                 },

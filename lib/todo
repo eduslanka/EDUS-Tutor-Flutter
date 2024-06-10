@@ -11,3 +11,52 @@ student4@demo.com
 student5@demo.com
 
 Default pass : 123456
+
+
+   "today_class":[
+                {
+                    "cancel_or_reschedule_status": "false",
+                    "start_time": "04:35 PM",
+                    "end_time": "06:05 PM",
+                    "topic": "test1",
+                    "teacher": "Saranraj Edvin",
+                    "status": "Closed",
+                    "meet_link": "https://meet.google.com/zng-hzzw-rwo",
+                    "reschedule_date": null,
+                    "reschedule_teacher": null,
+                    "reschedule_start": null,
+                    "reschedule_end": null,
+                    "reschedule_meet_link": null,
+                    "reschedule_reason": null
+                },
+                {
+                    "cancel_or_reschedule_status": "false",
+                    "start_time": "06:04 PM",
+                    "end_time": "06:54 PM",
+                    "topic": "adadasd",
+                    "teacher": "Saranraj Edvin",
+                    "status": "Closed",
+                    "meet_link": "https://meet.google.com/kkd-bxmq-xj",
+                    "reschedule_date": null,
+                    "reschedule_teacher": null,
+                    "reschedule_start": null,
+                    "reschedule_end": null,
+                    "reschedule_meet_link": null,
+                    "reschedule_reason": null
+                },
+                {
+                    "cancel_or_reschedule_status": "false",
+                    "start_time": "08:25 PM",
+                    "end_time": "09:00 PM",
+                    "topic": "dawa",
+                    "teacher": "Saranraj Edvin",
+                    "status": "Closed",
+                    "meet_link": "https://meet.google.com/kkd-bxmq-xj",
+                    "reschedule_date": null,
+                    "reschedule_teacher": null,
+                    "reschedule_start": null,
+                    "reschedule_end": null,
+                    "reschedule_meet_link": null,
+                    "reschedule_reason": null
+                }
+            ],

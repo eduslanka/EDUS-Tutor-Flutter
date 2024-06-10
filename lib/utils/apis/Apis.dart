@@ -14,7 +14,6 @@ class EdusApi {
 
   static String accountDelete = "${baseApi}user_delete";
 
-
   static String uploadContent = baseApi + "teacher-upload-content";
   static String currentPermission = baseApi + "privacy-permission-status";
   static String createVirtualClass = "zoom/create-virtual-class";
@@ -22,7 +21,8 @@ class EdusApi {
   static String zoomMakeMeeting = "zoom-make-meeting";
   static String service = baseApi + 'service/check';
   static String zoomMakeMeetingUrl = "zoom-meeting-room";
-static String todayClass=baseApi+"student-today-class";
+  static String todayClass = baseApi + "student-today-class";
+   static String classList = baseApi + "student-class-list";
   static String login(String email, String password) {
     return baseApi + 'login?email=' + email + '&password=' + password;
   }
@@ -137,7 +137,6 @@ static String todayClass=baseApi+"student-today-class";
   static String deleteContent(dynamic id) {
     return baseApi + "delete-content/$id";
   }
-
 
   static String about = baseApi + "parent-about";
 
@@ -352,12 +351,12 @@ static String todayClass=baseApi+"student-today-class";
 
   static String getMyNotifications(dynamic id) {
     return baseApi + "my-notifications";
-   //return baseApi + "my-notifications";
+    //return baseApi + "my-notifications";
   }
 
   static String readMyNotifications(dynamic userID, notificationID) {
-   // return baseApi + "viewNotification/$userID/$notificationID";
-   return baseApi + "read-notification";
+    // return baseApi + "viewNotification/$userID/$notificationID";
+    return baseApi + "read-notification";
   }
 
   static String readAllNotification(dynamic userID) {
@@ -612,7 +611,8 @@ static String todayClass=baseApi+"student-today-class";
 
   static String routineView(userId, role, {bool? mine, int? recordId}) {
     if (role == "student") {
-      return baseApi + "class-routine-view/$userId/$recordId";
+      //  return baseApi + "class-routine-view/$userId/$recordId";
+      return baseApi + "student-weekly-timetable";
     } else {
       if (mine!) {
         return baseApi + "teacher-routine-view/$userId";
@@ -651,7 +651,7 @@ static String todayClass=baseApi+"student-today-class";
 
   static String feesInvoiceView(int invoiceId) {
     return baseApi + "fees-invoice-view/$invoiceId/view";
-  // return baseApi + "student-fees-all/$invoiceId";
+    // return baseApi + "student-fees-all/$invoiceId";
   }
 
   static String adminFeesBankPaymentList = baseApi + "bank-payment";

@@ -91,10 +91,10 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
                                     child: AutoSizeText(
                                   classes.cancelOrRescheduleStatus == 'false'
                                       ? classes.status
-                                      : classes.cancelOrRescheduleStatus,
+                                      :classes.status=='Join'? classes.status: classes.cancelOrRescheduleStatus,
                                   style:  TextStyle(
                                       color:classes.cancelOrRescheduleStatus == 'false'
-                                      ? classes.status=='Join'?  Colors.white:Colors.black:Colors.red,
+                                      ? classes.status=='Join'?  Colors.white:Colors.black:classes.status=='Join'?Colors.white: Colors.red,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600),
                                   minFontSize: 10,
