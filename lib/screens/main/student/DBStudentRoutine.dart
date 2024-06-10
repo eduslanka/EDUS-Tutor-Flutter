@@ -132,7 +132,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine> with SingleTickerPr
                   child: Padding(
                     padding: const EdgeInsets.only(left: 0.0),
                     child: Text(
-                    widget.isHome?"Classes".tr:  "Routine".tr,
+                    widget.isHome?"Classes".tr:  "TimeTable".tr,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18.sp, color: Colors.white),
                     ),
                   ),

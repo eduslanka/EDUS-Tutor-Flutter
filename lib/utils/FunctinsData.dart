@@ -89,7 +89,7 @@ import '../screens/virtual_class/virtual_class_main.dart';
 
 class AppFunction {
   static var students = [
-    'Class',
+   // 'Class',
     'Notice',
     'Subjects',
     'Study Materials',
@@ -110,7 +110,7 @@ class AppFunction {
     'More',
   ];
   static var studentIcons = [
-    'assets/images/routine.png',
+  //  'assets/images/routine.png',
     'assets/images/notice.png',
     'assets/images/subjects.png',
     'assets/images/downloads.png',
@@ -591,13 +591,13 @@ class AppFunction {
           withNavBar: false,
         );
         break;
-      case 'Class':
-        PersistentNavBarNavigator.pushNewScreen(
-          context,
-          screen: DBStudentRoutine(isHome: true,),
-          withNavBar: false,
-        );
-        break;
+      // case 'Class':
+      //   PersistentNavBarNavigator.pushNewScreen(
+      //     context,
+      //     screen: DBStudentRoutine(isHome: true,),
+      //     withNavBar: false,
+      //   );
+      //  break;
     }
   }
 
