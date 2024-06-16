@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-
+import 'dart:convert';
 
 class TodayClass {
   final String cancelOrRescheduleStatus;
@@ -61,14 +61,19 @@ class TodayClassResponse {
   TodayClassResponse({required this.success, required this.classes});
 
   factory TodayClassResponse.fromJson(Map<String, dynamic> json) {
-  final now = DateTime.now();
-  final dayName = DateFormat('EEEE').format(now);
-  print(dayName);
-    var classesJson =json['data']['today_class'] !=[]? json['data']['today_class'][dayName] as List:[] ;
-    List<TodayClass> classesList =
-        classesJson.map((i) => TodayClass.fromJson(i)).toList();
+    final now = DateTime.now();
+    final dayName = DateFormat('EEEE').format(now);
+    print(dayName);
 
-    return TodayClassResponse(success: json['success'] , classes: classesList);
+    List<TodayClass> classesList = [];
+    if (json['data'] != null && json['data']['today_class'] != null) {
+      for (var dayClasses in json['data']['today_class']) {
+        if (dayClasses != null && dayClasses is List) {
+          classesList = dayClasses.map((i) => TodayClass.fromJson(i)).toList();
+        }
+      }
+    }
+
+    return TodayClassResponse(success: json['success'], classes: classesList);
   }
 }
-

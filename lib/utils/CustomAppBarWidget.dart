@@ -15,7 +15,6 @@ import 'package:edus_tutor/utils/server/LogoutService.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 // Project imports:
-import 'package:edus_tutor/config/app_config.dart';
 import 'package:edus_tutor/main.dart';
 import 'package:edus_tutor/screens/ChangePassword.dart';
 import 'package:edus_tutor/screens/student/Profile.dart';
@@ -628,7 +627,10 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
   Future<String> getImageUrl(String email, String password, String rule) async {
     var image = 'http://saskolhmg.com/images/studentprofile.png';
 
-    var response = await http.get(Uri.parse(EdusApi.login(email, password)),
+    var response =  await http.post(Uri.parse(EdusApi.login),body: {
+      "email":email,
+      "password":password
+    },
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

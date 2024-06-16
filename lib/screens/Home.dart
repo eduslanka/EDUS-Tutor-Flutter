@@ -1064,7 +1064,10 @@ class _HomeState extends State<Home> {
   Future<String> getImageUrl(String email, String password, String rule) async {
     var image = 'http://saskolhmg.com/images/studentprofile.png';
 
-    var response = await http.get(Uri.parse(EdusApi.login(email, password)));
+    var response = await http.post(Uri.parse(EdusApi.login),body: {
+      "email":email,
+      "password":password
+    });
 
     if (response.statusCode == 200) {
       Map user = jsonDecode(response.body) as Map;

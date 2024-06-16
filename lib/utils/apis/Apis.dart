@@ -22,10 +22,13 @@ class EdusApi {
   static String service = baseApi + 'service/check';
   static String zoomMakeMeetingUrl = "zoom-meeting-room";
   static String todayClass = baseApi + "student-today-class";
+  
+  static String todayClassTecher = baseApi + "teacher-today-class";
    static String classList = baseApi + "student-class-list";
-  static String login(String email, String password) {
-    return baseApi + 'login?email=' + email + '&password=' + password;
-  }
+  // static String login(String email, String password) {
+  //   return baseApi + 'login?email=' + email + '&password=' + password;
+  // }
+  static String login =baseApi+"login";
 
   static String getFeesUrl(dynamic id) {
     return baseApi + 'fees-collect-student-wise/$id';
@@ -621,7 +624,7 @@ class EdusApi {
       }
     }
   }
-
+static String studentWeeklyClass= baseApi + "student-weekly-timetable";
   static String generalSettings = baseApi + "general-settings";
 
   static String feesRecordList = baseApi + "student-record-fees-list";

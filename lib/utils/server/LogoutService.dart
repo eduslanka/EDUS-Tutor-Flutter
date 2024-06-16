@@ -36,9 +36,9 @@ class LogoutService {
         ),
       ),
       onPressed: () async {
-        await Utils.getStringValue('token').then((value) {
-          _token = value ?? '';
-        });
+        // await Utils.getStringValue('token').then((value) {
+        //   _token = value ?? '';
+        // });
         Utils.clearAllValue();
 
         Get.offNamedUntil("/", ModalRoute.withName('/'));

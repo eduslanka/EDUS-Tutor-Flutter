@@ -37,9 +37,13 @@ class Login {
     try {
       DIO.Dio dio = DIO.Dio();
       DIO.Response response =
-          await dio.get(EdusApi.login(email, password)).catchError((e) {
+          await dio.post(EdusApi.login, data: {
+        'email': email,
+        'password': password,
+      },).catchError((e) {
         message = DioExceptions.fromDioError(e).toString();
       });
+     // print(EdusApi.login(email, password));
       if (response.statusCode == 200) {
         print('Login Response: ${response.data}');
         var user = response.data;

@@ -48,6 +48,7 @@ class Utils extends GetxController {
 
   static Future<bool> clearAllValue() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+   
     return prefs.clear();
   }
 
