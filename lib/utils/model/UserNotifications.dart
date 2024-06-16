@@ -1,6 +1,6 @@
 class UserNotifications {
   UserNotifications({
-    this.id,
+   required this.id,
     this.date,
     this.message,
     this.url,
@@ -8,7 +8,7 @@ class UserNotifications {
     this.isRead,
   });
 
-  dynamic id;
+  int id;
   DateTime? date;
   String? message;
   String? url;
@@ -21,7 +21,7 @@ class UserNotifications {
     message: json["message"],
     url: json["url"],
     createdAt: DateTime.parse(json["created_at"]),
-    isRead: json["is_read"],
+    isRead: json["is_read"].toString(),
   );
 
   Map<String, dynamic> toJson() => {

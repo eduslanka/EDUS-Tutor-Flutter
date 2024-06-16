@@ -18,20 +18,20 @@ Future<Quote> fetchQuoteOfTheDay() async {
   }
 }
 
-Future<TodayClassResponse> fetchTodayClasses(String token) async {
-  try {
-    final response = await http.get(
-      Uri.parse(EdusApi.todayClass),
-      headers: Utils.setHeader(token),
-    );
-    print(EdusApi.todayClass);
+// Future<TodayClassResponse> fetchTodayClasses(String token) async {
+//   try {
+//     final response = await http.get(
+//       Uri.parse(EdusApi.todayClass),
+//       headers: Utils.setHeader(token),
+//     );
+//     print(EdusApi.todayClass);
 
-    if (response.statusCode == 200) {
-      return TodayClassResponse.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to load today classes: ${response.body} ${response.statusCode}');
-    }
-  } catch (e) {
-    throw Exception('Failed to load today classes: $e');
-  }
-}
+//     if (response.statusCode == 200) {
+//       return TodayClassResponse.fromJson(json.decode(response.body));
+//     } else {
+//       throw Exception('Failed to load today classes: ${response.body} ${response.statusCode}');
+//     }
+//   } catch (e) {
+//     throw Exception('Failed to load today classes: $e');
+//   }
+// }

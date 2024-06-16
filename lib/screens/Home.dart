@@ -395,7 +395,9 @@ class _HomeState extends State<Home> {
       ),
       body: SafeArea(
         child: RefreshIndicator(
-          onRefresh: () async{_systemController.fetchTodayClasses();  },
+          onRefresh: () async{
+           _systemController.getSystemSettings();
+             },
           child: Container(
             color: Color.fromARGB(255, 239, 239, 239),
             child: Obx(() {
@@ -412,7 +414,7 @@ class _HomeState extends State<Home> {
                   
                     QuoteOfTheDayWidget(quote:   _systemController.quote.value),
                     
-                      TodayClassScreen(response: _systemController.todayClassResponse.value,),
+                      TodayClassScreen(studentResponse: _systemController.todayClassResponse.value, rule: _rule??'0', teachersResponse: _systemController.teacherTodayClassResponse.value,),
                     GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),

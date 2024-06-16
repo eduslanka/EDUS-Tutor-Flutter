@@ -9,19 +9,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../model/teacher_today_class_model.dart';
+
 class TodayClassScreen extends StatefulWidget {
-  final TodayClassResponse response;
-  const TodayClassScreen({super.key, required this.response});
+  final TodayClassResponse? studentResponse;
+  final TeacherTodayClassResponse? teachersResponse;
+  final String rule;
+  const TodayClassScreen({super.key,  this.studentResponse, this.teachersResponse, required this.rule});
 
   @override
   State<TodayClassScreen> createState() => _TodayClassScreenState();
 }
 
 class _TodayClassScreenState extends State<TodayClassScreen> {
+  
   @override
   Widget build(BuildContext context) {
+    final classLen= widget.rule=='2'? widget.studentResponse?.classes.length:widget.teachersResponse?.data.todayClass.length;
+   final classes=widget.rule=='2'? widget.studentResponse?.classes:widget.teachersResponse?.data.todayClass;
     return Container(
-      child: widget.response.classes.length == 0
+      child:  classLen==0
           ? Container(
               height: 40,
               child: const Center(
@@ -57,11 +64,20 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ListView.builder(
-                              itemCount: widget.response.classes?.length ?? 0,
+                              itemCount: classLen,
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: ((context, index) {
-                                final classes = widget.response.classes[index];
+                                TodayClass? classes;
+                                TeacherClassDetail? techersClass;
+                                if(widget.rule=='2'){
+   classes = widget.studentResponse?.classes[index];
+                                }else{
+  techersClass=widget.teachersResponse?.data.todayClass[index];
+                                }
+                              
+                               
+                                bool isStudent=widget.rule=='2';
                                 return Padding(
                                   padding: const EdgeInsets.only(
                                       left: 8.0, right: 8, top: 8),
@@ -80,7 +96,7 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
                                           Expanded(
                                             flex: 7,
                                             child: AutoSizeText(
-                                              classes.classSec,
+                                           isStudent?   classes?.classSec??'':techersClass?.classSection??'',
                                               style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 14,
@@ -93,7 +109,7 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
                                           Expanded(
                                             flex: 3,
                                             child: AutoSizeText(
-                                              classes.startTime,
+                                               isStudent?   classes?.startTime??'':techersClass?.startTime??'',
                                               style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 14,
@@ -107,9 +123,18 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
                                             flex: 3,
                                             child: GestureDetector(
                                               onTap: () {
-                                                if (classes.status == 'Join') {
+                                                if(isStudent){
+
+                                                
+                                                if (classes?.status == 'Join') {
                                                   launchUrl(Uri.parse(
-                                                      classes.meetLink));
+                                                      classes?.meetLink??''));
+                                                }
+                                                }else{
+                                                  if (techersClass?.status == 'Join') {
+                                                  launchUrl(Uri.parse(
+                                                      classes?.meetLink??''));
+                                                }
                                                 }
                                               },
                                               child: Container(
@@ -118,7 +143,9 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
                                                 height: 40,
                                                 decoration: BoxDecoration(
                                                     color:
-                                                        classes.status == 'Join'
+                                                      isStudent?  classes?.status == 'Join'
+                                                            ? Utils.baseBlue
+                                                            : Colors.white:techersClass?.status == 'Join'
                                                             ? Utils.baseBlue
                                                             : Colors.white,
                                                     borderRadius:
@@ -130,23 +157,40 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
                                                       screenWidth(60, context),
                                                   child: Center(
                                                     child: AutoSizeText(
-                                                      classes.cancelOrRescheduleStatus ==
+                                                  isStudent?    classes?.cancelOrRescheduleStatus ==
                                                               'false'
-                                                          ? classes.status
-                                                          : classes.status ==
+                                                          ? classes?.status??''
+                                                          : classes?.status ==
                                                                   'Join'
-                                                              ? classes.status
-                                                              : classes
-                                                                  .cancelOrRescheduleStatus,
+                                                              ? classes?.status??''
+                                                              : techersClass
+                                                                  ?.cancelOrRescheduleStatus??'':techersClass?.cancelOrRescheduleStatus ==
+                                                              'false'
+                                                          ? techersClass?.status??''
+                                                          : techersClass?.status ==
+                                                                  'Join'
+                                                              ? techersClass?.status??''
+                                                              : techersClass
+                                                                  ?.cancelOrRescheduleStatus??'',
                                                       style: TextStyle(
-                                                          color: classes
-                                                                      .cancelOrRescheduleStatus ==
+                                                          color: isStudent? classes
+                                                                      ?.cancelOrRescheduleStatus ==
                                                                   'false'
-                                                              ? classes.status ==
+                                                              ? classes?.status ==
                                                                       'Join'
                                                                   ? Colors.white
                                                                   : Colors.black
-                                                              : classes.status ==
+                                                              : techersClass?.status ==
+                                                                      'Join'
+                                                                  ? Colors.white
+                                                                  : Colors.red:classes
+                                                                      ?.cancelOrRescheduleStatus ==
+                                                                  'false'
+                                                              ? techersClass?.status ==
+                                                                      'Join'
+                                                                  ? Colors.white
+                                                                  : Colors.black
+                                                              : techersClass?.status ==
                                                                       'Join'
                                                                   ? Colors.white
                                                                   : Colors.red,

@@ -17,7 +17,7 @@ class SystemController extends GetxController {
   Rx<SystemSettings> systemSettings = SystemSettings().obs;
   Rx<Quote> quote=Quote().obs;
  Rx<TodayClassResponse> todayClassResponse=TodayClassResponse(success: false, classes: []).obs;
-  Rx<TeacherTodayClassResponse> teacherTodayClassResponse=TeacherTodayClassResponse(success: false, classes: []).obs;
+  Rx<TeacherTodayClassResponse> teacherTodayClassResponse=TeacherTodayClassResponse(success: false, data: TodayClassData(todayClass: []), message: '', ).obs;
   Rx<bool> isLoading = false.obs;
 
   final Rx<String> _token = "".obs;
@@ -64,7 +64,6 @@ fetchTeacherTodayClasses();
       throw Exception('failed to load');
     }
   }
-String hardCodeToken='Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmM5YjM5MGY1Njg2NWM0MzllNGJhMDZhZDc3OWM2MGY4ZjM2Y2Y4YTBiNTdhNmMyZTczODhlY2IxOGNhZTBjNzIyNGYyMzhlYjg0Njk3YmUiLCJpYXQiOjE3MTczMjk4OTAuMzU3NDY0LCJuYmYiOjE3MTczMjk4OTAuMzU3NDY3LCJleHAiOjE3NDg4NjU4OTAuMzU0ODYzLCJzdWIiOiIyMyIsInNjb3BlcyI6W119.WsXvgtV9EDLMv8XXPN69jYhdtFJRJm5n1mDxZOP7Qh4cQqXvAJMYhjAh63RAt7KHn6Wj3fhT4QGCMk8Su-_1_1Oqlqq8KT6ByquAQFFIAaB5GsX3WdTswfFTgqR-rGHZHGM1GDD1MlQ7IDdtWUCLCMhS8oNgPim3P0KtarO0a1mNwsZvihe9r8S2dIR367X7qkquzsDZuzdoVLu7n5GPPb-DVMjSj9KkWII3rr3DuPYb-AQApVgaytlj1OdPW6SC-GemYiqVeWhYjfG0Nl1pO3cTFZTFTBNsNGsldGJ6XmaIRuFl9BCxra14WYAAgJUH1ZCmtS_Mw2NPFKD66_vPtHflgF70nRnbcdz8ag2AZB-ZwzTH9pL75cgjsyRYf4WEJRoCuU1NBSDpNjrjwKQvvwc9f8arEp7QRRiVM5pM5wfT2l1B-Ybxl4EM4sdTxsjAH8yiCxJmNX-i32h2_kRCdDZOmJ_yUD8cvCxhtgD6Z37-MEIkoWH3wGXEc325_JfUCZhzI9GI-r7We124xiGHMEinHMstmzBtizTugPfEuGVSGg0rrWXbUIMx4z4Z63F-SA0FS0rndCqa2zyFgb1pRSJT76CrB6Gs-2wjtUgjxN8SaD_GS0AKA1cwQPilL1Edge9vM12CteGryTM4JZ29x5LwN4YyBOW6lbWMaxqY8Aw';
 Future fetchTodayClasses()async{
    try {
  await getSchoolId().then((value) async {

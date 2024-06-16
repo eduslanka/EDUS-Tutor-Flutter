@@ -49,8 +49,10 @@ class NotificationController extends GetxController {
       isLoading(false);
       throw Exception('Failed to load notifications');
     }
-  } catch (e) {
+  } catch (e,t) {
     isLoading(false);
+    print(e);
+    print(t);
     throw Exception(e.toString());
   }
 }

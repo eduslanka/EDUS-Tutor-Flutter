@@ -225,7 +225,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 ),
                                 onTap: () async {
                                   await controller
-                                      .readNotification(item?.id)
+                                      .readNotification(item?.id??0)
                                       .then((value) async {
                                     if (value == true) {
                                       controller.userNotificationList.value
@@ -248,7 +248,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 ),
                                 onTap: () async {
                                   await controller
-                                      .readNotification(item?.id)
+                                      .readNotification(item?.id??0)
                                       .then((value) async {
                                     if (value == true) {
                                       controller.userNotificationList.value
