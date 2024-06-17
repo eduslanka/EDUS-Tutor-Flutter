@@ -625,6 +625,7 @@ class EdusApi {
     }
   }
 static String studentWeeklyClass= baseApi + "student-weekly-timetable";
+static String techersWeeklyClass= baseApi + "teacher-weekly-timetable";
   static String generalSettings = baseApi + "general-settings";
 
   static String feesRecordList = baseApi + "student-record-fees-list";
