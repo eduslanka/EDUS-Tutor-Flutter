@@ -376,7 +376,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                                                                           .start,
                                                                   children: [
                                                                     Text(
-                                                                      'Status'.tr +
+                                                                      'Subject'.tr +
                                                                           ":",
                                                                       style: Theme.of(
                                                                               context)
@@ -393,7 +393,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                                                                     Expanded(
                                                                       child:
                                                                           Text(
-                                                                        classDetail?.status ??
+                                                                        classDetail?.classSection ??
                                                                             '',
                                                                         style: Theme.of(context)
                                                                             .textTheme
