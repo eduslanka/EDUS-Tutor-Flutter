@@ -143,7 +143,7 @@ class AppFunction {
   //  'Library',
     'Homework',
    // 'About',
-    'Class',
+   // 'Class',
     'More',
   ];
 
@@ -157,7 +157,7 @@ class AppFunction {
   //  'assets/images/library.png',
     'assets/images/homework.png',
  //   'assets/images/about.png',
-    'assets/images/myroutine.png',
+  //  'assets/images/myroutine.png',
     'assets/images/addhw.png',
   ];
 
