@@ -25,6 +25,8 @@ import 'package:edus_tutor/screens/parent/ChildDashboardScreen.dart';
 import 'package:edus_tutor/utils/FunctinsData.dart';
 import 'package:edus_tutor/utils/Utils.dart';
 import '../Home.dart';
+import '../teacher/ClassSubjectAttendanceHome.dart';
+import '../teacher/academic/TeacherRoutineScreen.dart';
 import 'teacher/DBTeacherAttendance.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -155,15 +157,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       : Home(widget.titles, widget.images, widget.role),
                   NotificationScreen(_id),
                   widget.role == "4"
-                      ? DashboardTeacherAttendance(AppFunction.attendance, AppFunction.attendanceIcons)
+                      ? StudentSubjectAttendanceHome(isHome: true,)
                       : DBStudentFees(
                           id: widget.role == "3"
                               ? widget.childUID.toString()
                               : _id.toString(),
                         ),
                   widget.role == "4"
-                      ? DBTeacherAcademic(
-                          AppFunction.academics, AppFunction.academicsIcons)
+                      ? TeacherMyRoutineScreen(isHome: true,)
                       : DBStudentRoutine(
                           id: widget.role == "3"
                               ? widget.childUID.toString()
@@ -338,7 +339,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                     icon: widget.role == "4"
                         ? Image.asset(
-                            "assets/images/academics (2).png",
+                            "assets/images/routine (2).png",
                             width: 30.w,
                             height: 30.h,
                             color: Color(0xff053EFF).withOpacity(0.9),
@@ -349,7 +350,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             height: 30.h,
                             color: Color(0xff053EFF).withOpacity(0.9),
                           ),
-                    title: widget.role == "4" ? "Academic".tr : "TimeTable".tr,
+                    title: widget.role == "4" ? "TimeTable".tr : "TimeTable".tr,
                     activeColorPrimary: Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),

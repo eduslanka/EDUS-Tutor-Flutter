@@ -105,7 +105,7 @@ Future fetchTodayClasses()async{
     }
   } catch (e,t) {
     print('trace tree $t');
-    throw Exception('Failed to load today classes: $e');
+    //throw Exception('Failed to load today classes: $e');
   }
 }
 

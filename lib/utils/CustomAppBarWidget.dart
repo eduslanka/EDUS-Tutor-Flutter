@@ -25,9 +25,10 @@ import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 
 // ignore: must_be_immutable
 class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
-  CustomAppBarWidget({Key? key, this.title}) : super(key: key);
+  CustomAppBarWidget({Key? key, this.title,this.isAcadamic}) : super(key: key);
 
   String? title;
+  bool ?isAcadamic;
 
   @override
   _CustomAppBarWidgetState createState() => _CustomAppBarWidgetState();
@@ -806,7 +807,8 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  Material(
+             
+               widget.isAcadamic==true? Container(width: 24,):    Material(
                     color: Colors.transparent,
                     child: SizedBox(
                       height: 70.h,

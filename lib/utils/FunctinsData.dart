@@ -99,7 +99,7 @@ class AppFunction {
     // 'Online Exam',
     // 'Timeline',
     'Attendance',
-    'Leave',
+    //'Leave',
     'Wallet',
 
     //'Teacher',
@@ -122,7 +122,7 @@ class AppFunction {
     // 'assets/images/onlineexam.png',
     'assets/images/attendance.png',
 
-    'assets/images/leave.png',
+ //   'assets/images/leave.png',
 
     //  'assets/images/teacher.png',
     // 'assets/images/library.png',
@@ -134,29 +134,29 @@ class AppFunction {
   ];
 
   static var teachers = [
-    'Students',
-    'Academic',
-    'Attendance',
-    'Leave',
+   // 'Students',
+    'My Routine',
+    'Mark Attendance',
+    //'Leave',
     'Content',
     'Notice',
-    'Library',
+  //  'Library',
     'Homework',
-    'About',
+   // 'About',
     'Class',
     'More',
   ];
 
   static var teachersIcons = [
-    'assets/images/students.png',
+   // 'assets/images/students.png',
     'assets/images/academics.png',
     'assets/images/attendance.png',
-    'assets/images/leave.png',
+  //  'assets/images/leave.png',
     'assets/images/contents.png',
     'assets/images/notice.png',
-    'assets/images/library.png',
+  //  'assets/images/library.png',
     'assets/images/homework.png',
-    'assets/images/about.png',
+ //   'assets/images/about.png',
     'assets/images/myroutine.png',
     'assets/images/addhw.png',
   ];
@@ -840,15 +840,15 @@ class AppFunction {
       case 'Students':
         Navigator.push(context, ScaleRoute(page: StudentSearch()));
         break;
-      case 'Academic':
-        Navigator.push(context,
-            ScaleRoute(page: AcademicHomeScreen(academics, academicsIcons)));
+      case 'My Routine':
+        Navigator.push(
+            context, ScaleRoute(page: const TeacherMyRoutineScreen(isHome: false,)));
         break;
-      case 'Attendance':
+      case 'Mark Attendance':
         Navigator.push(
             context,
             ScaleRoute(
-                page: AttendanceHomeScreen(attendance, attendanceIcons)));
+                page: StudentSubjectAttendanceHome(isHome: false,)));
         break;
       case 'Homework':
         Navigator.push(context,
@@ -915,7 +915,7 @@ class AppFunction {
         break;
       case 'Subject Atten':
         Navigator.push(
-            context, ScaleRoute(page: const StudentSubjectAttendanceHome()));
+            context, ScaleRoute(page: const StudentSubjectAttendanceHome(isHome: false,)));
         break;
       case 'Search Atten':
         Navigator.push(
@@ -949,7 +949,7 @@ class AppFunction {
         break;
       case 'Subject Atten':
         Navigator.push(
-            context, ScaleRoute(page: const StudentSubjectAttendanceHome()));
+            context, ScaleRoute(page: const StudentSubjectAttendanceHome(isHome: false,)));
         break;
       case 'Search Atten':
         Navigator.push(
@@ -980,7 +980,7 @@ class AppFunction {
         break;
       case 'My Routine':
         Navigator.push(
-            context, ScaleRoute(page: const TeacherMyRoutineScreen()));
+            context, ScaleRoute(page: const TeacherMyRoutineScreen(isHome: false,)));
         break;
     }
   }

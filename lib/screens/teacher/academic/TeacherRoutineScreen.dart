@@ -23,7 +23,8 @@ import '../../../model/teachers_weekly_class.dart';
 
 // ignore: must_be_immutable
 class TeacherMyRoutineScreen extends StatefulWidget {
-  const TeacherMyRoutineScreen({Key? key}) : super(key: key);
+  final bool  isHome;
+  const TeacherMyRoutineScreen({Key? key,required this.isHome}) : super(key: key);
 
   @override
   State<TeacherMyRoutineScreen> createState() => _TeacherMyRoutineScreenState();
@@ -65,7 +66,8 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> with Si
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBarWidget(
-        title: "My Routine",
+        isAcadamic: widget.isHome,
+        title: "Time Table",
       ),
       body: routinBody(),
     );

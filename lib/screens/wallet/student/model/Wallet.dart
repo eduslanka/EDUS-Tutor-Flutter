@@ -20,7 +20,7 @@ class Wallet {
   });
 
   String? currencySymbol;
-  num? myBalance;
+  String? myBalance;
   List<PaymentMethod>? paymentMethods;
   List<BankAccount>? bankAccounts;
   List<WalletTransaction>? walletTransactions;
@@ -29,7 +29,7 @@ class Wallet {
 
   factory Wallet.fromJson(Map<String, dynamic> json) => Wallet(
         currencySymbol: json["currencySymbol"],
-        myBalance: json["myBalance"]??0.0,
+        myBalance: json["myBalance"].toString(),
         paymentMethods: List<PaymentMethod>.from(
             json["paymentMethods"].map((x) => PaymentMethod.fromJson(x))),
         bankAccounts: List<BankAccount>.from(

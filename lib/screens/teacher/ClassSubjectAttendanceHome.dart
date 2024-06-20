@@ -22,7 +22,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'attendance/SubjectAttendanceStudentList.dart';
 
 class StudentSubjectAttendanceHome extends StatefulWidget {
-  const StudentSubjectAttendanceHome({Key? key}) : super(key: key);
+final  bool isHome;
+  const StudentSubjectAttendanceHome({Key? key, required this.isHome}) : super(key: key);
 
   @override
   _StudentSubjectAttendanceHomeState createState() =>
@@ -103,6 +104,7 @@ class _StudentSubjectAttendanceHomeState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBarWidget(
+        isAcadamic: widget.isHome,
         title: 'Search Attendance',
       ),
       backgroundColor: Colors.white,

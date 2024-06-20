@@ -393,106 +393,104 @@ class _HomeState extends State<Home> {
           elevation: 0.0,
         ),
       ),
-      body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () async{
-           _systemController.getSystemSettings();
-             },
-          child: Container(
-            color: Color.fromARGB(255, 239, 239, 239),
-            child: Obx(() {
-              if (_systemController.isLoading.value) {
-                return const Center(child: CupertinoActivityIndicator());
-              } else {
-                return ListView(
-                  shrinkWrap: false,
-                  physics: const BouncingScrollPhysics(),
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
+      body: RefreshIndicator(
+        onRefresh: () async{
+         _systemController.getSystemSettings();
+           },
+        child: Container(
+          color: Color.fromARGB(255, 239, 239, 239),
+          child: Obx(() {
+            if (_systemController.isLoading.value) {
+              return const Center(child: CupertinoActivityIndicator());
+            } else {
+              return ListView(
+                shrinkWrap: false,
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                
+                  QuoteOfTheDayWidget(quote:   _systemController.quote.value),
                   
-                    QuoteOfTheDayWidget(quote:   _systemController.quote.value),
-                    
-                      TodayClassScreen(studentResponse: _systemController.todayClassResponse.value, rule: _rule??'0', teachersResponse: _systemController.teacherTodayClassResponse.value,),
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
-                      ),
-                      itemCount: _titles.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                      ),
-                      itemBuilder: (context, index) {
-                        print(_rule);
-                        return CustomWidget(
-                          index: index,
-                          isSelected: currentSelectedIndex == index,
-                          onSelect: () {
-                            setState(() {
-                              currentSelectedIndex = index;
-                              if (_rule == '2') {
-                                AppFunction.getDashboardPage(
-                                  context,
-                                  _titles[index],
-                                  id: _id,
-                                  token: _token,
-                                );
-                              } else if (_rule == '4') {
-                                AppFunction.getTeacherDashboardPage(
+                    TodayClassScreen(studentResponse: _systemController.todayClassResponse.value, rule: _rule??'0', teachersResponse: _systemController.teacherTodayClassResponse.value,),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                    itemCount: _titles.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                    ),
+                    itemBuilder: (context, index) {
+                      print(_rule);
+                      return CustomWidget(
+                        index: index,
+                        isSelected: currentSelectedIndex == index,
+                        onSelect: () {
+                          setState(() {
+                            currentSelectedIndex = index;
+                            if (_rule == '2') {
+                              AppFunction.getDashboardPage(
+                                context,
+                                _titles[index],
+                                id: _id,
+                                token: _token,
+                              );
+                            } else if (_rule == '4') {
+                              AppFunction.getTeacherDashboardPage(
+                                context,
+                                _titles[index],
+                                _id ?? '',
+                              );
+                            } else if (_rule == '3') {
+                              AppFunction.getParentDashboardPage(
+                                context,
+                                _titles[index],
+                                _id ?? '',
+                              );
+                            } else if (_rule == '1' || _rule == '5') {
+                              if (isAdministrator == 'yes') {
+                                AppFunction.getSaasAdminDashboardPage(
                                   context,
                                   _titles[index],
                                   _id ?? '',
+                                  _systemController.systemSettings.value,
                                 );
-                              } else if (_rule == '3') {
-                                AppFunction.getParentDashboardPage(
-                                  context,
-                                  _titles[index],
-                                  _id ?? '',
-                                );
-                              } else if (_rule == '1' || _rule == '5') {
-                                if (isAdministrator == 'yes') {
-                                  AppFunction.getSaasAdminDashboardPage(
-                                    context,
-                                    _titles[index],
-                                    _id ?? '',
-                                    _systemController.systemSettings.value,
-                                  );
-                                } else {
-                                  AppFunction.getAdminDashboardPage(
-                                    context,
-                                    _titles[index],
-                                    _id ?? '',
-                                    _systemController.systemSettings.value,
-                                  );
-                                }
-                              } else if (_rule == '9') {
-                                AppFunction.getDriverDashboard(
+                              } else {
+                                AppFunction.getAdminDashboardPage(
                                   context,
                                   _titles[index],
                                   _id ?? '',
                                   _systemController.systemSettings.value,
                                 );
                               }
-                            });
-                          },
-                          headline: _titles[index],
-                          icon: _images[index],
-                        );
-                      },
-                    ),
-                    SizedBox(
-                      height: 50.h,
-                    ),
-                  ],
-                );
-              }
-            }),
-          ),
+                            } else if (_rule == '9') {
+                              AppFunction.getDriverDashboard(
+                                context,
+                                _titles[index],
+                                _id ?? '',
+                                _systemController.systemSettings.value,
+                              );
+                            }
+                          });
+                        },
+                        headline: _titles[index],
+                        icon: _images[index],
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 50.h,
+                  ),
+                ],
+              );
+            }
+          }),
         ),
       ),
     );

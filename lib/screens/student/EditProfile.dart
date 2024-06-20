@@ -19,6 +19,8 @@ import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
 import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/model/StudentDetailsModel.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditProfile extends StatefulWidget {
   final String? id;
@@ -127,19 +129,48 @@ class _EditProfileState extends State<EditProfile> {
 
   File? _file;
   Future pickDocument() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      allowMultiple: false,
-      type: FileType.image,
-    );
-    if (result != null) {
-      setState(() {
-        _file = File(result.files.single.path ?? '');
-      });
+    final ImagePicker _picker = ImagePicker();
+    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    
+    if (pickedFile != null) {
+      CroppedFile? croppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+       uiSettings: [
+      AndroidUiSettings(
+        toolbarTitle: 'Cropper',
+        toolbarColor: Colors.deepOrange,
+        toolbarWidgetColor: Colors.white,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+      ),
+      IOSUiSettings(
+        title: 'Cropper',
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9 // IMPORTANT: iOS supports only one custom aspect ratio in preset list
+        ],
+      ),
+    
+    ],
+      );
+      
+      if (croppedFile != null) {
+        setState(() {
+          _file = File(croppedFile.path);
+        });
+      }
     } else {
       Utils.showToast('Cancelled');
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

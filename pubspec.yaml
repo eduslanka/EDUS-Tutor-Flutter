@@ -94,6 +94,7 @@ dependencies:
   image_picker: ^1.0.4
   dots_indicator: ^3.0.0
   card_swiper: ^3.0.1
+  image_cropper: ^7.0.5
 
 dev_dependencies:
   flutter_test:

@@ -29,13 +29,18 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
    final classes=widget.rule=='2'? widget.studentResponse?.classes:widget.teachersResponse?.data.todayClass;
     return Container(
       child:  classLen==0
-          ? Container(
-              height: 40,
-              child: const Center(
-                  child: Text(
-                'No Today Classes',
-                style: TextStyle(color: Colors.black),
-              )))
+          ? Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Container(
+               
+                
+                child:  Center(
+                    child: Text(
+               widget.rule=='2'?   'No Classes Today. You can study on your own, revise and practice past lessons..!':'You have no classes scheduled today..!',
+                 textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w500),
+                ))),
+          )
           : Padding(
               padding: const EdgeInsets.only(left: 24.0, right: 24, top: 16),
               child: Column(
