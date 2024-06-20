@@ -135,7 +135,7 @@ class AppFunction {
 
   static var teachers = [
    // 'Students',
-    'My Routine',
+    'Time Table',
     'Mark Attendance',
     //'Leave',
     'Content',
@@ -840,7 +840,7 @@ class AppFunction {
       case 'Students':
         Navigator.push(context, ScaleRoute(page: StudentSearch()));
         break;
-      case 'My Routine':
+      case 'Time Table':
         Navigator.push(
             context, ScaleRoute(page: const TeacherMyRoutineScreen(isHome: false,)));
         break;

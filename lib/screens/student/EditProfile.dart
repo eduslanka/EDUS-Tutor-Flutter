@@ -268,8 +268,8 @@ class _EditProfileState extends State<EditProfile> {
                                 ? const SizedBox.shrink()
                                 : Image.file(
                                     _file ?? File(''),
-                                    width: Get.width * 0.1,
-                                    height: Get.height * 0.1,
+                                    width: Get.width * 0.3,
+                                    height: Get.height * 0.3,
                                   ),
                             Padding(
                               padding: EdgeInsets.symmetric(
