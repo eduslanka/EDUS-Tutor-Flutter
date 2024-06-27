@@ -50,7 +50,8 @@ class EdusApi {
   }
 
   static String getNoticeUrl(dynamic id) {
-    return baseApi + "student-noticeboard/$id";
+   // return baseApi + "student-noticeboard/$id";
+   return baseApi + "student-noticeboard";
   }
 
   static String getStudentTimeline(dynamic id) {

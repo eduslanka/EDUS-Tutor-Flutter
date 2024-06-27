@@ -47,7 +47,7 @@ class LogoutService {
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
         } else {
-          Utils.showToast('Unable to logout');
+        //  Utils.showToast('Unable to logout');
         }
       },
     );

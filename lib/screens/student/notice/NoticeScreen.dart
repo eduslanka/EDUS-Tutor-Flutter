@@ -85,7 +85,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
   Future<NoticeList> getNotices(dynamic id) async {
     final response = await http.get(Uri.parse(EdusApi.getNoticeUrl(id)),
         headers: Utils.setHeader(_token.toString()));
-
+        print(EdusApi.getNoticeUrl(id));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
       return NoticeList.fromJson(jsonData['data']['allNotices']);

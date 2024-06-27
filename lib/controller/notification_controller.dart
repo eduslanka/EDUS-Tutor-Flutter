@@ -56,18 +56,31 @@ class NotificationController extends GetxController {
     throw Exception(e.toString());
   }
 }
-  Future readNotification(int notificationId) async {
-    await getIdToken();
-    var response = await http.get(
-        Uri.parse(EdusApi.readMyNotifications(_id.value, notificationId)),
-        headers: Utils.setHeader(_token.toString()));
+  Future readNotification() async {
+    try{
+ await getIdToken();
+    var response = await http.post(
+        Uri.parse(EdusApi.readMyNotifications(_id.value,0)),
+        headers: Utils.setHeader(_token.toString()), body:jsonEncode({
+        'id': 217
+      }),);
+       
+        print(_id.value);
+         print(response.body);
     if (response.statusCode == 200) {
       Map notifications = jsonDecode(response.body) as Map;
       bool status = notifications['data']['status'] ?? false;
+      print(status);
+      print(response.body);
       return status;
     } else {
       debugPrint('Error retrieving from api');
     }
+    }catch(e,t){
+      print(e);
+      print(t);
+    }
+   
   }
 
   Future getIdToken() async {

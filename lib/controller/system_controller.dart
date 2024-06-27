@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:edus_tutor/app_service/app_service.dart';
 import 'package:edus_tutor/model/quets_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
@@ -11,6 +12,8 @@ import 'package:http/http.dart' as http;
 
 import '../model/teacher_today_class_model.dart';
 import '../model/today_class_model.dart';
+import 'package:in_app_update/in_app_update.dart';
+import 'package:in_app_review/in_app_review.dart';
 
 class SystemController extends GetxController {
 
@@ -63,6 +66,27 @@ fetchTeacherTodayClasses();
       print('From t: $t');
       throw Exception('failed to load');
     }
+  }
+   Future<void> checkForUpdate() async {
+    final InAppReview inAppReview = InAppReview.instance;
+
+if (await inAppReview.isAvailable()) {
+    inAppReview.requestReview();
+}
+    InAppUpdate.checkForUpdate().then((updateInfo) {
+      if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
+        if (updateInfo.flexibleUpdateAllowed) {
+          //Perform flexible update
+          InAppUpdate.startFlexibleUpdate().then((appUpdateResult) {
+            if (appUpdateResult == AppUpdateResult.success) {
+              //App Update successful
+              InAppUpdate.completeFlexibleUpdate();
+            }
+          });
+        }
+      }
+      
+    });
   }
 Future fetchTodayClasses()async{
    try {
@@ -123,8 +147,13 @@ Rx<String> get rule=>_rule;
   @override
   void onInit() {
     getSystemSettings();
+    if(!kDebugMode){
+checkForUpdate();
+    }
+    
   //  fetchTodayClasses();
     super.onInit();
+    
     
   }
 }

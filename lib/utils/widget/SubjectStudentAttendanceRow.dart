@@ -131,7 +131,7 @@ class _SubjectStudentAttendanceRowState
                 ],
                 buttonTextStyle: ButtonTextStyle(
                     selectedColor: Colors.white,
-                    unSelectedColor: const Color(0xff415094),
+                    unSelectedColor:  Colors.black,
                     textStyle: TextStyle(fontSize: ScreenUtil().setSp(14))),
                 radioButtonValue: (value) {
                   setState(() {

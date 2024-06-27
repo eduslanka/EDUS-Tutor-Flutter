@@ -138,24 +138,19 @@ class _EditProfileState extends State<EditProfile> {
        uiSettings: [
       AndroidUiSettings(
         toolbarTitle: 'Cropper',
-        toolbarColor: Colors.deepOrange,
+    
+        toolbarColor: Utils.baseBlue,
         toolbarWidgetColor: Colors.white,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
+         
         ],
       ),
       IOSUiSettings(
         title: 'Cropper',
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9 // IMPORTANT: iOS supports only one custom aspect ratio in preset list
+         // IMPORTANT: iOS supports only one custom aspect ratio in preset list
         ],
       ),
     
@@ -251,13 +246,18 @@ class _EditProfileState extends State<EditProfile> {
                                   SizedBox(width: 10.w),
                                   IconButton(
                                     onPressed: () async {
-                                      await updateData(
+                                      if( _file?.path !=null){
+ await updateData(
                                           fieldName: "student_photo",
                                           file: await DIO.MultipartFile.fromFile(
                                               _file?.path ?? ''));
+                                      }else{
+                                        pickDocument();
+                                      }
+                                     
                                     },
-                                    icon: const Icon(
-                                      Icons.save_as,
+                                    icon:  Icon(
+                                    _file==null? Icons.edit: Icons.save_as,
                                       color: Colors.blueAccent,
                                     ),
                                   ),
@@ -281,6 +281,7 @@ class _EditProfileState extends State<EditProfile> {
                                       keyboardType: TextInputType.text,
                                       style: Theme.of(context).textTheme.titleLarge,
                                       controller: _firstNameCtrl,
+                                      
                                       validator: (String? value) {
                                         if (value!.isEmpty) {
                                           return 'Please enter your first name'.tr;
@@ -305,11 +306,14 @@ class _EditProfileState extends State<EditProfile> {
                                   SizedBox(width: 10.w),
                                   IconButton(
                                     onPressed: () async {
-                                      await updateData(
+                                      if(_firstNameCtrl.text .isNotEmpty){
+  await updateData(
                                           fieldName: "first_name",
                                           value: _firstNameCtrl.text);
+                                      }
+                                    
                                     },
-                                    icon: const Icon(
+                                    icon:  Icon(
                                       Icons.save_as,
                                       color: Colors.blueAccent,
                                     ),

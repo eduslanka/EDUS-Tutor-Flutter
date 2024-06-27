@@ -26,17 +26,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
   final NotificationController controller = Get.put(NotificationController());
 
   Future readAll() async {
-    controller.userNotificationList.value.userNotifications
-        ?.forEach((element) async {
-      await controller.readNotification(element.id).then((value) {
+    print('function clicked');
+   await controller.readNotification().then((value) {
         if (value == true) {
           controller.userNotificationList.value.userNotifications
-              ?.remove(element);
+              ?.clear();
         }
       }).then((value) async {
         await controller.getNotifications();
       });
-    });
     // await controller.getNotifications();
   }
 
@@ -225,7 +223,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 ),
                                 onTap: () async {
                                   await controller
-                                      .readNotification(item?.id??0)
+                                      .readNotification()
                                       .then((value) async {
                                     if (value == true) {
                                       controller.userNotificationList.value
@@ -248,7 +246,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 ),
                                 onTap: () async {
                                   await controller
-                                      .readNotification(item?.id??0)
+                                      .readNotification()
                                       .then((value) async {
                                     if (value == true) {
                                       controller.userNotificationList.value

@@ -70,9 +70,10 @@ class _TeacherHomeworkState extends State<TeacherHomework> {
   }
 
   Future<HomeworkList> fetchHomework(int id) async {
-    final response = await http.get(Uri.parse(EdusApi.getHomeWorkListUrl(id)),
+    try{
+       final response = await http.get(Uri.parse(EdusApi.getHomeWorkListUrl(id)),
         headers: Utils.setHeader(_token.toString()));
-
+print(EdusApi.getHomeWorkListUrl(id));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
 
@@ -80,5 +81,11 @@ class _TeacherHomeworkState extends State<TeacherHomework> {
     } else {
       throw Exception('failed to load');
     }
+    }catch(e,t){
+      print(e);
+      print(t);
+      throw e;
+    }
+   
   }
 }

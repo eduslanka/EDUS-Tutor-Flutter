@@ -33,7 +33,7 @@ class Homework {
       evaluationDate: json['evaluation_date'],
       fileUrl: json['file'],
       status: json['status'],
-      marks: json['marks'],
+      marks: json['marks'].toString(),
       obtainedMarks: json['obtained_marks'],
       classId: json['class_id'],
       sectionId: json['section_id'],

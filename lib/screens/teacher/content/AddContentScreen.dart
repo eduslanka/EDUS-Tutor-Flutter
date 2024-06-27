@@ -485,7 +485,8 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
               filename: _file?.path)
           : "",
     });
-    response = await dio.post(
+    try{
+ response = await dio.post(
       EdusApi.uploadContent,
       data: formData,
       options: Options(
@@ -498,10 +499,8 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
       onSendProgress: (received, total) {
         if (total != -1) {}
       },
-    ).catchError((e) {
-      final errorMessage = DioExceptions.fromDioError(e).toString();
-    });
-
+    );
+print(EdusApi.uploadContent);
     if (response?.statusCode == 200) {
       Utils.showToast('Upload successful');
       if (radioStr == 'admin') {
@@ -515,6 +514,11 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
       }
       Navigator.pop(context);
     }
+    }catch(e,t){
+      print(e);
+      print(t);
+    }
+   
   }
 
 
