@@ -276,9 +276,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     String email = emailController.text;
                     String password = passwordController.text;
 
+
+                   
                     if (email.isNotEmpty && password.isNotEmpty) {
                       setState(() {
                         isResponse = true;
+                         Utils.saveStringValue('emailAdd', emailController.text);
+                    Utils.saveStringValue('passwordNum', passwordController.text);
                       });
                       Login(email, password).getLogin(context).then((result) {
                         setState(() {

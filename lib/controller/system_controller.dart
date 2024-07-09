@@ -52,12 +52,13 @@ print(EdusApi.generalSettings + '/$schoolId');
   
   quote.value=  await fetchQuoteOfTheDay();
  // response.value=await fetchTodayClasses(_token.toString());
-  Utils.getStringValue('rule').then((value) {
+  Utils.getStringValue('rule').then((value) async{
       _rule.value = value??'';
       if(value=='2'){
-          fetchTodayClasses();
+         await fetchTodayClasses();
+          print(':::::::::::::student ');
       }else if(value=='4'){
-fetchTeacherTodayClasses();
+await fetchTeacherTodayClasses();
       }
     });
     } catch (e, t) {
@@ -101,6 +102,7 @@ Future fetchTodayClasses()async{
     if (response.statusCode == 200) {
       
   todayClassResponse.value=TodayClassResponse.fromJson(json.decode(response.body));
+  print(':::::::::::${response.body}');
     } else {
       throw Exception('Failed to load today classes: ${response.body} ${response.statusCode}');
     }

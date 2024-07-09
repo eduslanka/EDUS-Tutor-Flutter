@@ -257,21 +257,32 @@ class _StudentWalletTransactionsState extends State<StudentWalletTransactions> {
         title: "Add Balance",
         initialChildSize: 0.7,
         children: <Widget>[
-          TextField(
-            style: Theme.of(context).textTheme.headlineMedium,
-            controller: _controller.amountController,
-            keyboardType: TextInputType.number,
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(
-                  RegExp(r'^(?!\.)(\d+)?\.?\d{0,2}'))
-            ],
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.zero,
-              hintText: "Amount".tr,
-              labelText: "Amount".tr,
-              hintStyle: Theme.of(context).textTheme.headlineMedium,
-            ),
+       TextField(
+      style: Theme.of(context).textTheme.headlineMedium,
+      controller: _controller.amountController,
+      keyboardType: TextInputType.number,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'^(?!\.)(\d+)?\.?\d{0,2}'))
+      ],
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.zero,
+        hintText: "Amount".tr,
+        labelText: "Amount".tr,
+        hintStyle: Theme.of(context).textTheme.headlineMedium,
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey, // Customize the color
+            width: 2.0, // Customize the width
           ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.secondary, // Customize the color
+            width: 2.0, // Customize the width
+          ),
+        ),
+      ),
+    ),
           const SizedBox(
             height: 20,
           ),

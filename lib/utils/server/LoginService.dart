@@ -31,6 +31,7 @@ class Login {
     dynamic message;
     dynamic fullName;
     dynamic phone;
+    dynamic isBlock;
 
     bool isNullOrEmpty(Object o) => o == null || o == "";
 
@@ -47,6 +48,7 @@ class Login {
       if (response.statusCode == 200) {
         print('Login Response: ${response.data}');
         var user = response.data;
+        isBlock=user['data']['student_have_due_fees'];
         isSuccess = user['success'];
         message = user['message'];
         id = user['data']['user']['id'];
@@ -85,6 +87,7 @@ class Login {
           saveStringValue('isAdministrator', '$isAdministrator');
           saveStringValue('lang', 'en');
           saveStringValue('token', token.toString());
+          saveBooleanValue('isBlock', isBlock);
 
           if (rule == 2 || rule == "2") {
             saveIntValue('studentId', int.parse(studentId.toString()));

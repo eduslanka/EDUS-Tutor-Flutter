@@ -5,14 +5,15 @@ import 'package:edus_tutor/screens/fees/fees_student/fees_student_new/fees_add_p
 import 'package:edus_tutor/screens/fees/fees_student/fees_student_new/fees_invoice_view.dart';
 
 // Project imports:
-import 'package:edus_tutor/screens/fees/model/FeesRecord.dart';
+
+import '../../../../model/fee_invoice_model.dart';
 
 // ignore: must_be_immutable
 class FeesRowNew extends StatefulWidget {
-  FeesRecord fee;
-  String id;
+  FeesInvoice fee;
+  
 
-  FeesRowNew(this.fee, this.id, {Key? key}) : super(key: key);
+  FeesRowNew(this.fee,  {Key? key}) : super(key: key);
 
   @override
   State<FeesRowNew> createState() => _FeesRowNewState();
@@ -20,11 +21,12 @@ class FeesRowNew extends StatefulWidget {
 
 class _FeesRowNewState extends State<FeesRowNew> {
   final TextEditingController amountController = TextEditingController();
-
+late double blance;
   final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
-    amountController.text = widget.fee.balance.toString();
+    amountController.text = widget.fee.totalFees.toString();
+    blance=(widget.fee.totalFees?.toDouble()??0)-(widget.fee.totalPaid?.toDouble()??0);
     super.initState();
   }
 
@@ -36,7 +38,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
           children: <Widget>[
             Expanded(
               child: Text(
-                widget.fee.date.toString(),
+                widget.fee.dueDate.toString(),
                 style: Theme.of(context).textTheme.headlineSmall,
                 maxLines: 1,
               ),
@@ -57,7 +59,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                 ],
               ),
               itemBuilder: (context) {
-                if (widget.fee.status == 'paid') {
+                if (widget.fee.totalDue ==0) {
                   return [
                     PopupMenuItem(
                       value: 'view',
@@ -79,7 +81,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
               },
               onSelected: (String value) async {
                 if (value == 'view') {
-                  Get.to(() => FeeInvoiceViewStudent(invoiceId: widget.fee.id));
+                  Get.to(() => FeeInvoiceViewStudent(feesInvoice: widget.fee,));
                 } else {
                   Get.to(() => FeesAddPaymentScreen(invoiceId: widget.fee.id));
                 }
@@ -107,7 +109,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                       height: 10.0,
                     ),
                     Text(
-                      double.parse(widget.fee.amount.toString())
+                      double.parse(widget.fee.totalFees.toString())
                           .toStringAsFixed(2),
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
@@ -130,7 +132,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                       height: 10.0,
                     ),
                     Text(
-                      double.parse(widget.fee.paidAmount.toString())
+                      double.parse(widget.fee.totalPaid.toString())
                           .toStringAsFixed(2),
                       maxLines: 1,
                       style: Theme.of(context).textTheme.headlineMedium,
@@ -154,7 +156,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                       height: 10.0,
                     ),
                     Text(
-                      double.parse(widget.fee.balance.toString())
+                      blance
                           .toStringAsFixed(2),
                       maxLines: 1,
                       style: Theme.of(context).textTheme.headlineMedium,
@@ -223,7 +225,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                           children: <Widget>[
                             Expanded(
                               child: Text(
-                                widget.fee.date.toString(),
+                                widget.fee.createDate.toString(),
                                 style: Theme.of(context).textTheme.headlineSmall,
                                 maxLines: 1,
                               ),
@@ -251,7 +253,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                                       height: 10.0,
                                     ),
                                     Text(
-                                      widget.fee.amount.toString(),
+                                      widget.fee.totalFees.toString(),
                                       maxLines: 1,
                                       style:
                                           Theme.of(context).textTheme.headlineMedium,
@@ -275,14 +277,14 @@ class _FeesRowNewState extends State<FeesRowNew> {
                                     const SizedBox(
                                       height: 10.0,
                                     ),
-                                    Text(
-                                      widget.fee.weaver == 0
-                                          ? 'N/A'
-                                          : widget.fee.weaver.toString(),
-                                      maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
-                                    ),
+                                    // Text(
+                                    //   widget.fee.weaver == 0
+                                    //       ? 'N/A'
+                                    //       : widget.fee.weaver.toString(),
+                                    //   maxLines: 1,
+                                    //   style:
+                                    //       Theme.of(context).textTheme.headlineMedium,
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -302,12 +304,12 @@ class _FeesRowNewState extends State<FeesRowNew> {
                                     const SizedBox(
                                       height: 10.0,
                                     ),
-                                    Text(
-                                      widget.fee.fine.toString(),
-                                      maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
-                                    ),
+                                    // Text(
+                                    //   widget.fee.fine.toString(),
+                                    //   maxLines: 1,
+                                    //   style:
+                                    //       Theme.of(context).textTheme.headlineMedium,
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -328,7 +330,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                                       height: 10.0,
                                     ),
                                     Text(
-                                      widget.fee.paidAmount.toString(),
+                                      widget.fee.totalPaid.toString(),
                                       maxLines: 1,
                                       style:
                                           Theme.of(context).textTheme.headlineMedium,
@@ -353,7 +355,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                                       height: 10.0,
                                     ),
                                     Text(
-                                      widget.fee.balance.toString(),
+                                     blance.toString(),
                                       textAlign: TextAlign.center,
                                       maxLines: 1,
                                       style:
@@ -387,7 +389,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                                 if (!regExp.hasMatch(value)) {
                                   return 'Please enter a number';
                                 }
-                                if (int.tryParse(value)! > (widget.fee.balance?.toDouble() ?? 0)) {
+                                if (int.tryParse(value)! > (blance ?? 0)) {
                                   return 'Amount must not greater than balance';
                                 }
                                 return null;
@@ -406,7 +408,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
                             ),
                           ),
                         ),
-                        (widget.fee.balance ?? 0) > 0
+                        (blance ?? 0) > 0
                             ? GestureDetector(
                                 onTap: () {
                                   if (_formKey.currentState!.validate()) {}
@@ -448,7 +450,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
   }
 
   Widget getStatus(BuildContext context) {
-    if (widget.fee.balance == 0) {
+    if (blance == 0) {
       return Container(
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(color: Colors.greenAccent),
@@ -465,9 +467,9 @@ class _FeesRowNewState extends State<FeesRowNew> {
           ),
         ),
       );
-    } else if ((widget.fee.paidAmount == 0
-            ? widget.fee.paidAmount
-            : (double.parse(widget.fee.paidAmount.toString())))! >
+    } else if ((widget.fee.totalPaid == 0
+            ? widget.fee.totalPaid
+            : (double.parse(widget.fee.totalPaid.toString())))! >
         0.0) {
       return Container(
         width: MediaQuery.of(context).size.width,
@@ -485,7 +487,7 @@ class _FeesRowNewState extends State<FeesRowNew> {
           ),
         ),
       );
-    } else if (widget.fee.paidAmount == 0) {
+    } else if (widget.fee.totalPaid == 0) {
       return Container(
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(color: Colors.redAccent),

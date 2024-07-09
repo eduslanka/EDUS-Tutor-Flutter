@@ -61,19 +61,8 @@ class TodayClassResponse {
   TodayClassResponse({required this.success, required this.classes});
 
   factory TodayClassResponse.fromJson(Map<String, dynamic> json) {
-    final now = DateTime.now();
-    final dayName = DateFormat('EEEE').format(now);
-    print(dayName);
+   
 
-    List<TodayClass> classesList = [];
-    if (json['data'] != null && json['data']['today_class'] != null) {
-      for (var dayClasses in json['data']['today_class']) {
-        if (dayClasses != null && dayClasses is List) {
-          classesList = dayClasses.map((i) => TodayClass.fromJson(i)).toList();
-        }
-      }
-    }
-
-    return TodayClassResponse(success: json['success'], classes: classesList);
+    return TodayClassResponse(success: json['success'], classes: json['data']['today_class'] !=null ? List<TodayClass>.from(json['data']['today_class'].map((classJson) => TodayClass.fromJson(classJson))):[]);
   }
 }

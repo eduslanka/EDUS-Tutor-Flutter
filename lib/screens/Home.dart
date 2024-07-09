@@ -36,6 +36,7 @@ import 'package:edus_tutor/utils/server/About.dart';
 import 'package:edus_tutor/utils/server/LogoutService.dart';
 import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import '../main.dart';
+import '../utils/server/LoginService.dart';
 import '../widget/quates_widget.dart';
 import 'ChangePassword.dart';
 
@@ -121,6 +122,7 @@ class _HomeState extends State<Home> {
 
   final SystemController _systemController = Get.put(SystemController());
 
+bool isBlock=false;
   @override
   void dispose() {
     didReceiveLocalNotificationSubject.close();
@@ -131,6 +133,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+      
     Utils.getStringValue('token').then((value) {
       _token = value ?? '';
       setState(() {
@@ -164,6 +167,8 @@ class _HomeState extends State<Home> {
         rtlValue = value;
       });
     });
+
+   
     //init settings for android
     var initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -292,6 +297,7 @@ class _HomeState extends State<Home> {
       }
     });
   }
+  
 
   @override
   Widget build(BuildContext context) {

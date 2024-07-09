@@ -19,10 +19,13 @@ import 'package:edus_tutor/screens/fees/model/StudentAddPaymentModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio;
 
+import '../../../model/fee_invoice_model.dart';
+
 class StudentFeesController extends GetxController {
   final UserController userController = Get.put(UserController());
 
-  Rx<FeesRecordList> feesRecordList = FeesRecordList().obs;
+  Rx<List<ClassRecord>> feesRecordList = Rx<List<ClassRecord>>([]);
+   Rx<ClassRecord> feesRecord = ClassRecord().obs;
 
   Rx<bool> isFeesLoading = false.obs;
 
@@ -177,8 +180,8 @@ class StudentFeesController extends GetxController {
               selectedPaymentMethod.value == "Cheque" ||
               selectedPaymentMethod.value == "Bank") {
             isPaymentProcessing(false);
-            await fetchFeesRecord(userController.studentId.value,
-                userController.studentRecord.value.records?.first.id);
+            await fetchFeesRecord(userController.studentId.value,userController.studentRecord.value.records?.first.id
+               );
             Get.back();
             CustomSnackBar().snackBarSuccess("Payment Added".tr);
           } else {
@@ -288,8 +291,8 @@ class StudentFeesController extends GetxController {
         data = Map<String, dynamic>.from(response.data);
 
         isPaymentProcessing(false);
-        await fetchFeesRecord(userController.studentId.value,
-            userController.studentRecord.value.records?.first.id);
+        await fetchFeesRecord(userController.studentId.value,userController.studentRecord.value.records?.first.id
+            );
         Get.back();
         CustomSnackBar().snackBarSuccess(data['message']);
       } else {
@@ -383,33 +386,44 @@ print(response.statusCode);
     return addPaymentModel.value;
   }
 
-  Future<FeesRecordList> fetchFeesRecord(studentId, recordId) async {
+  Future<void> fetchFeesRecord(studentId,recordId) async {
     try {
       isFeesLoading(true);
       final response = await http.get(
-          Uri.parse(EdusApi.feesRecordList + "/$studentId/$recordId"),
-          headers: Utils.setHeader(userController.token.value.toString()));
-
+        Uri.parse(EdusApi.getFeeApi(studentId)),
+        headers: Utils.setHeader(userController.token.toString()),
+      );
+print(recordId);
       if (response.statusCode == 200) {
-        var jsonData = jsonDecode(response.body);
-        feesRecordList.value = FeesRecordList.fromJson(jsonData['records']);
-
-        isFeesLoading(false);
+        final jsonData = jsonDecode(response.body);
+        Iterable list = jsonData;
+        feesRecordList.value = list.map((model) => ClassRecord.fromJson(model)).toList();
+        for(var record in feesRecordList.value ){
+         if (record.recordId==recordId){
+           feesRecord.value=record;
+           print(feesRecord.value.className);
+           print(feesRecord.value.feesInvoice?.length);
+         }
+        }
+      //  feesRecord.value = feesRecordList.value.firstWhereOrNull((record) => record.recordId == recordId)??ClassRecord();
       } else {
-        isFeesLoading(false);
-        throw Exception('failed to load');
+        log("Error: ${response.statusCode} - ${response.body}");
       }
-    } catch (e, t) {
-      debugPrint(e.toString());
-      debugPrint(t.toString());
-    }
-    return feesRecordList.value;
-  }
+    } catch (error,t) {
+      log("Error: $error");
+      print(t);
+    } finally {
+      
+      if(feesRecordList.value.isNotEmpty){
 
+      }
+      
+        isFeesLoading(false);
+    }
+  }
   @override
   void onInit() {
-    fetchFeesRecord(userController.studentId.value,
-        userController.studentRecord.value.records?.first.id);
+    fetchFeesRecord(userController.studentId.value,userController.studentRecord.value.records?.first.id);
     plugin.initialize(publicKey: payStackPublicKey);
     super.onInit();
   }

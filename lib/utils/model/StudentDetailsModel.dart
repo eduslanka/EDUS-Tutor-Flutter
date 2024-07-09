@@ -121,6 +121,7 @@ class User {
   User({
     this.id,
     this.admissionNo,
+    this.edNo,
     this.rollNo,
     this.firstName,
     this.lastName,
@@ -180,6 +181,7 @@ class User {
 
   int? id;
   int? admissionNo;
+  String ? edNo;
   int? rollNo;
   String? firstName;
   String? lastName;
@@ -239,6 +241,7 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         admissionNo: json["admission_no"],
+        edNo: json["ed_number"],
         rollNo: json["roll_no"],
         firstName: json["first_name"] ?? "",
         lastName: json["last_name"] ?? "",
@@ -693,6 +696,7 @@ class UserDetails {
     this.guardiansMobile,
     this.guardiansEmail,
     this.mothersMobile,
+    this.ednum
   });
 
   int? id;
@@ -700,6 +704,7 @@ class UserDetails {
   String? fullName;
   dynamic phoneNumber;
   int? admissionNo;
+  String? ednum;
   List<String>? classSection;
   dynamic fatherName;
   dynamic fathersMobile;
@@ -712,6 +717,7 @@ class UserDetails {
   factory UserDetails.fromJson(Map<String, dynamic> json) => UserDetails(
         id: json["id"],
         userId: json["user_id"],
+        ednum: json["ed_number"],
         fullName: json["full_name"] ?? "",
         phoneNumber: json["phone_number"] ?? "",
         admissionNo: json["admission_no"],

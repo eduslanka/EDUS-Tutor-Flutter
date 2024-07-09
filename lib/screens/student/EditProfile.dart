@@ -78,7 +78,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   Future updateData(
-      {String? fieldName, String? value, DIO.MultipartFile? file}) async {
+      {String? fieldName, String? value,}) async {
     await Utils.getStringValue('token').then((value) {
       _token = value ?? '';
     });
@@ -95,7 +95,7 @@ class _EditProfileState extends State<EditProfile> {
     } else {
       _formData = DIO.FormData.fromMap({
         "field_name": fieldName,
-        fieldName ?? '': file,
+        fieldName ?? '': value,
         "id": _userDetails.studentData?.user?.id,
         "student_photo": await DIO.MultipartFile.fromFile(_file?.path ?? ''),
       });
@@ -113,7 +113,8 @@ class _EditProfileState extends State<EditProfile> {
     if (data['data']['flag'] == true) {
       if (_file != null) {
         await getProfile().then((value) {
-          Utils.saveStringValue("image", value.studentData?.user?.studentPhoto ?? '');
+          Utils.saveStringValue(
+              "image", value.studentData?.user?.studentPhoto ?? '');
         });
       }
       setState(() {});
@@ -130,33 +131,31 @@ class _EditProfileState extends State<EditProfile> {
   File? _file;
   Future pickDocument() async {
     final ImagePicker _picker = ImagePicker();
-    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+
     if (pickedFile != null) {
       CroppedFile? croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedFile.path,
-       uiSettings: [
-      AndroidUiSettings(
-        toolbarTitle: 'Cropper',
-    
-        toolbarColor: Utils.baseBlue,
-        toolbarWidgetColor: Colors.white,
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-         
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Utils.baseBlue,
+            toolbarWidgetColor: Colors.white,
+            aspectRatioPresets: [
+              CropAspectRatioPreset.square,
+            ],
+          ),
+          IOSUiSettings(
+            title: 'Cropper',
+            aspectRatioPresets: [
+              CropAspectRatioPreset.square,
+              // IMPORTANT: iOS supports only one custom aspect ratio in preset list
+            ],
+          ),
         ],
-      ),
-      IOSUiSettings(
-        title: 'Cropper',
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-         // IMPORTANT: iOS supports only one custom aspect ratio in preset list
-        ],
-      ),
-    
-    ],
       );
-      
+
       if (croppedFile != null) {
         setState(() {
           _file = File(croppedFile.path);
@@ -166,20 +165,16 @@ class _EditProfileState extends State<EditProfile> {
       Utils.showToast('Cancelled');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBarWidget(title: 'Edit Profile'),
       backgroundColor: Colors.white,
-
       body: SingleChildScrollView(
-
         child: Column(
-
-         // mainAxisSize: MainAxisSize.max,
+          // mainAxisSize: MainAxisSize.max,
           children: [
-
-
             FutureBuilder<StudentDetailsModel>(
                 future: profile,
                 builder: (context, snapshot) {
@@ -193,14 +188,17 @@ class _EditProfileState extends State<EditProfile> {
                       );
                       // if we got our data
                     } else if (snapshot.hasData) {
-                      _firstNameCtrl.text = snapshot.data?.studentData?.user?.firstName ?? '';
-                      _lastNameCtrl.text = snapshot.data?.studentData?.user?.lastName ?? '';
+                      _firstNameCtrl.text =
+                          snapshot.data?.studentData?.user?.firstName ?? '';
+                      _lastNameCtrl.text =
+                          snapshot.data?.studentData?.user?.lastName ?? '';
                       _addressCtrl.text =
-                          snapshot.data?.studentData?.user?.currentAddress ?? '';
+                          snapshot.data?.studentData?.user?.currentAddress ??
+                              '';
                       maxDateTime = "2100-01-01";
                       minDateTime = "1900-01-01";
-                      date =
-                          DateTime.parse(snapshot.data?.studentData?.user?.dateOfBirth ?? '');
+                      date = DateTime.parse(
+                          snapshot.data?.studentData?.user?.dateOfBirth ?? '');
                       return Form(
                         key: _formKey,
                         child: Column(
@@ -227,17 +225,22 @@ class _EditProfileState extends State<EditProfile> {
                                       child: TextFormField(
                                         enabled: false,
                                         keyboardType: TextInputType.text,
-                                        style: Theme.of(context).textTheme.titleLarge,
-                                        autovalidateMode: AutovalidateMode.disabled,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge,
+                                        autovalidateMode:
+                                            AutovalidateMode.disabled,
                                         decoration: InputDecoration(
                                           labelText: _file == null
                                               ? 'Select image'.tr
-                                              : _file?.path.split('/').last ?? '',
+                                              : _file?.path.split('/').last ??
+                                                  '',
                                           errorStyle: const TextStyle(
                                               color: Colors.blue,
                                               fontSize: 15.0),
                                           border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5.0),
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
                                           ),
                                         ),
                                       ),
@@ -246,18 +249,19 @@ class _EditProfileState extends State<EditProfile> {
                                   SizedBox(width: 10.w),
                                   IconButton(
                                     onPressed: () async {
-                                      if( _file?.path !=null){
- await updateData(
-                                          fieldName: "student_photo",
-                                          file: await DIO.MultipartFile.fromFile(
-                                              _file?.path ?? ''));
-                                      }else{
+                                      if (_file?.path != null) {
+                                        await updateData(
+                                            fieldName: "student_photo",
+                                           
+                                            );
+                                      } else {
                                         pickDocument();
                                       }
-                                     
                                     },
-                                    icon:  Icon(
-                                    _file==null? Icons.edit: Icons.save_as,
+                                    icon: Icon(
+                                      _file == null
+                                          ? Icons.edit
+                                          : Icons.save_as,
                                       color: Colors.blueAccent,
                                     ),
                                   ),
@@ -279,26 +283,30 @@ class _EditProfileState extends State<EditProfile> {
                                   Expanded(
                                     child: TextFormField(
                                       keyboardType: TextInputType.text,
-                                      style: Theme.of(context).textTheme.titleLarge,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
                                       controller: _firstNameCtrl,
-                                      
                                       validator: (String? value) {
                                         if (value!.isEmpty) {
-                                          return 'Please enter your first name'.tr;
+                                          return 'Please enter your first name'
+                                              .tr;
                                         }
                                         return null;
                                       },
                                       decoration: InputDecoration(
                                         hintText: "First Name".tr,
                                         labelText: "First Name".tr,
-                                        labelStyle:
-                                            Theme.of(context).textTheme.headlineMedium,
+                                        labelStyle: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium,
                                         errorStyle: const TextStyle(
                                           color: Colors.blue,
                                           fontSize: 15.0,
                                         ),
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
                                         ),
                                       ),
                                     ),
@@ -306,14 +314,13 @@ class _EditProfileState extends State<EditProfile> {
                                   SizedBox(width: 10.w),
                                   IconButton(
                                     onPressed: () async {
-                                      if(_firstNameCtrl.text .isNotEmpty){
-  await updateData(
-                                          fieldName: "first_name",
-                                          value: _firstNameCtrl.text);
+                                      if (_firstNameCtrl.text.isNotEmpty) {
+                                        await updateData(
+                                            fieldName: "first_name",
+                                            value: _firstNameCtrl.text);
                                       }
-                                    
                                     },
-                                    icon:  Icon(
+                                    icon: Icon(
                                       Icons.save_as,
                                       color: Colors.blueAccent,
                                     ),
@@ -329,25 +336,30 @@ class _EditProfileState extends State<EditProfile> {
                                   Expanded(
                                     child: TextFormField(
                                       keyboardType: TextInputType.text,
-                                      style: Theme.of(context).textTheme.titleLarge,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
                                       controller: _lastNameCtrl,
                                       validator: (String? value) {
                                         if (value!.isEmpty) {
-                                          return 'Please enter your last name'.tr;
+                                          return 'Please enter your last name'
+                                              .tr;
                                         }
                                         return null;
                                       },
                                       decoration: InputDecoration(
                                         hintText: "Last Name".tr,
                                         labelText: "Last Name".tr,
-                                        labelStyle:
-                                            Theme.of(context).textTheme.headlineMedium,
+                                        labelStyle: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium,
                                         errorStyle: const TextStyle(
                                           color: Colors.blue,
                                           fontSize: 15.0,
                                         ),
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
                                         ),
                                       ),
                                     ),
@@ -375,21 +387,25 @@ class _EditProfileState extends State<EditProfile> {
                                   Expanded(
                                     child: TextFormField(
                                       keyboardType: TextInputType.text,
-                                      style: Theme.of(context).textTheme.titleLarge,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
                                       enabled: false,
                                       initialValue:
                                           "${date?.day}/${date?.month}/${date?.year}",
                                       decoration: InputDecoration(
                                         hintText: "Date of birth".tr,
                                         labelText: "Date of birth".tr,
-                                        labelStyle:
-                                            Theme.of(context).textTheme.headlineMedium,
+                                        labelStyle: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium,
                                         errorStyle: const TextStyle(
                                           color: Colors.blue,
                                           fontSize: 15.0,
                                         ),
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
                                         ),
                                       ),
                                     ),
@@ -401,18 +417,24 @@ class _EditProfileState extends State<EditProfile> {
                                         context,
                                         pickerTheme: const DateTimePickerTheme(
                                           confirm: Text('Done',
-                                              style: TextStyle(color: Colors.red)),
+                                              style:
+                                                  TextStyle(color: Colors.red)),
                                           cancel: Text('Cancel',
-                                              style: TextStyle(color: Colors.cyan)),
+                                              style: TextStyle(
+                                                  color: Colors.cyan)),
                                         ),
-                                        minDateTime: DateTime.parse(minDateTime),
-                                        maxDateTime: DateTime.parse(maxDateTime ?? ''),
+                                        minDateTime:
+                                            DateTime.parse(minDateTime),
+                                        maxDateTime:
+                                            DateTime.parse(maxDateTime ?? ''),
                                         initialDateTime: date,
                                         dateFormat: _format,
                                         locale: _locale,
-                                        onClose: () => print("----- onClose -----"),
+                                        onClose: () =>
+                                            print("----- onClose -----"),
                                         onCancel: () => print('onCancel'),
-                                        onConfirm: (dateTime, List<int> index) async {
+                                        onConfirm:
+                                            (dateTime, List<int> index) async {
                                           date = dateTime;
                                           _selectedDate =
                                               '${date?.year}-${getAbsoluteDate(date?.month ?? 0)}-${getAbsoluteDate(date?.day ?? 0)}';
@@ -441,7 +463,9 @@ class _EditProfileState extends State<EditProfile> {
                                     child: TextFormField(
                                       maxLines: 3,
                                       keyboardType: TextInputType.text,
-                                      style: Theme.of(context).textTheme.titleLarge,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
                                       controller: _addressCtrl,
                                       validator: (String? value) {
                                         if (value!.isEmpty) {
@@ -452,14 +476,16 @@ class _EditProfileState extends State<EditProfile> {
                                       decoration: InputDecoration(
                                         hintText: "Current Address".tr,
                                         labelText: "Current Address".tr,
-                                        labelStyle:
-                                            Theme.of(context).textTheme.headlineMedium,
+                                        labelStyle: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium,
                                         errorStyle: const TextStyle(
                                           color: Colors.blue,
                                           fontSize: 15.0,
                                         ),
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
                                         ),
                                       ),
                                     ),

@@ -81,6 +81,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   Future<StudentDetailsModel> getProfile(id) async {
     final response = await http.get(Uri.parse(EdusApi.getChildren(id)),
         headers: id == null ? null : Utils.setHeader(_token.toString()));
+        print(EdusApi.getChildren(id));
     if (response.statusCode == 200) {
       final studentDetails = studentDetailsFromJson(response.body);
       setState(() {
@@ -121,10 +122,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           flexibleSpace: Container(
             padding: EdgeInsets.only(top: 20.h),
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppConfig.appToolbarBackground),
-                fit: BoxFit.cover,
-              ),
+             
               color: Color(0xff053EFF),
             ),
             child: Row(
@@ -965,9 +963,9 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           height: 5,
         ),
         Text(
-          'Admission'.tr +
+          'ED Number'.tr +
               ' : ' +
-              '${_studentDetails.studentData?.userDetails?.admissionNo.toString()}',
+              '${_studentDetails.studentData?.user?.edNo.toString()}',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: const Color(0xFF727FC8),
                 fontWeight: FontWeight.normal,

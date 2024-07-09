@@ -8,6 +8,7 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/model/StudentRecord.dart';
 
 import '../model/class_list_model.dart';
+import '../model/fee_invoice_model.dart';
 
 class UserController extends GetxController {
   final Rx<int> _studentId = 0.obs;
@@ -28,6 +29,8 @@ class UserController extends GetxController {
 
   Rx<bool> isLoading = false.obs;
 
+
+
   final Rx<StudentRecords> _studentRecord = StudentRecords().obs;
 
   Rx<StudentRecords> get studentRecord => _studentRecord;
@@ -36,6 +39,19 @@ class UserController extends GetxController {
 final Rx<ClassListResponse> _classListResponse=ClassListResponse(success: false, data: ClassListData(classLists: []), message: '',).obs;
  Rx<ClassListResponse> get classListResponse=> _classListResponse;
  
+ Future<ClassRecord> fetchStudentFees() async {
+    final url = EdusApi.getFeeApi(_studentId.value);
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return ClassRecord.fromJson(data);
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+
   Future getStudentRecord() async {
     log('get record ${_studentId.value}');
     try {
@@ -66,6 +82,8 @@ final Rx<ClassListResponse> _classListResponse=ClassListResponse(success: false,
       throw Exception('failed to load $e');
     }
   }
+
+
   Future fetchTodayClasses()async{
    try {
    final  response = await http.post(

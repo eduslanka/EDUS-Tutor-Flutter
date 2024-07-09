@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:edus_tutor/utils/server/LoginService.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:edus_tutor/config/app_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:universal_html/js.dart';
 import 'screens/fees/paymentGateway/khalti/sdk/khalti.dart';
 import 'utils/Utils.dart';
 import 'utils/widget/page.dart';
@@ -40,6 +42,7 @@ void main() async {
     publicKey: khaltiPublicKey,
     enabledDebugging: true,
   );
+  
   runApp(const MyApp());
 }
 

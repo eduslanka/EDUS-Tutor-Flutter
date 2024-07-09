@@ -22,7 +22,7 @@ class EdusApi {
   static String service = baseApi + 'service/check';
   static String zoomMakeMeetingUrl = "zoom-meeting-room";
   static String todayClass = baseApi + "student-today-class";
-  
+ 
   static String todayClassTecher = baseApi + "teacher-today-class";
    static String classList = baseApi + "student-class-list";
   // static String login(String email, String password) {
@@ -33,7 +33,9 @@ class EdusApi {
   static String getFeesUrl(dynamic id) {
     return baseApi + 'fees-collect-student-wise/$id';
   }
-
+static String getFeeApi(dynamic id){
+  return baseApi + 'student-fees-all/$id';
+}
   static String getRoutineUrl(dynamic id) {
     return baseApi + "student-class-routine/$id";
   }

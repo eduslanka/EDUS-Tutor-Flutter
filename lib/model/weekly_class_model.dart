@@ -63,14 +63,14 @@ class WeeklyClassData {
 }
 
 class ClassDetail {
-  final String cancelOrRescheduleStatus;
-  final String startTime;
-  final String endTime;
-  final String topic;
-  final String classSection;
-  final String teacher;
-  final String status;
-  final String meetLink;
+  final dynamic cancelOrRescheduleStatus;
+  final dynamic startTime;
+  final dynamic endTime;
+  final dynamic topic;
+  final dynamic classSection;
+  final dynamic teacher;
+  final dynamic status;
+  final dynamic meetLink;
   final String? rescheduleDate;
   final String? rescheduleTeacher;
   final String? rescheduleStart;

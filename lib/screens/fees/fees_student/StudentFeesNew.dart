@@ -1,5 +1,6 @@
 // Flutter imports:
 
+import 'package:edus_tutor/model/fee_invoice_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,20 +9,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 // Project imports:
-import 'package:edus_tutor/config/app_config.dart';
 import 'package:edus_tutor/controller/user_controller.dart';
 import 'package:edus_tutor/screens/fees/controller/student_fees_controller.dart';
 import 'package:edus_tutor/utils/StudentRecordWidget.dart';
 import 'package:edus_tutor/utils/Utils.dart';
-import 'package:edus_tutor/screens/fees/model/FeesRecord.dart';
 import 'package:edus_tutor/utils/model/StudentRecord.dart';
 import 'package:edus_tutor/utils/server/LogoutService.dart';
 import 'package:edus_tutor/screens/fees/fees_student/fees_student_new/fees_new_row_layout.dart';
 
 class StudentFeesNew extends StatefulWidget {
-  final String? id;
+  
 
-  const StudentFeesNew({Key? key, this.id}) : super(key: key);
+  const StudentFeesNew({Key? key, }) : super(key: key);
   @override
   _StudentFeesNewState createState() => _StudentFeesNewState();
 }
@@ -50,10 +49,7 @@ class _StudentFeesNewState extends State<StudentFeesNew> {
           flexibleSpace: Container(
             padding: EdgeInsets.only(top: 20.h),
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppConfig.appToolbarBackground),
-                fit: BoxFit.cover,
-              ),
+              
               color: Color(0xff053EFF),
             ),
             child: Row(
@@ -108,18 +104,18 @@ class _StudentFeesNewState extends State<StudentFeesNew> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 10,
+                ),
                 StudentRecordWidget(
                   onTap: (Record record) async {
                     _studentFeesController.userController.selectedRecord.value =
                         record;
                     await _studentFeesController.fetchFeesRecord(
-                      _studentFeesController.userController.studentId.value,
-                      record.id ?? 0,
+                      _studentFeesController.userController.studentId.value,record.id
+                      
                     );
                   },
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
                 Expanded(
                   child: Obx(() {
@@ -129,7 +125,7 @@ class _StudentFeesNewState extends State<StudentFeesNew> {
                       );
                     } else {
                       if (_studentFeesController
-                              .feesRecordList.value.feesRecords!.isEmpty) {
+                              .feesRecord.value.feesInvoice==null) {
                         return Utils.noDataWidget();
                       } else {
                         return ListView.separated(
@@ -138,14 +134,14 @@ class _StudentFeesNewState extends State<StudentFeesNew> {
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           itemCount: _studentFeesController
-                              .feesRecordList.value.feesRecords?.length ?? 0,
+                              .feesRecord.value.feesInvoice?.length ?? 0,
                           itemBuilder: (context, index) {
-                            FeesRecord? feesRecord = _studentFeesController
-                                .feesRecordList.value.feesRecords?[index];
+                            FeesInvoice? feesRecord = _studentFeesController
+                                .feesRecord.value.feesInvoice?[index];
 
                             return FeesRowNew(
-                              feesRecord ?? FeesRecord(),
-                              widget.id ?? '',
+                              feesRecord ?? FeesInvoice(),
+                             
                             );
                           },
                         );

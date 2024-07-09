@@ -19,15 +19,15 @@ import 'package:edus_tutor/screens/main/NotificationsScreen.dart';
 import 'package:edus_tutor/screens/main/student/DBStudentFees.dart';
 import 'package:edus_tutor/screens/main/student/DBStudentProfile.dart';
 import 'package:edus_tutor/screens/main/student/DBStudentRoutine.dart';
-import 'package:edus_tutor/screens/main/teacher/DBTeacherAcademic.dart';
 import 'package:edus_tutor/screens/main/teacher/DBTeacherHW.dart';
 import 'package:edus_tutor/screens/parent/ChildDashboardScreen.dart';
 import 'package:edus_tutor/utils/FunctinsData.dart';
 import 'package:edus_tutor/utils/Utils.dart';
+import '../../utils/server/LoginService.dart';
+import '../../widget/pay_your_bill.dart';
 import '../Home.dart';
 import '../teacher/ClassSubjectAttendanceHome.dart';
 import '../teacher/academic/TeacherRoutineScreen.dart';
-import 'teacher/DBTeacherAttendance.dart';
 
 class DashboardScreen extends StatefulWidget {
   final titles;
@@ -36,14 +36,19 @@ class DashboardScreen extends StatefulWidget {
   final childUID, image, token, childName, childId;
 
   const DashboardScreen(this.titles, this.images, this.role,
-      {Key? key, this.childUID, this.image, this.token, this.childName, this.childId}) : super(key: key);
+      {Key? key,
+      this.childUID,
+      this.image,
+      this.token,
+      this.childName,
+      this.childId})
+      : super(key: key);
 
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-
   final UserController userController = Get.put(UserController());
   final NotificationController controller = Get.put(NotificationController());
   final SystemController _systemController = Get.put(SystemController());
@@ -103,8 +108,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   int _studentId = 0;
+  bool isBlock = false;
+  String email='';
+  String password='';
   Future initate() async {
     print("ROLE ID ${widget.role} ${widget.role.runtimeType}");
+    Utils.getBooleanValue('isBlock').then((value) {
+      setState(() {
+        isBlock = value;
+      });
+    });
+ Utils.getStringValue('email').then((value) {
+      email = value??'';
+    });
+   
+    Utils.getStringValue('password').then((value) {
+      password = value??'';
+    });
+    Login(email, password).getLogin(context);
 
     await Utils.getStringValue('id').then((value) async {
       setState(() {
@@ -146,7 +167,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 context,
                 controller: persistentTabController,
                 screens: [
-                  widget.role == "3"
+              isBlock?const FeeReminderScreen():    widget.role == "3"
                       ? ChildHome(
                           AppFunction.students,
                           AppFunction.studentIcons,
@@ -154,23 +175,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           widget.image,
                           widget.token,
                           widget.childName)
-                      : Home(widget.titles, widget.images, widget.role),
+                      : 
+                      Home(widget.titles, widget.images, widget.role),
                   NotificationScreen(_id),
                   widget.role == "4"
-                      ? StudentSubjectAttendanceHome(isHome: true,)
-                      : DBStudentFees(
-                          id: widget.role == "3"
-                              ? widget.childUID.toString()
-                              : _id.toString(),
+                      ? const StudentSubjectAttendanceHome(
+                          isHome: true,
+                        )
+                      : const DBStudentFees(
+                        
                         ),
-                  widget.role == "4"
-                      ? TeacherMyRoutineScreen(isHome: true,)
+               isBlock?const FeeReminderScreen():    widget.role == "4"
+                      ? const TeacherMyRoutineScreen(
+                          isHome: true,
+                        )
                       : DBStudentRoutine(
                           id: widget.role == "3"
                               ? widget.childUID.toString()
-                              : _id.toString(), isHome: false,
+                              : _id.toString(),
+                          isHome: false,
                         ),
-                  widget.role == "4"
+            isBlock?const FeeReminderScreen():       widget.role == "4"
                       ? DBTeacherHW(
                           AppFunction.homework, AppFunction.homeworkIcons)
                       : DBStudentProfile(
@@ -191,7 +216,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       size: 18.sp,
                     ),
                     title: "Home".tr,
-                    activeColorPrimary: Color(0xff053EFF).withOpacity(0.9),
+                    activeColorPrimary: const Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),
                   PersistentBottomNavBarItem(
@@ -206,7 +231,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ?.copyWith(color: Colors.white),
                           ),
                           badgeStyle: bz.BadgeStyle(
-                            badgeColor: Color(0xff053EFF).withOpacity(0.8),
+                            badgeColor: const Color(0xff053EFF).withOpacity(0.8),
                           ),
                           // badgeAnimation: BadgeAnimationType.fade,
                           // toAnimate: false,
@@ -235,8 +260,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                         // animationType: bz.BadgeAnimationType.fade,
                         badgeAnimation: const bz.BadgeAnimation.fade(
-                          // animationDuration: Duration(seconds: 1),
-                        ),
+                            // animationDuration: Duration(seconds: 1),
+                            ),
                         child: Icon(
                           Themify.bell,
                           size: 22.sp,
@@ -252,7 +277,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           // animationType: bz.BadgeAnimationType.fade,
                           // toAnimate: false,
                           badgeStyle: bz.BadgeStyle(
-                            badgeColor: Color(0xff053EFF).withOpacity(0.8),
+                            badgeColor: const Color(0xff053EFF).withOpacity(0.8),
                           ),
                           // badgeAnimation: BadgeAnimationType.fade,
                           // toAnimate: false,
@@ -263,7 +288,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           child: Icon(
                             Themify.bell,
                             size: 22.sp,
-                            color: Color(0xff053EFF).withOpacity(0.9),
+                            color: const Color(0xff053EFF).withOpacity(0.9),
                           ),
                         );
                       }
@@ -284,12 +309,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Icon(
                           Themify.bell,
                           size: 22.sp,
-                          color: Color(0xff053EFF).withOpacity(0.9),
+                          color: const Color(0xff053EFF).withOpacity(0.9),
                         ),
                       );
                     }),
                     title: "Notification".tr,
-                    activeColorPrimary: Color(0xff053EFF).withOpacity(0.9),
+                    activeColorPrimary: const Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),
                   PersistentBottomNavBarItem(
@@ -320,7 +345,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             color: Colors.white,
                           ),
                     title: widget.role == "4" ? "Attendance".tr : "Fees".tr,
-                    activeColorPrimary: Color(0xff053EFF).withOpacity(0.9),
+                    activeColorPrimary: const Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),
                   PersistentBottomNavBarItem(
@@ -329,29 +354,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             "assets/images/academics (2).png",
                             width: 30.w,
                             height: 30.h,
-                           color: Colors.grey.withOpacity(0.9),
+                            color: Colors.grey.withOpacity(0.9),
                           )
                         : Image.asset(
                             "assets/images/routine (2).png",
                             width: 30.w,
                             height: 30.h,
-                           color: Colors.grey.withOpacity(0.9),
+                            color: Colors.grey.withOpacity(0.9),
                           ),
                     icon: widget.role == "4"
                         ? Image.asset(
                             "assets/images/routine (2).png",
                             width: 30.w,
                             height: 30.h,
-                            color: Color(0xff053EFF).withOpacity(0.9),
+                            color: const Color(0xff053EFF).withOpacity(0.9),
                           )
                         : Image.asset(
                             "assets/images/routine (2).png",
                             width: 30.w,
                             height: 30.h,
-                            color: Color(0xff053EFF).withOpacity(0.9),
+                            color: const Color(0xff053EFF).withOpacity(0.9),
                           ),
                     title: widget.role == "4" ? "TimeTable".tr : "TimeTable".tr,
-                    activeColorPrimary: Color(0xff053EFF).withOpacity(0.9),
+                    activeColorPrimary: const Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),
                   PersistentBottomNavBarItem(
@@ -373,16 +398,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             "assets/images/homework (2).png",
                             width: 25.w,
                             height: 25.h,
-                            color: Color(0xff053EFF).withOpacity(0.9),
+                            color: const Color(0xff053EFF).withOpacity(0.9),
                           )
                         : Image.asset(
                             "assets/images/profile (2).png",
                             width: 25.w,
                             height: 25.h,
-                            color: Color(0xff053EFF).withOpacity(0.9),
+                            color: const Color(0xff053EFF).withOpacity(0.9),
                           ),
                     title: widget.role == "4" ? "Homework".tr : "Profile".tr,
-                    activeColorPrimary: Color(0xff053EFF).withOpacity(0.9),
+                    activeColorPrimary: const Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),
                 ],
