@@ -56,7 +56,7 @@ String _id='XXXX';
       });
       
     });
-    print(_fullName);
+  
   }
 
   @override

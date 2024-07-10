@@ -34,7 +34,7 @@ class _AdminFeesDueReportState extends State<AdminFeesDueReport> {
 
         return FeesDueReportModel.fromJson(jsonData);
       }catch(e,tr){
-        print("$e");
+        debugPrint("$e");
         tr.printInfo();
         return FeesDueReportModel.fromJson({});
       }

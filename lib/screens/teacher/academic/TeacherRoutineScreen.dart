@@ -201,16 +201,15 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> with Si
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
         var data = TeacherWeeklyClassResponse.fromJson(jsonResponse);
-        print('Response: ${response.body}');
+      
         return data;
       } else {
-        print(response.body);
-        print(response.statusCode);
+       
         throw Exception('Failed to load post');
       }
     } catch (e,t) {
-      print(t);
-      print(e);
+      debugPrint(t.toString());
+      debugPrint(e.toString());
       throw Exception(e.toString());
     } finally {
       setState(() {

@@ -73,7 +73,7 @@ class _TeacherHomeworkState extends State<TeacherHomework> {
     try{
        final response = await http.get(Uri.parse(EdusApi.getHomeWorkListUrl(id)),
         headers: Utils.setHeader(_token.toString()));
-print(EdusApi.getHomeWorkListUrl(id));
+
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
 
@@ -82,8 +82,8 @@ print(EdusApi.getHomeWorkListUrl(id));
       throw Exception('failed to load');
     }
     }catch(e,t){
-      print(e);
-      print(t);
+      debugPrint(e.toString());
+      debugPrint(t.toString());
       throw e;
     }
    

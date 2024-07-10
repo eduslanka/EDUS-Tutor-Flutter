@@ -38,7 +38,7 @@ class KhaltiPaymentState extends State<KhaltiPayment> {
 
   @override
   Widget build(BuildContext context) {
-    print('Checkout url ${widget.checkoutUrl}');
+  
 
     if (widget.checkoutUrl != null) {
       return SafeArea(
@@ -51,13 +51,12 @@ class KhaltiPaymentState extends State<KhaltiPayment> {
             initialUrl: widget.checkoutUrl,
             javascriptMode: JavascriptMode.unrestricted,
             navigationDelegate: (NavigationRequest request) {
-              print(request.url);
+         
               if (request.url.contains(returnURL)) {
                 final uri = Uri.parse(request.url);
                 final status = uri.queryParameters['status'];
                 final idx = uri.queryParameters['idx'];
-                print("Status => $status");
-                print("txn => $idx");
+            
                 if (status == "200") {
                   Map data = {
                     'id': idx,

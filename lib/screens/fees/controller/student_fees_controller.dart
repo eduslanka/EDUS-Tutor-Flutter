@@ -339,8 +339,8 @@ class StudentFeesController extends GetxController {
 
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
-print(response.statusCode);
- print('addPaymentModel.value.paymentMethods${addPaymentModel.value.paymentMethods}');
+
+
         addPaymentModel.value = StudentAddPaymentModel.fromJson(jsonData);
        
 
@@ -393,7 +393,7 @@ print(response.statusCode);
         Uri.parse(EdusApi.getFeeApi(studentId)),
         headers: Utils.setHeader(userController.token.toString()),
       );
-print(recordId);
+
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         Iterable list = jsonData;
@@ -401,8 +401,7 @@ print(recordId);
         for(var record in feesRecordList.value ){
          if (record.recordId==recordId){
            feesRecord.value=record;
-           print(feesRecord.value.className);
-           print(feesRecord.value.feesInvoice?.length);
+          
          }
         }
       //  feesRecord.value = feesRecordList.value.firstWhereOrNull((record) => record.recordId == recordId)??ClassRecord();
@@ -411,7 +410,7 @@ print(recordId);
       }
     } catch (error,t) {
       log("Error: $error");
-      print(t);
+      debugPrint(t.toString());
     } finally {
       
       if(feesRecordList.value.isNotEmpty){

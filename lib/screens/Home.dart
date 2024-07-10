@@ -433,7 +433,7 @@ bool isBlock=false;
                       crossAxisCount: 3,
                     ),
                     itemBuilder: (context, index) {
-                      print(_rule);
+                 
                       return CustomWidget(
                         index: index,
                         isSelected: currentSelectedIndex == index,

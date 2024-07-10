@@ -236,7 +236,7 @@ class _WalletPaymentState extends State<WalletPayment> {
                 await khaltiPaymentService
                     .paymentDataSave()
                     .then((value) async {
-                  print(value);
+               
 
                   final initiationModel = await Khalti.service.initiatePayment(
                     request: PaymentInitiationRequestModel(

@@ -38,7 +38,7 @@ class SystemController extends GetxController {
         final response = await http.get(
             Uri.parse(EdusApi.generalSettings + '/$schoolId'),
             headers: Utils.setHeader(_token.toString()));
-print(EdusApi.generalSettings + '/$schoolId');
+
         if (response.statusCode == 200) {
           final studentRecords = systemSettingsFromJson(response.body);
           systemSettings.value = studentRecords;
@@ -56,15 +56,15 @@ print(EdusApi.generalSettings + '/$schoolId');
       _rule.value = value??'';
       if(value=='2'){
          await fetchTodayClasses();
-          print(':::::::::::::student ');
+        
       }else if(value=='4'){
 await fetchTeacherTodayClasses();
       }
     });
     } catch (e, t) {
       isLoading(false);
-      print('From e: $e');
-      print('From t: $t');
+      debugPrint('From e: $e');
+      debugPrint('From t: $t');
       throw Exception('failed to load');
     }
   }
@@ -102,7 +102,7 @@ Future fetchTodayClasses()async{
     if (response.statusCode == 200) {
       
   todayClassResponse.value=TodayClassResponse.fromJson(json.decode(response.body));
-  print(':::::::::::${response.body}');
+ 
     } else {
       throw Exception('Failed to load today classes: ${response.body} ${response.statusCode}');
     }
@@ -120,8 +120,7 @@ Future fetchTodayClasses()async{
       Uri.parse( EdusApi.todayClassTecher),
       headers: Utils.setHeader(_token.toString()),
     );
-   print(EdusApi.todayClassTecher);
-   print(_token.toString());
+
 
     if (response.statusCode == 200) {
       
@@ -130,7 +129,7 @@ Future fetchTodayClasses()async{
       throw Exception('Failed to load today classes: ${response.body} ${response.statusCode}');
     }
   } catch (e,t) {
-    print('trace tree $t');
+    debugPrint('trace tree $t');
     //throw Exception('Failed to load today classes: $e');
   }
 }

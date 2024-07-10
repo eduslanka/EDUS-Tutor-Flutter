@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:edus_tutor/utils/Utils.dart';
 import 'package:http/http.dart' as http;
@@ -62,7 +63,7 @@ final Rx<ClassListResponse> _classListResponse=ClassListResponse(success: false,
             headers: Utils.setHeader(_token.toString()));
 
         if (response.statusCode == 200) {
-          print('Body: ${response.body}');
+       
           final studentRecords = studentRecordsFromJson(response.body);
           _studentRecord.value = studentRecords;
           if (_studentRecord.value.records!.isNotEmpty) {
@@ -76,8 +77,8 @@ final Rx<ClassListResponse> _classListResponse=ClassListResponse(success: false,
         }
       });
     } catch (e, t) {
-      print('From T: $t');
-      print('From E: $e');
+      debugPrint('From T: $t');
+      debugPrint('From E: $e');
       isLoading(false);
       throw Exception('failed to load $e');
     }
@@ -90,7 +91,7 @@ final Rx<ClassListResponse> _classListResponse=ClassListResponse(success: false,
       Uri.parse(EdusApi.classList),
       headers: Utils.setHeader(_token.toString()),
     );
-    print(EdusApi.todayClass);
+  
 
     if (response.statusCode == 200) {
       

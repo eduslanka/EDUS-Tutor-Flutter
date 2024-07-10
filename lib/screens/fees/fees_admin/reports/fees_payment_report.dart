@@ -29,7 +29,7 @@ class _AdminFeesPaymentReportState extends State<AdminFeesPaymentReport> {
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
-      print(jsonData);
+     
 
 
         return FeePaymentReportModel.fromJson(jsonData);

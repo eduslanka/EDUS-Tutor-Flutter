@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 
 // Package imports:
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // Project imports:
@@ -57,7 +58,7 @@ class FeeService {
         Utils.showToast('try again later');
       }
     }catch (e){
-      print(e);
+      debugPrint(e.toString());
     }
     return feeMap;
   }

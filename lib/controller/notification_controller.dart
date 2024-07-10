@@ -35,8 +35,7 @@ class NotificationController extends GetxController {
       headers: Utils.setHeader(_token.toString()),
     );
 
-    print(EdusApi.getMyNotifications(_id));
-    print(_token.toString());
+    
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -51,8 +50,7 @@ class NotificationController extends GetxController {
     }
   } catch (e,t) {
     isLoading(false);
-    print(e);
-    print(t);
+   
     throw Exception(e.toString());
   }
 }
@@ -65,20 +63,18 @@ class NotificationController extends GetxController {
         'id': 217
       }),);
        
-        print(_id.value);
-         print(response.body);
+        
     if (response.statusCode == 200) {
       Map notifications = jsonDecode(response.body) as Map;
       bool status = notifications['data']['status'] ?? false;
-      print(status);
-      print(response.body);
+  
       return status;
     } else {
       debugPrint('Error retrieving from api');
     }
     }catch(e,t){
-      print(e);
-      print(t);
+    debugPrint(e.toString());
+     debugPrint(t.toString());
     }
    
   }

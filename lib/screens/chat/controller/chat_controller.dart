@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:edus_tutor/screens/chat/controller/pusher_controller.dart';
@@ -157,8 +158,8 @@ class ChatController extends GetxController {
         throw Exception('failed to load');
       }
     } catch (e, t) {
-      print('Chat Controller E: $e');
-      print('Chat Controller T: $t');
+      debugPrint('Chat Controller E: $e');
+      debugPrint('Chat Controller T: $t');
       throw Exception(e.toString());
     } finally {}
     return chatModel.value;
