@@ -69,8 +69,8 @@ android {
         applicationId "com.edus.edustutor"
         minSdkVersion 23
         targetSdkVersion 34
-        versionCode 4
-        versionName '1.1.2'
+        versionCode 8
+        versionName '1.1.6'
         multiDexEnabled true
 
 //        ndk {

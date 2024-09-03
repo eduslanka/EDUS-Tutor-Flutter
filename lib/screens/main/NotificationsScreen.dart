@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:edus_tutor/utils/model/UserNotifications.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -10,7 +11,6 @@ import 'package:edus_tutor/utils/server/LogoutService.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 // Project imports:
-import 'package:edus_tutor/config/app_config.dart';
 import 'package:edus_tutor/controller/notification_controller.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -27,113 +27,112 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   Future readAll() async {
     print('function clicked');
-   await controller.readNotification().then((value) {
-        if (value == true) {
-          controller.userNotificationList.value.userNotifications
-              ?.clear();
-        }
-      }).then((value) async {
-        await controller.getNotifications();
-      });
-    // await controller.getNotifications();
+    await controller.readNotification().then((value) {
+      if (value == true) {
+        controller.userNotificationList.value.userNotifications?.clear();
+      }
+    }).then((value) async {
+      await controller.getNotifications();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70.h),
-          child: AppBar(
-            centerTitle: false,
-            automaticallyImplyLeading: false,
-            flexibleSpace: Container(
-              padding: EdgeInsets.only(top: 20.h),
-              decoration: BoxDecoration(
-               
-                color: Color(0xff053EFF),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Container(
-                    width: 25.w,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 0.0),
-                      child: Text(
-                        "Notification".tr,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(fontSize: 18.sp, color: Colors.white),
-                      ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70.h),
+        child: AppBar(
+          centerTitle: false,
+          automaticallyImplyLeading: false,
+          flexibleSpace: Container(
+            padding: EdgeInsets.only(top: 20.h),
+            decoration: const BoxDecoration(
+              color: Color(0xff053EFF),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Container(
+                  width: 25.w,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 0.0),
+                    child: Text(
+                      "Notification".tr,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontSize: 18.sp, color: Colors.white),
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                IconButton(
+                  onPressed: () {
+                    Get.dialog(LogoutService().logoutDialog());
+                  },
+                  icon: Icon(
+                    Icons.exit_to_app,
+                    size: 25.sp,
                   ),
-                  IconButton(
-                    onPressed: () {
-                      Get.dialog(LogoutService().logoutDialog());
-                    },
-                    icon: Icon(
-                      Icons.exit_to_app,
-                      size: 25.sp,
+                ),
+              ],
+            ),
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await controller.getNotifications();
+        },
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: Obx(() {
+                      return Text(
+                        "You have".tr +
+                            " ${controller.notificationCount.value} " +
+                            "New notification".tr,
+                      );
+                    }),
+                  ),
+                  ElevatedButton(
+                    onPressed: readAll,
+                    child: Text(
+                      'Mark all as read'.tr,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontSize: ScreenUtil().setSp(12),
+                            color: Colors.white,
+                          ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff053EFF),
                     ),
                   ),
                 ],
               ),
             ),
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        body: RefreshIndicator(
-          onRefresh: () async {
-            await controller.getNotifications();
-          },
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: Obx(() {
-                        return Text(
-                          "You have".tr +
-                              " ${controller.notificationCount.value} " +
-                              "New notification".tr,
-                        );
-                      }),
-                    ),
-                    ElevatedButton(
-                      onPressed: readAll,
-                      child: Text(
-                        'Mark all as read'.tr,
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                              fontSize: ScreenUtil().setSp(12),
-                              color: Colors.white,
-                            ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff053EFF),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Obx(() {
+            Expanded(
+              child: StreamBuilder<UserNotificationList>(
+                stream: controller.notificationStream,
+                builder: (context, snapshot) {
                   if (controller.isLoading.value) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
-                    if (controller.userNotificationList.value.userNotifications!.isEmpty) {
+                    if (controller.userNotificationList.value.userNotifications?.isEmpty ?? true) {
                       return Center(
                         child: Container(
                           child: Text(
@@ -153,11 +152,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             height: 10.h,
                           );
                         },
-                        itemCount: controller.userNotificationList.value
-                            .userNotifications?.length ?? 0,
+                        itemCount: controller.userNotificationList.value.userNotifications?.length ?? 0,
                         itemBuilder: (context, index) {
-                          final item = controller.userNotificationList.value
-                              .userNotifications?[index];
+                          final item = controller.userNotificationList.value.userNotifications?[index];
                           return Slidable(
                             actionPane: const SlidableDrawerActionPane(),
                             actionExtentRatio: 0.25,
@@ -169,7 +166,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Icon(
                                     FontAwesomeIcons.solidBell,
-                                    color: Color(0xff053EFF),
+                                    color: const Color(0xff053EFF),
                                     size: 15.sp,
                                   ),
                                 ),
@@ -179,8 +176,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         item?.message.toString() ?? '',
@@ -213,19 +209,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             actions: <Widget>[
                               IconSlideAction(
                                 caption: 'Mark as Read',
-                                color: Color(0xff053EFF),
+                                color: const Color(0xff053EFF),
                                 iconWidget: const Icon(
                                   Icons.panorama_fish_eye,
                                   size: 1,
                                 ),
                                 onTap: () async {
-                                  await controller
-                                      .readNotification()
-                                      .then((value) async {
+                                  await controller.readNotification().then((value) async {
                                     if (value == true) {
-                                      controller.userNotificationList.value
-                                          .userNotifications
-                                          ?.removeAt(index);
+                                      controller.userNotificationList.value.userNotifications?.removeAt(index);
                                     }
                                   }).then((value) async {
                                     await controller.getNotifications();
@@ -236,19 +228,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             secondaryActions: <Widget>[
                               IconSlideAction(
                                 caption: 'Mark as Read',
-                                color: Color(0xff053EFF),
+                                color: const Color(0xff053EFF),
                                 iconWidget: const Icon(
                                   Icons.panorama_fish_eye,
                                   size: 1,
                                 ),
                                 onTap: () async {
-                                  await controller
-                                      .readNotification()
-                                      .then((value) async {
+                                  await controller.readNotification().then((value) async {
                                     if (value == true) {
-                                      controller.userNotificationList.value
-                                          .userNotifications
-                                          ?.removeAt(index);
+                                      controller.userNotificationList.value.userNotifications?.removeAt(index);
                                     }
                                   }).then((value) async {
                                     await controller.getNotifications();
@@ -261,10 +249,32 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       );
                     }
                   }
-                }),
+                },
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
+  //  Future<void> _showNotification(UserNotificationList notification) async {
+  //   const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  //     'your channel id',
+  //     'your channel name',
+  //     'your channel description',
+  //     importance: Importance.max,
+  //     priority: Priority.high,
+  //     ticker: 'ticker',
+  //   );
+
+  //   const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
+
+  //   await flutterLocalNotificationsPlugin.show(
+  //     0,
+  //     notification.userNotifications.,
+  //     notification.body,
+  //     platformChannelSpecifics,
+  //     payload: 'item x',
+  //   );
+  // }
 }

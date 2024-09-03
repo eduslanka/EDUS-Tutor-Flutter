@@ -1,12 +1,13 @@
 import 'dart:io';
-import 'package:edus_tutor/utils/server/LoginService.dart';
+import 'package:edus_tutor/controller/notification_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:edus_tutor/config/app_config.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_html/js.dart';
 import 'screens/fees/paymentGateway/khalti/sdk/khalti.dart';
 import 'utils/Utils.dart';
 import 'utils/widget/page.dart';
@@ -23,7 +24,7 @@ class MyHttpOverrides extends HttpOverrides {
 // ignore: prefer_typing_uninitialized_variables
 var language;
 bool langValue = false;
-
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -34,6 +35,12 @@ void main() async {
          Utils.baseBlue, //or set color with: Color(0xFF0000FF)
         
   ));
+  final NotificationController notificationController = Get.put(NotificationController());
+
+  const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+  final InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
+
+  flutterLocalNotificationsPlugin.initialize(initializationSettings);
   HttpOverrides.global = MyHttpOverrides();
   final sharedPref = await SharedPreferences.getInstance();
   language = sharedPref.getString('language');

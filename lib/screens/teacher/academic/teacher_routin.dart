@@ -9,49 +9,50 @@ import 'package:intl/intl.dart';
 import 'package:edus_tutor/utils/FunctinsData.dart';
 import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
-import '../../../model/weekly_class_model.dart';
+import '../../../model/teachers_weekly_class.dart';
+
 import '../../../utils/server/LogoutService.dart';
 
-class DBStudentRoutine extends StatefulWidget {
-  final String? id;
+class TeacherMyRoutineScreen extends StatefulWidget {
   final bool isHome;
-  const DBStudentRoutine({Key? key, this.id, required this.isHome})
-      : super(key: key);
+  const TeacherMyRoutineScreen({super.key, required this.isHome});
 
   @override
-  _DBStudentRoutineState createState() => _DBStudentRoutineState();
+  State<TeacherMyRoutineScreen> createState() => _TeacherMyRoutineScreenState();
 }
 
-class _DBStudentRoutineState extends State<DBStudentRoutine>
-    with SingleTickerProviderStateMixin {
+class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
+ 
+
+
+
   List<String> weeks = AppFunction.weeks;
   var _token;
-  Future<WeeklyClassResponse>? routine;
-  bool isLoading = true;
-  WeeklyClassResponse? weeklyClassResponse;
 
-  Future<WeeklyClassResponse> getRoutine() async {
+  bool isLoading = true;
+  TeacherWeeklyClassResponse? weeklyClassResponse;
+
+  Future<TeacherWeeklyClassResponse> getRoutine() async {
     try {
       _token = await Utils.getStringValue('token');
 
-      final response = await http.post(
-        Uri.parse(EdusApi.studentWeeklyClass),
+      final response = await http.get(
+        Uri.parse(EdusApi.techersWeeklyClass),
         headers: Utils.setHeader(_token.toString()),
       );
 
+      //  print(EdusApi.routineView(widget.id, "student", recordId: sectionId));
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
-        var data = WeeklyClassResponse.fromJson(jsonResponse);
-        print('Response: ${response.body}');
+        var data = TeacherWeeklyClassResponse.fromJson(jsonResponse);
+
         return data;
       } else {
-        print(response.body);
-        print(response.statusCode);
         throw Exception('Failed to load post');
       }
     } catch (e, t) {
-      print(t);
-      print(e);
+      debugPrint(t.toString());
+      debugPrint(e.toString());
       throw Exception(e.toString());
     } finally {
       setState(() {
@@ -62,9 +63,11 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
 
   Future<void> fetchData() async {
     try {
-      weeklyClassResponse = await getRoutine();
+      await Utils.getStringValue('token').then((tok) async {
+        weeklyClassResponse = await getRoutine();
+      });
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
@@ -105,17 +108,17 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
     super.initState();
     getInitialDay();
     selectedDay = weeks[initialIndex];
-   pageController = PageController(initialPage:initialIndex );
+    pageController=PageController(initialPage: initialIndex);
     fetchData();
   }
 
   String selectedDay = '';
- late PageController pageController ;
+ late PageController pageController ; 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
+    //  backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.h),
         child: AppBar(
@@ -130,7 +133,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Container(width: 25.w),
-                if (widget.isHome)
+                if (!widget.isHome)
                   IconButton(
                       onPressed: () {
                         Navigator.pop(context);
@@ -223,6 +226,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
             controller: pageController,
             itemCount: weeks.length,
             onPageChanged: (index) {
+              
               setState(() {
                 initialIndex=index;
                 selectedDay = weeks[initialIndex];
@@ -231,17 +235,14 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
             itemBuilder: (context, index) {
               final classes =
                   weeklyClassResponse?.data.weeklyClass[selectedDay] ?? [];
-                       if (classes.isEmpty) {
+                   if (classes.isEmpty) {
                 return Utils.noDataWidget();
               }
               return ListView.builder(
                 itemCount: classes.length ,
                 itemBuilder: (context, classIndex) {
                  
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom:  8.0),
-                    child: _tutionCard(context, classes[classIndex]),
-                  );
+                  return _tutionCard(context, classes[classIndex]);
                 },
               );
             },
@@ -251,17 +252,21 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
     );
   }
 
-  Widget _tutionCard(BuildContext context, ClassDetail classDetail) {
+  Widget _tutionCard(BuildContext context, TeachersClassDetail classDetail) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal:  16.0),
       child: Card(
-         color: Colors.transparent,
+        color: Colors.transparent,
         surfaceTintColor: Colors.white,
         child: Container(
-          
+         // margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-           
+            // gradient: const LinearGradient(
+            //   colors: [
+                
+            //   ],
+            // ),
             color: Colors.white
           ),
           child: Padding(
@@ -274,13 +279,13 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                   children: [
                     Text(
                       'Time'.tr + ":",
-                      style: _textStyle()
+                      style: _textStyle(),
                     ),
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(
                         '${classDetail.startTime} - ${classDetail.endTime}',
-                        style: _textStyle()
+                        style:  _textStyle(),
                       ),
                     ),
                   ],
@@ -297,7 +302,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                     Expanded(
                       child: Text(
                         classDetail.topic ?? '',
-                        style: _textStyle()
+                        style:  _textStyle()
                       ),
                     ),
                   ],
@@ -324,13 +329,13 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Teacher'.tr + ":",
+                      'Status'.tr + ":",
                       style: _textStyle()
                     ),
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(
-                        classDetail.teacher ?? '',
+                        classDetail.status ?? '',
                         style: _textStyle()
                       ),
                     ),
@@ -343,7 +348,8 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
       ),
     );
   }
-    TextStyle _textStyle() {
+
+  TextStyle _textStyle() {
     return const TextStyle(
                     color: Colors.black, fontWeight: FontWeight.w700);
   }

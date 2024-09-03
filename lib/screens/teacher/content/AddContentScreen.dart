@@ -466,42 +466,43 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
     );
   }
 
-  void uploadContent() async {
+ void uploadContent() async {
+  FormData formData = FormData.fromMap({
+    "class": '$classId',
+    "section": '$sectionId',
+    "school_id": _schoolId,
+    "upload_date": _selectedaAssignDate,
+    "available_for": radioStr,
+    "description": descriptionController.text,
+    "created_by": _id,
+    "all_classes": '$allClasses',
+    "content_title": titleController.text,
+    "content_type": _selectedContentType?.toLowerCase().substring(0, 2),
+    "attach_file": _file != null
+        ? await MultipartFile.fromFile(_file?.path ?? '', filename: _file?.path.split('/').last)
+        : "",
+  });
 
-
-    FormData formData = FormData.fromMap({
-      "class": '$classId',
-      "section": '$sectionId',
-      "school_id": _schoolId,
-      "upload_date": _selectedaAssignDate,
-      "available_for": radioStr,
-      "description": descriptionController.text,
-      "created_by": _id,
-      "all_classes": '$allClasses',
-      "content_title": titleController.text,
-      "content_type": _selectedContentType?.toLowerCase().substring(0, 2),
-      "attach_file": _file != null
-          ? await MultipartFile.fromFile(_file?.path ?? '',
-              filename: _file?.path)
-          : "",
-    });
-    try{
- response = await dio.post(
+  try {
+    final response = await dio.post(
       EdusApi.uploadContent,
       data: formData,
       options: Options(
-        // contentType: Headers.formUrlEncodedContentType,
         headers: {
           "Accept": "application/json",
           "Authorization": _token.toString(),
         },
       ),
       onSendProgress: (received, total) {
-        if (total != -1) {}
+        if (total != -1) {
+          print('${(received / total * 100).toStringAsFixed(0)}%');
+        }
       },
     );
-print(EdusApi.uploadContent);
-    if (response?.statusCode == 200) {
+
+    print(EdusApi.uploadContent);
+
+    if (response.statusCode == 200) {
       Utils.showToast('Upload successful');
       if (radioStr == 'admin') {
         sentNotificationTo(1);
@@ -513,13 +514,17 @@ print(EdusApi.uploadContent);
         }
       }
       Navigator.pop(context);
+    } else {
+      print('Failed to upload content. Status code: ${response.statusCode}');
+      print('Response data: ${response.data}');
+      Utils.showToast('Upload failed. Please try again.');
     }
-    }catch(e,t){
-      print(e);
-      print(t);
-    }
-   
+  } catch (e, stackTrace) {
+    print('Upload error: $e');
+    print('Stack trace: $stackTrace');
+    Utils.showToast('An error occurred during upload. Please try again.');
   }
+}
 
 
   int? getCode<T>(List t, String title) {

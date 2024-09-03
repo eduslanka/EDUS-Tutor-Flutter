@@ -1,13 +1,11 @@
 import 'dart:convert';
 
-import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
 
 import '../model/fee_invoice_model.dart';
 import '../model/quets_model.dart';
 import 'package:http/http.dart' as http;
 
-import '../model/today_class_model.dart';
 Future<Quote> fetchQuoteOfTheDay() async {
   final response = await http.get(Uri.parse('http://thurukural.edustutor.com/quote-of-the-day'));
 
