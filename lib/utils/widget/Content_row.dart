@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:file_utils/file_utils.dart';
+
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -33,7 +33,8 @@ class ContentRow extends StatefulWidget {
   dynamic index;
 
   ContentRow(this.content, this.animation,
-      {Key? key, this.onPressed, this.token, this.index}) : super(key: key);
+      {Key? key, this.onPressed, this.token, this.index})
+      : super(key: key);
 
   @override
   // ignore: no_logic_in_create_state
@@ -96,8 +97,7 @@ class _ContentRowState extends State<ContentRow> {
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: <Widget>[
                                       const SizedBox(
                                         height: 10.0,
@@ -366,7 +366,7 @@ class _ContentRowState extends State<ContentRow> {
     Utils.showToast(dirloc);
 
     try {
-      FileUtils.mkdir([dirloc]);
+//FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
 
       await dio.download(
@@ -388,7 +388,8 @@ class _ContentRowState extends State<ContentRow> {
                     page: DownloadViewer(
                         title: title, filePath: EdusApi.root + url)));
           } else {
-            var file = await DefaultCacheManager().getSingleFile(EdusApi.root + url);
+            var file =
+                await DefaultCacheManager().getSingleFile(EdusApi.root + url);
             OpenFilex.open(file.path);
             print('File ::::::::: $file');
 

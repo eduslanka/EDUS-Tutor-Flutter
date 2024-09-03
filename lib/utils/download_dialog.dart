@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:file_utils/file_utils.dart';
+// import 'package:file_utils/file_utils.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -46,7 +46,7 @@ class _DownloadDialogState extends State<DownloadDialog> {
     Utils.showToast(dirloc);
 
     try {
-      FileUtils.mkdir([dirloc]);
+      // FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
 
       await dio.download(

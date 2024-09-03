@@ -9,7 +9,6 @@ import 'package:dio/dio.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
-import 'package:pdf_flutter/pdf_flutter.dart';
 
 // Project imports:
 import 'package:edus_tutor/screens/student/studyMaterials/StudyMaterialViewer.dart';
@@ -19,6 +18,7 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/custom_widgets/CustomRadioButton/CustomButton/ButtonTextStyle.dart';
 import 'package:edus_tutor/utils/custom_widgets/CustomRadioButton/custom_radio_button.dart';
 import 'package:edus_tutor/utils/widget/Line.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class EvaluateScreen extends StatefulWidget {
   final String? studentName;
@@ -31,14 +31,16 @@ class EvaluateScreen extends StatefulWidget {
   final String? totalMarks;
 
   const EvaluateScreen(
-      {Key? key, this.studentName,
+      {Key? key,
+      this.studentName,
       this.marks,
       this.teacherComment,
       this.status,
       this.studentId,
       this.homeworkId,
       this.files,
-      this.totalMarks}) : super(key: key);
+      this.totalMarks})
+      : super(key: key);
 
   @override
   _EvaluateScreenState createState() => _EvaluateScreenState();
@@ -116,7 +118,8 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                     if (!regExp.hasMatch(value)) {
                       return 'Please enter a number';
                     }
-                    if ((int.tryParse(value) ?? 0) > (int.tryParse(widget.totalMarks ?? '') ?? 0)) {
+                    if ((int.tryParse(value) ?? 0) >
+                        (int.tryParse(widget.totalMarks ?? '') ?? 0)) {
                       return 'Marks must not greater than total marks';
                     }
                     return null;
@@ -291,46 +294,46 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                     itemBuilder: (context, index) {
                       return widget.files![index].contains('.pdf')
                           ? InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => DownloadViewer(
-                                        title: 'PDF',
-                                        filePath: EdusApi.root +
-                                            '${widget.files?[index]}',
-                                      )));
-                            },
-                            child: Stack(
-                              fit: StackFit.loose,
-                              children: [
-                                PDF.network(
-                                  EdusApi.root + '${widget.files?[index]}',
-                                  height: 300,
-                                  width: double.maxFinite,
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.picture_as_pdf,
-                                        color: Color(0xff053EFF),
-                                      ),
-                                      Text(
-                                        'View',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium
-                                            ?.copyWith(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 20),
-                                      ),
-                                    ],
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => DownloadViewer(
+                                          title: 'PDF',
+                                          filePath: EdusApi.root +
+                                              '${widget.files?[index]}',
+                                        )));
+                              },
+                              child: Stack(
+                                fit: StackFit.loose,
+                                children: [
+                                  // WebView(
+                                  //   initialUrl: EdusApi.root +
+                                  //       '${widget.files?[index]}',
+                                  //   javascriptMode: JavascriptMode.unrestricted,
+                                  // ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.picture_as_pdf,
+                                          color: Color(0xff053EFF),
+                                        ),
+                                        Text(
+                                          'View',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineMedium
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 20),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          )
+                                ],
+                              ),
+                            )
                           : ExtendedImage.network(
                               EdusApi.root + '${widget.files?[index]}',
                               fit: BoxFit.cover,

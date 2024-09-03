@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
-import 'package:file_utils/file_utils.dart';
+// import 'package:file_utils/file_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -81,7 +81,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   Future<StudentDetailsModel> getProfile(id) async {
     final response = await http.get(Uri.parse(EdusApi.getChildren(id)),
         headers: id == null ? null : Utils.setHeader(_token.toString()));
-        print(EdusApi.getChildren(id));
+    print(EdusApi.getChildren(id));
     if (response.statusCode == 200) {
       final studentDetails = studentDetailsFromJson(response.body);
       setState(() {
@@ -122,7 +122,6 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           flexibleSpace: Container(
             padding: EdgeInsets.only(top: 20.h),
             decoration: BoxDecoration(
-             
               color: Color(0xff053EFF),
             ),
             child: Row(
@@ -208,8 +207,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                       image: imageProvider,
                                       fit: BoxFit.cover,
                                     ),
-                                    borderRadius:
-                                        const BorderRadius.all(Radius.circular(50)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(50)),
                                   ),
                                 ),
                                 placeholder: (context, url) =>
@@ -225,8 +224,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                         image: imageProvider,
                                         fit: BoxFit.cover,
                                       ),
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(50)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(50)),
                                     ),
                                   ),
                                   placeholder: (context, url) =>
@@ -288,7 +287,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                             color: const Color(0xff415094),
                                             fontSize: ScreenUtil().setSp(11),
                                             fontWeight: FontWeight.bold),
-                                    unselectedLabelColor: const Color(0xff415094),
+                                    unselectedLabelColor:
+                                        const Color(0xff415094),
                                   ),
                                 ),
                                 body: Column(
@@ -308,12 +308,13 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                     ),
                                     Expanded(
                                       child: TabBarView(
-                                        physics: const NeverScrollableScrollPhysics(),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         children: [
                                           getProfileList(),
                                           getParentDetails(),
-                                      //    getTransportList(),
-                                         // getOthersList(),
+                                          //    getTransportList(),
+                                          // getOthersList(),
                                           getDocumentsList(),
                                           // getParentDetails(),
                                           // getProfileList(2),
@@ -381,11 +382,14 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                           image: imageProvider,
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                     ),
-                    placeholder: (context, url) => const CupertinoActivityIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -398,8 +402,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                   children: [
                     ParentsDetailsRow(
                       title: "Name".tr,
-                      value:
-                          _studentDetails.studentData?.user?.parents?.fathersName,
+                      value: _studentDetails
+                          .studentData?.user?.parents?.fathersName,
                     ),
                     GestureDetector(
                       onTap: () async {
@@ -466,11 +470,14 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                           image: imageProvider,
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                     ),
-                    placeholder: (context, url) => const CupertinoActivityIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -483,8 +490,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                   children: [
                     ParentsDetailsRow(
                       title: "Name".tr,
-                      value:
-                          _studentDetails.studentData?.user?.parents?.mothersName,
+                      value: _studentDetails
+                          .studentData?.user?.parents?.mothersName,
                     ),
                     GestureDetector(
                       onTap: () async {
@@ -538,18 +545,22 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                   radius: ScreenUtil().setSp(25),
                   child: CachedNetworkImage(
                     imageUrl: buildGuardianPhoto(
-                        _studentDetails.studentData?.user?.parents ?? Parents()),
+                        _studentDetails.studentData?.user?.parents ??
+                            Parents()),
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: imageProvider,
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                     ),
-                    placeholder: (context, url) => const CupertinoActivityIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -659,12 +670,15 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
             _studentDetails.studentData?.religion != null
                 ? ProfileRowList(
                     "Religion".tr,
-                    _studentDetails.studentData?.religion?.name.toString() ?? '',
+                    _studentDetails.studentData?.religion?.name.toString() ??
+                        '',
                   )
                 : const SizedBox.shrink(),
             ProfileRowList(
               "Phone number".tr,
-              _studentDetails.studentData?.userDetails?.phoneNumber.toString() ?? '',
+              _studentDetails.studentData?.userDetails?.phoneNumber
+                      .toString() ??
+                  '',
             ),
             ProfileRowList(
               "Email address".tr,
@@ -672,16 +686,19 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
             ),
             ProfileRowList(
               "Present address".tr,
-              _studentDetails.studentData?.user?.currentAddress.toString() ?? '',
+              _studentDetails.studentData?.user?.currentAddress.toString() ??
+                  '',
             ),
             ProfileRowList(
               "Permanent address".tr,
-              _studentDetails.studentData?.user?.permanentAddress.toString() ?? '',
+              _studentDetails.studentData?.user?.permanentAddress.toString() ??
+                  '',
             ),
             _studentDetails.studentData?.bloodGroup != null
                 ? ProfileRowList(
                     "Blood group".tr,
-                    _studentDetails.studentData?.bloodGroup?.name.toString() ?? '',
+                    _studentDetails.studentData?.bloodGroup?.name.toString() ??
+                        '',
                   )
                 : const SizedBox.shrink(),
           ]),
@@ -719,7 +736,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   //         : const SizedBox.shrink(),
   //   );
   // }
-// 
+//
   Widget getOthersList() {
     return Container(
       height: MediaQuery.of(context).size.height,
@@ -789,8 +806,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle1)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle1)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle1,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -830,8 +847,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle2)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle2)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle2,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -871,8 +888,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle3)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle3)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle3,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -912,8 +929,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle4)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle4)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle4,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -949,8 +966,9 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
             _studentDetails.studentData?.userDetails?.classSection?.length ?? 0,
             (index) => Text(
               _studentDetails.studentData?.userDetails?.classSection?[index]
-                  .toString()
-                  .replaceAll(',', '') ?? '',
+                      .toString()
+                      .replaceAll(',', '') ??
+                  '',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: const Color(0xFF727FC8),
                     fontWeight: FontWeight.normal,
@@ -1031,7 +1049,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
     Utils.showToast(dirloc);
 
     try {
-      FileUtils.mkdir([dirloc]);
+      // FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
 
       await dio.download(

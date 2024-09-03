@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+// import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 // Project imports:
 import '../../../utils/CustomAppBarWidget.dart';
@@ -57,17 +57,17 @@ class _NoticDetailsLayoutState extends State<NoticDetailsLayout> {
               const SizedBox(
                 height: 10.0,
               ),
-              HtmlWidget(
-                '''
-              ${notice.destails ?? ""}
-              ''',
-                textStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.w300,
-                      fontSize: ScreenUtil().setSp(14.0),
-                    ),
-                // ignore: deprecated_member_use
-                webView: true,
-              ),
+              // HtmlWidget(
+              //   '''
+              // ${notice.destails ?? ""}
+              // ''',
+              //   textStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              //         fontWeight: FontWeight.w300,
+              //         fontSize: ScreenUtil().setSp(14.0),
+              //       ),
+              //   // ignore: deprecated_member_use
+              //   webView: true,
+              // ),
             ],
           ),
         ),

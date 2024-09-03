@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:file_utils/file_utils.dart';
+//import 'package:file_utils/file_utils.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +23,8 @@ import '../Utils.dart';
 import 'ScaleRoute.dart';
 
 class HomeWorkEvaluationDetailsRow extends StatefulWidget {
-  const HomeWorkEvaluationDetailsRow(this.studentHomeworkEvaluation, {Key? key}) : super(key: key);
+  const HomeWorkEvaluationDetailsRow(this.studentHomeworkEvaluation, {Key? key})
+      : super(key: key);
 
   final StudentHomeworkEvaluation studentHomeworkEvaluation;
 
@@ -91,7 +92,7 @@ class _HomeWorkEvaluationDetailsRowState
     Utils.showToast(dirloc);
 
     try {
-      FileUtils.mkdir([dirloc]);
+      // FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
 
       await dio.download(
@@ -183,7 +184,8 @@ class _HomeWorkEvaluationDetailsRowState
                       height: 10.0,
                     ),
                     Text(
-                      widget.studentHomeworkEvaluation.homeworkDate ?? 'not assigned',
+                      widget.studentHomeworkEvaluation.homeworkDate ??
+                          'not assigned',
                       maxLines: 1,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
@@ -206,7 +208,8 @@ class _HomeWorkEvaluationDetailsRowState
                       height: 10.0,
                     ),
                     Text(
-                      widget.studentHomeworkEvaluation.submissionDate ?? 'not assigned',
+                      widget.studentHomeworkEvaluation.submissionDate ??
+                          'not assigned',
                       maxLines: 1,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),

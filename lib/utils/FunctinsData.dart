@@ -80,7 +80,8 @@ import 'package:edus_tutor/screens/teacher/students/StudentSearch.dart';
 import 'package:edus_tutor/screens/wallet/student/views/StudentWalletTransactions.dart';
 import 'package:edus_tutor/utils/model/SystemSettings.dart';
 import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+// import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../screens/main/student/DBStudentRoutine.dart';
 import '../screens/student/exam/exam_home.dart';
@@ -89,7 +90,7 @@ import '../screens/virtual_class/virtual_class_main.dart';
 
 class AppFunction {
   static var students = [
-   // 'Class',
+    // 'Class',
     'Notice',
     'Subjects',
     'Study Materials',
@@ -110,7 +111,7 @@ class AppFunction {
     'More',
   ];
   static var studentIcons = [
-  //  'assets/images/routine.png',
+    //  'assets/images/routine.png',
     'assets/images/notice.png',
     'assets/images/subjects.png',
     'assets/images/downloads.png',
@@ -122,7 +123,7 @@ class AppFunction {
     // 'assets/images/onlineexam.png',
     'assets/images/attendance.png',
 
- //   'assets/images/leave.png',
+    //   'assets/images/leave.png',
 
     //  'assets/images/teacher.png',
     // 'assets/images/library.png',
@@ -134,30 +135,30 @@ class AppFunction {
   ];
 
   static var teachers = [
-   // 'Students',
+    // 'Students',
     'Time Table',
     'Mark Attendance',
     //'Leave',
     'Content',
     'Notice',
-  //  'Library',
+    //  'Library',
     'Homework',
-   // 'About',
-   // 'Class',
+    // 'About',
+    // 'Class',
     'More',
   ];
 
   static var teachersIcons = [
-   // 'assets/images/students.png',
+    // 'assets/images/students.png',
     'assets/images/academics.png',
     'assets/images/attendance.png',
-  //  'assets/images/leave.png',
+    //  'assets/images/leave.png',
     'assets/images/contents.png',
     'assets/images/notice.png',
-  //  'assets/images/library.png',
+    //  'assets/images/library.png',
     'assets/images/homework.png',
- //   'assets/images/about.png',
-  //  'assets/images/myroutine.png',
+    //   'assets/images/about.png',
+    //  'assets/images/myroutine.png',
     'assets/images/addhw.png',
   ];
 
@@ -842,13 +843,19 @@ class AppFunction {
         break;
       case 'Time Table':
         Navigator.push(
-            context, ScaleRoute(page: const TeacherMyRoutineScreen(isHome: false,)));
+            context,
+            ScaleRoute(
+                page: const TeacherMyRoutineScreen(
+              isHome: false,
+            )));
         break;
       case 'Mark Attendance':
         Navigator.push(
             context,
             ScaleRoute(
-                page: StudentSubjectAttendanceHome(isHome: false,)));
+                page: StudentSubjectAttendanceHome(
+              isHome: false,
+            )));
         break;
       case 'Homework':
         Navigator.push(context,
@@ -915,7 +922,11 @@ class AppFunction {
         break;
       case 'Subject Atten':
         Navigator.push(
-            context, ScaleRoute(page: const StudentSubjectAttendanceHome(isHome: false,)));
+            context,
+            ScaleRoute(
+                page: const StudentSubjectAttendanceHome(
+              isHome: false,
+            )));
         break;
       case 'Search Atten':
         Navigator.push(
@@ -949,7 +960,11 @@ class AppFunction {
         break;
       case 'Subject Atten':
         Navigator.push(
-            context, ScaleRoute(page: const StudentSubjectAttendanceHome(isHome: false,)));
+            context,
+            ScaleRoute(
+                page: const StudentSubjectAttendanceHome(
+              isHome: false,
+            )));
         break;
       case 'Search Atten':
         Navigator.push(
@@ -980,7 +995,11 @@ class AppFunction {
         break;
       case 'My Routine':
         Navigator.push(
-            context, ScaleRoute(page: const TeacherMyRoutineScreen(isHome: false,)));
+            context,
+            ScaleRoute(
+                page: const TeacherMyRoutineScreen(
+              isHome: false,
+            )));
         break;
     }
   }

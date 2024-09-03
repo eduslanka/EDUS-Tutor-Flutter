@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
+// import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:edus_tutor/config/app_config.dart';
 import 'package:edus_tutor/screens/chat/controller/chat_controller.dart';
 import 'package:edus_tutor/screens/chat/controller/chat_group_open_controller.dart';
@@ -38,7 +38,8 @@ class GroupChatOpenPage extends StatefulWidget {
   final String? groupId;
   final ChatGroup? chatGroup;
   const GroupChatOpenPage(
-      {Key? key, this.photoUrl, this.chatTitle, this.groupId, this.chatGroup}) : super(key: key);
+      {Key? key, this.photoUrl, this.chatTitle, this.groupId, this.chatGroup})
+      : super(key: key);
 
   @override
   _GroupChatOpenPageState createState() => _GroupChatOpenPageState();
@@ -54,7 +55,7 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
 
   final ChatController _chatController = Get.put(ChatController());
 
-  final HtmlEditorController _htmlEditorController = HtmlEditorController();
+  // final HtmlEditorController _htmlEditorController = HtmlEditorController();
 
   Future? chatOpen;
 
@@ -74,10 +75,11 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
 
   @override
   void initState() {
+    _chatGroupOpenController =
+        Get.put(ChatGroupOpenController(widget.groupId ?? ''));
 
-    _chatGroupOpenController = Get.put(ChatGroupOpenController(widget.groupId ?? ''));
-
-    source = ChatGroupLoadMore(widget.groupId ?? '', _chatGroupOpenController ?? ChatGroupOpenController(''));
+    source = ChatGroupLoadMore(widget.groupId ?? '',
+        _chatGroupOpenController ?? ChatGroupOpenController(''));
 
     _focusNode.addListener(_focusNodeListener);
 
@@ -87,7 +89,6 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
         _pusherController.chatOpenGroup(widget.groupId, source!);
       });
     }
-
 
     scrollController.addListener(() {
       // print(scrollController.offset);
@@ -380,7 +381,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                   return GroupMessageItemWidget(
                                       groupThread: groupThread,
                                       currentUserId:
-                                          _chatGroupOpenController?.id.value ?? '',
+                                          _chatGroupOpenController?.id.value ??
+                                              '',
                                       menuVisible: false,
                                       showActions: true,
                                       onTapMenu: () {
@@ -408,8 +410,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                         onPressed: () {
                                           scrollController.animateTo(
                                             0,
-                                            duration:
-                                                const Duration(milliseconds: 100),
+                                            duration: const Duration(
+                                                milliseconds: 100),
                                             curve: Curves.easeIn,
                                           );
                                         },
@@ -436,9 +438,13 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                           ],
                         ),
                       ),
-                      _chatGroupOpenController?.chatGroupModel.value.group?.readOnly == "0" || _chatGroupOpenController?.chatGroupModel.value.group?.readOnly == 0 ?
-
-                      Container(
+                      _chatGroupOpenController
+                                      ?.chatGroupModel.value.group?.readOnly ==
+                                  "0" ||
+                              _chatGroupOpenController
+                                      ?.chatGroupModel.value.group?.readOnly ==
+                                  0
+                          ? Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 10,
                               ),
@@ -468,8 +474,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                                     children: [
                                                       Text(
                                                         "Replying to ${_chatGroupOpenController?.selectedChatMsg.value.user?.fullName} ",
-                                                        style: Get
-                                                            .textTheme.titleMedium
+                                                        style: Get.textTheme
+                                                            .titleMedium
                                                             ?.copyWith(
                                                           fontSize: 10,
                                                           fontWeight:
@@ -477,11 +483,20 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                                         ),
                                                       ),
                                                       Text(
-                                                        _chatGroupOpenController?.selectedChatMsg.value.conversation?.message ?? '',
+                                                        _chatGroupOpenController
+                                                                ?.selectedChatMsg
+                                                                .value
+                                                                .conversation
+                                                                ?.message ??
+                                                            '',
                                                         maxLines: 1,
-                                                        overflow: TextOverflow.ellipsis,
-                                                        style: Get.textTheme.titleMedium?.copyWith(
-                                                          overflow: TextOverflow.clip,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: Get.textTheme
+                                                            .titleMedium
+                                                            ?.copyWith(
+                                                          overflow:
+                                                              TextOverflow.clip,
                                                           fontSize: 10,
                                                         ),
                                                       ),
@@ -509,8 +524,6 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                           )
                                         : const SizedBox.shrink(),
                                   ),
-
-
                                   AnimatedSwitcher(
                                     duration: const Duration(milliseconds: 500),
                                     switchInCurve: Curves.easeIn,
@@ -533,13 +546,16 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                                       DIO.FormData.fromMap({
                                                     'from_id': int.parse(
                                                         _chatGroupOpenController
-                                                            ?.id.value ?? ''),
+                                                                ?.id.value ??
+                                                            ''),
                                                     'to_id': int.parse(
                                                         _chatGroupOpenController
-                                                            ?.id.value ?? ''),
+                                                                ?.id.value ??
+                                                            ''),
                                                     'user_id': int.parse(
                                                         _chatGroupOpenController
-                                                            ?.id.value ?? ''),
+                                                                ?.id.value ??
+                                                            ''),
                                                     'message':
                                                         _chatMessageCtrl.text,
                                                     'group_id':
@@ -615,7 +631,6 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                       const SizedBox(
                                         width: 15,
                                       ),
-
                                       Expanded(
                                         child: GestureDetector(
                                           onTap: () {
@@ -650,7 +665,6 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                           ),
                                         ),
                                       ),
-
                                       const SizedBox(
                                         width: 15,
                                       ),
@@ -663,7 +677,7 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                                 : InkWell(
                                                     onTap: () async {
                                                       if (_chatMessageCtrl
-                                                              .text.isNotEmpty) {
+                                                          .text.isNotEmpty) {
                                                         if (replyClick) {
                                                           Map data = {
                                                             'reply': _chatGroupOpenController
@@ -673,13 +687,19 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                                                 ?.id,
                                                             'from_id': int.parse(
                                                                 _chatGroupOpenController
-                                                                    ?.id.value ?? ''),
+                                                                        ?.id
+                                                                        .value ??
+                                                                    ''),
                                                             'to_id': int.parse(
                                                                 _chatGroupOpenController
-                                                                    ?.id.value ?? ''),
+                                                                        ?.id
+                                                                        .value ??
+                                                                    ''),
                                                             'user_id': int.parse(
                                                                 _chatGroupOpenController
-                                                                    ?.id.value ?? ''),
+                                                                        ?.id
+                                                                        .value ??
+                                                                    ''),
                                                             'message':
                                                                 _chatMessageCtrl
                                                                     .text,
@@ -708,13 +728,19 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                                           Map data = {
                                                             'from_id': int.parse(
                                                                 _chatGroupOpenController
-                                                                    ?.id.value ?? ''),
+                                                                        ?.id
+                                                                        .value ??
+                                                                    ''),
                                                             'to_id': int.parse(
                                                                 _chatGroupOpenController
-                                                                    ?.id.value ?? ''),
+                                                                        ?.id
+                                                                        .value ??
+                                                                    ''),
                                                             'user_id': int.parse(
                                                                 _chatGroupOpenController
-                                                                    ?.id.value ?? ''),
+                                                                        ?.id
+                                                                        .value ??
+                                                                    ''),
                                                             'message':
                                                                 _chatMessageCtrl
                                                                     .text,
@@ -758,7 +784,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                   ),
                                 ],
                               ),
-                            ) : const SizedBox.shrink(),
+                            )
+                          : const SizedBox.shrink(),
                     ],
                   ),
                 ],
@@ -820,89 +847,89 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    HtmlEditor(
-                      controller: _htmlEditorController,
-                      htmlToolbarOptions: const HtmlToolbarOptions(
-                        toolbarType: ToolbarType.nativeScrollable,
-                        renderBorder: true,
-                      ),
-                      otherOptions: const OtherOptions(height: 320),
-                      htmlEditorOptions: const HtmlEditorOptions(
-                        hint: "Your message here...",
-                      ),
-                    ),
+                    // HtmlEditor(
+                    //   controller: _htmlEditorController,
+                    //   htmlToolbarOptions: const HtmlToolbarOptions(
+                    //     toolbarType: ToolbarType.nativeScrollable,
+                    //     renderBorder: true,
+                    //   ),
+                    //   otherOptions: const OtherOptions(height: 320),
+                    //   htmlEditorOptions: const HtmlEditorOptions(
+                    //     hint: "Your message here...",
+                    //   ),
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
                     Container(
                       decoration: Utils.gradientBtnDecoration,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
                       child: InkWell(
                         onTap: () async {
-                          setState(() {
-                            _htmlEditorController.getText().then((value) {
-                              setState(() {
-                                _chatMessageCtrl.text = value;
-                              });
+                          // setState(() {
+                          //   _htmlEditorController.getText().then((value) {
+                          //     setState(() {
+                          //       _chatMessageCtrl.text = value;
+                          //     });
 
-                              Future.delayed(const Duration(seconds: 1), () async {
-                                if (_chatMessageCtrl.text.isNotEmpty) {
-                                  if (replyClick) {
-                                    Map data = {
-                                      'reply': _chatGroupOpenController
-                                          ?.selectedChatMsg
-                                          .value
-                                          .conversation
-                                          ?.id,
-                                      'from_id': int.parse(
-                                          _chatGroupOpenController?.id.value ?? ''),
-                                      'to_id': int.parse(
-                                          _chatGroupOpenController?.id.value ?? ''),
-                                      'user_id': int.parse(
-                                          _chatGroupOpenController?.id.value ?? ''),
-                                      'message': _chatMessageCtrl.text,
-                                      'group_id':
-                                          _chatGroupOpenController?.groupId,
-                                    };
+                          //     Future.delayed(const Duration(seconds: 1), () async {
+                          //       if (_chatMessageCtrl.text.isNotEmpty) {
+                          //         if (replyClick) {
+                          //           Map data = {
+                          //             'reply': _chatGroupOpenController
+                          //                 ?.selectedChatMsg
+                          //                 .value
+                          //                 .conversation
+                          //                 ?.id,
+                          //             'from_id': int.parse(
+                          //                 _chatGroupOpenController?.id.value ?? ''),
+                          //             'to_id': int.parse(
+                          //                 _chatGroupOpenController?.id.value ?? ''),
+                          //             'user_id': int.parse(
+                          //                 _chatGroupOpenController?.id.value ?? ''),
+                          //             'message': _chatMessageCtrl.text,
+                          //             'group_id':
+                          //                 _chatGroupOpenController?.groupId,
+                          //           };
 
-                                    await source
-                                        ?.submitText(data: data, hasFile: false)
-                                        .then((value) {
-                                      _chatMessageCtrl.clear();
-                                      _chatGroupOpenController?.selectedChatMsg
-                                          .value = GroupThread();
-                                    });
-                                    setState(() {
-                                      replyClick = false;
-                                    });
-                                  } else {
-                                    Map data = {
-                                      'from_id': int.parse(
-                                          _chatGroupOpenController?.id.value ?? ''),
-                                      'to_id': int.parse(
-                                          _chatGroupOpenController?.id.value ?? ''),
-                                      'user_id': int.parse(
-                                          _chatGroupOpenController?.id.value ?? ''),
-                                      'message': _chatMessageCtrl.text,
-                                      'group_id':
-                                          _chatGroupOpenController?.groupId,
-                                    };
-                                    await source
-                                        ?.submitText(data: data, hasFile: false)
-                                        .then((value) {
-                                      _chatMessageCtrl.clear();
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pop('dialog');
-                                    });
-                                  }
-                                } else {
-                                  CustomSnackBar()
-                                      .snackBarWarning("Please type something");
-                                }
-                              });
-                            });
-                          });
+                          //           await source
+                          //               ?.submitText(data: data, hasFile: false)
+                          //               .then((value) {
+                          //             _chatMessageCtrl.clear();
+                          //             _chatGroupOpenController?.selectedChatMsg
+                          //                 .value = GroupThread();
+                          //           });
+                          //           setState(() {
+                          //             replyClick = false;
+                          //           });
+                          //         } else {
+                          //           Map data = {
+                          //             'from_id': int.parse(
+                          //                 _chatGroupOpenController?.id.value ?? ''),
+                          //             'to_id': int.parse(
+                          //                 _chatGroupOpenController?.id.value ?? ''),
+                          //             'user_id': int.parse(
+                          //                 _chatGroupOpenController?.id.value ?? ''),
+                          //             'message': _chatMessageCtrl.text,
+                          //             'group_id':
+                          //                 _chatGroupOpenController?.groupId,
+                          //           };
+                          //           await source
+                          //               ?.submitText(data: data, hasFile: false)
+                          //               .then((value) {
+                          //             _chatMessageCtrl.clear();
+                          //             Navigator.of(context, rootNavigator: true)
+                          //                 .pop('dialog');
+                          //           });
+                          //         }
+                          //       } else {
+                          //         CustomSnackBar()
+                          //             .snackBarWarning("Please type something");
+                          //       }
+                          //     });
+                          //   });
+                          // });
                         },
                         child: Text(
                           "Send",
@@ -992,14 +1019,14 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                     physics: const BouncingScrollPhysics(),
                     children: <Widget>[
                       GroupMessageItemWidget(
-                        groupThread: groupThread    ??GroupThread(),
+                        groupThread: groupThread ?? GroupThread(),
                         currentUserId: _chatGroupOpenController?.id.value ?? '',
                         menuVisible: menuVisible,
                         showActions: showActions ?? false,
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 35, vertical: 5),
                         child: TextFormField(
                           key: textFieldKey,
                           controller: forwardMessageCtrl,
@@ -1025,11 +1052,12 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                           separatorBuilder: (context, index) {
                             return const SizedBox(height: 10);
                           },
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 35, vertical: 5),
                           itemBuilder: (context, index) {
                             ChatUser chatUser =
-                                chatController.chatModel.value.users?[index] ?? ChatUser();
+                                chatController.chatModel.value.users?[index] ??
+                                    ChatUser();
                             return Container(
                               decoration: BoxDecoration(
                                 color: Colors.grey[200],
@@ -1088,17 +1116,19 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                           }),
                       ListView.separated(
                           itemCount:
-                              chatController.chatModel.value.groups?.length ?? 0,
+                              chatController.chatModel.value.groups?.length ??
+                                  0,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           separatorBuilder: (context, index) {
                             return const SizedBox(height: 10);
                           },
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 35, vertical: 5),
                           itemBuilder: (context, groupIndex) {
                             ChatGroup chatGroup = chatController
-                                .chatModel.value.groups?[groupIndex] ?? ChatGroup();
+                                    .chatModel.value.groups?[groupIndex] ??
+                                ChatGroup();
                             return Container(
                               decoration: BoxDecoration(
                                 color: Colors.grey[200],
@@ -1210,10 +1240,10 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
         padding: const EdgeInsets.all(8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment:
-              groupThread?.userId.toString() == _chatGroupOpenController?.id.value
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.start,
+          crossAxisAlignment: groupThread?.userId.toString() ==
+                  _chatGroupOpenController?.id.value
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.start,
           children: <Widget>[
             GroupMessageItemWidget(
               groupThread: groupThread ?? GroupThread(),
@@ -1268,7 +1298,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       onTap: () {
-                        _chatGroupOpenController?.selectedChatMsg.value = groupThread ?? GroupThread();
+                        _chatGroupOpenController?.selectedChatMsg.value =
+                            groupThread ?? GroupThread();
                         setState(() {
                           replyClick = true;
                         });
@@ -1468,7 +1499,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                 color: Colors.black),
                             iconSize: 20,
                             underline: const SizedBox(),
-                            items: _chatGroupOpenController?.members.map((item) {
+                            items:
+                                _chatGroupOpenController?.members.map((item) {
                               return DropdownMenuItem(
                                 value: item,
                                 child: Row(
@@ -1485,8 +1517,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                               _chatGroupOpenController?.selectedAddUser.value =
                                   value ?? ChatUser();
                             },
-                            value:
-                                _chatGroupOpenController?.selectedAddUser.value),
+                            value: _chatGroupOpenController
+                                ?.selectedAddUser.value),
                       )
                     : Text(
                         "No users to add",
@@ -1714,13 +1746,14 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                 Expanded(
                   child: ListView.separated(
                       itemCount: _chatGroupOpenController
-                          ?.chatGroupModel.value.group?.users?.length ?? 0,
+                              ?.chatGroupModel.value.group?.users?.length ??
+                          0,
                       physics: const BouncingScrollPhysics(),
                       separatorBuilder: (context, index) {
                         return const SizedBox(height: 10);
                       },
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       itemBuilder: (context, index) {
                         ChatUser? groupUser = _chatGroupOpenController
                             ?.chatGroupModel.value.group?.users?[index];
@@ -1731,7 +1764,9 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                           ),
                           child: ListTile(
                             title: Text(
-                              groupUser?.fullName ?? groupUser?.email.toString() ?? "",
+                              groupUser?.fullName ??
+                                  groupUser?.email.toString() ??
+                                  "",
                               style: Get.textTheme.titleMedium
                                   ?.copyWith(fontSize: 14),
                             ),
@@ -1878,7 +1913,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                   child: DropdownButton(
                     elevation: 0,
                     isExpanded: true,
-                    icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
+                    icon:
+                        const Icon(Icons.arrow_drop_down, color: Colors.black),
                     iconSize: 20,
                     underline: const SizedBox(),
                     items: _chatGroupOpenController
@@ -1900,7 +1936,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                       );
                     }).toList(),
                     onChanged: (ChatUser? value) async {
-                      _chatGroupOpenController?.selectedUser.value = value ?? ChatUser();
+                      _chatGroupOpenController?.selectedUser.value =
+                          value ?? ChatUser();
                     },
                     value: _chatGroupOpenController?.selectedUser.value,
                   ),
@@ -1925,7 +1962,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                   child: DropdownButton(
                     elevation: 0,
                     isExpanded: true,
-                    icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
+                    icon:
+                        const Icon(Icons.arrow_drop_down, color: Colors.black),
                     iconSize: 20,
                     underline: const SizedBox(),
                     items: _chatGroupOpenController?.groupRoles.map((item) {
@@ -1942,7 +1980,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                       );
                     }).toList(),
                     onChanged: (GroupRole? value) async {
-                      _chatGroupOpenController?.selectedGroupRole.value = value ?? GroupRole();
+                      _chatGroupOpenController?.selectedGroupRole.value =
+                          value ?? GroupRole();
                     },
                     value: _chatGroupOpenController?.selectedGroupRole.value,
                   ),
@@ -2136,7 +2175,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                       ),
                                     );
                                   } else if (value == 6) {
-                                    await _chatGroupOpenController?.leaveGroup();
+                                    await _chatGroupOpenController
+                                        ?.leaveGroup();
                                   } else if (value == 7) {
                                     if (_chatGroupOpenController
                                             ?.chatGroupModel.value.myRole ==
@@ -2213,7 +2253,8 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                       ),
                                     );
                                   } else if (value == 5) {
-                                    await _chatGroupOpenController?.leaveGroup();
+                                    await _chatGroupOpenController
+                                        ?.leaveGroup();
                                   }
                                 },
                                 itemBuilder: (context) => [
@@ -2255,11 +2296,13 @@ class GroupMessageItemWidget extends StatelessWidget {
   final bool? showActions;
   final Function? onTapMenu;
   const GroupMessageItemWidget(
-      {Key? key, this.groupThread,
+      {Key? key,
+      this.groupThread,
       this.currentUserId,
       this.menuVisible,
       this.showActions,
-      this.onTapMenu}) : super(key: key);
+      this.onTapMenu})
+      : super(key: key);
 
   onAvatarPress(BuildContext context) {
     final child = Center(
@@ -2367,7 +2410,7 @@ class GroupMessageItemWidget extends StatelessWidget {
                   id: int.parse(currentUserId.toString()),
                   menuVisible: menuVisible ?? false,
                   showActions: showActions ?? false,
-                  onTapMenu: onTapMenu ?? (){},
+                  onTapMenu: onTapMenu ?? () {},
                 )
               : const SizedBox(),
         ],

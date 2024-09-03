@@ -1,11 +1,10 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:pdf_flutter/pdf_flutter.dart';
-
 // Project imports:
 import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 // import 'package:edus_tutor/utils/pdf_flutter.dart';
 
@@ -21,10 +20,11 @@ class _DownloadViewerState extends State<DownloadViewer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarWidget(title: widget.title ?? ''),
-      body: PDF.network(
-        widget.filePath ?? '',
-      ),
-    );
+        appBar: CustomAppBarWidget(title: widget.title ?? ''), body: Container()
+        // WebView(
+        //   initialUrl: widget.filePath ?? '',
+        //   javascriptMode: JavascriptMode.unrestricted,
+        // ),
+        );
   }
 }

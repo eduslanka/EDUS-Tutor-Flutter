@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:file_utils/file_utils.dart';
+//import 'package:file_utils/file_utils.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -60,19 +60,19 @@ class StudyMaterialListRow extends StatelessWidget {
                       uploadedContent.uploadFile == ''
                   ? Container()
                   : InkWell(
-                    onTap: (() {
-                      PermissionCheck().checkPermissions(context);
-                      showDownloadAlertDialog(
-                          context, uploadedContent.contentTitle ?? '');
-                    }),
-                    child: Text(
-                      'Download',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontSize: 15,
-                          color: Colors.blueAccent,
-                          decoration: TextDecoration.underline),
+                      onTap: (() {
+                        PermissionCheck().checkPermissions(context);
+                        showDownloadAlertDialog(
+                            context, uploadedContent.contentTitle ?? '');
+                      }),
+                      child: Text(
+                        'Download',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontSize: 15,
+                            color: Colors.blueAccent,
+                            decoration: TextDecoration.underline),
+                      ),
                     ),
-                  ),
             ],
           ),
           const SizedBox(
@@ -107,7 +107,8 @@ class StudyMaterialListRow extends StatelessWidget {
                             children: [
                               Text(
                                 "Source Url:",
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                               const SizedBox(
                                 width: 10,
@@ -115,7 +116,8 @@ class StudyMaterialListRow extends StatelessWidget {
                               InkWell(
                                 onTap: () async {
                                   // ignore: deprecated_member_use
-                                  if (!await launch(uploadedContent.sourceUrl ?? '')) {
+                                  if (!await launch(
+                                      uploadedContent.sourceUrl ?? '')) {
                                     throw 'Could not launch ${uploadedContent.sourceUrl}';
                                   }
                                 },
@@ -202,8 +204,9 @@ class StudyMaterialListRow extends StatelessWidget {
                                   Text(
                                     uploadedContent.uploadDate.toString(),
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -250,7 +253,8 @@ class StudyMaterialListRow extends StatelessWidget {
       },
     );
     Widget yesButton = TextButton(
-      child: Text("Download", style: Theme.of(context).textTheme.headlineMedium),
+      child:
+          Text("Download", style: Theme.of(context).textTheme.headlineMedium),
       onPressed: () {
         uploadedContent.uploadFile != null
             ? downloadFile(uploadedContent.uploadFile ?? '', context, title)
@@ -294,7 +298,7 @@ class StudyMaterialListRow extends StatelessWidget {
     Utils.showToast(dirloc);
 
     try {
-      FileUtils.mkdir([dirloc]);
+//FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
 
       await dio.download(

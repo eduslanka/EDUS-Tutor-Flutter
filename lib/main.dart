@@ -1,12 +1,11 @@
 import 'dart:io';
-import 'package:edus_tutor/utils/server/LoginService.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:edus_tutor/config/app_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_html/js.dart';
+import 'firebase_options.dart';
 import 'screens/fees/paymentGateway/khalti/sdk/khalti.dart';
 import 'utils/Utils.dart';
 import 'utils/widget/page.dart';
@@ -26,28 +25,26 @@ bool langValue = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-    statusBarColor:
-         Utils.baseBlue, //or set color with: Color(0xFF0000FF)
-        
+    statusBarColor: Utils.baseBlue, //or set color with: Color(0xFF0000FF)
   ));
   HttpOverrides.global = MyHttpOverrides();
   final sharedPref = await SharedPreferences.getInstance();
   language = sharedPref.getString('language');
   debugPrint(language);
-  await Khalti.init(
-    publicKey: khaltiPublicKey,
-    enabledDebugging: true,
-  );
-  
+  // await Khalti.init(
+  //   publicKey: khaltiPublicKey,
+  //   enabledDebugging: true,
+  // );
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   _MyAppState createState() => _MyAppState();

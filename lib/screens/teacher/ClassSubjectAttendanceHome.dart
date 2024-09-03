@@ -18,12 +18,14 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/model/Classes.dart';
 import 'package:edus_tutor/utils/model/Section.dart';
 import 'package:edus_tutor/utils/model/SubjectModel.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+
 import 'attendance/SubjectAttendanceStudentList.dart';
 
 class StudentSubjectAttendanceHome extends StatefulWidget {
-final  bool isHome;
-  const StudentSubjectAttendanceHome({Key? key, required this.isHome}) : super(key: key);
+  final bool isHome;
+  const StudentSubjectAttendanceHome({Key? key, required this.isHome})
+      : super(key: key);
 
   @override
   _StudentSubjectAttendanceHomeState createState() =>
@@ -117,7 +119,7 @@ class _StudentSubjectAttendanceHomeState
               if (snapshot.hasData) {
                 return ListView(
                   children: <Widget>[
-                     getClassDropdown([]),
+                    getClassDropdown([]),
                     FutureBuilder<SectionList>(
                       future: sections,
                       builder: (context, secSnap) {
@@ -129,7 +131,8 @@ class _StudentSubjectAttendanceHomeState
                         } else if (secSnap.connectionState.name == 'none') {
                           return getClassDropdown([]);
                         } else {
-                          return const Center(child: CupertinoActivityIndicator());
+                          return const Center(
+                              child: CupertinoActivityIndicator());
                         }
                       },
                     ),
@@ -144,7 +147,8 @@ class _StudentSubjectAttendanceHomeState
                         } else if (subSnap.connectionState.name == 'none') {
                           return getClassDropdown([]);
                         } else {
-                          return const Center(child: CupertinoActivityIndicator());
+                          return const Center(
+                              child: CupertinoActivityIndicator());
                         }
                       },
                     ),
@@ -227,8 +231,10 @@ class _StudentSubjectAttendanceHomeState
                             ),
                             Icon(
                               Icons.calendar_today,
-                              color:
-                                  Theme.of(context).textTheme.titleMedium?.color,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.color,
                               size: 20.0,
                             ),
                           ],
@@ -270,8 +276,7 @@ class _StudentSubjectAttendanceHomeState
           ),
         ),
         onTap: () {
-          var passedDate =
-              _selectedDate ?? "$year-$month-$day";
+          var passedDate = _selectedDate ?? "$year-$month-$day";
           PersistentNavBarNavigator.pushNewScreen(
             context,
             screen: SubjectStudentListAttendance(
@@ -302,8 +307,8 @@ class _StudentSubjectAttendanceHomeState
             value: item.name,
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child:
-                  Text(item.name ?? '', style: Theme.of(context).textTheme.headlineMedium),
+              child: Text(item.name ?? '',
+                  style: Theme.of(context).textTheme.headlineMedium),
             ),
           );
         }).toList(),
@@ -315,7 +320,8 @@ class _StudentSubjectAttendanceHomeState
           setState(() {
             _selectedClass = '$value';
 
-            int classIndex = AllClasses.classes.indexWhere((element) => value == element.name);
+            int classIndex = AllClasses.classes
+                .indexWhere((element) => value == element.name);
             //classId = getCode(classes, '$value');
             classId = AllClasses.classes[classIndex].id;
 
@@ -344,8 +350,8 @@ class _StudentSubjectAttendanceHomeState
             value: item.name,
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child:
-                  Text(item.name ?? '', style: Theme.of(context).textTheme.headlineMedium),
+              child: Text(item.name ?? '',
+                  style: Theme.of(context).textTheme.headlineMedium),
             ),
           );
         }).toList(),
@@ -386,8 +392,8 @@ class _StudentSubjectAttendanceHomeState
             value: item.name,
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child:
-                  Text(item.name ?? '', style: Theme.of(context).textTheme.headlineMedium),
+              child: Text(item.name ?? '',
+                  style: Theme.of(context).textTheme.headlineMedium),
             ),
           );
         }).toList(),

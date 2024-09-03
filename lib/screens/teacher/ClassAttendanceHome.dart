@@ -17,7 +17,8 @@ import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/model/Classes.dart';
 import 'package:edus_tutor/utils/model/Section.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+
 import 'attendance/AttendanceStudentList.dart';
 
 class StudentAttendanceHome extends StatefulWidget {
@@ -99,19 +100,21 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
               if (snapshot.hasData) {
                 return ListView(
                   children: <Widget>[
-                     getClassDropdown([]),
+                    getClassDropdown([]),
                     FutureBuilder<SectionList>(
                       future: sections,
                       builder: (context, secSnap) {
                         if (secSnap.hasData) {
-                          return getSectionDropdown(secSnap.data?.sections ?? []);
+                          return getSectionDropdown(
+                              secSnap.data?.sections ?? []);
                         } else if (secSnap.connectionState.name == 'waiting') {
                           return const Center(
                               child: CupertinoActivityIndicator());
                         } else if (secSnap.connectionState.name == 'none') {
                           return getClassDropdown([]);
-                        }  else {
-                          return const Center(child: CupertinoActivityIndicator());
+                        } else {
+                          return const Center(
+                              child: CupertinoActivityIndicator());
                         }
                       },
                     ),
@@ -194,8 +197,10 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
                             ),
                             Icon(
                               Icons.calendar_today,
-                              color:
-                                  Theme.of(context).textTheme.titleMedium?.color,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.color,
                               size: 20.0,
                             ),
                           ],
@@ -237,8 +242,7 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
           ),
         ),
         onTap: () {
-          var passedDate =
-              _selectedDate ?? "$year-$month-$day";
+          var passedDate = _selectedDate ?? "$year-$month-$day";
           PersistentNavBarNavigator.pushNewScreen(
             context,
             screen: StudentListAttendance(
@@ -267,7 +271,8 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
             value: item.name,
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child: Text(item.name ?? '', style: Theme.of(context).textTheme.headlineMedium),
+              child: Text(item.name ?? '',
+                  style: Theme.of(context).textTheme.headlineMedium),
             ),
           );
         }).toList(),
@@ -277,10 +282,10 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
             ?.copyWith(fontSize: ScreenUtil().setSp(15)),
         onChanged: (value) {
           setState(() {
-
             _selectedClass = '$value';
 
-            int classIndex = AllClasses.classes.indexWhere((element) => value == element.name);
+            int classIndex = AllClasses.classes
+                .indexWhere((element) => value == element.name);
             //classId = getCode(classes, '$value');
             classId = AllClasses.classes[classIndex].id;
 
@@ -309,8 +314,8 @@ class _StudentAttendanceHomeState extends State<StudentAttendanceHome> {
             value: item.name,
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child:
-                  Text(item.name ?? '', style: Theme.of(context).textTheme.headlineMedium),
+              child: Text(item.name ?? '',
+                  style: Theme.of(context).textTheme.headlineMedium),
             ),
           );
         }).toList(),

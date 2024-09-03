@@ -1,7 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+// import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:edus_tutor/config/app_config.dart';
 import 'package:edus_tutor/screens/chat/views/FilePreview/ImagePreview.dart';
@@ -20,7 +20,8 @@ class ChatMessageWidget extends StatefulWidget {
   final bool? menuVisible;
   final bool? showActions;
   final int? activeStatus;
-  const ChatMessageWidget({Key? key, 
+  const ChatMessageWidget({
+    Key? key,
     this.name,
     this.chatMessage,
     this.id,
@@ -326,15 +327,16 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
                                 : CrossAxisAlignment.end,
                         children: [
                           widget.chatMessage?.message != null
-                              ? HtmlWidget(
-                                widget.chatMessage?.message ?? '',
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(
-                                      color: Colors.white,
-                                    ),
-                              )
+                              ? Container()
+                              // ? HtmlWidget(
+                              //     widget.chatMessage?.message ?? '',
+                              //     textStyle: Theme.of(context)
+                              //         .textTheme
+                              //         .headlineMedium
+                              //         ?.copyWith(
+                              //           color: Colors.white,
+                              //         ),
+                              //   )
                               : const SizedBox.shrink(),
                           Directionality(
                             textDirection:
@@ -348,7 +350,8 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4.0),
                         child: Text(
-                          timeago.format(widget.chatMessage?.createdAt ?? DateTime(200)),
+                          timeago.format(
+                              widget.chatMessage?.createdAt ?? DateTime(200)),
                           textAlign: widget.chatMessage?.fromId == widget.id
                               ? TextAlign.right
                               : TextAlign.left,
@@ -496,16 +499,16 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
                                             size: 20,
                                             color: Colors.white,
                                           ),
-                                    HtmlWidget(
-                                      "${widget.chatMessage?.reply.message ?? ""}",
-                                      textStyle: Theme.of(context)
-                                          .textTheme
-                                          .headlineMedium
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.white,
-                                          ),
-                                    ),
+                                    // HtmlWidget(
+                                    //   "${widget.chatMessage?.reply.message ?? ""}",
+                                    //   textStyle: Theme.of(context)
+                                    //       .textTheme
+                                    //       .headlineMedium
+                                    //       ?.copyWith(
+                                    //         fontWeight: FontWeight.w300,
+                                    //         color: Colors.white,
+                                    //       ),
+                                    // ),
                                   ],
                                 )
                               : const SizedBox.shrink(),
@@ -557,18 +560,18 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
                                         ? CrossAxisAlignment.start
                                         : CrossAxisAlignment.end,
                                 children: [
-                                  widget.chatMessage?.message != null
-                                      ? HtmlWidget(
-                                          widget.chatMessage?.message ?? '',
-                                          textStyle: Theme.of(context)
-                                              .textTheme
-                                              .headlineMedium
-                                              ?.copyWith(
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                              ),
-                                        )
-                                      : const SizedBox.shrink(),
+                                  // widget.chatMessage?.message != null
+                                  //     ? HtmlWidget(
+                                  //         widget.chatMessage?.message ?? '',
+                                  //         textStyle: Theme.of(context)
+                                  //             .textTheme
+                                  //             .headlineMedium
+                                  //             ?.copyWith(
+                                  //               fontWeight: FontWeight.w300,
+                                  //               color: Colors.white,
+                                  //             ),
+                                  //       )
+                                  //     : const SizedBox.shrink(),
                                   const SizedBox(height: 10),
                                   fileWidget(widget.chatMessage?.reply),
                                 ],
@@ -577,7 +580,9 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 4.0),
                                 child: Text(
-                                  timeago.format(widget.chatMessage?.createdAt ?? DateTime(2000)),
+                                  timeago.format(
+                                      widget.chatMessage?.createdAt ??
+                                          DateTime(2000)),
                                   textAlign:
                                       widget.chatMessage?.fromId == widget.id
                                           ? TextAlign.right
@@ -647,7 +652,9 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        widget.chatMessage?.fromUser?.fullName ?? widget.chatMessage?.fromUser?.email ?? "",
+                        widget.chatMessage?.fromUser?.fullName ??
+                            widget.chatMessage?.fromUser?.email ??
+                            "",
                         textAlign: widget.chatMessage?.fromId == widget.id
                             ? TextAlign.right
                             : TextAlign.left,
@@ -724,16 +731,16 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
                                   fontSize: 12.sp,
                                 ),
                               ),
-                              HtmlWidget(
-                                widget.chatMessage?.forwardFrom?.message ?? "",
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.white,
-                                    ),
-                              ),
+                              // HtmlWidget(
+                              //   widget.chatMessage?.forwardFrom?.message ?? "",
+                              //   textStyle: Theme.of(context)
+                              //       .textTheme
+                              //       .headlineMedium
+                              //       ?.copyWith(
+                              //         fontWeight: FontWeight.w300,
+                              //         color: Colors.white,
+                              //       ),
+                              // ),
                               fileWidget(widget.chatMessage?.forwardFrom),
                             ],
                           ),
@@ -785,18 +792,18 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
                                         ? CrossAxisAlignment.start
                                         : CrossAxisAlignment.end,
                                 children: [
-                                  widget.chatMessage?.message != null
-                                      ? HtmlWidget(
-                                          widget.chatMessage?.message ?? '',
-                                          textStyle: Theme.of(context)
-                                              .textTheme
-                                              .headlineMedium
-                                              ?.copyWith(
-                                                fontWeight: FontWeight.w300,
-                                                color: Colors.white,
-                                              ),
-                                        )
-                                      : const SizedBox.shrink(),
+                                  // widget.chatMessage?.message != null
+                                  //     ? HtmlWidget(
+                                  //         widget.chatMessage?.message ?? '',
+                                  //         textStyle: Theme.of(context)
+                                  //             .textTheme
+                                  //             .headlineMedium
+                                  //             ?.copyWith(
+                                  //               fontWeight: FontWeight.w300,
+                                  //               color: Colors.white,
+                                  //             ),
+                                  //       )
+                                  //     : const SizedBox.shrink(),
                                   const SizedBox(height: 10),
                                   fileWidget(widget.chatMessage),
                                 ],
@@ -805,7 +812,9 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 4.0),
                                 child: Text(
-                                  timeago.format(widget.chatMessage?.createdAt ?? DateTime(2000)),
+                                  timeago.format(
+                                      widget.chatMessage?.createdAt ??
+                                          DateTime(2000)),
                                   textAlign:
                                       widget.chatMessage?.fromId == widget.id
                                           ? TextAlign.right
