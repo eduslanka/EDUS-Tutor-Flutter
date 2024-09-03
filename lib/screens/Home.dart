@@ -717,6 +717,10 @@ class _HomeState extends State<Home> {
                                           Navigator.of(context).pop();
                                         });
                                       },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xff053EFF),
+                                      ),
                                       child: Text(
                                         'Mark all as read',
                                         style: Theme.of(context)
@@ -726,10 +730,6 @@ class _HomeState extends State<Home> {
                                               fontSize: ScreenUtil().setSp(12),
                                               color: Colors.white,
                                             ),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xff053EFF),
                                       ),
                                     ),
                                   ],
