@@ -103,9 +103,9 @@ class _MySubjectScreenState extends State<MySubjectScreen> {
             FutureBuilder<TeacherSubjectList>(
               future: subjects,
               builder: (context, snapshot) {
-                print('1::::::::::${snapshot.data?.subjects.length}');
+               
                 if (snapshot.hasData) {
-                  print('1::::::::::${snapshot.data?.subjects.length}');
+                 
                   return ListView.builder(
                     shrinkWrap: true,
                     itemCount: snapshot.data?.subjects.length ?? 0,

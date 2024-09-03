@@ -22,23 +22,23 @@ import '../../../controller/user_controller.dart';
 import '../../../model/teachers_weekly_class.dart';
 
 // ignore: must_be_immutable
-class TeacherMyRoutineScreen extends StatefulWidget {
+class SampleScreemTecherTimeTable extends StatefulWidget {
   final bool  isHome;
-  const TeacherMyRoutineScreen({Key? key,required this.isHome}) : super(key: key);
+  const SampleScreemTecherTimeTable({Key? key,required this.isHome}) : super(key: key);
 
   @override
-  State<TeacherMyRoutineScreen> createState() => _TeacherMyRoutineScreenState();
+  State<SampleScreemTecherTimeTable> createState() => _TeacherRoutineState();
 }
 
-class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> with SingleTickerProviderStateMixin {
+class _TeacherRoutineState extends State<SampleScreemTecherTimeTable> with SingleTickerProviderStateMixin {
   // List<String> weeks = AppFunction.weeks;
 
   // var _token;
 
   // var _id;
 
-  // Future<TeacherRoutine?> getRoutine() async {
-  //   TeacherRoutine? data;
+  // Future<SampleScreemTecherTimeTable?> getRoutine() async {
+  //   SampleScreemTecherTimeTable? data;
   //   await Utils.getStringValue('id').then((id) {
   //     _id = id;
   //   }).then((value) async {
@@ -76,7 +76,7 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> with Si
   // Padding oldbody() {
   //   return Padding(
   //         padding: const EdgeInsets.only(top: 16.0, left: 10.0, right: 10.0),
-  //         child: FutureBuilder<TeacherRoutine?>(
+  //         child: FutureBuilder<SampleScreemTecherTimeTable?>(
   //           future: getRoutine(),
   //           builder: (context, snapshot) {
   //             if (snapshot.hasData) {
@@ -201,16 +201,15 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> with Si
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
         var data = TeacherWeeklyClassResponse.fromJson(jsonResponse);
-        print('Response: ${response.body}');
+      
         return data;
       } else {
-        print(response.body);
-        print(response.statusCode);
+       
         throw Exception('Failed to load post');
       }
     } catch (e,t) {
-      print(t);
-      print(e);
+      debugPrint(t.toString());
+      debugPrint(e.toString());
       throw Exception(e.toString());
     } finally {
       setState(() {
@@ -335,7 +334,7 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> with Si
                                       children: List.generate(
                                         weeks.length,
                                         (index) {
-                                          Map<String, List<ClassDetail>>
+                                          Map<String, List<TeachersClassDetail>>
                                               classRoutines =
                                               snapshot.data!.data.weeklyClass;
 

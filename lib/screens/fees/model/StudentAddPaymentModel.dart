@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 StudentAddPaymentModel studentAddPaymentModelFromJson(String str) =>
@@ -168,7 +169,7 @@ class InvoiceInfo {
         studentInfo: StudentInfo.fromJson(json["student_info"]),
       );
     } catch (e, tr) {
-      print("$e");
+      debugPrint("$e");
       tr.printInfo();
       return InvoiceInfo();
     }

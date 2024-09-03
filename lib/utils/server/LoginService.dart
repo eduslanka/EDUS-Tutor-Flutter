@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-// ignore: library_prefixes
-import 'package:dio/dio.dart' as DIO;
 import 'package:get/get.dart';
-import 'package:edus_tutor/controller/system_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // Project imports:
+import 'package:edus_tutor/controller/system_controller.dart';
 import 'package:edus_tutor/utils/FunctinsData.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/exception/DioException.dart';
@@ -36,19 +36,17 @@ class Login {
     bool isNullOrEmpty(Object o) => o == null || o == "";
 
     try {
-      DIO.Dio dio = DIO.Dio();
-      DIO.Response response =
-          await dio.post(EdusApi.login, data: {
-        'email': email,
-        'password': password,
-      },).catchError((e) {
-        message = DioExceptions.fromDioError(e).toString();
-      });
-     // print(EdusApi.login(email, password));
+      final response = await http.post(
+        Uri.parse(EdusApi.login),
+        body: {
+          'email': email,
+          'password': password,
+        },
+      );
+
       if (response.statusCode == 200) {
-        print('Login Response: ${response.data}');
-        var user = response.data;
-        isBlock=user['data']['student_have_due_fees'];
+        var user = json.decode(response.body);
+        isBlock = user['data']['student_have_due_fees'];
         isSuccess = user['success'];
         message = user['message'];
         id = user['data']['user']['id'];
@@ -70,7 +68,8 @@ class Login {
               ? 'public/uploads/staff/demo/staff.jpg'
               : user['data']['userDetails']['student_photo'].toString();
         } else if (rule == 3) {
-          image = user['data']['userDetails']['guardian_photo'] == null || user['data']['userDetails']['guardian_photo'] == ''
+          image = user['data']['userDetails']['guardian_photo'] == null ||
+                  user['data']['userDetails']['guardian_photo'] == ''
               ? 'public/uploads/staff/demo/staff.jpg'
               : user['data']['userDetails']['guardian_photo'].toString();
         }
@@ -98,8 +97,11 @@ class Login {
           AppFunction.getFunctions(context, rule.toString());
         }
         return message;
+      } else {
+        message = "Error: ${response.statusCode}";
       }
     } catch (e, t) {
+      
       debugPrint(e.toString());
       debugPrint(t.toString());
     }
@@ -108,19 +110,16 @@ class Login {
 
   Future<bool> saveBooleanValue(String key, bool value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
     return prefs.setBool(key, value);
   }
 
   Future<bool> saveStringValue(String key, String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
     return prefs.setString(key, value);
   }
 
   Future<bool> saveIntValue(String key, int value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
     return prefs.setInt(key, value);
   }
 }

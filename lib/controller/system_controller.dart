@@ -16,11 +16,16 @@ import 'package:in_app_update/in_app_update.dart';
 import 'package:in_app_review/in_app_review.dart';
 
 class SystemController extends GetxController {
-
   Rx<SystemSettings> systemSettings = SystemSettings().obs;
-  Rx<Quote> quote=Quote().obs;
- Rx<TodayClassResponse> todayClassResponse=TodayClassResponse(success: false, classes: []).obs;
-  Rx<TeacherTodayClassResponse> teacherTodayClassResponse=TeacherTodayClassResponse(success: false, data: TodayClassData(todayClass: []), message: '', ).obs;
+  Rx<Quote> quote = Quote().obs;
+  Rx<TodayClassResponse> todayClassResponse =
+      TodayClassResponse(success: false, classes: []).obs;
+  Rx<TeacherTodayClassResponse> teacherTodayClassResponse =
+      TeacherTodayClassResponse(
+    success: false,
+    data: TodayClassData(todayClass: []),
+    message: '',
+  ).obs;
   Rx<bool> isLoading = false.obs;
 
   final Rx<String> _token = "".obs;
@@ -38,7 +43,7 @@ class SystemController extends GetxController {
         final response = await http.get(
             Uri.parse(EdusApi.generalSettings + '/$schoolId'),
             headers: Utils.setHeader(_token.toString()));
-print(EdusApi.generalSettings + '/$schoolId');
+
         if (response.statusCode == 200) {
           final studentRecords = systemSettingsFromJson(response.body);
           systemSettings.value = studentRecords;
@@ -49,31 +54,31 @@ print(EdusApi.generalSettings + '/$schoolId');
           throw Exception('failed to load');
         }
       });
-  
-  quote.value=  await fetchQuoteOfTheDay();
- // response.value=await fetchTodayClasses(_token.toString());
-  Utils.getStringValue('rule').then((value) async{
-      _rule.value = value??'';
-      if(value=='2'){
-         await fetchTodayClasses();
-          print(':::::::::::::student ');
-      }else if(value=='4'){
-await fetchTeacherTodayClasses();
-      }
-    });
+
+      quote.value = await fetchQuoteOfTheDay();
+      // response.value=await fetchTodayClasses(_token.toString());
+      Utils.getStringValue('rule').then((value) async {
+        _rule.value = value ?? '';
+        if (value == '2') {
+          await fetchTodayClasses();
+        } else if (value == '4') {
+          await fetchTeacherTodayClasses();
+        }
+      });
     } catch (e, t) {
       isLoading(false);
-      print('From e: $e');
-      print('From t: $t');
+      debugPrint('From e: $e');
+      debugPrint('From t: $t');
       throw Exception('failed to load');
     }
   }
-   Future<void> checkForUpdate() async {
+
+  Future<void> checkForUpdate() async {
     final InAppReview inAppReview = InAppReview.instance;
 
-if (await inAppReview.isAvailable()) {
-    inAppReview.requestReview();
-}
+    if (await inAppReview.isAvailable()) {
+      inAppReview.requestReview();
+    }
     InAppUpdate.checkForUpdate().then((updateInfo) {
       if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
         if (updateInfo.flexibleUpdateAllowed) {
@@ -86,56 +91,59 @@ if (await inAppReview.isAvailable()) {
           });
         }
       }
-      
     });
   }
-Future fetchTodayClasses()async{
-   try {
- await getSchoolId().then((value) async {
 
-   final  response =  await http.post(
-      Uri.parse( EdusApi.todayClass),
-      headers: Utils.setHeader(_token.toString()),
-    );
-   
+  Future fetchTodayClasses() async {
+    try {
+      await getSchoolId().then((value) async {
+        final response = await http.post(
+          Uri.parse(EdusApi.todayClass),
+          headers: Utils.setHeader(_token.toString()),
+        );
 
-    if (response.statusCode == 200) {
-      
-  todayClassResponse.value=TodayClassResponse.fromJson(json.decode(response.body));
-  print(':::::::::::${response.body}');
-    } else {
-      throw Exception('Failed to load today classes: ${response.body} ${response.statusCode}');
+        if (response.statusCode == 200) {
+          todayClassResponse.value =
+              TodayClassResponse.fromJson(json.decode(response.body));
+        } else {
+          todayClassResponse.value =
+              TodayClassResponse(success: false, classes: []);
+          //  throw Exception(
+          //  'Failed to load today classes: ${response.body} ${response.statusCode}');
+        }
+      });
+    } catch (e,t) {
+      todayClassResponse.value =
+          TodayClassResponse(success: false, classes: []);
+      debugPrint(e.toString());
+       debugPrint(t.toString());
     }
- });
-  
-  } catch (e) {
-    throw Exception('Failed to load today classes: $e');
   }
-}
 
-  Future fetchTeacherTodayClasses()async{
-   try {
+  Future fetchTeacherTodayClasses() async {
+    try {
+      final response = await http.get(
+        Uri.parse(EdusApi.todayClassTecher),
+        headers: Utils.setHeader(_token.toString()),
+      );
 
-   final  response = await http.get(
-      Uri.parse( EdusApi.todayClassTecher),
-      headers: Utils.setHeader(_token.toString()),
-    );
-   print(EdusApi.todayClassTecher);
-   print(_token.toString());
-
-    if (response.statusCode == 200) {
-      
-  teacherTodayClassResponse .value=TeacherTodayClassResponse.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to load today classes: ${response.body} ${response.statusCode}');
+      if (response.statusCode == 200) {
+        teacherTodayClassResponse.value =
+            TeacherTodayClassResponse.fromJson(json.decode(response.body));
+      } else {
+        teacherTodayClassResponse.value = TeacherTodayClassResponse(
+            success: false, data: TodayClassData(todayClass: []), message: '');
+        throw Exception(
+            'Failed to load today classes: ${response.body} ${response.statusCode}');
+      }
+    } catch (e, t) {
+      teacherTodayClassResponse.value = TeacherTodayClassResponse(
+          success: false, data: TodayClassData(todayClass: []), message: '');
+      debugPrint('trace tree $t');
+      //throw Exception('Failed to load today classes: $e');
     }
-  } catch (e,t) {
-    print('trace tree $t');
-    //throw Exception('Failed to load today classes: $e');
   }
-}
 
- 
   Future getSchoolId() async {
     await Utils.getStringValue('schoolId').then((value) async {
       _schoolId.value = value ?? '';
@@ -144,18 +152,17 @@ Future fetchTodayClasses()async{
       });
     });
   }
-Rx<String> _rule=''.obs;
-Rx<String> get rule=>_rule;
+
+  Rx<String> _rule = ''.obs;
+  Rx<String> get rule => _rule;
   @override
   void onInit() {
     getSystemSettings();
-    if(!kDebugMode){
-checkForUpdate();
+    if (!kDebugMode) {
+      checkForUpdate();
     }
-    
-  //  fetchTodayClasses();
+
+    //  fetchTodayClasses();
     super.onInit();
-    
-    
   }
 }

@@ -85,6 +85,7 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../screens/main/student/DBStudentRoutine.dart';
 import '../screens/student/exam/exam_home.dart';
+import '../screens/teacher/academic/teacher_routin.dart';
 import '../screens/teacher/students/SubjectStudentSearch.dart';
 import '../screens/virtual_class/virtual_class_main.dart';
 

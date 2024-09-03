@@ -28,6 +28,7 @@ import '../../widget/pay_your_bill.dart';
 import '../Home.dart';
 import '../teacher/ClassSubjectAttendanceHome.dart';
 import '../teacher/academic/TeacherRoutineScreen.dart';
+import '../teacher/academic/teacher_routin.dart';
 
 class DashboardScreen extends StatefulWidget {
   final titles;
@@ -359,7 +360,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   PersistentBottomNavBarItem(
                     inactiveIcon: widget.role == "4"
                         ? Image.asset(
-                            "assets/images/academics (2).png",
+                            "assets/images/routine (2).png",
                             width: 30.w,
                             height: 30.h,
                             color: Colors.grey.withOpacity(0.9),

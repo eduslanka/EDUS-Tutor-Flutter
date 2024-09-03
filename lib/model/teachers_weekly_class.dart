@@ -27,20 +27,20 @@ class TeacherWeeklyClassResponse {
 }
 
 class TeacherWeeklyClassData {
-  final Map<String, List<ClassDetail>> weeklyClass;
+  final Map<String, List<TeachersClassDetail>> weeklyClass;
 
   TeacherWeeklyClassData({
     required this.weeklyClass,
   });
 
   factory TeacherWeeklyClassData.fromJson(Map<String, dynamic> json) {
-    Map<String, List<ClassDetail>> weeklyClassMap = {};
+    Map<String, List<TeachersClassDetail>> weeklyClassMap = {};
     if (json['weekly_class'] != null) {
       json['weekly_class'][0].forEach((day, classes) {
-        List<ClassDetail> classList = [];
+        List<TeachersClassDetail> classList = [];
         if (classes is List) {
           classes.forEach((classJson) {
-            classList.add(ClassDetail.fromJson(classJson));
+            classList.add(TeachersClassDetail.fromJson(classJson));
           });
         }
         weeklyClassMap[day] = classList;
@@ -60,7 +60,7 @@ class TeacherWeeklyClassData {
   }
 }
 
-class ClassDetail {
+class TeachersClassDetail {
   final dynamic cancelOrRescheduleStatus;
   final String startTime;
   final String endTime;
@@ -74,7 +74,7 @@ class ClassDetail {
   final String? rescheduleMeetLink;
   final String? rescheduleReason;
 
-  ClassDetail({
+  TeachersClassDetail({
     required this.cancelOrRescheduleStatus,
     required this.startTime,
     required this.endTime,
@@ -89,8 +89,8 @@ class ClassDetail {
     this.rescheduleReason,
   });
 
-  factory ClassDetail.fromJson(Map<String, dynamic> json) {
-    return ClassDetail(
+  factory TeachersClassDetail.fromJson(Map<String, dynamic> json) {
+    return TeachersClassDetail(
       cancelOrRescheduleStatus: json['cancel_or_reschedule_status'],
       startTime: json['start_time'],
       endTime: json['end_time'],

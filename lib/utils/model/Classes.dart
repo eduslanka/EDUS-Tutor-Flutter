@@ -59,7 +59,6 @@ class AdminClassList {
 
     List<AdminClasses> classList;
 
-    print("Data : ${json}");
 
     classList = json.map((i) => AdminClasses.fromJson(i)).toList();
     AllClasses.classes = classList;

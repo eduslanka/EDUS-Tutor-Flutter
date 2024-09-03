@@ -342,7 +342,7 @@ class StudentFeesController extends GetxController {
       }
     } catch (error, t) {
       log("Error: $error");
-      print(t);
+      debugPrint(t.toString());
     } finally {
       if (feesRecordList.value.isNotEmpty) {}
 
