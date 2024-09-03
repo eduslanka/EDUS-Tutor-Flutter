@@ -43,7 +43,7 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
                     ? 'No Classes Today. You can study on your own, revise and practice past lessons..!'
                     : 'You have no classes scheduled today..!',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 14,
                     fontWeight: FontWeight.w500),

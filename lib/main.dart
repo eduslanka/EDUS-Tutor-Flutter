@@ -3,10 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:edus_tutor/config/app_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
-import 'screens/fees/paymentGateway/khalti/sdk/khalti.dart';
 import 'utils/Utils.dart';
 import 'utils/widget/page.dart';
 
