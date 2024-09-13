@@ -105,17 +105,16 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
     super.initState();
     getInitialDay();
     selectedDay = weeks[initialIndex];
-   pageController = PageController(initialPage:initialIndex );
+    pageController = PageController(initialPage: initialIndex);
     fetchData();
   }
 
   String selectedDay = '';
- late PageController pageController ;
+  late PageController pageController;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.h),
         child: AppBar(
@@ -224,22 +223,33 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
             itemCount: weeks.length,
             onPageChanged: (index) {
               setState(() {
-                initialIndex=index;
+                initialIndex = index;
                 selectedDay = weeks[initialIndex];
               });
             },
             itemBuilder: (context, index) {
               final classes =
                   weeklyClassResponse?.data.weeklyClass[selectedDay] ?? [];
-                       if (classes.isEmpty) {
-                return Utils.noDataWidget();
+              if (classes.isEmpty) {
+                return Center(
+                  child: SizedBox(
+                    width: screenWidth(360, context),
+                    child: Text(
+                      'Please note that there will be no classes on $selectedDay. You are encouraged to use this time to study independently, revise previous lessons, and practice past exercises.',
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                );
               }
               return ListView.builder(
-                itemCount: classes.length ,
+                itemCount: classes.length,
                 itemBuilder: (context, classIndex) {
-                 
                   return Padding(
-                    padding: const EdgeInsets.only(bottom:  8.0),
+                    padding: const EdgeInsets.only(bottom: 8.0),
                     child: _tutionCard(context, classes[classIndex]),
                   );
                 },
@@ -255,15 +265,11 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Card(
-         color: Colors.transparent,
+        color: Colors.transparent,
         surfaceTintColor: Colors.white,
         child: Container(
-          
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-           
-            color: Colors.white
-          ),
+              borderRadius: BorderRadius.circular(15), color: Colors.white),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -272,16 +278,12 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Time'.tr + ":",
-                      style: _textStyle()
-                    ),
+                    Text('Time'.tr + ":", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(
-                        '${classDetail.startTime} - ${classDetail.endTime}',
-                        style: _textStyle()
-                      ),
+                          '${classDetail.startTime} - ${classDetail.endTime}',
+                          style: _textStyle()),
                     ),
                   ],
                 ),
@@ -289,16 +291,10 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Topic'.tr + ":",
-                      style: _textStyle()
-                    ),
+                    Text('Topic'.tr + ":", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
-                      child: Text(
-                        classDetail.topic ?? '',
-                        style: _textStyle()
-                      ),
+                      child: Text(classDetail.topic ?? '', style: _textStyle()),
                     ),
                   ],
                 ),
@@ -306,16 +302,11 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Class'.tr + ":",
-                      style: _textStyle()
-                    ),
+                    Text('Class'.tr + ":", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
-                      child: Text(
-                        classDetail.classSection ?? '',
-                        style: _textStyle()
-                      ),
+                      child: Text(classDetail.classSection ?? '',
+                          style: _textStyle()),
                     ),
                   ],
                 ),
@@ -323,16 +314,11 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Teacher'.tr + ":",
-                      style: _textStyle()
-                    ),
+                    Text('Teacher'.tr + ":", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
-                      child: Text(
-                        classDetail.teacher ?? '',
-                        style: _textStyle()
-                      ),
+                      child:
+                          Text(classDetail.teacher ?? '', style: _textStyle()),
                     ),
                   ],
                 ),
@@ -343,8 +329,8 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
       ),
     );
   }
-    TextStyle _textStyle() {
-    return const TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.w700);
+
+  TextStyle _textStyle() {
+    return const TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
   }
 }

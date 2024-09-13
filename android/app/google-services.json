@@ -1,29 +1,29 @@
 {
-    "project_info": {
-      "project_number": "211481900673",
-      "project_id": "edus-tutor",
-      "storage_bucket": "edus-tutor.appspot.com"
-    },
-    "client": [
-      {
-        "client_info": {
-          "mobilesdk_app_id": "1:211481900673:android:2ce56ca1bdc97ed63fbf80",
-          "android_client_info": {
-            "package_name": "com.edus.edustutor"
-          }
-        },
-        "oauth_client": [],
-        "api_key": [
-          {
-            "current_key": "AIzaSyDv_Df_bPdzFveA3tbjXq49jJG-dOlJoQg"
-          }
-        ],
-        "services": {
-          "appinvite_service": {
-            "other_platform_oauth_client": []
-          }
+  "project_info": {
+    "project_number": "211481900673",
+    "project_id": "edus-tutor",
+    "storage_bucket": "edus-tutor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211481900673:android:2ce56ca1bdc97ed63fbf80",
+        "android_client_info": {
+          "package_name": "com.edus.edustutor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv_Df_bPdzFveA3tbjXq49jJG-dOlJoQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
-    ],
-    "configuration_version": "1"
-  }
+    }
+  ],
+  "configuration_version": "1"
+}

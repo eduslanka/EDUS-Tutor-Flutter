@@ -7,7 +7,8 @@ import '../model/quets_model.dart';
 import 'package:http/http.dart' as http;
 
 Future<Quote> fetchQuoteOfTheDay() async {
-  final response = await http.get(Uri.parse('http://thurukural.edustutor.com/quote-of-the-day'));
+  final response = await http
+      .get(Uri.parse('http://thurukural.edustutor.com/quote-of-the-day'));
 
   if (response.statusCode == 200) {
     Map<String, dynamic> data = json.decode(response.body);
@@ -17,17 +18,17 @@ Future<Quote> fetchQuoteOfTheDay() async {
   }
 }
 
- Future<ClassRecord> fetchStudentFees(int studentId) async {
-    final url = EdusApi.getFeeApi(studentId);
-    final response = await http.get(Uri.parse(url));
+Future<ClassRecord> fetchStudentFees(int studentId) async {
+  final url = EdusApi.getFeeApi(studentId);
+  final response = await http.get(Uri.parse(url));
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return ClassRecord.fromJson(data);
-    } else {
-      throw Exception('Failed to load data');
-    }
+  if (response.statusCode == 200) {
+    final data = json.decode(response.body);
+    return ClassRecord.fromJson(data);
+  } else {
+    throw Exception('Failed to load data');
   }
+}
 // Future<TodayClassResponse> fetchTodayClasses(String token) async {
 //   try {
 //     final response = await http.get(

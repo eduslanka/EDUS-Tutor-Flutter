@@ -124,8 +124,6 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
       teacherClass = classes?[index];
     }
 
-
-
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
       child: AnimatedContainer(
@@ -147,7 +145,9 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
                   _buildJoinButton(isStudent, studentClass, teacherClass),
                 ],
               ),
-              if (isStudent&& isRescheduled==studentClass &&isClicked || !isStudent&& selectedClass==teacherClass&&isClicked) _buildRescheduledDetails(isStudent, studentClass, teacherClass),
+              if (isStudent && isRescheduled == studentClass && isClicked ||
+                  !isStudent && selectedClass == teacherClass && isClicked)
+                _buildRescheduledDetails(isStudent, studentClass, teacherClass),
             ],
           ),
         ),
@@ -155,13 +155,20 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
     );
   }
 
-  Widget _buildClassSection(bool isStudent, TodayClass? studentClass, TeacherClassDetail? teacherClass) {
+  Widget _buildClassSection(bool isStudent, TodayClass? studentClass,
+      TeacherClassDetail? teacherClass) {
     return Expanded(
       flex: 7,
       child: AutoSizeText(
         isStudent
-            ? studentClass?.classSec.replaceAll('(Group Classes)', '').replaceAll('(Individual Classes)', '') ?? ''
-            : teacherClass?.classSection.replaceAll('(Group Classes)', '').replaceAll('(Individual Classes)', '') ?? '',
+            ? studentClass?.classSec
+                    .replaceAll('(Group Classes)', '')
+                    .replaceAll('(Individual Classes)', '') ??
+                ''
+            : teacherClass?.classSection
+                    .replaceAll('(Group Classes)', '')
+                    .replaceAll('(Individual Classes)', '') ??
+                '',
         style: const TextStyle(
           color: Colors.black,
           fontSize: 14,
@@ -174,7 +181,8 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
     );
   }
 
-  Widget _buildStartTime(bool isStudent, TodayClass? studentClass, TeacherClassDetail? teacherClass) {
+  Widget _buildStartTime(bool isStudent, TodayClass? studentClass,
+      TeacherClassDetail? teacherClass) {
     return Expanded(
       flex: 3,
       child: AutoSizeText(
@@ -192,11 +200,12 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
       ),
     );
   }
-  
-TodayClass ?isRescheduled;
-bool isClicked=false;
-TeacherClassDetail?selectedClass;
-  Widget _buildJoinButton(bool isStudent, TodayClass? studentClass, TeacherClassDetail? teacherClass) {
+
+  TodayClass? isRescheduled;
+  bool isClicked = false;
+  TeacherClassDetail? selectedClass;
+  Widget _buildJoinButton(bool isStudent, TodayClass? studentClass,
+      TeacherClassDetail? teacherClass) {
     return Expanded(
       flex: 4,
       child: GestureDetector(
@@ -207,26 +216,30 @@ TeacherClassDetail?selectedClass;
             } else {
               googleMeet(studentClass?.meetLink ?? '');
             }
-          } else if (!isStudent&& teacherClass?.status == 'Join') {
+          } else if (!isStudent && teacherClass?.status == 'Join') {
             if (teacherClass?.cancelOrRescheduleStatus != 'false') {
               googleMeet(teacherClass?.rescheduleMeetLink ?? '');
             } else {
               googleMeet(teacherClass?.meetLink ?? '');
             }
-          } else if (isStudent && studentClass?.cancelOrRescheduleStatus != 'false' && studentClass?.status != 'Join') {
+          } else if (isStudent &&
+              studentClass?.cancelOrRescheduleStatus != 'false' &&
+              studentClass?.status != 'Join') {
             setState(() {
               isRescheduled = studentClass;
-              isClicked=!isClicked;
+              isClicked = !isClicked;
             });
-          } else if (!isStudent&& teacherClass?.cancelOrRescheduleStatus != 'false' && teacherClass?.status != 'Join') {
+          } else if (!isStudent &&
+              teacherClass?.cancelOrRescheduleStatus != 'false' &&
+              teacherClass?.status != 'Join') {
             setState(() {
-             selectedClass = teacherClass;
-             isClicked=!isClicked;
+              selectedClass = teacherClass;
+              isClicked = !isClicked;
             });
           }
         },
         child: Container(
-         // width: screenWidth(100, context),
+          // width: screenWidth(100, context),
           height: 40,
           decoration: BoxDecoration(
             color: isStudent
@@ -240,12 +253,13 @@ TeacherClassDetail?selectedClass;
           ),
           child: Center(
             child: SizedBox(
-             // width: screenWidth(100, context),
+              // width: screenWidth(100, context),
               child: Center(
                 child: AutoSizeText(
                   _getStatusText(isStudent, studentClass, teacherClass),
                   style: TextStyle(
-                    color: _getStatusTextColor(isStudent, studentClass, teacherClass),
+                    color: _getStatusTextColor(
+                        isStudent, studentClass, teacherClass),
                     fontWeight: FontWeight.w600,
                   ),
                   minFontSize: 12,
@@ -261,7 +275,8 @@ TeacherClassDetail?selectedClass;
     );
   }
 
-  Widget _buildRescheduledDetails(bool isStudent, TodayClass? studentClass, TeacherClassDetail? teacherClass) {
+  Widget _buildRescheduledDetails(bool isStudent, TodayClass? studentClass,
+      TeacherClassDetail? teacherClass) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -305,31 +320,36 @@ TeacherClassDetail?selectedClass;
     );
   }
 
-  String _getStatusText(bool isStudent, TodayClass? studentClass, TeacherClassDetail? teacherClass) {
+  String _getStatusText(bool isStudent, TodayClass? studentClass,
+      TeacherClassDetail? teacherClass) {
     if (isStudent) {
       if (studentClass?.status == 'Join') {
         return 'Join';
-      } else if (studentClass?.cancelOrRescheduleStatus != 'false' && studentClass?.status != 'Join') {
+      } else if (studentClass?.cancelOrRescheduleStatus != 'false' &&
+          studentClass?.status != 'Join') {
         return studentClass?.cancelOrRescheduleStatus ?? '';
       } else {
-        return studentClass?.status??'';
+        return studentClass?.status ?? '';
       }
     } else {
       if (teacherClass?.status == 'Join') {
         return 'Join';
-      } else if (teacherClass?.cancelOrRescheduleStatus != 'false' && teacherClass?.status != 'Join') {
+      } else if (teacherClass?.cancelOrRescheduleStatus != 'false' &&
+          teacherClass?.status != 'Join') {
         return teacherClass?.cancelOrRescheduleStatus ?? '';
       } else {
-        return teacherClass?.status??'';
+        return teacherClass?.status ?? '';
       }
     }
   }
 
-  Color _getStatusTextColor(bool isStudent, TodayClass? studentClass, TeacherClassDetail? teacherClass) {
+  Color _getStatusTextColor(bool isStudent, TodayClass? studentClass,
+      TeacherClassDetail? teacherClass) {
     if (isStudent) {
       if (studentClass?.status == 'Join') {
         return Colors.white;
-      } else if (studentClass?.cancelOrRescheduleStatus != 'false' && studentClass?.status != 'Join') {
+      } else if (studentClass?.cancelOrRescheduleStatus != 'false' &&
+          studentClass?.status != 'Join') {
         return Colors.red;
       } else {
         return Colors.black;
@@ -337,7 +357,8 @@ TeacherClassDetail?selectedClass;
     } else {
       if (teacherClass?.status == 'Join') {
         return Colors.white;
-      } else if (teacherClass?.cancelOrRescheduleStatus != 'false' && teacherClass?.status != 'Join') {
+      } else if (teacherClass?.cancelOrRescheduleStatus != 'false' &&
+          teacherClass?.status != 'Join') {
         return Colors.red;
       } else {
         return Colors.black;

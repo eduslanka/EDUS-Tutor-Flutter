@@ -1,16 +1,9 @@
-// Flutter imports:
-import 'package:edus_tutor/utils/model/UserNotifications.dart';
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:edus_tutor/utils/server/LogoutService.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
-// Project imports:
 import 'package:edus_tutor/controller/notification_controller.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -39,100 +32,100 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.h),
-        child: AppBar(
-          centerTitle: false,
-          automaticallyImplyLeading: false,
-          flexibleSpace: Container(
-            padding: EdgeInsets.only(top: 20.h),
-            decoration: const BoxDecoration(
-              color: Color(0xff053EFF),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Container(
-                  width: 25.w,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 0.0),
-                    child: Text(
-                      "Notification".tr,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(fontSize: 18.sp, color: Colors.white),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                IconButton(
-                  onPressed: () {
-                    Get.dialog(LogoutService().logoutDialog());
-                  },
-                  icon: Icon(
-                    Icons.exit_to_app,
-                    size: 25.sp,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-        ),
-      ),
-      backgroundColor: Colors.white,
-      body: RefreshIndicator(
-        onRefresh: () async {
-          await controller.getNotifications();
-        },
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(70.h),
+          child: AppBar(
+            centerTitle: false,
+            automaticallyImplyLeading: false,
+            flexibleSpace: Container(
+              padding: EdgeInsets.only(top: 20.h),
+              decoration: const BoxDecoration(
+                color: Color(0xff053EFF),
+              ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: Obx(() {
-                      return Text(
-                        "You have".tr +
-                            " ${controller.notificationCount.value} " +
-                            "New notification".tr,
-                      );
-                    }),
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Container(
+                    width: 25.w,
                   ),
-                  ElevatedButton(
-                    onPressed: readAll,
-                    child: Text(
-                      'Mark all as read'.tr,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontSize: ScreenUtil().setSp(12),
-                            color: Colors.white,
-                          ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 0.0),
+                      child: Text(
+                        "Notification".tr,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontSize: 18.sp, color: Colors.white),
+                      ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff053EFF),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Get.dialog(LogoutService().logoutDialog());
+                    },
+                    icon: Icon(
+                      Icons.exit_to_app,
+                      size: 25.sp,
                     ),
                   ),
                 ],
               ),
             ),
-            Expanded(
-              child: StreamBuilder<UserNotificationList>(
-                stream: controller.notificationStream,
-                builder: (context, snapshot) {
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        body: RefreshIndicator(
+          onRefresh: () async {
+            await controller.getNotifications();
+          },
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: Obx(() {
+                        return Text(
+                          "You have".tr +
+                              " ${controller.notificationCount.value} " +
+                              "New notification".tr,
+                        );
+                      }),
+                    ),
+                    ElevatedButton(
+                      onPressed: readAll,
+                      child: Text(
+                        'Mark all as read'.tr,
+                        style:
+                            Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  fontSize: ScreenUtil().setSp(12),
+                                  color: Colors.white,
+                                ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff053EFF),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Obx(() {
                   if (controller.isLoading.value) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
-                    if (controller.userNotificationList.value.userNotifications?.isEmpty ?? true) {
+                    if (controller.userNotificationList.value.userNotifications!
+                        .isEmpty) {
                       return Center(
                         child: Container(
                           child: Text(
@@ -152,12 +145,65 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             height: 10.h,
                           );
                         },
-                        itemCount: controller.userNotificationList.value.userNotifications?.length ?? 0,
+                        itemCount: controller.userNotificationList.value
+                                .userNotifications?.length ??
+                            0,
                         itemBuilder: (context, index) {
-                          final item = controller.userNotificationList.value.userNotifications?[index];
-                          return Slidable(
-                            actionPane: const SlidableDrawerActionPane(),
-                            actionExtentRatio: 0.25,
+                          final item = controller.userNotificationList.value
+                              .userNotifications?[index];
+                          return Dismissible(
+                            key: Key(item?.id.toString() ?? ''),
+                            direction: DismissDirection.endToStart,
+                            background: Container(
+                              color: const Color(0xff053EFF),
+                              alignment: Alignment.centerRight,
+                              padding: EdgeInsets.symmetric(horizontal: 20.w),
+                              child: const Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                              ),
+                            ),
+                            confirmDismiss: (direction) async {
+                              if (direction == DismissDirection.endToStart) {
+                                final result = await showDialog<bool>(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: const Text('Mark as Read'),
+                                      content: const Text(
+                                          'Are you sure you want to mark this notification as read?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(true),
+                                          child: const Text('Yes'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(false),
+                                          child: const Text('No'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                return result ?? false;
+                              }
+                              return false;
+                            },
+                            onDismissed: (direction) async {
+                              await controller
+                                  .readNotification()
+                                  .then((value) async {
+                                if (value == true) {
+                                  controller.userNotificationList.value
+                                      .userNotifications
+                                      ?.removeAt(index);
+                                }
+                              }).then((value) async {
+                                await controller.getNotifications();
+                              });
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,7 +222,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         item?.message.toString() ?? '',
@@ -189,7 +236,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                             ),
                                       ),
                                       Text(
-                                        timeago.format(item?.createdAt ?? DateTime(2000)),
+                                        timeago.format(
+                                            item?.createdAt ?? DateTime(2000)),
                                         textAlign: TextAlign.end,
                                         style: Theme.of(context)
                                             .textTheme
@@ -206,75 +254,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 ),
                               ],
                             ),
-                            actions: <Widget>[
-                              IconSlideAction(
-                                caption: 'Mark as Read',
-                                color: const Color(0xff053EFF),
-                                iconWidget: const Icon(
-                                  Icons.panorama_fish_eye,
-                                  size: 1,
-                                ),
-                                onTap: () async {
-                                  await controller.readNotification().then((value) async {
-                                    if (value == true) {
-                                      controller.userNotificationList.value.userNotifications?.removeAt(index);
-                                    }
-                                  }).then((value) async {
-                                    await controller.getNotifications();
-                                  });
-                                },
-                              ),
-                            ],
-                            secondaryActions: <Widget>[
-                              IconSlideAction(
-                                caption: 'Mark as Read',
-                                color: const Color(0xff053EFF),
-                                iconWidget: const Icon(
-                                  Icons.panorama_fish_eye,
-                                  size: 1,
-                                ),
-                                onTap: () async {
-                                  await controller.readNotification().then((value) async {
-                                    if (value == true) {
-                                      controller.userNotificationList.value.userNotifications?.removeAt(index);
-                                    }
-                                  }).then((value) async {
-                                    await controller.getNotifications();
-                                  });
-                                },
-                              ),
-                            ],
                           );
                         },
                       );
                     }
                   }
-                },
+                }),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            ],
+          ),
+        ));
   }
-  //  Future<void> _showNotification(UserNotificationList notification) async {
-  //   const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
-  //     'your channel id',
-  //     'your channel name',
-  //     'your channel description',
-  //     importance: Importance.max,
-  //     priority: Priority.high,
-  //     ticker: 'ticker',
-  //   );
-
-  //   const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
-
-  //   await flutterLocalNotificationsPlugin.show(
-  //     0,
-  //     notification.userNotifications.,
-  //     notification.body,
-  //     platformChannelSpecifics,
-  //     payload: 'item x',
-  //   );
-  // }
 }

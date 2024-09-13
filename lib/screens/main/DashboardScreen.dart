@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:edus_tutor/controller/system_controller.dart';
 import 'package:edus_tutor/controller/user_controller.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 // import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:themify_flutter/themify_flutter.dart';
 
@@ -110,8 +110,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   int _studentId = 0;
   bool isBlock = false;
-  String email='';
-  String password='';
+  String email = '';
+  String password = '';
   Future initate() async {
     print("ROLE ID ${widget.role} ${widget.role.runtimeType}");
     Utils.getBooleanValue('isBlock').then((value) {
@@ -119,12 +119,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         isBlock = value;
       });
     });
- Utils.getStringValue('email').then((value) {
-      email = value??'';
+    Utils.getStringValue('email').then((value) {
+      email = value ?? '';
     });
-   
+
     Utils.getStringValue('password').then((value) {
-      password = value??'';
+      password = value ?? '';
     });
     Login(email, password).getLogin(context);
 
@@ -168,43 +168,46 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 context,
                 controller: persistentTabController,
                 screens: [
-              isBlock?const FeeReminderScreen():    widget.role == "3"
-                      ? ChildHome(
-                          AppFunction.students,
-                          AppFunction.studentIcons,
-                          widget.childUID,
-                          widget.image,
-                          widget.token,
-                          widget.childName)
-                      : 
-                      Home(widget.titles, widget.images, widget.role),
+                  isBlock
+                      ? const FeeReminderScreen()
+                      : widget.role == "3"
+                          ? ChildHome(
+                              AppFunction.students,
+                              AppFunction.studentIcons,
+                              widget.childUID,
+                              widget.image,
+                              widget.token,
+                              widget.childName)
+                          : Home(widget.titles, widget.images, widget.role),
                   NotificationScreen(_id),
                   widget.role == "4"
                       ? const StudentSubjectAttendanceHome(
                           isHome: true,
                         )
-                      : const DBStudentFees(
-                        
-                        ),
-               isBlock?const FeeReminderScreen():    widget.role == "4"
-                      ? const TeacherMyRoutineScreen(
-                          isHome: true,
-                        )
-                      : DBStudentRoutine(
-                          id: widget.role == "3"
-                              ? widget.childUID.toString()
-                              : _id.toString(),
-                          isHome: false,
-                        ),
-            isBlock?const FeeReminderScreen():       widget.role == "4"
-                      ? DBTeacherHW(
-                          AppFunction.homework, AppFunction.homeworkIcons)
-                      : DBStudentProfile(
-                          id: widget.role == "3"
-                              ? widget.childUID.toString()
-                              : _id.toString(),
-                          image: widget.image,
-                        ),
+                      : const DBStudentFees(),
+                  isBlock
+                      ? const FeeReminderScreen()
+                      : widget.role == "4"
+                          ? const TeacherMyRoutineScreen(
+                              isHome: true,
+                            )
+                          : DBStudentRoutine(
+                              id: widget.role == "3"
+                                  ? widget.childUID.toString()
+                                  : _id.toString(),
+                              isHome: false,
+                            ),
+                  isBlock
+                      ? const FeeReminderScreen()
+                      : widget.role == "4"
+                          ? DBTeacherHW(
+                              AppFunction.homework, AppFunction.homeworkIcons)
+                          : DBStudentProfile(
+                              id: widget.role == "3"
+                                  ? widget.childUID.toString()
+                                  : _id.toString(),
+                              image: widget.image,
+                            ),
                 ],
                 items: [
                   PersistentBottomNavBarItem(
@@ -217,7 +220,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       size: 18.sp,
                     ),
                     title: "Home".tr,
-                    activeColorPrimary: const Color(0xff053EFF).withOpacity(0.9),
+                    activeColorPrimary:
+                        const Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),
                   PersistentBottomNavBarItem(
@@ -232,7 +236,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ?.copyWith(color: Colors.white),
                           ),
                           badgeStyle: bz.BadgeStyle(
-                            badgeColor: const Color(0xff053EFF).withOpacity(0.8),
+                            badgeColor:
+                                const Color(0xff053EFF).withOpacity(0.8),
                           ),
                           // badgeAnimation: BadgeAnimationType.fade,
                           // toAnimate: false,
@@ -278,7 +283,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           // animationType: bz.BadgeAnimationType.fade,
                           // toAnimate: false,
                           badgeStyle: bz.BadgeStyle(
-                            badgeColor: const Color(0xff053EFF).withOpacity(0.8),
+                            badgeColor:
+                                const Color(0xff053EFF).withOpacity(0.8),
                           ),
                           // badgeAnimation: BadgeAnimationType.fade,
                           // toAnimate: false,
@@ -315,7 +321,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       );
                     }),
                     title: "Notification".tr,
-                    activeColorPrimary: const Color(0xff053EFF).withOpacity(0.9),
+                    activeColorPrimary:
+                        const Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),
                   PersistentBottomNavBarItem(
@@ -324,29 +331,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             "assets/images/classattendance (2).png",
                             width: 25.w,
                             height: 25.h,
-                            color: Colors.white,
+                            color: Colors.grey,
                           )
                         : Image.asset(
                             "assets/images/fees_icon (2).png",
                             width: 25.w,
                             height: 25.h,
-                            color: Colors.white,
+                            color: Colors.grey,
                           ),
                     icon: widget.role == "4"
                         ? Image.asset(
                             "assets/images/classattendance (2).png",
                             width: 25.w,
                             height: 25.h,
-                            color: Colors.white,
+                            color: const Color(0xff053EFF).withOpacity(0.9),
                           )
                         : Image.asset(
                             "assets/images/fees_icon (2).png",
                             width: 25.w,
                             height: 25.h,
-                            color: Colors.white,
+                            color: const Color(0xff053EFF).withOpacity(0.9),
                           ),
                     title: widget.role == "4" ? "Attendance".tr : "Fees".tr,
-                    activeColorPrimary: const Color(0xff053EFF).withOpacity(0.9),
+                    activeColorPrimary:
+                        const Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),
                   PersistentBottomNavBarItem(
@@ -377,7 +385,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             color: const Color(0xff053EFF).withOpacity(0.9),
                           ),
                     title: widget.role == "4" ? "TimeTable".tr : "TimeTable".tr,
-                    activeColorPrimary: const Color(0xff053EFF).withOpacity(0.9),
+                    activeColorPrimary:
+                        const Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),
                   PersistentBottomNavBarItem(
@@ -408,48 +417,54 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             color: const Color(0xff053EFF).withOpacity(0.9),
                           ),
                     title: widget.role == "4" ? "Homework".tr : "Profile".tr,
-                    activeColorPrimary: const Color(0xff053EFF).withOpacity(0.9),
+                    activeColorPrimary:
+                        const Color(0xff053EFF).withOpacity(0.9),
                     inactiveColorPrimary: Colors.grey.withOpacity(0.9),
                   ),
                 ],
-                hideNavigationBar: false,
-                navBarHeight: 70,
+                //   hideNavigationBar: false,
+                // navBarHeight: 70,
                 margin: const EdgeInsets.all(0),
-                padding: const NavBarPadding.symmetric(horizontal: 5),
-                confineInSafeArea: true,
+//padding: const NavBarPadding.symmetric(horizontal: 5),
+                //  confineInSafeArea: true,
                 backgroundColor: Colors.white,
                 handleAndroidBackButtonPress: true,
                 resizeToAvoidBottomInset: true,
                 stateManagement: false,
-                hideNavigationBarWhenKeyboardShows: true,
+                //   hideNavigationBarWhenKeyboardShows: true,
                 onItemSelected: (index) async {
                   if (index == 1) {
                     await controller.getNotifications();
                   }
                 },
-                decoration: NavBarDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  colorBehindNavBar: Colors.white,
-                  boxShadow: [
-                    const BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 10.0,
-                      offset: Offset(2, 3),
-                    ),
-                  ],
+                // decoration: NavBarDecoration(
+                //   borderRadius: BorderRadius.circular(10.0),
+                //   colorBehindNavBar: Colors.white,
+                //   boxShadow: [
+                //     const BoxShadow(
+                //       color: Colors.grey,
+                //       blurRadius: 10.0,
+                //       offset: Offset(2, 3),
+                //     ),
+                //   ],
+                // ),
+                confineToSafeArea: true,
+                navBarHeight: kBottomNavigationBarHeight,
+                animationSettings: const NavBarAnimationSettings(
+                  navBarItemAnimation: ItemAnimationSettings(
+                    // Navigation Bar's items animation properties.
+                    duration: Duration(milliseconds: 400),
+                    curve: Curves.ease,
+                  ),
+                  screenTransitionAnimation: ScreenTransitionAnimationSettings(
+                    // Screen transition animation on change of selected tab.
+                    animateTabTransition: true,
+                    duration: Duration(milliseconds: 200),
+                    screenTransitionAnimationType:
+                        ScreenTransitionAnimationType.fadeIn,
+                  ),
                 ),
-                popAllScreensOnTapOfSelectedTab: true,
-                popActionScreens: PopActionScreensType.all,
-                itemAnimationProperties: const ItemAnimationProperties(
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.ease,
-                ),
-                screenTransitionAnimation: const ScreenTransitionAnimation(
-                  animateTabTransition: false,
-                  curve: Curves.ease,
-                  duration: Duration(milliseconds: 200),
-                ),
-                navBarStyle: NavBarStyle.style15,
+                navBarStyle: NavBarStyle.style1,
               );
       }),
     );

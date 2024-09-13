@@ -1,551 +1,551 @@
-// Dart imports:
-import 'dart:convert';
+// // Dart imports:
+// import 'dart:convert';
 
-// Flutter imports:
-import 'package:flutter/material.dart';
+// // Flutter imports:
+// import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart' as http;
+// // Package imports:
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:http/http.dart' as http;
 
-// Project imports:
-import 'package:edus_tutor/config/app_config.dart';
-import 'package:edus_tutor/screens/fees/paymentGateway/khalti/KhaltiPayment.dart';
-import 'package:edus_tutor/utils/Utils.dart';
-import 'package:edus_tutor/utils/apis/Apis.dart';
-import 'package:edus_tutor/screens/fees/model/Fee.dart';
-import 'package:edus_tutor/utils/model/UserDetails.dart';
-import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
-import 'core/khalti_core.dart';
-import 'sdk/khalti.dart';
+// // Project imports:
+// import 'package:edus_tutor/config/app_config.dart';
+// import 'package:edus_tutor/screens/fees/paymentGateway/khalti/KhaltiPayment.dart';
+// import 'package:edus_tutor/utils/Utils.dart';
+// import 'package:edus_tutor/utils/apis/Apis.dart';
+// import 'package:edus_tutor/screens/fees/model/Fee.dart';
+// import 'package:edus_tutor/utils/model/UserDetails.dart';
+// import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
+// import 'core/khalti_core.dart';
+// import 'sdk/khalti.dart';
 
-class KhaltiPaymentScreen extends StatelessWidget {
-  final String? id;
-  final String? paidBy;
-  final FeeElement? fee;
-  final String? email;
-  final String? method;
-  final String? amount;
-  final UserDetails? userDetails;
+// class KhaltiPaymentScreen extends StatelessWidget {
+//   final String? id;
+//   final String? paidBy;
+//   final FeeElement? fee;
+//   final String? email;
+//   final String? method;
+//   final String? amount;
+//   final UserDetails? userDetails;
 
-  const KhaltiPaymentScreen(
-      {Key? key,
-      this.id,
-      this.paidBy,
-      this.fee,
-      this.email,
-      this.method,
-      this.amount,
-      this.userDetails})
-      : super(key: key);
+//   const KhaltiPaymentScreen(
+//       {Key? key,
+//       this.id,
+//       this.paidBy,
+//       this.fee,
+//       this.email,
+//       this.method,
+//       this.amount,
+//       this.userDetails})
+//       : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> _tabs = [
-      const Tab(text: 'Wallet Payment'),
-      const Tab(text: 'EBanking'),
-      const Tab(text: 'MBanking'),
-    ];
+//   @override
+//   Widget build(BuildContext context) {
+//     List<Widget> _tabs = [
+//       const Tab(text: 'Wallet Payment'),
+//       const Tab(text: 'EBanking'),
+//       const Tab(text: 'MBanking'),
+//     ];
 
-    return SafeArea(
-      child: DefaultTabController(
-        length: _tabs.length,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.blueAccent,
-            automaticallyImplyLeading: false,
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(AppConfig.appToolbarBackground),
-                  fit: BoxFit.cover,
-                ),
-                color: Color(0xff053EFF),
-              ),
-            ),
-            title: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Material(
-                    color: Colors.transparent,
-                    child: SizedBox(
-                      height: 70.h,
-                      child: IconButton(
-                          tooltip: 'Back',
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: ScreenUtil().setSp(20),
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 0.0),
-                      child: Text(
-                        "Khalti Payment",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(
-                                fontSize: ScreenUtil().setSp(20),
-                                color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                ],
-              ),
-            ),
-            bottom: TabBar(
-              labelColor: Colors.white,
-              unselectedLabelColor: Colors.grey,
-              labelPadding: EdgeInsets.zero,
-              tabs: _tabs,
-            ),
-          ),
-          body: TabBarView(
-            children: [
-              WalletPayment(
-                id: id ?? '',
-                paidBy: paidBy ?? '',
-                fee: fee ?? FeeElement(),
-                email: email ?? '',
-                method: 'Khalti Payment',
-                userDetails: userDetails ?? UserDetails(),
-                amount: amount ?? '',
-              ),
-              Banking(
-                  id: id ?? '',
-                  paidBy: paidBy ?? '',
-                  fee: fee ?? FeeElement(),
-                  email: email ?? '',
-                  method: 'Khalti Payment',
-                  userDetails: userDetails ?? UserDetails(),
-                  amount: amount ?? '',
-                  paymentType: BankPaymentType.eBanking),
-              Banking(
-                  id: id ?? '',
-                  paidBy: paidBy ?? '',
-                  fee: fee ?? FeeElement(),
-                  email: email ?? '',
-                  method: 'Khalti Payment',
-                  userDetails: userDetails ?? UserDetails(),
-                  amount: amount ?? '',
-                  paymentType: BankPaymentType.mobileCheckout),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//     return SafeArea(
+//       child: DefaultTabController(
+//         length: _tabs.length,
+//         child: Scaffold(
+//           appBar: AppBar(
+//             backgroundColor: Colors.blueAccent,
+//             automaticallyImplyLeading: false,
+//             flexibleSpace: Container(
+//               decoration: BoxDecoration(
+//                 image: DecorationImage(
+//                   image: AssetImage(AppConfig.appToolbarBackground),
+//                   fit: BoxFit.cover,
+//                 ),
+//                 color: Color(0xff053EFF),
+//               ),
+//             ),
+//             title: Container(
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.start,
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 mainAxisSize: MainAxisSize.min,
+//                 children: <Widget>[
+//                   Material(
+//                     color: Colors.transparent,
+//                     child: SizedBox(
+//                       height: 70.h,
+//                       child: IconButton(
+//                           tooltip: 'Back',
+//                           icon: Icon(
+//                             Icons.arrow_back,
+//                             size: ScreenUtil().setSp(20),
+//                             color: Colors.white,
+//                           ),
+//                           onPressed: () {
+//                             Navigator.pop(context);
+//                           }),
+//                     ),
+//                   ),
+//                   Expanded(
+//                     child: Padding(
+//                       padding: const EdgeInsets.only(left: 0.0),
+//                       child: Text(
+//                         "Khalti Payment",
+//                         style: Theme.of(context)
+//                             .textTheme
+//                             .titleMedium
+//                             ?.copyWith(
+//                                 fontSize: ScreenUtil().setSp(20),
+//                                 color: Colors.white),
+//                       ),
+//                     ),
+//                   ),
+//                   const SizedBox(
+//                     width: 5,
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             bottom: TabBar(
+//               labelColor: Colors.white,
+//               unselectedLabelColor: Colors.grey,
+//               labelPadding: EdgeInsets.zero,
+//               tabs: _tabs,
+//             ),
+//           ),
+//           body: TabBarView(
+//             children: [
+//               WalletPayment(
+//                 id: id ?? '',
+//                 paidBy: paidBy ?? '',
+//                 fee: fee ?? FeeElement(),
+//                 email: email ?? '',
+//                 method: 'Khalti Payment',
+//                 userDetails: userDetails ?? UserDetails(),
+//                 amount: amount ?? '',
+//               ),
+//               Banking(
+//                   id: id ?? '',
+//                   paidBy: paidBy ?? '',
+//                   fee: fee ?? FeeElement(),
+//                   email: email ?? '',
+//                   method: 'Khalti Payment',
+//                   userDetails: userDetails ?? UserDetails(),
+//                   amount: amount ?? '',
+//                   paymentType: BankPaymentType.eBanking),
+//               Banking(
+//                   id: id ?? '',
+//                   paidBy: paidBy ?? '',
+//                   fee: fee ?? FeeElement(),
+//                   email: email ?? '',
+//                   method: 'Khalti Payment',
+//                   userDetails: userDetails ?? UserDetails(),
+//                   amount: amount ?? '',
+//                   paymentType: BankPaymentType.mobileCheckout),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-class WalletPayment extends StatefulWidget {
-  final String? id;
-  final String? paidBy;
-  final FeeElement? fee;
-  final String? email;
-  final String? method;
-  final String? amount;
-  final UserDetails? userDetails;
+// class WalletPayment extends StatefulWidget {
+//   final String? id;
+//   final String? paidBy;
+//   final FeeElement? fee;
+//   final String? email;
+//   final String? method;
+//   final String? amount;
+//   final UserDetails? userDetails;
 
-  const WalletPayment(
-      {Key? key,
-      this.id,
-      this.paidBy,
-      this.fee,
-      this.email,
-      this.method,
-      this.amount,
-      this.userDetails})
-      : super(key: key);
+//   const WalletPayment(
+//       {Key? key,
+//       this.id,
+//       this.paidBy,
+//       this.fee,
+//       this.email,
+//       this.method,
+//       this.amount,
+//       this.userDetails})
+//       : super(key: key);
 
-  @override
-  State<WalletPayment> createState() => _WalletPaymentState();
-}
+//   @override
+//   State<WalletPayment> createState() => _WalletPaymentState();
+// }
 
-class _WalletPaymentState extends State<WalletPayment> {
-  TextEditingController? _mobileController, _pinController;
-  final GlobalKey<FormState> _formKey = GlobalKey();
+// class _WalletPaymentState extends State<WalletPayment> {
+//   TextEditingController? _mobileController, _pinController;
+//   final GlobalKey<FormState> _formKey = GlobalKey();
 
-  @override
-  void initState() {
-    super.initState();
-    _mobileController = TextEditingController();
-    _pinController = TextEditingController();
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     _mobileController = TextEditingController();
+//     _pinController = TextEditingController();
+//   }
 
-  @override
-  void dispose() {
-    _mobileController?.dispose();
-    _pinController?.dispose();
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     _mobileController?.dispose();
+//     _pinController?.dispose();
+//     super.dispose();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          TextFormField(
-            validator: (v) => (v?.isEmpty ?? true) ? 'Required ' : null,
-            decoration: const InputDecoration(
-              label: Text('Mobile Number'),
-            ),
-            controller: _mobileController,
-          ),
-          TextFormField(
-            validator: (v) => (v?.isEmpty ?? true) ? 'Required ' : null,
-            decoration: const InputDecoration(
-              label: Text('Khalti MPIN'),
-            ),
-            controller: _pinController,
-          ),
-          const SizedBox(height: 24),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueAccent,
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                textStyle:
-                    TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
-            onPressed: () async {
-              if (!(_formKey.currentState?.validate() ?? false)) return;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Form(
+//       key: _formKey,
+//       child: ListView(
+//         padding: const EdgeInsets.all(16),
+//         children: [
+//           TextFormField(
+//             validator: (v) => (v?.isEmpty ?? true) ? 'Required ' : null,
+//             decoration: const InputDecoration(
+//               label: Text('Mobile Number'),
+//             ),
+//             controller: _mobileController,
+//           ),
+//           TextFormField(
+//             validator: (v) => (v?.isEmpty ?? true) ? 'Required ' : null,
+//             decoration: const InputDecoration(
+//               label: Text('Khalti MPIN'),
+//             ),
+//             controller: _pinController,
+//           ),
+//           const SizedBox(height: 24),
+//           ElevatedButton(
+//             style: ElevatedButton.styleFrom(
+//                 backgroundColor: Colors.blueAccent,
+//                 padding: const EdgeInsets.symmetric(vertical: 10),
+//                 textStyle:
+//                     TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+//             onPressed: () async {
+//               if (!(_formKey.currentState?.validate() ?? false)) return;
 
-              try {
-                final khaltiPaymentService = KhaltiPaymentService(
-                    widget.id ?? '',
-                    widget.fee ?? FeeElement(),
-                    widget.email ?? '',
-                    widget.method ?? '',
-                    widget.amount ?? '',
-                    widget.userDetails ?? UserDetails(),
-                    widget.paidBy ?? '',
-                    context);
+//               try {
+//                 final khaltiPaymentService = KhaltiPaymentService(
+//                     widget.id ?? '',
+//                     widget.fee ?? FeeElement(),
+//                     widget.email ?? '',
+//                     widget.method ?? '',
+//                     widget.amount ?? '',
+//                     widget.userDetails ?? UserDetails(),
+//                     widget.paidBy ?? '',
+//                     context);
 
-                await khaltiPaymentService
-                    .paymentDataSave()
-                    .then((value) async {
-               
+//                 await khaltiPaymentService
+//                     .paymentDataSave()
+//                     .then((value) async {
+//                   print(value);
 
-                  final initiationModel = await Khalti.service.initiatePayment(
-                    request: PaymentInitiationRequestModel(
-                      amount: int.parse((widget.amount ?? '')) * 100,
-                      mobile: _mobileController?.text ?? '',
-                      productIdentity: '${widget.fee?.feesName}',
-                      productName: '${widget.fee?.feesName}',
-                      transactionPin: _pinController?.text ?? '',
-                      productUrl: '',
-                    ),
-                  );
+//                   final initiationModel = await Khalti.service.initiatePayment(
+//                     request: PaymentInitiationRequestModel(
+//                       amount: int.parse((widget.amount ?? '')) * 100,
+//                       mobile: _mobileController?.text ?? '',
+//                       productIdentity: '${widget.fee?.feesName}',
+//                       productName: '${widget.fee?.feesName}',
+//                       transactionPin: _pinController?.text ?? '',
+//                       productUrl: '',
+//                     ),
+//                   );
 
-                  final otpCode = await showDialog<String>(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (context) {
-                      String _otp = '';
-                      return AlertDialog(
-                        title: const Text('OTP Sent!'),
-                        content: TextField(
-                          decoration: const InputDecoration(
-                            label: Text('OTP Code'),
-                          ),
-                          onChanged: (v) => _otp = v,
-                        ),
-                        actions: [
-                          SimpleDialogOption(
-                            child: const Text('OK'),
-                            onPressed: () => Navigator.pop(context, _otp),
-                          )
-                        ],
-                      );
-                    },
-                  );
+//                   final otpCode = await showDialog<String>(
+//                     context: context,
+//                     barrierDismissible: false,
+//                     builder: (context) {
+//                       String _otp = '';
+//                       return AlertDialog(
+//                         title: const Text('OTP Sent!'),
+//                         content: TextField(
+//                           decoration: const InputDecoration(
+//                             label: Text('OTP Code'),
+//                           ),
+//                           onChanged: (v) => _otp = v,
+//                         ),
+//                         actions: [
+//                           SimpleDialogOption(
+//                             child: const Text('OK'),
+//                             onPressed: () => Navigator.pop(context, _otp),
+//                           )
+//                         ],
+//                       );
+//                     },
+//                   );
 
-                  print("OTP CODE $otpCode");
-                  if (otpCode != null) {
-                    final model = await Khalti.service.confirmPayment(
-                      request: PaymentConfirmationRequestModel(
-                        confirmationCode: otpCode,
-                        token: initiationModel.token,
-                        transactionPin: _pinController?.text ?? '',
-                      ),
-                    );
-                    print(model);
+//                   print("OTP CODE $otpCode");
+//                   if (otpCode != null) {
+//                     final model = await Khalti.service.confirmPayment(
+//                       request: PaymentConfirmationRequestModel(
+//                         confirmationCode: otpCode,
+//                         token: initiationModel.token,
+//                         transactionPin: _pinController?.text ?? '',
+//                       ),
+//                     );
+//                     print(model);
 
-                    Map params = {"token": model.token, "amount": model.amount};
+//                     Map params = {"token": model.token, "amount": model.amount};
 
-                    var response = await http.post(
-                      Uri.parse(
-                        "https://khalti.com/api/v2/payment/status/",
-                      ),
-                      headers: {
-                        "Authorization": "Key $khaltiPublicKey",
-                      },
-                      body: jsonEncode(params),
-                    );
-                    Utils.showToast(response.body.toString());
-                    Utils.showToast(response.statusCode.toString());
-                    var jsonString = jsonDecode(response.body);
-                    Utils.showToast(jsonString.toString());
-                    if (response.statusCode == 200) {
-                      if (jsonString['state'] == "Complete") {
-                        Utils.showToast(
-                            "Payment state: ${jsonString['state']}");
-                        await khaltiPaymentService.paymentCallBack(
-                            reference: value, status: true);
-                      }
-                    } else {
-                      Utils.showToast(
-                          'Unable to pay ${response.body.toString()}');
-                    }
-                  }
-                });
-              } catch (e) {
-                ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-                  SnackBar(content: Text(e.toString())),
-                );
-              }
-            },
-            child: Text('PAY Rs. ${widget.amount}'),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//                     var response = await http.post(
+//                       Uri.parse(
+//                         "https://khalti.com/api/v2/payment/status/",
+//                       ),
+//                       headers: {
+//                         "Authorization": "Key $khaltiPublicKey",
+//                       },
+//                       body: jsonEncode(params),
+//                     );
+//                     Utils.showToast(response.body.toString());
+//                     Utils.showToast(response.statusCode.toString());
+//                     var jsonString = jsonDecode(response.body);
+//                     Utils.showToast(jsonString.toString());
+//                     if (response.statusCode == 200) {
+//                       if (jsonString['state'] == "Complete") {
+//                         Utils.showToast(
+//                             "Payment state: ${jsonString['state']}");
+//                         await khaltiPaymentService.paymentCallBack(
+//                             reference: value, status: true);
+//                       }
+//                     } else {
+//                       Utils.showToast(
+//                           'Unable to pay ${response.body.toString()}');
+//                     }
+//                   }
+//                 });
+//               } catch (e) {
+//                 ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+//                   SnackBar(content: Text(e.toString())),
+//                 );
+//               }
+//             },
+//             child: Text('PAY Rs. ${widget.amount}'),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-class Banking extends StatefulWidget {
-  final String? id;
-  final String? paidBy;
-  final FeeElement? fee;
-  final String? email;
-  final String? method;
-  final String? amount;
-  final UserDetails? userDetails;
-  final BankPaymentType? paymentType;
+// class Banking extends StatefulWidget {
+//   final String? id;
+//   final String? paidBy;
+//   final FeeElement? fee;
+//   final String? email;
+//   final String? method;
+//   final String? amount;
+//   final UserDetails? userDetails;
+//   final BankPaymentType? paymentType;
 
-  const Banking(
-      {Key? key,
-      this.id,
-      this.paidBy,
-      this.fee,
-      this.email,
-      this.method,
-      this.amount,
-      this.userDetails,
-      required this.paymentType})
-      : super(key: key);
+//   const Banking(
+//       {Key? key,
+//       this.id,
+//       this.paidBy,
+//       this.fee,
+//       this.email,
+//       this.method,
+//       this.amount,
+//       this.userDetails,
+//       required this.paymentType})
+//       : super(key: key);
 
-  @override
-  State<Banking> createState() => _BankingState();
-}
+//   @override
+//   State<Banking> createState() => _BankingState();
+// }
 
-class _BankingState extends State<Banking> with AutomaticKeepAliveClientMixin {
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
+// class _BankingState extends State<Banking> with AutomaticKeepAliveClientMixin {
+//   @override
+//   Widget build(BuildContext context) {
+//     super.build(context);
 
-    return FutureBuilder<BankListModel>(
-      future: Khalti.service.getBanks(paymentType: widget.paymentType!),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final banks = snapshot.data?.banks;
-          return ListView.builder(
-            itemCount: banks?.length,
-            itemBuilder: (context, index) {
-              final bank = banks?[index];
-              return ListTile(
-                leading: SizedBox.square(
-                  dimension: 40,
-                  child: Image.network(bank?.logo ?? ''),
-                ),
-                title: Text(bank?.name ?? ''),
-                subtitle: Text(
-                  bank?.shortName ?? '',
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                onTap: () async {
-                  final mobile = await showDialog<String>(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (context) {
-                      String _mobile = '';
-                      return AlertDialog(
-                        title: const Text('Enter Mobile Number'),
-                        content: TextField(
-                          decoration: const InputDecoration(
-                            label: Text('Mobile Number'),
-                          ),
-                          onChanged: (v) => _mobile = v,
-                        ),
-                        actions: [
-                          SimpleDialogOption(
-                            child: const Text('OK'),
-                            onPressed: () => Navigator.pop(context, _mobile),
-                          )
-                        ],
-                      );
-                    },
-                  );
+//     return FutureBuilder<BankListModel>(
+//       future: Khalti.service.getBanks(paymentType: widget.paymentType!),
+//       builder: (context, snapshot) {
+//         if (snapshot.hasData) {
+//           final banks = snapshot.data?.banks;
+//           return ListView.builder(
+//             itemCount: banks?.length,
+//             itemBuilder: (context, index) {
+//               final bank = banks?[index];
+//               return ListTile(
+//                 leading: SizedBox.square(
+//                   dimension: 40,
+//                   child: Image.network(bank?.logo ?? ''),
+//                 ),
+//                 title: Text(bank?.name ?? ''),
+//                 subtitle: Text(
+//                   bank?.shortName ?? '',
+//                   style: Theme.of(context).textTheme.titleSmall,
+//                 ),
+//                 onTap: () async {
+//                   final mobile = await showDialog<String>(
+//                     context: context,
+//                     barrierDismissible: false,
+//                     builder: (context) {
+//                       String _mobile = '';
+//                       return AlertDialog(
+//                         title: const Text('Enter Mobile Number'),
+//                         content: TextField(
+//                           decoration: const InputDecoration(
+//                             label: Text('Mobile Number'),
+//                           ),
+//                           onChanged: (v) => _mobile = v,
+//                         ),
+//                         actions: [
+//                           SimpleDialogOption(
+//                             child: const Text('OK'),
+//                             onPressed: () => Navigator.pop(context, _mobile),
+//                           )
+//                         ],
+//                       );
+//                     },
+//                   );
 
-                  if (mobile != null) {
-                    final url = Khalti.service.buildBankUrl(
-                      bankId: bank?.idx ?? '',
-                      amount: int.parse(widget.amount ?? '') * 100,
-                      mobile: mobile,
-                      productIdentity: '${widget.fee?.feesName}',
-                      productName: '${widget.fee?.feesName}',
-                      paymentType: widget.paymentType!,
-                      returnUrl: AppConfig.domainName,
-                    );
+//                   if (mobile != null) {
+//                     final url = Khalti.service.buildBankUrl(
+//                       bankId: bank?.idx ?? '',
+//                       amount: int.parse(widget.amount ?? '') * 100,
+//                       mobile: mobile,
+//                       productIdentity: '${widget.fee?.feesName}',
+//                       productName: '${widget.fee?.feesName}',
+//                       paymentType: widget.paymentType!,
+//                       returnUrl: AppConfig.domainName,
+//                     );
 
-                    final khaltiPaymentService = KhaltiPaymentService(
-                        widget.id ?? '',
-                        widget.fee ?? FeeElement(),
-                        widget.email ?? '',
-                        widget.method ?? '',
-                        widget.amount ?? '',
-                        widget.userDetails ?? UserDetails(),
-                        widget.paidBy ?? '',
-                        context);
+//                     final khaltiPaymentService = KhaltiPaymentService(
+//                         widget.id ?? '',
+//                         widget.fee ?? FeeElement(),
+//                         widget.email ?? '',
+//                         widget.method ?? '',
+//                         widget.amount ?? '',
+//                         widget.userDetails ?? UserDetails(),
+//                         widget.paidBy ?? '',
+//                         context);
 
-                    await khaltiPaymentService.paymentDataSave().then((value) {
-                      print(value);
-                      print(url);
-                      Navigator.push(
-                          context,
-                          ScaleRoute(
-                              page: KhaltiPayment(
-                            checkoutUrl: url,
-                            onFinish: (onFinish) async {
-                              await khaltiPaymentService.paymentCallBack(
-                                  reference: value, status: onFinish['status']);
-                            },
-                          )));
-                    });
-                  }
-                },
-              );
-            },
-          );
-        }
+//                     await khaltiPaymentService.paymentDataSave().then((value) {
+//                       print(value);
+//                       print(url);
+//                       Navigator.push(
+//                           context,
+//                           ScaleRoute(
+//                               page: KhaltiPayment(
+//                             checkoutUrl: url,
+//                             onFinish: (onFinish) async {
+//                               await khaltiPaymentService.paymentCallBack(
+//                                   reference: value, status: onFinish['status']);
+//                             },
+//                           )));
+//                     });
+//                   }
+//                 },
+//               );
+//             },
+//           );
+//         }
 
-        return const Center(child: CircularProgressIndicator());
-      },
-    );
-  }
+//         return const Center(child: CircularProgressIndicator());
+//       },
+//     );
+//   }
 
-  @override
-  bool get wantKeepAlive => true;
-}
+//   @override
+//   bool get wantKeepAlive => true;
+// }
 
-class KhaltiPaymentService {
-  final String id;
-  final FeeElement fee;
-  final String email;
-  final String method;
-  final String amount;
-  final String paidBy;
-  final UserDetails userDetails;
-  final BuildContext context;
+// class KhaltiPaymentService {
+//   final String id;
+//   final FeeElement fee;
+//   final String email;
+//   final String method;
+//   final String amount;
+//   final String paidBy;
+//   final UserDetails userDetails;
+//   final BuildContext context;
 
-  KhaltiPaymentService(this.id, this.fee, this.email, this.method, this.amount,
-      this.userDetails, this.paidBy, this.context);
+//   KhaltiPaymentService(this.id, this.fee, this.email, this.method, this.amount,
+//       this.userDetails, this.paidBy, this.context);
 
-  String? token;
+//   String? token;
 
-  Future<dynamic> paymentDataSave() async {
-    await Utils.getStringValue('token').then((value) {
-      token = value;
-    });
+//   Future<dynamic> paymentDataSave() async {
+//     await Utils.getStringValue('token').then((value) {
+//       token = value;
+//     });
 
-    Map data = {
-      'student_id': id,
-      'fees_type_id': fee.feesTypeId,
-      'amount': amount,
-      'method': method,
-      'school_id': userDetails.schoolId,
-    };
-    final response = await http.post(
-      Uri.parse(EdusApi.paymentDataSave),
-      body: jsonEncode(data),
-      headers: {
-        "Accept": "application/json",
-        "Authorization": token.toString(),
-      },
-    );
-    print("paymentDataSave ${response.body}");
-    print("paymentDataSave ${response.statusCode}");
+//     Map data = {
+//       'student_id': id,
+//       'fees_type_id': fee.feesTypeId,
+//       'amount': amount,
+//       'method': method,
+//       'school_id': userDetails.schoolId,
+//     };
+//     final response = await http.post(
+//       Uri.parse(EdusApi.paymentDataSave),
+//       body: jsonEncode(data),
+//       headers: {
+//         "Accept": "application/json",
+//         "Authorization": token.toString(),
+//       },
+//     );
+//     print("paymentDataSave ${response.body}");
+//     print("paymentDataSave ${response.statusCode}");
 
-    var jsonString = jsonDecode(response.body);
+//     var jsonString = jsonDecode(response.body);
 
-    return jsonString['payment_ref'];
-  }
+//     return jsonString['payment_ref'];
+//   }
 
-  Future paymentCallBack({dynamic reference, dynamic status}) async {
-    await Utils.getStringValue('token').then((value) {
-      token = value;
-    });
-    final response = await http.post(
-      Uri.parse(EdusApi.paymentSuccessCallback(status, reference, amount)),
-      headers: {
-        "Accept": "application/json",
-        "Authorization": token.toString(),
-      },
-    );
-    print("paymentCallBack ===> ${response.body}");
-    print("paymentCallBack ===> ${response.statusCode}");
-    await studentPayment();
-  }
+//   Future paymentCallBack({dynamic reference, dynamic status}) async {
+//     await Utils.getStringValue('token').then((value) {
+//       token = value;
+//     });
+//     final response = await http.post(
+//       Uri.parse(EdusApi.paymentSuccessCallback(status, reference, amount)),
+//       headers: {
+//         "Accept": "application/json",
+//         "Authorization": token.toString(),
+//       },
+//     );
+//     print("paymentCallBack ===> ${response.body}");
+//     print("paymentCallBack ===> ${response.statusCode}");
+//     await studentPayment();
+//   }
 
-  Future studentPayment() async {
-    await Utils.getStringValue('token').then((value) {
-      token = value;
-    });
-    try {
-      final response = await http.get(
-          Uri.parse(EdusApi.studentFeePayment(id.toString(),
-              int.parse(fee.feesTypeId.toString()), amount, paidBy, 'Khalti')),
-          headers: {
-            "Accept": "application/json",
-            "Authorization": token.toString(),
-          });
-      print('Response Status => ${response.statusCode}');
-      print('Response Body => ${response.body}');
-      if (response.statusCode == 200) {
-        print(response.body);
-        var data = json.decode(response.body.toString());
+//   Future studentPayment() async {
+//     await Utils.getStringValue('token').then((value) {
+//       token = value;
+//     });
+//     try {
+//       final response = await http.get(
+//           Uri.parse(EdusApi.studentFeePayment(id.toString(),
+//               int.parse(fee.feesTypeId.toString()), amount, paidBy, 'Khalti')),
+//           headers: {
+//             "Accept": "application/json",
+//             "Authorization": token.toString(),
+//           });
+//       print('Response Status => ${response.statusCode}');
+//       print('Response Body => ${response.body}');
+//       if (response.statusCode == 200) {
+//         print(response.body);
+//         var data = json.decode(response.body.toString());
 
-        print(data['success']);
+//         print(data['success']);
 
-        print(data);
-        if (data['success'] == true) {
-          Utils.showToast('Payment Added');
+//         print(data);
+//         if (data['success'] == true) {
+//           Utils.showToast('Payment Added');
 
-          Navigator.of(context).pop();
-          Navigator.of(context).pop();
-          Navigator.of(context).pop();
-          // Route route = MaterialPageRoute(
-          //     builder: (context) => FeeScreen(), fullscreenDialog: true);
-          // Navigator.of(context, rootNavigator: true).push(route);
-        } else {
-          Utils.showToast('Some error occurred');
-          Navigator.of(context).pop();
-        }
-      } else {}
-    } catch (e) {
-      Exception(e.toString());
-    }
-  }
-}
+//           Navigator.of(context).pop();
+//           Navigator.of(context).pop();
+//           Navigator.of(context).pop();
+//           // Route route = MaterialPageRoute(
+//           //     builder: (context) => FeeScreen(), fullscreenDialog: true);
+//           // Navigator.of(context, rootNavigator: true).push(route);
+//         } else {
+//           Utils.showToast('Some error occurred');
+//           Navigator.of(context).pop();
+//         }
+//       } else {}
+//     } catch (e) {
+//       Exception(e.toString());
+//     }
+//   }
+// }

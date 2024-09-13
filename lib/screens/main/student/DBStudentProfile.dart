@@ -3,13 +3,14 @@ import 'dart:async';
 import 'dart:io';
 
 // Flutter imports:
+import 'package:edus_tutor/config/app_size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
-import 'package:file_utils/file_utils.dart';
+// import 'package:file_utils/file_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -81,7 +82,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   Future<StudentDetailsModel> getProfile(id) async {
     final response = await http.get(Uri.parse(EdusApi.getChildren(id)),
         headers: id == null ? null : Utils.setHeader(_token.toString()));
-        print(EdusApi.getChildren(id));
+    print(EdusApi.getChildren(id));
     if (response.statusCode == 200) {
       final studentDetails = studentDetailsFromJson(response.body);
       setState(() {
@@ -114,6 +115,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.h),
         child: AppBar(
@@ -122,7 +124,6 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           flexibleSpace: Container(
             padding: EdgeInsets.only(top: 20.h),
             decoration: BoxDecoration(
-             
               color: Color(0xff053EFF),
             ),
             child: Row(
@@ -148,20 +149,6 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                 const SizedBox(
                   width: 5,
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      ScaleRoute(
-                          page: EditProfile(
-                        id: widget.id ?? '',
-                        updateData: (index) {
-                          updateData();
-                        },
-                      )),
-                    );
-                  },
-                  icon: const Icon(Icons.edit),
-                ),
               ],
             ),
           ),
@@ -169,7 +156,6 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           elevation: 0.0,
         ),
       ),
-      backgroundColor: Colors.white,
       body: FutureBuilder<StudentDetailsModel>(
           future: profile,
           builder: (context, snapshot) {
@@ -208,8 +194,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                       image: imageProvider,
                                       fit: BoxFit.cover,
                                     ),
-                                    borderRadius:
-                                        const BorderRadius.all(Radius.circular(50)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(50)),
                                   ),
                                 ),
                                 placeholder: (context, url) =>
@@ -225,8 +211,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                         image: imageProvider,
                                         fit: BoxFit.cover,
                                       ),
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(50)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(50)),
                                     ),
                                   ),
                                   placeholder: (context, url) =>
@@ -288,7 +274,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                             color: const Color(0xff415094),
                                             fontSize: ScreenUtil().setSp(11),
                                             fontWeight: FontWeight.bold),
-                                    unselectedLabelColor: const Color(0xff415094),
+                                    unselectedLabelColor:
+                                        const Color(0xff415094),
                                   ),
                                 ),
                                 body: Column(
@@ -300,7 +287,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
                                             colors: [
-                                              const Color(0xffe8d6fd)
+                                              const Color.fromARGB(
+                                                      255, 220, 220, 220)
                                                   .withOpacity(0.5),
                                               Colors.white
                                             ]),
@@ -308,12 +296,13 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                     ),
                                     Expanded(
                                       child: TabBarView(
-                                        physics: const NeverScrollableScrollPhysics(),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         children: [
                                           getProfileList(),
                                           getParentDetails(),
-                                      //    getTransportList(),
-                                         // getOthersList(),
+                                          //    getTransportList(),
+                                          // getOthersList(),
                                           getDocumentsList(),
                                           // getParentDetails(),
                                           // getProfileList(2),
@@ -352,7 +341,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -381,11 +370,14 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                           image: imageProvider,
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                     ),
-                    placeholder: (context, url) => const CupertinoActivityIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -398,8 +390,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                   children: [
                     ParentsDetailsRow(
                       title: "Name".tr,
-                      value:
-                          _studentDetails.studentData?.user?.parents?.fathersName,
+                      value: _studentDetails
+                          .studentData?.user?.parents?.fathersName,
                     ),
                     GestureDetector(
                       onTap: () async {
@@ -437,7 +429,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -466,11 +458,14 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                           image: imageProvider,
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                     ),
-                    placeholder: (context, url) => const CupertinoActivityIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -483,8 +478,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                   children: [
                     ParentsDetailsRow(
                       title: "Name".tr,
-                      value:
-                          _studentDetails.studentData?.user?.parents?.mothersName,
+                      value: _studentDetails
+                          .studentData?.user?.parents?.mothersName,
                     ),
                     GestureDetector(
                       onTap: () async {
@@ -522,7 +517,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -538,18 +533,22 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                   radius: ScreenUtil().setSp(25),
                   child: CachedNetworkImage(
                     imageUrl: buildGuardianPhoto(
-                        _studentDetails.studentData?.user?.parents ?? Parents()),
+                        _studentDetails.studentData?.user?.parents ??
+                            Parents()),
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: imageProvider,
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                     ),
-                    placeholder: (context, url) => const CupertinoActivityIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -620,19 +619,19 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   String buildGuardianPhoto(Parents parents) {
     if (parents.relation == 'Father') {
       if (parents.fathersPhoto == null || parents.fathersPhoto == '') {
-        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return '${EdusApi.root}public/uploads/staff/demo/staff.jpg';
       } else {
         return "${EdusApi.root}/${parents.fathersPhoto}";
       }
     } else if (parents.relation == 'Mother') {
       if (parents.mothersPhoto == null || parents.mothersPhoto == '') {
-        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return '${EdusApi.root}public/uploads/staff/demo/staff.jpg';
       } else {
         return "${EdusApi.root}/${parents.mothersPhoto}";
       }
     } else {
       if (parents.guardiansPhoto == null || parents.guardiansPhoto == '') {
-        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return '${EdusApi.root}public/uploads/staff/demo/staff.jpg';
       } else {
         return "${EdusApi.root}/${parents.guardiansPhoto}";
       }
@@ -659,12 +658,15 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
             _studentDetails.studentData?.religion != null
                 ? ProfileRowList(
                     "Religion".tr,
-                    _studentDetails.studentData?.religion?.name.toString() ?? '',
+                    _studentDetails.studentData?.religion?.name.toString() ??
+                        '',
                   )
                 : const SizedBox.shrink(),
             ProfileRowList(
               "Phone number".tr,
-              _studentDetails.studentData?.userDetails?.phoneNumber.toString() ?? '',
+              _studentDetails.studentData?.userDetails?.phoneNumber
+                      .toString() ??
+                  '',
             ),
             ProfileRowList(
               "Email address".tr,
@@ -672,16 +674,19 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
             ),
             ProfileRowList(
               "Present address".tr,
-              _studentDetails.studentData?.user?.currentAddress.toString() ?? '',
+              _studentDetails.studentData?.user?.currentAddress.toString() ??
+                  '',
             ),
             ProfileRowList(
               "Permanent address".tr,
-              _studentDetails.studentData?.user?.permanentAddress.toString() ?? '',
+              _studentDetails.studentData?.user?.permanentAddress.toString() ??
+                  '',
             ),
             _studentDetails.studentData?.bloodGroup != null
                 ? ProfileRowList(
                     "Blood group".tr,
-                    _studentDetails.studentData?.bloodGroup?.name.toString() ?? '',
+                    _studentDetails.studentData?.bloodGroup?.name.toString() ??
+                        '',
                   )
                 : const SizedBox.shrink(),
           ]),
@@ -719,7 +724,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   //         : const SizedBox.shrink(),
   //   );
   // }
-// 
+//
   Widget getOthersList() {
     return Container(
       height: MediaQuery.of(context).size.height,
@@ -789,12 +794,12 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle1)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle1)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle1,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -830,12 +835,12 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle2)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle2)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle2,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -871,12 +876,12 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle3)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle3)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle3,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -912,12 +917,12 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle4)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle4)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle4,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -937,9 +942,9 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
         Text(
           _studentDetails.studentData?.userDetails?.fullName ?? '',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                fontSize: ScreenUtil().setSp(14),
-              ),
+              fontWeight: FontWeight.bold,
+              fontSize: ScreenUtil().setSp(14),
+              color: Colors.black),
         ),
         const SizedBox(
           height: 5,
@@ -949,10 +954,11 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
             _studentDetails.studentData?.userDetails?.classSection?.length ?? 0,
             (index) => Text(
               _studentDetails.studentData?.userDetails?.classSection?[index]
-                  .toString()
-                  .replaceAll(',', '') ?? '',
+                      .toString()
+                      .replaceAll(',', '') ??
+                  '',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: const Color(0xFF727FC8),
+                    color: Colors.black,
                     fontWeight: FontWeight.normal,
                     fontSize: 12,
                   ),
@@ -963,14 +969,42 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           height: 5,
         ),
         Text(
-          'ED Number'.tr +
-              ' : ' +
-              '${_studentDetails.studentData?.user?.edNo.toString()}',
+          '${'Admission Number'.tr} : ${_studentDetails.studentData?.user?.edNo.toString()}',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: const Color(0xFF727FC8),
-                fontWeight: FontWeight.normal,
-                fontSize: 12,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
               ),
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.of(context).push(
+              ScaleRoute(
+                  page: EditProfile(
+                id: widget.id ?? '',
+                updateData: (index) {
+                  updateData();
+                },
+              )),
+            );
+          },
+          icon: Row(
+            children: [
+              Text(
+                'Edit Profile',
+                style: TextStyle(
+                    color: Utils.baseBlue,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
+              ),
+              w16,
+              Icon(
+                Icons.edit,
+                color: Utils.baseBlue,
+                size: 20,
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -1031,7 +1065,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
     Utils.showToast(dirloc);
 
     try {
-      FileUtils.mkdir([dirloc]);
+      // FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
 
       await dio.download(
@@ -1040,7 +1074,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           onReceiveProgress: (receivedBytes, totalBytes) async {
         received = ((receivedBytes / totalBytes) * 100);
         progress =
-            ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";
+            "${((receivedBytes / totalBytes) * 100).toStringAsFixed(0)}%";
         if (received == 100.0) {
           if (url.contains('.pdf')) {
             Utils.showToast(
@@ -1094,7 +1128,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   title ?? "",
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: const Color(0xff727fc8),
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                         fontSize: ScreenUtil().setSp(12),
                       ),
@@ -1106,7 +1140,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   height: 0.2.h,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF828BB2),
+                    color: Colors.grey,
                   ),
                 ),
               ],
@@ -1124,7 +1158,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   isNullOrEmpty(value ?? '') ? "" : value.toString(),
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: const Color(0xff727fc8),
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                         fontSize: ScreenUtil().setSp(12),
                       ),
@@ -1136,7 +1170,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   height: 0.2.h,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF828BB2),
+                    color: Colors.grey,
                   ),
                 ),
               ],

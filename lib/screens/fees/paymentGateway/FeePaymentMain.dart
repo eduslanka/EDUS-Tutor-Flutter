@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter_paystack/flutter_paystack.dart';
+// import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart' as GETx;
 import 'package:http/http.dart' as http;
@@ -41,7 +41,8 @@ class FeePaymentMain extends StatefulWidget {
   final String id;
   final String amount;
 
-  const FeePaymentMain(this.fee, this.id, this.amount, {Key? key}) : super(key: key);
+  const FeePaymentMain(this.fee, this.id, this.amount, {Key? key})
+      : super(key: key);
 
   @override
   _FeePaymentMainState createState() => _FeePaymentMainState();
@@ -54,7 +55,7 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
   bool? isResponse = false;
   String? _id;
 
-  final plugin = PaystackPlugin();
+  // final plugin = PaystackPlugin();
 
   Future<PaymentMethod>? getPayment;
 
@@ -70,7 +71,7 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
     });
     getPayment = getPaymentMethods() as Future<PaymentMethod>?;
     fetchUserDetails(widget.id);
-    plugin.initialize(publicKey: payStackPublicKey);
+    // plugin.initialize(publicKey: payStackPublicKey);
     super.initState();
   }
 
@@ -98,85 +99,36 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
     }
   }
 
-  Future onPayment(PaymentMethod payment) async {
+  Future<void> onPayment(PaymentMethod payment) async {
     if (payment.method == "Bank") {
       Navigator.push(
-          context,
-          ScaleRoute(
-              page: BankOrCheque(widget.id, widget.fee, _email ?? '', 'Bank Payment',
-                  widget.amount)));
+        context,
+        ScaleRoute(
+          page: BankOrCheque(
+            widget.id,
+            widget.fee,
+            _email ?? '',
+            'Bank Payment',
+            widget.amount,
+          ),
+        ),
+      );
     } else if (payment.method == "Cheque") {
       Navigator.push(
-          context,
-          ScaleRoute(
-              page: BankOrCheque(widget.id, widget.fee, _email ?? '',
-                  'Cheque Payment', widget.amount)));
-    } else if (payment.method == "PayPal") {
-      await paymentDataSave("PayPal").then((value) {
-        Navigator.push(
-            context,
-            ScaleRoute(
-              page: PaypalPayment(
-                fee: widget.fee.feesName,
-                amount: widget.amount,
-                onFinish: (onFinish) async {
-                  await paymentCallBack('PayPal',
-                      reference: value, status: onFinish['status']);
-                },
-              ),
-            ));
-      });
-    } else if (payment.method == "Paystack") {
-      await paymentDataSave("Paystack").then((value) async {
-        await payStackPayment(value.toString());
-      });
-    } else if (payment.method == "Stripe") {
-      await paymentDataSave("PayPal").then((value) {
-        Navigator.push(
-            context,
-            ScaleRoute(
-                page: StripePage.StripePaymentScreen(
-              id: widget.id,
-              paidBy: _id ?? '',
-              email: _email ?? '',
-              method: 'Stripe Payment',
-              amount: widget.amount,
-              onFinish: (onFinish) async {
-                await paymentCallBack('Stripe',
-                    reference: value, status: onFinish['status']);
-              },
-            )));
-      });
-    } else if (payment.method == "Xendit") {
-      Navigator.push(
-          context,
-          ScaleRoute(
-              page: XenditScreen(
-            id: widget.id,
-            paidBy: _id ?? '',
-            fee: widget.fee,
-            email: _email ?? '',
-            method: 'Xendit Payment',
-            userDetails: _userDetails,
-            amount: widget.amount,
-          )));
-    } else if (payment.method == "Khalti") {
-      Navigator.push(
-          context,
-          ScaleRoute(
-              page: KhaltiPaymentScreen(
-            id: widget.id,
-            paidBy: _id ?? '',
-            fee: widget.fee,
-            email: _email ?? '',
-            method: 'Khalti Payment',
-            userDetails: _userDetails,
-            amount: widget.amount,
-          )));
-    } else if (payment.method == "RazorPay") {
-      await paymentDataSave("RazorPay").then((value) async {
-        await callRazorPayService();
-      });
+        context,
+        ScaleRoute(
+          page: BankOrCheque(
+            widget.id,
+            widget.fee,
+            _email ?? '',
+            'Cheque Payment',
+            widget.amount,
+          ),
+        ),
+      );
+    } else {
+      // Handle other payment methods or default case if needed
+      print('Unsupported payment method');
     }
   }
 
@@ -222,29 +174,6 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
     return jsonString['payment_ref'];
   }
 
-  Future payStackPayment(dynamic referenceId) async {
-    final finalAmount = (int.parse(widget.amount) * 100).toInt();
-    Charge charge = Charge()
-      ..amount = finalAmount
-      ..currency = 'ZAR'
-      ..reference = referenceId.toString()
-      ..email = _userDetails.email.toString();
-    CheckoutResponse response = await plugin.checkout(
-      context,
-      method: CheckoutMethod.card,
-      charge: charge,
-    );
-
-    if (response.status == true) {
-      await paymentCallBack('PayStack',
-          reference: referenceId, status: response.status);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(response.message),
-      ));
-    }
-  }
-
   Future paymentCallBack(dynamic method,
       {dynamic reference, dynamic status}) async {
     final response = await http.post(
@@ -284,7 +213,6 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
           isResponse = false;
         });
         var data = json.decode(response.body.toString());
-
 
         if (data['success'] == true) {
           Utils.showToast('Payment Added');
@@ -389,7 +317,9 @@ class BankOrCheque extends StatefulWidget {
   final String paymentType;
   final String amount;
 
-  BankOrCheque(this.id, this.fee, this.email, this.paymentType, this.amount, {Key? key}) : super(key: key);
+  BankOrCheque(this.id, this.fee, this.email, this.paymentType, this.amount,
+      {Key? key})
+      : super(key: key);
 
   @override
   _BankOrChequeState createState() => _BankOrChequeState();
@@ -571,8 +501,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
             },
           ),
           onSendProgress: (received, total) {
-            if (total != -1) {
-            }
+            if (total != -1) {}
           },
         ).catchError((e) {
           final errorMessage = DioExceptions.fromDioError(e).toString();
@@ -585,7 +514,6 @@ class _BankOrChequeState extends State<BankOrCheque> {
             isResponse = false;
           });
           var data = json.decode(response.toString());
-
 
           if (data['success'] == true) {
             Utils.showToast('Payment added. Please wait for approval');
@@ -646,10 +574,11 @@ class _BankOrChequeState extends State<BankOrCheque> {
                                             return DropdownMenuItem<String>(
                                               value: item.bankName,
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.only(
-                                                        left: 8.0),
-                                                child: Text(item?.bankName.toString() ?? ''),
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0),
+                                                child: Text(
+                                                    item?.bankName.toString() ??
+                                                        ''),
                                               ),
                                             );
                                           }).toList(),
@@ -661,7 +590,8 @@ class _BankOrChequeState extends State<BankOrCheque> {
                                             setState(() {
                                               _selectedBank = value as String?;
                                               bankId = getCode(
-                                                  snapshot.data!.banks, value ?? '');
+                                                  snapshot.data!.banks,
+                                                  value ?? '');
                                               bankAccountName =
                                                   getBankAccountName(
                                                       snapshot.data!.banks,
@@ -670,8 +600,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
                                                   getBankAccountNumber(
                                                       snapshot.data!.banks,
                                                       value ?? '');
-                                              debugPrint(
-                                                  'User select $bankId');
+                                              debugPrint('User select $bankId');
                                             });
                                           },
                                           value: _selectedBank,
@@ -713,8 +642,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
                           style: Theme.of(context).textTheme.titleLarge,
                           controller: amountController,
                           enabled: false,
-                          autovalidateMode:
-                              AutovalidateMode.onUserInteraction,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (String? value) {
                             RegExp regExp = RegExp(r'^[0-9]*$');
                             if (value!.isEmpty) {
@@ -726,7 +654,9 @@ class _BankOrChequeState extends State<BankOrCheque> {
                             if (!regExp.hasMatch(value)) {
                               return 'Please enter a number';
                             }
-                            if ((int.tryParse(value) ?? 0) > (int.tryParse(widget.fee.balance.toString()) ?? 0)) {
+                            if ((int.tryParse(value) ?? 0) >
+                                (int.tryParse(widget.fee.balance.toString()) ??
+                                    0)) {
                               return 'Amount must not greater than balance';
                             }
                             return null;
@@ -734,7 +664,8 @@ class _BankOrChequeState extends State<BankOrCheque> {
                           decoration: InputDecoration(
                             hintText: "Amount",
                             labelText: "Amount",
-                            labelStyle: Theme.of(context).textTheme.headlineMedium,
+                            labelStyle:
+                                Theme.of(context).textTheme.headlineMedium,
                             errorStyle: const TextStyle(
                                 color: Colors.blue, fontSize: 15.0),
                             border: OutlineInputBorder(
@@ -764,8 +695,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
                                     padding: const EdgeInsets.only(left: 8.0),
                                     child: Text(
                                       _file == null
-                                          ? widget.paymentType ==
-                                                  "Bank Payment"
+                                          ? widget.paymentType == "Bank Payment"
                                               ? 'Select Bank payment slip'
                                               : 'Select Cheque payment slip'
                                           : _file?.path.split('/').last ?? '',
@@ -821,10 +751,10 @@ class _BankOrChequeState extends State<BankOrCheque> {
                               ),
                             )
                           : Text(
-                            "No Bank Available for payment. Please use a different payment method.",
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
+                              "No Bank Available for payment. Please use a different payment method.",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ),
                       const SizedBox(
                         height: 20,
                       ),

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:file_utils/file_utils.dart';
+//import 'package:file_utils/file_utils.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_filex/open_filex.dart';
@@ -206,7 +206,8 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
                         height: 10.0,
                       ),
                       Text(
-                        widget.homework.marks == null ||  widget.homework.marks == '0'
+                        widget.homework.marks == null ||
+                                widget.homework.marks == '0'
                             ? 'N/A'
                             : widget.homework.marks.toString(),
                         maxLines: 1,
@@ -285,13 +286,15 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
                           widget.homework.obtainedMarks == ""
                               ? Text(
                                   "Marks: ".tr + '${widget.homework.marks}',
-                                  style: Theme.of(context).textTheme.headlineSmall,
+                                  style:
+                                      Theme.of(context).textTheme.headlineSmall,
                                   maxLines: 1,
                                 )
                               : Text(
                                   "Obtained Marks: " +
                                       '${widget.homework.obtainedMarks}',
-                                  style: Theme.of(context).textTheme.headlineSmall,
+                                  style:
+                                      Theme.of(context).textTheme.headlineSmall,
                                   maxLines: 1,
                                 )
                         ],
@@ -318,8 +321,9 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
                                   Text(
                                     widget.homework.homeworkDate ?? '',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -342,8 +346,9 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
                                   Text(
                                     widget.homework.submissionDate ?? '',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -366,8 +371,9 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
                                   Text(
                                     widget.homework.evaluationDate ?? 'N/A',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -390,8 +396,8 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
                                         const SizedBox(
                                           height: 10.0,
                                         ),
-                                        getStatus(
-                                            context, widget.homework.status ?? ''),
+                                        getStatus(context,
+                                            widget.homework.status ?? ''),
                                       ],
                                     ),
                                   )
@@ -468,8 +474,8 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
                                     onTap: () {
                                       PermissionCheck()
                                           .checkPermissions(context);
-                                      showDownloadAlertDialog(
-                                          context, widget.homework.subjectName ?? '');
+                                      showDownloadAlertDialog(context,
+                                          widget.homework.subjectName ?? '');
                                     },
                                   ),
                             widget.type == 'student' && rule != 3
@@ -630,7 +636,7 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
     Utils.showToast(dirloc);
 
     try {
-      FileUtils.mkdir([dirloc]);
+      // FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
 
       await dio.download(

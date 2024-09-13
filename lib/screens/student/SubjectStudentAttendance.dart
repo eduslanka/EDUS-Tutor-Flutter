@@ -31,7 +31,13 @@ class SubjectStudentAttendanceScreen extends StatefulWidget {
   String? subjectName;
 
   SubjectStudentAttendanceScreen(
-      {Key? key, this.id, this.token, this.schoolId, this.subjectCode, this.subjectName}) : super(key: key);
+      {Key? key,
+      this.id,
+      this.token,
+      this.schoolId,
+      this.subjectCode,
+      this.subjectName})
+      : super(key: key);
 
   @override
   _SubjectStudentAttendanceScreenState createState() =>
@@ -98,7 +104,8 @@ class _SubjectStudentAttendanceScreenState
         });
       }).then((value) async {
         await getProfile(widget.id).then((value) async {
-          _userController.studentId.value = value.studentData?.userDetails?.id ?? 0;
+          _userController.studentId.value =
+              value.studentData?.userDetails?.id ?? 0;
 
           await _userController.getStudentRecord().then((value) {
             DateTime date = DateTime.now();
@@ -169,7 +176,8 @@ class _SubjectStudentAttendanceScreenState
                               if (widget.id != null) {
                                 attendances = getAllStudentAttendance(
                                     widget.id,
-                                    _userController.selectedRecord.value.id ?? 0,
+                                    _userController.selectedRecord.value.id ??
+                                        0,
                                     date.month,
                                     date.year,
                                     token ?? '',
@@ -177,7 +185,8 @@ class _SubjectStudentAttendanceScreenState
                               } else {
                                 attendances = getAllStudentAttendance(
                                     id,
-                                    _userController.selectedRecord.value.id ?? 0,
+                                    _userController.selectedRecord.value.id ??
+                                        0,
                                     date.month,
                                     date.year,
                                     token ?? '',
@@ -269,7 +278,8 @@ class _SubjectStudentAttendanceScreenState
                                                   .textTheme
                                                   .headlineMedium
                                                   ?.copyWith(
-                                                    color: const Color(0xFF5F75EF),
+                                                    color:
+                                                        const Color(0xFF5F75EF),
                                                     fontSize: ScreenUtil()
                                                         .setSp(14.0),
                                                   )),
@@ -302,7 +312,7 @@ class _SubjectStudentAttendanceScreenState
                                                 .textTheme
                                                 .headlineMedium
                                                 ?.copyWith(
-                                                  color: const Color(0xFF727FC8),
+                                                  color: Colors.black,
                                                   fontSize:
                                                       ScreenUtil().setSp(14.0),
                                                 ),
@@ -356,8 +366,7 @@ class _SubjectStudentAttendanceScreenState
                                           style: Theme.of(context)
                                               .textTheme
                                               .headlineMedium
-                                              ?.copyWith(
-                                                  color: const Color(0xFF727FC8))),
+                                              ?.copyWith(color: Colors.black)),
                                     ],
                                   ),
                                 ),

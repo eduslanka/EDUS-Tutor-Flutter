@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:file_utils/file_utils.dart';
+// import 'package:file_utils/file_utils.dart';
 import 'package:path_provider/path_provider.dart';
 
 // Project imports:
@@ -88,14 +88,16 @@ class TimeLineView extends StatelessWidget {
               ),
               timeline.file != "" && timeline.file != null
                   ? ListTile(
-                      visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                      visualDensity:
+                          const VisualDensity(horizontal: 0, vertical: -4),
                       dense: true,
                       contentPadding: EdgeInsets.zero,
                       onTap: () {
-                        PermissionCheck().checkPermissions(context)
-                          .then((value) {
-                            showDownloadAlertDialog(context);
-                          });
+                        PermissionCheck()
+                            .checkPermissions(context)
+                            .then((value) {
+                          showDownloadAlertDialog(context);
+                        });
                       },
                       // leading: Icon(Icons.file_present),
                       title: Row(
@@ -176,7 +178,7 @@ class TimeLineView extends StatelessWidget {
     Utils.showToast(dirloc);
 
     try {
-      FileUtils.mkdir([dirloc]);
+      // FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
       await dio
           .download(EdusApi.root + url, dirloc + AppFunction.getExtention(url),
@@ -201,8 +203,8 @@ class TimeLineView extends StatelessWidget {
             title: const Text("Permission denied"),
             children: <Widget>[
               Container(
-                padding:
-                    const EdgeInsets.only(left: 30, right: 30, top: 15, bottom: 15),
+                padding: const EdgeInsets.only(
+                    left: 30, right: 30, top: 15, bottom: 15),
                 child: const Text(
                   "You must grant all permission to use this application",
                   style: TextStyle(fontSize: 18, color: Colors.black54),

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:file_utils/file_utils.dart';
+// import 'package:file_utils/file_utils.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_filex/open_filex.dart';
@@ -266,8 +266,9 @@ class _TeacherHomeworkRowState extends State<TeacherHomeworkRow> {
                                   Text(
                                     widget.homework.homeworkDate ?? '',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -290,8 +291,9 @@ class _TeacherHomeworkRowState extends State<TeacherHomeworkRow> {
                                   Text(
                                     widget.homework.submissionDate ?? '',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -312,10 +314,12 @@ class _TeacherHomeworkRowState extends State<TeacherHomeworkRow> {
                                     height: 10.0,
                                   ),
                                   Text(
-                                    widget.homework.evaluationDate ?? 'not assigned',
+                                    widget.homework.evaluationDate ??
+                                        'not assigned',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -385,8 +389,8 @@ class _TeacherHomeworkRowState extends State<TeacherHomeworkRow> {
                                     onTap: () {
                                       PermissionCheck()
                                           .checkPermissions(context);
-                                      showDownloadAlertDialog(
-                                          context, widget.homework.subjectName ?? '');
+                                      showDownloadAlertDialog(context,
+                                          widget.homework.subjectName ?? '');
                                     },
                                   ),
                           ],
@@ -499,7 +503,7 @@ class _TeacherHomeworkRowState extends State<TeacherHomeworkRow> {
     Utils.showToast(dirloc);
 
     try {
-      FileUtils.mkdir([dirloc]);
+      // FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
 
       await dio.download(

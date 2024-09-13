@@ -8,10 +8,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+// import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
+// import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:edus_tutor/config/app_config.dart';
 import 'package:edus_tutor/screens/chat/controller/pusher_controller.dart';
 import 'package:edus_tutor/utils/CustomSnackBars.dart';
@@ -37,7 +37,12 @@ class ChatOpenPage extends StatefulWidget {
   final int? userId;
   final int? onlineStatus;
   const ChatOpenPage(
-      {Key? key, this.avatarUrl, this.chatTitle, this.userId, this.onlineStatus}) : super(key: key);
+      {Key? key,
+      this.avatarUrl,
+      this.chatTitle,
+      this.userId,
+      this.onlineStatus})
+      : super(key: key);
 
   @override
   _ChatOpenPageState createState() => _ChatOpenPageState();
@@ -53,7 +58,7 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
 
   final TextEditingController _chatMessageCtrl = TextEditingController();
 
-  final HtmlEditorController _htmlEditorController = HtmlEditorController();
+  // final HtmlEditorController _htmlEditorController = HtmlEditorController();
 
   final ScrollController scrollController = ScrollController();
   final PusherController _pusherController = Get.put(PusherController());
@@ -74,7 +79,8 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
   @override
   void initState() {
     _chatOpenController = Get.put(ChatOpenController(widget.userId ?? 0));
-    source = ChatLoadMore(widget.userId ?? 0, _chatOpenController ?? ChatOpenController(0));
+    source = ChatLoadMore(
+        widget.userId ?? 0, _chatOpenController ?? ChatOpenController(0));
     _focusNode.addListener(_focusNodeListener);
 
     if (_chatController.chatSettings.value.chatSettings?.chatMethod ==
@@ -329,8 +335,8 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
         .unsubscribe(channelName: 'private-single-chat' '.${widget.userId}');
 
     _pusherController.pusher.unsubscribe(
-        channelName:
-            'private-single-chat' '.${int.parse(_chatController?.id.value ?? '')}');
+        channelName: 'private-single-chat'
+            '.${int.parse(_chatController.id.value)}');
     super.dispose();
   }
 
@@ -351,8 +357,8 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                         .chatSettings.value.chatSettings?.chatMethod !=
                     "pusher") {
                   return StreamBuilder<Object>(
-                      stream: Stream.periodic(
-                          const Duration(seconds: 5), (_) => source!.checkNewMsg()),
+                      stream: Stream.periodic(const Duration(seconds: 5),
+                          (_) => source!.checkNewMsg()),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return const SizedBox.shrink();
@@ -391,10 +397,13 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                                   chatMessage: chatMessage,
                                   name: widget.chatTitle ?? '',
                                   avatarUrl: widget.avatarUrl ?? '',
-                                  currentUserId: _chatOpenController?.id.value ?? '',
+                                  currentUserId:
+                                      _chatOpenController?.id.value ?? '',
                                   menuVisible: false,
                                   showActions: true,
-                                  activeStatus: int.tryParse(_chatOpenController?.activeUser.value.activeStatus??"0"),
+                                  activeStatus: int.tryParse(_chatOpenController
+                                          ?.activeUser.value.activeStatus ??
+                                      "0"),
                                   onTapMenu: () {
                                     onMenuPress(
                                       context: context,
@@ -420,7 +429,8 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                                     onPressed: () {
                                       scrollController.animateTo(
                                         0,
-                                        duration: const Duration(milliseconds: 100),
+                                        duration:
+                                            const Duration(milliseconds: 100),
                                         curve: Curves.easeIn,
                                       );
                                     },
@@ -457,7 +467,8 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                       if (_chatOpenController!.isLoading.value) {
                         return Container();
                       } else {
-                        if (_chatOpenController!.activeUser.value.block??false) {
+                        if (_chatOpenController!.activeUser.value.block ??
+                            false) {
                           return const SizedBox.shrink();
                         } else {
                           return Column(
@@ -491,9 +502,13 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                                                           FontWeight.bold,
                                                     ),
                                                   ),
-                                                  HtmlWidget(
-                                                    _chatOpenController?.selectedChatMsg.value.message ?? '',
-                                                  ),
+                                                  // HtmlWidget(
+                                                  //   _chatOpenController
+                                                  //           ?.selectedChatMsg
+                                                  //           .value
+                                                  //           .message ??
+                                                  //       '',
+                                                  // ),
                                                 ],
                                               ),
                                             ),
@@ -539,15 +554,18 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                                                   DIO.FormData.fromMap({
                                                 'from_id': int.parse(
                                                     _chatOpenController
-                                                        ?.id.value ?? ''),
+                                                            ?.id.value ??
+                                                        ''),
                                                 'to_id': widget.userId,
                                                 'message':
                                                     _chatMessageCtrl.text,
                                                 'file_attach': await DIO
                                                     .MultipartFile.fromFile(
                                                   file?.path ?? '',
-                                                  filename:
-                                                      file?.path.split('/').last ?? '',
+                                                  filename: file?.path
+                                                          .split('/')
+                                                          .last ??
+                                                      '',
                                                 )
                                               });
 
@@ -635,8 +653,7 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                                         ),
                                         decoration: const InputDecoration(
                                           contentPadding:
-                                              EdgeInsets.symmetric(
-                                                  vertical: 4),
+                                              EdgeInsets.symmetric(vertical: 4),
                                           hintText: "Type message...",
                                           hintStyle: TextStyle(
                                             color: Colors.black54,
@@ -658,7 +675,7 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                                             : InkWell(
                                                 onTap: () async {
                                                   if (_chatMessageCtrl
-                                                          .text.isNotEmpty) {
+                                                      .text.isNotEmpty) {
                                                     if (replyClick) {
                                                       Map data = {
                                                         'reply':
@@ -668,7 +685,9 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                                                                 .id,
                                                         'from_id': int.parse(
                                                             _chatOpenController
-                                                                ?.id.value ?? ''),
+                                                                    ?.id
+                                                                    .value ??
+                                                                ''),
                                                         'to_id': widget.userId,
                                                         'message':
                                                             _chatMessageCtrl
@@ -689,7 +708,9 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                                                       Map data = {
                                                         'from_id': int.parse(
                                                             _chatOpenController
-                                                                ?.id.value ?? ''),
+                                                                    ?.id
+                                                                    .value ??
+                                                                ''),
                                                         'to_id': widget.userId,
                                                         'message':
                                                             _chatMessageCtrl
@@ -792,73 +813,74 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    HtmlEditor(
-                      controller: _htmlEditorController,
-                      htmlToolbarOptions: const HtmlToolbarOptions(
-                        toolbarType: ToolbarType.nativeScrollable,
-                        renderBorder: true,
-                      ),
-                      otherOptions: const OtherOptions(height: 320),
-                      htmlEditorOptions: const HtmlEditorOptions(
-                        hint: "Your message here...",
-                      ),
-                    ),
+                    // HtmlEditor(
+                    //   controller: _htmlEditorController,
+                    //   htmlToolbarOptions: const HtmlToolbarOptions(
+                    //     toolbarType: ToolbarType.nativeScrollable,
+                    //     renderBorder: true,
+                    //   ),
+                    //   otherOptions: const OtherOptions(height: 320),
+                    //   htmlEditorOptions: const HtmlEditorOptions(
+                    //     hint: "Your message here...",
+                    //   ),
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
                     Container(
                       decoration: Utils.gradientBtnDecoration,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
                       child: InkWell(
                         onTap: () async {
-                          setState(() {
-                            _htmlEditorController.getText().then((value) {
-                              setState(() {
-                                _chatMessageCtrl.text = value;
-                              });
+                          // setState(() {
+                          //   _htmlEditorController.getText().then((value) {
+                          //     setState(() {
+                          //       _chatMessageCtrl.text = value;
+                          //     });
 
-                              Future.delayed(const Duration(seconds: 1), () async {
-                                if (_chatMessageCtrl.text.isNotEmpty) {
-                                  if (replyClick) {
-                                    Map data = {
-                                      'reply': _chatOpenController
-                                          ?.selectedChatMsg.value.id,
-                                      'from_id': int.parse(
-                                          _chatOpenController?.id.value ?? ''),
-                                      'to_id': widget.userId,
-                                      'message': _chatMessageCtrl.text,
-                                    };
-                                    await source
-                                        ?.submitText(data: data, hasFile: false)
-                                        .then((value) {
-                                      _chatMessageCtrl.clear();
-                                    });
-                                    setState(() {
-                                      replyClick = false;
-                                    });
-                                  } else {
-                                    Map data = {
-                                      'from_id': int.parse(
-                                          _chatOpenController?.id.value ?? ''),
-                                      'to_id': widget.userId,
-                                      'message': _chatMessageCtrl.text,
-                                    };
-                                    await source
-                                        ?.submitText(data: data, hasFile: false)
-                                        .then((value) {
-                                      _chatMessageCtrl.clear();
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pop('dialog');
-                                    });
-                                  }
-                                } else {
-                                  CustomSnackBar()
-                                      .snackBarWarning("Please type something");
-                                }
-                              });
-                            });
-                          });
+                          //     Future.delayed(const Duration(seconds: 1),
+                          //         () async {
+                          //       if (_chatMessageCtrl.text.isNotEmpty) {
+                          //         if (replyClick) {
+                          //           Map data = {
+                          //             'reply': _chatOpenController
+                          //                 ?.selectedChatMsg.value.id,
+                          //             'from_id': int.parse(
+                          //                 _chatOpenController?.id.value ?? ''),
+                          //             'to_id': widget.userId,
+                          //             'message': _chatMessageCtrl.text,
+                          //           };
+                          //           await source
+                          //               ?.submitText(data: data, hasFile: false)
+                          //               .then((value) {
+                          //             _chatMessageCtrl.clear();
+                          //           });
+                          //           setState(() {
+                          //             replyClick = false;
+                          //           });
+                          //         } else {
+                          //           Map data = {
+                          //             'from_id': int.parse(
+                          //                 _chatOpenController?.id.value ?? ''),
+                          //             'to_id': widget.userId,
+                          //             'message': _chatMessageCtrl.text,
+                          //           };
+                          //           await source
+                          //               ?.submitText(data: data, hasFile: false)
+                          //               .then((value) {
+                          //             _chatMessageCtrl.clear();
+                          //             Navigator.of(context, rootNavigator: true)
+                          //                 .pop('dialog');
+                          //           });
+                          //         }
+                          //       } else {
+                          //         CustomSnackBar()
+                          //             .snackBarWarning("Please type something");
+                          //       }
+                          //     });
+                          //   });
+                          // });
                         },
                         child: Text(
                           "Send",
@@ -956,8 +978,8 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                             _chatOpenController?.activeUser.value.activeStatus,
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 35, vertical: 5),
                         child: TextFormField(
                           key: textFieldKey,
                           controller: forwardMessageCtrl,
@@ -983,11 +1005,12 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                           separatorBuilder: (context, index) {
                             return const SizedBox(height: 10);
                           },
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 35, vertical: 5),
                           itemBuilder: (context, index) {
                             ChatUser chatUser =
-                                chatController.chatModel.value.users?[index] ?? ChatUser();
+                                chatController.chatModel.value.users?[index] ??
+                                    ChatUser();
                             return Container(
                               decoration: BoxDecoration(
                                 color: Colors.grey[200],
@@ -1046,17 +1069,19 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                           }),
                       ListView.separated(
                           itemCount:
-                              chatController.chatModel.value.groups?.length ?? 0,
+                              chatController.chatModel.value.groups?.length ??
+                                  0,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           separatorBuilder: (context, index) {
                             return const SizedBox(height: 10);
                           },
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 35, vertical: 5),
                           itemBuilder: (context, groupIndex) {
                             ChatGroup chatGroup = chatController
-                                .chatModel.value.groups?[groupIndex] ?? ChatGroup();
+                                    .chatModel.value.groups?[groupIndex] ??
+                                ChatGroup();
                             return Container(
                               decoration: BoxDecoration(
                                 color: Colors.grey[200],
@@ -1228,7 +1253,8 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       onTap: () {
-                        _chatOpenController?.selectedChatMsg.value = chatMessage ?? ChatMessage();
+                        _chatOpenController?.selectedChatMsg.value =
+                            chatMessage ?? ChatMessage();
                         setState(() {
                           replyClick = true;
                         });
@@ -1278,16 +1304,19 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                       ),
                     ),
                   ),
-                  chatMessage?.fromId.toString() == _chatOpenController?.id.value
+                  chatMessage?.fromId.toString() ==
+                          _chatOpenController?.id.value
                       ? const Divider()
                       : const SizedBox.shrink(),
-                  chatMessage?.fromId.toString() == _chatOpenController?.id.value
+                  chatMessage?.fromId.toString() ==
+                          _chatOpenController?.id.value
                       ? Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: InkWell(
                             onTap: () async {
                               await source
-                                  ?.deleteSingleMessage(chatMessage ?? ChatMessage())
+                                  ?.deleteSingleMessage(
+                                      chatMessage ?? ChatMessage())
                                   .then((value) => Get.back());
                             },
                             child: Row(
@@ -1493,7 +1522,8 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                     if (_chatOpenController!.isLoading.value) {
                       return Container();
                     } else {
-                      if (_chatOpenController!.activeUser.value.block??false) {
+                      if (_chatOpenController!.activeUser.value.block ??
+                          false) {
                         return PopupMenuButton(
                           onSelected: (value) async {
                             if (value == 1) {
@@ -1561,7 +1591,8 @@ class MessageItemWidget extends StatelessWidget {
   final bool? showActions;
   final Function? onTapMenu;
   final int? activeStatus;
-  const MessageItemWidget({Key? key,
+  const MessageItemWidget({
+    Key? key,
     this.chatMessage,
     this.name,
     this.avatarUrl,
@@ -1602,7 +1633,8 @@ class MessageItemWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    placeholder: (context, url) => const CupertinoActivityIndicator(),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(),
                     errorWidget: (context, url, error) => Image.network(
                       "${AppConfig.domainName}/public/uploads/staff/demo/staff.jpg",
                       width: 20.w,

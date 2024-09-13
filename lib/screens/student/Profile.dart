@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
-import 'package:file_utils/file_utils.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:http/http.dart' as http;
@@ -35,13 +35,14 @@ class Profile extends StatefulWidget {
   const Profile({Key? key, this.id, this.image}) : super(key: key);
 
   @override
-  _ProfileState createState() => _ProfileState(id: id ?? '', image: image ?? '');
+  _ProfileState createState() =>
+      _ProfileState(id: id ?? '', image: image ?? '');
 }
 
 class _ProfileState extends State<Profile> {
   bool isPersonal = false;
   bool isParents = false;
- // bool isTransport = false;
+  // bool isTransport = false;
   bool isOthers = false;
   String section = 'personal';
   String? id;
@@ -149,8 +150,8 @@ class _ProfileState extends State<Profile> {
                                       image: imageProvider,
                                       fit: BoxFit.cover,
                                     ),
-                                    borderRadius:
-                                        const BorderRadius.all(Radius.circular(50)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(50)),
                                   ),
                                 ),
                                 placeholder: (context, url) =>
@@ -166,8 +167,8 @@ class _ProfileState extends State<Profile> {
                                         image: imageProvider,
                                         fit: BoxFit.cover,
                                       ),
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(50)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(50)),
                                     ),
                                   ),
                                   placeholder: (context, url) =>
@@ -229,7 +230,8 @@ class _ProfileState extends State<Profile> {
                                             color: const Color(0xff415094),
                                             fontSize: ScreenUtil().setSp(11),
                                             fontWeight: FontWeight.bold),
-                                    unselectedLabelColor: const Color(0xff415094),
+                                    unselectedLabelColor:
+                                        const Color(0xff415094),
                                   ),
                                 ),
                                 body: Column(
@@ -249,11 +251,12 @@ class _ProfileState extends State<Profile> {
                                     ),
                                     Expanded(
                                       child: TabBarView(
-                                        physics: const NeverScrollableScrollPhysics(),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         children: [
                                           getProfileList(),
                                           getParentDetails(),
-                                         // getTransportList(),
+                                          // getTransportList(),
                                           getOthersList(),
                                           getDocumentsList(),
                                           // getParentDetails(),
@@ -293,7 +296,7 @@ class _ProfileState extends State<Profile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -322,11 +325,14 @@ class _ProfileState extends State<Profile> {
                           image: imageProvider,
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                     ),
-                    placeholder: (context, url) => const CupertinoActivityIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -339,8 +345,8 @@ class _ProfileState extends State<Profile> {
                   children: [
                     ParentsDetailsRow(
                       title: "Name".tr,
-                      value:
-                          _studentDetails.studentData?.user?.parents?.fathersName,
+                      value: _studentDetails
+                          .studentData?.user?.parents?.fathersName,
                     ),
                     GestureDetector(
                       onTap: () async {
@@ -378,7 +384,7 @@ class _ProfileState extends State<Profile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -407,11 +413,14 @@ class _ProfileState extends State<Profile> {
                           image: imageProvider,
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                     ),
-                    placeholder: (context, url) => const CupertinoActivityIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -424,8 +433,8 @@ class _ProfileState extends State<Profile> {
                   children: [
                     ParentsDetailsRow(
                       title: "Name".tr,
-                      value:
-                          _studentDetails.studentData?.user?.parents?.mothersName,
+                      value: _studentDetails
+                          .studentData?.user?.parents?.mothersName,
                     ),
                     GestureDetector(
                       onTap: () async {
@@ -463,7 +472,7 @@ class _ProfileState extends State<Profile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -479,18 +488,22 @@ class _ProfileState extends State<Profile> {
                   radius: ScreenUtil().setSp(25),
                   child: CachedNetworkImage(
                     imageUrl: buildGuardianPhoto(
-                        _studentDetails.studentData?.user?.parents ?? Parents()),
+                        _studentDetails.studentData?.user?.parents ??
+                            Parents()),
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: imageProvider,
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                     ),
-                    placeholder: (context, url) => const CupertinoActivityIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -600,12 +613,15 @@ class _ProfileState extends State<Profile> {
             _studentDetails.studentData?.religion != null
                 ? ProfileRowList(
                     "Religion".tr,
-                    _studentDetails.studentData?.religion?.name.toString() ?? '',
+                    _studentDetails.studentData?.religion?.name.toString() ??
+                        '',
                   )
                 : const SizedBox.shrink(),
             ProfileRowList(
               "Phone number".tr,
-              _studentDetails.studentData?.userDetails?.phoneNumber.toString() ?? '',
+              _studentDetails.studentData?.userDetails?.phoneNumber
+                      .toString() ??
+                  '',
             ),
             ProfileRowList(
               "Email address".tr,
@@ -613,16 +629,19 @@ class _ProfileState extends State<Profile> {
             ),
             ProfileRowList(
               "Present address".tr,
-              _studentDetails.studentData?.user?.currentAddress.toString() ?? '',
+              _studentDetails.studentData?.user?.currentAddress.toString() ??
+                  '',
             ),
             ProfileRowList(
               "Permanent address".tr,
-              _studentDetails.studentData?.user?.permanentAddress.toString() ?? '',
+              _studentDetails.studentData?.user?.permanentAddress.toString() ??
+                  '',
             ),
             _studentDetails.studentData?.bloodGroup != null
                 ? ProfileRowList(
                     "Blood group".tr,
-                    _studentDetails.studentData?.bloodGroup?.name.toString() ?? '',
+                    _studentDetails.studentData?.bloodGroup?.name.toString() ??
+                        '',
                   )
                 : const SizedBox.shrink(),
           ]),
@@ -641,20 +660,26 @@ class _ProfileState extends State<Profile> {
               children: [
                   ProfileRowList(
                     "Drivers name".tr,
-                    _studentDetails.studentData?.transport?.driverName.toString() ?? '',
+                    _studentDetails.studentData?.transport?.driverName
+                            .toString() ??
+                        '',
                   ),
                   ProfileRowList(
                     "Car no".tr,
-                    _studentDetails.studentData?.transport?.vehicleNo.toString() ?? '',
+                    _studentDetails.studentData?.transport?.vehicleNo
+                            .toString() ??
+                        '',
                   ),
                   ProfileRowList(
                     "Car model".tr,
                     _studentDetails.studentData?.transport?.vehicleModel
-                        .toString() ?? '',
+                            .toString() ??
+                        '',
                   ),
                   ProfileRowList(
                     "Car info".tr,
-                    _studentDetails.studentData?.transport?.note.toString() ?? '',
+                    _studentDetails.studentData?.transport?.note.toString() ??
+                        '',
                   ),
                 ])
           : const SizedBox.shrink(),
@@ -700,7 +725,6 @@ class _ProfileState extends State<Profile> {
   }
 
   Widget getDocumentsList() {
-
     return Container(
       height: MediaQuery.of(context).size.height,
       margin: const EdgeInsets.symmetric(horizontal: 22),
@@ -731,12 +755,12 @@ class _ProfileState extends State<Profile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle1)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle1)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle1,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -772,12 +796,12 @@ class _ProfileState extends State<Profile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle2)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle2)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle2,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -813,12 +837,12 @@ class _ProfileState extends State<Profile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle3)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle3)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle3,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -854,12 +878,12 @@ class _ProfileState extends State<Profile> {
                         width: 10,
                       ),
                       Text(
-                        isNullOrEmpty(
-                                _studentDetails.studentData?.user?.documentTitle4)
+                        isNullOrEmpty(_studentDetails
+                                .studentData?.user?.documentTitle4)
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle4,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -891,10 +915,11 @@ class _ProfileState extends State<Profile> {
             _studentDetails.studentData?.userDetails?.classSection?.length ?? 0,
             (index) => Text(
               _studentDetails.studentData?.userDetails?.classSection?[index]
-                  .toString()
-                  .replaceAll(',', '') ?? '',
+                      .toString()
+                      .replaceAll(',', '') ??
+                  '',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: const Color(0xFF727FC8),
+                    color: Colors.black,
                     fontWeight: FontWeight.normal,
                     fontSize: 12,
                   ),
@@ -909,7 +934,7 @@ class _ProfileState extends State<Profile> {
               ' : ' +
               '${_studentDetails.studentData?.userDetails?.admissionNo.toString()}',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: const Color(0xFF727FC8),
+                color: Colors.black,
                 fontWeight: FontWeight.normal,
                 fontSize: 12,
               ),
@@ -973,7 +998,7 @@ class _ProfileState extends State<Profile> {
     Utils.showToast(dirloc);
 
     try {
-      FileUtils.mkdir([dirloc]);
+//FileUtils.mkdir([dirloc]);
       Utils.showToast("Downloading...");
 
       await dio.download(
@@ -1036,7 +1061,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   title ?? "",
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: const Color(0xff727fc8),
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                         fontSize: ScreenUtil().setSp(12),
                       ),
@@ -1048,7 +1073,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   height: 0.2.h,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF828BB2),
+                    color: Colors.grey,
                   ),
                 ),
               ],
@@ -1066,7 +1091,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   isNullOrEmpty(value.toString()) ? "" : value.toString(),
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: const Color(0xff727fc8),
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                         fontSize: ScreenUtil().setSp(12),
                       ),
@@ -1078,7 +1103,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   height: 0.2.h,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF828BB2),
+                    color: Colors.grey,
                   ),
                 ),
               ],

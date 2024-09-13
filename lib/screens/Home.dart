@@ -2,7 +2,6 @@
 import 'dart:convert';
 
 // Flutter imports:
-import 'package:edus_tutor/config/app_size.dart';
 import 'package:edus_tutor/widget/today_class_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +35,6 @@ import 'package:edus_tutor/utils/server/About.dart';
 import 'package:edus_tutor/utils/server/LogoutService.dart';
 import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import '../main.dart';
-import '../utils/server/LoginService.dart';
 import '../widget/quates_widget.dart';
 import 'ChangePassword.dart';
 
@@ -122,7 +120,7 @@ class _HomeState extends State<Home> {
 
   final SystemController _systemController = Get.put(SystemController());
 
-bool isBlock=false;
+  bool isBlock = false;
   @override
   void dispose() {
     didReceiveLocalNotificationSubject.close();
@@ -133,7 +131,7 @@ bool isBlock=false;
   @override
   void initState() {
     super.initState();
-      
+
     Utils.getStringValue('token').then((value) {
       _token = value ?? '';
       setState(() {
@@ -168,7 +166,6 @@ bool isBlock=false;
       });
     });
 
-   
     //init settings for android
     var initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -186,7 +183,7 @@ bool isBlock=false;
         if (payload != null) {
           debugPrint('notification payload: $payload');
         }
-        selectNotificationSubject.add(payload.toString() ?? '');
+        selectNotificationSubject.add(payload.toString());
       },
     );
 
@@ -297,206 +294,203 @@ bool isBlock=false;
       }
     });
   }
-  
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff053EFF),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80.h),
-        child: AppBar(
-          centerTitle: false,
-          automaticallyImplyLeading: false,
-          flexibleSpace: Column(
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 110.h,
-                padding: EdgeInsets.only(top: 20.h),
-                decoration: BoxDecoration(
-                  // image: DecorationImage(
-                  //  // image: AssetImage(AppConfig.appToolbarBackground),
-                  //   fit: BoxFit.cover,
-                  // ),
-                  color: const Color(0xff053EFF),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: 200.h,
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
+    return Container(
+      color: const Color(0xff053EFF),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: const Color(0xff053EFF),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(80.h),
+            child: AppBar(
+              centerTitle: false,
+              automaticallyImplyLeading: false,
+              flexibleSpace: Column(
+                children: [
+                  Container(
+                    height: 80.h,
+                    decoration: const BoxDecoration(
+                      color: Color(0xff053EFF),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 200.w,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Flexible(
+                                  child: Image.asset(
+                                    AppConfig.appLogo,
+                                    height: 30,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Welcome".tr + " $_fullName" + " 🎓",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(
+                                          color: Colors.white, fontSize: 15),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             const SizedBox(
                               height: 10,
                             ),
-                            Flexible(
-                              child: Image.asset(
-                                AppConfig.appLogo,
-                                height: 30,
+                            IconButton(
+                              onPressed: () {
+                                Get.dialog(LogoutService().logoutDialog());
+                              },
+                              icon: Icon(
+                                Icons.exit_to_app,
+                                size: 25.sp,
                               ),
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 8,
                             ),
-                            Text(
-                              "Welcome".tr + " $_fullName" + " 🎓",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(color: Colors.white, fontSize: 15),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 12.0),
+                              child: Text(
+                                DateFormat('yMd').format(DateTime.now()),
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
-                           
                           ],
-                        ),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            Get.dialog(LogoutService().logoutDialog());
-                          },
-                          icon: Icon(
-                            Icons.exit_to_app,
-                            size: 25.sp,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 12.0),
-                          child: Text(
-                            DateFormat('yMd').format(DateTime.now()),
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          ),
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-        ),
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async{
-         _systemController.getSystemSettings();
-           },
-        child: Container(
-          color: Color.fromARGB(255, 239, 239, 239),
-          child: Obx(() {
-            if (_systemController.isLoading.value) {
-              return const Center(child: CupertinoActivityIndicator());
-            } else {
-              return ListView(
-                shrinkWrap: false,
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                
-                  QuoteOfTheDayWidget(quote:   _systemController.quote.value),
-                  
-                    TodayClassScreen(studentResponse: _systemController.todayClassResponse.value, rule: _rule??'0', teachersResponse: _systemController.teacherTodayClassResponse.value,),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    itemCount: _titles.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                    ),
-                    itemBuilder: (context, index) {
-                 
-                      return CustomWidget(
-                        index: index,
-                        isSelected: currentSelectedIndex == index,
-                        onSelect: () {
-                          setState(() {
-                            currentSelectedIndex = index;
-                            if (_rule == '2') {
-                              AppFunction.getDashboardPage(
-                                context,
-                                _titles[index],
-                                id: _id,
-                                token: _token,
-                              );
-                            } else if (_rule == '4') {
-                              AppFunction.getTeacherDashboardPage(
-                                context,
-                                _titles[index],
-                                _id ?? '',
-                              );
-                            } else if (_rule == '3') {
-                              AppFunction.getParentDashboardPage(
-                                context,
-                                _titles[index],
-                                _id ?? '',
-                              );
-                            } else if (_rule == '1' || _rule == '5') {
-                              if (isAdministrator == 'yes') {
-                                AppFunction.getSaasAdminDashboardPage(
-                                  context,
-                                  _titles[index],
-                                  _id ?? '',
-                                  _systemController.systemSettings.value,
-                                );
-                              } else {
-                                AppFunction.getAdminDashboardPage(
-                                  context,
-                                  _titles[index],
-                                  _id ?? '',
-                                  _systemController.systemSettings.value,
-                                );
-                              }
-                            } else if (_rule == '9') {
-                              AppFunction.getDriverDashboard(
-                                context,
-                                _titles[index],
-                                _id ?? '',
-                                _systemController.systemSettings.value,
-                              );
-                            }
-                          });
-                        },
-                        headline: _titles[index],
-                        icon: _images[index],
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 50.h,
                   ),
                 ],
-              );
-            }
-          }),
+              ),
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
+            ),
+          ),
+          body: RefreshIndicator(
+            onRefresh: () async {
+              _systemController.getSystemSettings();
+            },
+            child: Container(
+              color: const Color.fromARGB(255, 239, 239, 239),
+              child: Obx(() {
+                if (_systemController.isLoading.value) {
+                  return const Center(child: CupertinoActivityIndicator());
+                } else {
+                  return ListView(
+                    shrinkWrap: false,
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      QuoteOfTheDayWidget(quote: _systemController.quote.value),
+                      TodayClassScreen(
+                        studentResponse:
+                            _systemController.todayClassResponse.value,
+                        rule: _rule ?? '0',
+                        teachersResponse:
+                            _systemController.teacherTodayClassResponse.value,
+                      ),
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        itemCount: _titles.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                        ),
+                        itemBuilder: (context, index) {
+                          print(_rule);
+                          return CustomWidget(
+                            index: index,
+                            isSelected: currentSelectedIndex == index,
+                            onSelect: () {
+                              setState(() {
+                                currentSelectedIndex = index;
+                                if (_rule == '2') {
+                                  AppFunction.getDashboardPage(
+                                    context,
+                                    _titles[index],
+                                    id: _id,
+                                    token: _token,
+                                  );
+                                } else if (_rule == '4') {
+                                  AppFunction.getTeacherDashboardPage(
+                                    context,
+                                    _titles[index],
+                                    _id ?? '',
+                                  );
+                                } else if (_rule == '3') {
+                                  AppFunction.getParentDashboardPage(
+                                    context,
+                                    _titles[index],
+                                    _id ?? '',
+                                  );
+                                } else if (_rule == '1' || _rule == '5') {
+                                  if (isAdministrator == 'yes') {
+                                    AppFunction.getSaasAdminDashboardPage(
+                                      context,
+                                      _titles[index],
+                                      _id ?? '',
+                                      _systemController.systemSettings.value,
+                                    );
+                                  } else {
+                                    AppFunction.getAdminDashboardPage(
+                                      context,
+                                      _titles[index],
+                                      _id ?? '',
+                                      _systemController.systemSettings.value,
+                                    );
+                                  }
+                                } else if (_rule == '9') {
+                                  AppFunction.getDriverDashboard(
+                                    context,
+                                    _titles[index],
+                                    _id ?? '',
+                                    _systemController.systemSettings.value,
+                                  );
+                                }
+                              });
+                            },
+                            headline: _titles[index],
+                            icon: _images[index],
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        height: 50.h,
+                      ),
+                    ],
+                  );
+                }
+              }),
+            ),
+          ),
         ),
       ),
     );
@@ -723,6 +717,10 @@ bool isBlock=false;
                                           Navigator.of(context).pop();
                                         });
                                       },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xff053EFF),
+                                      ),
                                       child: Text(
                                         'Mark all as read',
                                         style: Theme.of(context)
@@ -732,10 +730,6 @@ bool isBlock=false;
                                               fontSize: ScreenUtil().setSp(12),
                                               color: Colors.white,
                                             ),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xff053EFF),
                                       ),
                                     ),
                                   ],
@@ -1070,10 +1064,8 @@ bool isBlock=false;
   Future<String> getImageUrl(String email, String password, String rule) async {
     var image = 'http://saskolhmg.com/images/studentprofile.png';
 
-    var response = await http.post(Uri.parse(EdusApi.login),body: {
-      "email":email,
-      "password":password
-    });
+    var response = await http.post(Uri.parse(EdusApi.login),
+        body: {"email": email, "password": password});
 
     if (response.statusCode == 200) {
       Map user = jsonDecode(response.body) as Map;

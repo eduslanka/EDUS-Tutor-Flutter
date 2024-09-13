@@ -28,7 +28,8 @@ class _TakeExamScreenState extends State<TakeExamScreen> {
 
   @override
   void initState() {
-    _questionController.startController(widget.takeExamModel ?? TakeExamModel());
+    _questionController
+        .startController(widget.takeExamModel ?? TakeExamModel());
     super.initState();
   }
 
@@ -55,8 +56,8 @@ class _TakeExamScreenState extends State<TakeExamScreen> {
                   ),
                   Text(
                     "Exam Result Processing. Please wait".tr,
-                    style:
-                        Get.textTheme.titleMedium?.copyWith(color: Colors.white),
+                    style: Get.textTheme.titleMedium
+                        ?.copyWith(color: Colors.white),
                   ),
                 ],
               ),
@@ -306,7 +307,6 @@ class _QuestionCardState extends State<QuestionCard>
         // m.addAll({"answer[${element.pmId}]": "${element.pTitle}"});
       }
 
-
       _rows = List<Widget>.generate(
         widget.assign?.piQuestions?.length ?? 0,
         (int index) => Container(
@@ -336,7 +336,8 @@ class _QuestionCardState extends State<QuestionCard>
           child: ClipRRect(
               borderRadius: BorderRadius.circular(5),
               clipBehavior: Clip.antiAlias,
-              child: Text(pairMatchQuestionList[index2].imageTitle.toString() ?? '')),
+              child: Text(
+                  pairMatchQuestionList[index2].imageTitle.toString() ?? '')),
         ),
       );
     }
@@ -358,7 +359,8 @@ class _QuestionCardState extends State<QuestionCard>
               return Form(
                 key: _formKey,
                 child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 10),
                   padding: const EdgeInsets.all(22.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -485,7 +487,8 @@ class _QuestionCardState extends State<QuestionCard>
               return Form(
                 key: _formKey,
                 child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 10),
                   padding: const EdgeInsets.all(22.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -611,7 +614,8 @@ class _QuestionCardState extends State<QuestionCard>
               return Form(
                 key: _formKey,
                 child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 10),
                   padding: const EdgeInsets.all(22.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -622,7 +626,8 @@ class _QuestionCardState extends State<QuestionCard>
                       Expanded(
                         child: ListView(
                           children: [
-                            const QuestionTypeWidget(title: "Fill in the blanks"),
+                            const QuestionTypeWidget(
+                                title: "Fill in the blanks"),
                             const SizedBox(height: 10),
                             HtmlWidget(
                               '''
@@ -735,7 +740,8 @@ class _QuestionCardState extends State<QuestionCard>
               );
             } else if (widget.assign?.questionType == "M") {
               return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 padding: const EdgeInsets.all(22.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -766,7 +772,7 @@ class _QuestionCardState extends State<QuestionCard>
                                 value: item.value,
                                 onChanged: (value) => onItemClicked(item),
                                 checkColor: Colors.white,
-                                activeColor:  Colors.lightBlue,
+                                activeColor: Colors.lightBlue,
                               ),
                               title: Transform.translate(
                                   offset: const Offset(-16, 0),
@@ -793,7 +799,8 @@ class _QuestionCardState extends State<QuestionCard>
               );
             } else if (widget.assign?.questionType == "MI") {
               return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 padding: const EdgeInsets.all(22.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -804,7 +811,8 @@ class _QuestionCardState extends State<QuestionCard>
                     Expanded(
                       child: ListView(
                         children: [
-                          const QuestionTypeWidget(title: "Multiple Image Question"),
+                          const QuestionTypeWidget(
+                              title: "Multiple Image Question"),
                           const SizedBox(height: 10),
                           Padding(
                             padding:
@@ -872,7 +880,8 @@ class _QuestionCardState extends State<QuestionCard>
                                         onTap: () {
                                           Get.to(() => PhotoViewerWidget(
                                                 image: multipleImageList[index]
-                                                    .image ?? '',
+                                                        .image ??
+                                                    '',
                                               ));
                                         },
                                         child: Container(
@@ -929,7 +938,8 @@ class _QuestionCardState extends State<QuestionCard>
               );
             } else if (widget.assign?.questionType == "IMQ") {
               return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 padding: const EdgeInsets.all(22.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -1006,7 +1016,9 @@ class _QuestionCardState extends State<QuestionCard>
                                           ),
                                           Expanded(
                                             child: Text(
-                                              imageQuestionList[index].imageTitle ?? '',
+                                              imageQuestionList[index]
+                                                      .imageTitle ??
+                                                  '',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleMedium,
@@ -1054,7 +1066,8 @@ class _QuestionCardState extends State<QuestionCard>
               );
             } else if (widget.assign?.questionType == "T") {
               return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 padding: const EdgeInsets.all(22.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -1100,7 +1113,7 @@ class _QuestionCardState extends State<QuestionCard>
                                             ),
                                       ),
                                       selected: defaultChoiceIndex == index,
-                                      selectedColor:  Colors.lightBlue,
+                                      selectedColor: Colors.lightBlue,
                                       onSelected: (value) async {
                                         setState(() {
                                           defaultChoiceIndex = value
@@ -1146,7 +1159,8 @@ class _QuestionCardState extends State<QuestionCard>
               );
             } else if (widget.assign?.questionType == "PM") {
               return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 padding: const EdgeInsets.all(22.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -1176,7 +1190,7 @@ class _QuestionCardState extends State<QuestionCard>
                             children: [
                               Flexible(
                                 child: ReorderableColumn(
-                                  isReorderable: false,
+                                  //  isReorderable: false,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   ignorePrimaryScrollController: true,
@@ -1212,7 +1226,8 @@ class _QuestionCardState extends State<QuestionCard>
 
                                     Map<String, String> answers = {};
 
-                                    for (var element2 in widget.assign!.piQuestions!) {
+                                    for (var element2
+                                        in widget.assign!.piQuestions!) {
                                       ans.add("${element2.pmId}");
                                     }
 
@@ -1232,7 +1247,6 @@ class _QuestionCardState extends State<QuestionCard>
                                           _userController.schoolId.value,
                                       'ansers': answers,
                                     };
-
 
                                     await _examController.singleSubmit(
                                         widget.index ?? 0, data, true);
@@ -1265,7 +1279,8 @@ class _QuestionCardState extends State<QuestionCard>
 }
 
 class ContinueSkipSubmitBtn extends StatelessWidget {
-  const ContinueSkipSubmitBtn({Key? key, 
+  const ContinueSkipSubmitBtn({
+    Key? key,
     this.qnController,
     this.index,
   }) : super(key: key);
@@ -1412,7 +1427,8 @@ class PhotoViewerWidget extends StatelessWidget {
             child: CircularProgressIndicator(
               value: event == null
                   ? 0
-                  : event.cumulativeBytesLoaded / (event.expectedTotalBytes ?? 0),
+                  : event.cumulativeBytesLoaded /
+                      (event.expectedTotalBytes ?? 0),
             ),
           ),
         ),
