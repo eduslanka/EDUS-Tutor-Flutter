@@ -296,7 +296,7 @@ class _ProfileState extends State<Profile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -384,7 +384,7 @@ class _ProfileState extends State<Profile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -472,7 +472,7 @@ class _ProfileState extends State<Profile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -760,7 +760,7 @@ class _ProfileState extends State<Profile> {
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle1,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -801,7 +801,7 @@ class _ProfileState extends State<Profile> {
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle2,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -842,7 +842,7 @@ class _ProfileState extends State<Profile> {
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle3,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -883,7 +883,7 @@ class _ProfileState extends State<Profile> {
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle4,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -919,7 +919,7 @@ class _ProfileState extends State<Profile> {
                       .replaceAll(',', '') ??
                   '',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: const Color(0xFF727FC8),
+                    color: Colors.black,
                     fontWeight: FontWeight.normal,
                     fontSize: 12,
                   ),
@@ -934,7 +934,7 @@ class _ProfileState extends State<Profile> {
               ' : ' +
               '${_studentDetails.studentData?.userDetails?.admissionNo.toString()}',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: const Color(0xFF727FC8),
+                color: Colors.black,
                 fontWeight: FontWeight.normal,
                 fontSize: 12,
               ),
@@ -1061,7 +1061,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   title ?? "",
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: const Color(0xff727fc8),
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                         fontSize: ScreenUtil().setSp(12),
                       ),
@@ -1073,7 +1073,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   height: 0.2.h,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF828BB2),
+                    color: Colors.grey,
                   ),
                 ),
               ],
@@ -1091,7 +1091,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   isNullOrEmpty(value.toString()) ? "" : value.toString(),
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: const Color(0xff727fc8),
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                         fontSize: ScreenUtil().setSp(12),
                       ),
@@ -1103,7 +1103,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   height: 0.2.h,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF828BB2),
+                    color: Colors.grey,
                   ),
                 ),
               ],

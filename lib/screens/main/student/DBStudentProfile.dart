@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:io';
 
 // Flutter imports:
+import 'package:edus_tutor/config/app_size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -114,6 +115,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.h),
         child: AppBar(
@@ -147,20 +149,6 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                 const SizedBox(
                   width: 5,
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      ScaleRoute(
-                          page: EditProfile(
-                        id: widget.id ?? '',
-                        updateData: (index) {
-                          updateData();
-                        },
-                      )),
-                    );
-                  },
-                  icon: const Icon(Icons.edit),
-                ),
               ],
             ),
           ),
@@ -168,7 +156,6 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           elevation: 0.0,
         ),
       ),
-      backgroundColor: Colors.white,
       body: FutureBuilder<StudentDetailsModel>(
           future: profile,
           builder: (context, snapshot) {
@@ -300,7 +287,8 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
                                             colors: [
-                                              const Color(0xffe8d6fd)
+                                              const Color.fromARGB(
+                                                      255, 220, 220, 220)
                                                   .withOpacity(0.5),
                                               Colors.white
                                             ]),
@@ -353,7 +341,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -441,7 +429,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -529,7 +517,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
-                  ?.copyWith(color: const Color(0xff727fc8)),
+                  ?.copyWith(color: Colors.black),
             ),
           ),
           Row(
@@ -631,19 +619,19 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
   String buildGuardianPhoto(Parents parents) {
     if (parents.relation == 'Father') {
       if (parents.fathersPhoto == null || parents.fathersPhoto == '') {
-        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return '${EdusApi.root}public/uploads/staff/demo/staff.jpg';
       } else {
         return "${EdusApi.root}/${parents.fathersPhoto}";
       }
     } else if (parents.relation == 'Mother') {
       if (parents.mothersPhoto == null || parents.mothersPhoto == '') {
-        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return '${EdusApi.root}public/uploads/staff/demo/staff.jpg';
       } else {
         return "${EdusApi.root}/${parents.mothersPhoto}";
       }
     } else {
       if (parents.guardiansPhoto == null || parents.guardiansPhoto == '') {
-        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return '${EdusApi.root}public/uploads/staff/demo/staff.jpg';
       } else {
         return "${EdusApi.root}/${parents.guardiansPhoto}";
       }
@@ -811,7 +799,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle1,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -852,7 +840,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle2,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -893,7 +881,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle3,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -934,7 +922,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                             ? ""
                             : _studentDetails.studentData?.user?.documentTitle4,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: const Color(0xff727fc8),
+                              color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 12,
                             ),
@@ -954,9 +942,9 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
         Text(
           _studentDetails.studentData?.userDetails?.fullName ?? '',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                fontSize: ScreenUtil().setSp(14),
-              ),
+              fontWeight: FontWeight.bold,
+              fontSize: ScreenUtil().setSp(14),
+              color: Colors.black),
         ),
         const SizedBox(
           height: 5,
@@ -970,7 +958,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                       .replaceAll(',', '') ??
                   '',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: const Color(0xFF727FC8),
+                    color: Colors.black,
                     fontWeight: FontWeight.normal,
                     fontSize: 12,
                   ),
@@ -981,14 +969,42 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           height: 5,
         ),
         Text(
-          'ED Number'.tr +
-              ' : ' +
-              '${_studentDetails.studentData?.user?.edNo.toString()}',
+          '${'Admission Number'.tr} : ${_studentDetails.studentData?.user?.edNo.toString()}',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: const Color(0xFF727FC8),
-                fontWeight: FontWeight.normal,
-                fontSize: 12,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
               ),
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.of(context).push(
+              ScaleRoute(
+                  page: EditProfile(
+                id: widget.id ?? '',
+                updateData: (index) {
+                  updateData();
+                },
+              )),
+            );
+          },
+          icon: Row(
+            children: [
+              Text(
+                'Edit Profile',
+                style: TextStyle(
+                    color: Utils.baseBlue,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
+              ),
+              w16,
+              Icon(
+                Icons.edit,
+                color: Utils.baseBlue,
+                size: 20,
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -1058,7 +1074,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           onReceiveProgress: (receivedBytes, totalBytes) async {
         received = ((receivedBytes / totalBytes) * 100);
         progress =
-            ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";
+            "${((receivedBytes / totalBytes) * 100).toStringAsFixed(0)}%";
         if (received == 100.0) {
           if (url.contains('.pdf')) {
             Utils.showToast(
@@ -1112,7 +1128,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   title ?? "",
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: const Color(0xff727fc8),
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                         fontSize: ScreenUtil().setSp(12),
                       ),
@@ -1124,7 +1140,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   height: 0.2.h,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF828BB2),
+                    color: Colors.grey,
                   ),
                 ),
               ],
@@ -1142,7 +1158,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   isNullOrEmpty(value ?? '') ? "" : value.toString(),
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: const Color(0xff727fc8),
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                         fontSize: ScreenUtil().setSp(12),
                       ),
@@ -1154,7 +1170,7 @@ class ParentsDetailsRow extends StatelessWidget {
                   height: 0.2.h,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: const BoxDecoration(
-                    color: Color(0xFF828BB2),
+                    color: Colors.grey,
                   ),
                 ),
               ],

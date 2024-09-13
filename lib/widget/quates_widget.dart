@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../model/quets_model.dart';
 
 class QuoteOfTheDayWidget extends StatefulWidget {
@@ -56,12 +55,13 @@ class _QuoteOfTheDayWidgetState extends State<QuoteOfTheDayWidget> {
                   children: [
                     Text(
                       isToggled ? '- Thirukkural -' : '- திருக்குறள் -',
-                      style: TextStyle(fontSize: 12),
+                      style: const TextStyle(fontSize: 12),
                     ),
                     GestureDetector(
                       onTap: _toggleImage,
-                      child: SvgPicture.asset(
-                        'assets/images/two-arrows.svg', // path to default image
+                      child: Image.asset(
+                        'assets/images/translation_2282220.png', // path to default image
+                        width: 24,
                       ),
                     ),
                   ],

@@ -126,7 +126,7 @@ class _TeacherAttendanceScreenState extends State<TeacherAttendanceScreen> {
                                     ?.copyWith(
                                         color: isToday == true
                                             ? Colors.white
-                                            : const Color(0xFF727FC8))),
+                                            : Colors.black)),
                             const SizedBox(
                               width: 2.0,
                             ),
@@ -153,7 +153,7 @@ class _TeacherAttendanceScreenState extends State<TeacherAttendanceScreen> {
                                     ?.copyWith(
                                         color: isToday == true
                                             ? Colors.white
-                                            : const Color(0xFF727FC8))),
+                                            : Colors.black)),
                           ],
                         ),
                       );
@@ -213,7 +213,9 @@ class _TeacherAttendanceScreenState extends State<TeacherAttendanceScreen> {
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         color: Colors.black45, fontWeight: FontWeight.w500),
                   )),
-                  Text(getStatusCount(titleVal, snapshot.data?.attendances ?? []),
+                  Text(
+                      getStatusCount(
+                          titleVal, snapshot.data?.attendances ?? []),
                       style: Theme.of(context).textTheme.headlineSmall),
                 ],
               ),

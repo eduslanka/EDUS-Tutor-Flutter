@@ -28,11 +28,12 @@ class StudentAttendanceScreen extends StatefulWidget {
   String? schoolId;
   var token;
 
-  StudentAttendanceScreen({Key? key, this.id, this.token, this.schoolId}) : super(key: key);
+  StudentAttendanceScreen({Key? key, this.id, this.token, this.schoolId})
+      : super(key: key);
 
   @override
-  _StudentAttendanceScreenState createState() =>
-      _StudentAttendanceScreenState(id: id, token: token, schoolId: schoolId ?? '');
+  _StudentAttendanceScreenState createState() => _StudentAttendanceScreenState(
+      id: id, token: token, schoolId: schoolId ?? '');
 }
 
 class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
@@ -87,7 +88,8 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
         });
       }).then((value) async {
         await getProfile(widget.id).then((value) async {
-          _userController.studentId.value = value.studentData?.userDetails?.id ?? 0;
+          _userController.studentId.value =
+              value.studentData?.userDetails?.id ?? 0;
 
           await _userController.getStudentRecord().then((value) {
             DateTime date = DateTime.now();
@@ -158,7 +160,9 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
                               if (widget.id != null) {
                                 attendances = getAllStudentAttendance(
                                     widget.id,
-                                    _userController.studentRecord.value.records?.first.id ?? 0,
+                                    _userController.studentRecord.value.records
+                                            ?.first.id ??
+                                        0,
                                     date.month,
                                     date.year,
                                     token ?? '',
@@ -166,7 +170,9 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
                               } else {
                                 attendances = getAllStudentAttendance(
                                     id,
-                                    _userController.studentRecord.value.records?.first.id ?? 0,
+                                    _userController.studentRecord.value.records
+                                            ?.first.id ??
+                                        0,
                                     date.month,
                                     date.year,
                                     token ?? '',
@@ -190,7 +196,9 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
                         setState(() {
                           attendances = getAllStudentAttendance(
                               widget.id,
-                              _userController.studentRecord.value.records?.first.id ?? 0,
+                              _userController
+                                      .studentRecord.value.records?.first.id ??
+                                  0,
                               date.month,
                               date.year,
                               token ?? '',
@@ -258,7 +266,8 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
                                                   .textTheme
                                                   .headlineMedium
                                                   ?.copyWith(
-                                                    color: const Color(0xFF5F75EF),
+                                                    color:
+                                                        const Color(0xFF5F75EF),
                                                     fontSize: ScreenUtil()
                                                         .setSp(14.0),
                                                   )),
@@ -291,7 +300,7 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
                                                 .textTheme
                                                 .headlineMedium
                                                 ?.copyWith(
-                                                  color: const Color(0xFF727FC8),
+                                                  color: Colors.black,
                                                   fontSize:
                                                       ScreenUtil().setSp(14.0),
                                                 ),
@@ -345,8 +354,7 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
                                           style: Theme.of(context)
                                               .textTheme
                                               .headlineMedium
-                                              ?.copyWith(
-                                                  color: const Color(0xFF727FC8))),
+                                              ?.copyWith(color: Colors.black)),
                                     ],
                                   ),
                                 ),

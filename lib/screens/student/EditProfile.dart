@@ -1,20 +1,14 @@
-// Dart imports:
 import 'dart:convert';
 import 'dart:io';
 
-// Flutter imports:
+import 'package:edus_tutor/config/app_size.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:flutter_cupertino_date_picker_fork/flutter_cupertino_date_picker_fork.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as DIO;
-
-// Project imports:
 import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
 import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
@@ -40,95 +34,64 @@ class _EditProfileState extends State<EditProfile> {
   final TextEditingController _firstNameCtrl = TextEditingController();
   final TextEditingController _lastNameCtrl = TextEditingController();
   final TextEditingController _addressCtrl = TextEditingController();
+  final TextEditingController _dobController = TextEditingController();
 
-  String? maxDateTime;
-  String minDateTime = '2019-01-01';
+  bool _isLoading = false;
+  File? _file;
   DateTime? date;
-  String? day, year, month;
   String? _selectedDate;
-  String? _format;
-  final DateTimePickerLocale _locale = DateTimePickerLocale.en_us;
 
   final DIO.Dio _dio = DIO.Dio();
 
-  String getAbsoluteDate(int date) {
-    return date < 10 ? '0$date' : '$date';
-  }
-
-  Future<StudentDetailsModel>? profile;
-
   Future<StudentDetailsModel> getProfile() async {
-    await Utils.getStringValue('token').then((value) {
-      _token = value ?? '';
-    });
-    await Utils.getStringValue('id').then((value) {
-      _id = value ?? '';
-    });
+    _token = await Utils.getStringValue('token') ?? '';
+    _id = await Utils.getStringValue('id') ?? '';
+
     final response = await http.get(
-        Uri.parse(EdusApi.getChildren(widget.id ?? _id)),
-        headers: Utils.setHeader(_token.toString()));
+      Uri.parse(EdusApi.getChildren(widget.id ?? _id)),
+      headers: Utils.setHeader(_token),
+    );
 
     if (response.statusCode == 200) {
-      var jsonData = json.decode(response.body);
-      _userDetails = StudentDetailsModel.fromJson(jsonData);
+      _userDetails = StudentDetailsModel.fromJson(json.decode(response.body));
       return _userDetails;
     } else {
-      throw Exception('Failed to load from api');
+      throw Exception('Failed to load profile');
     }
   }
 
-  Future updateData(
-      {String? fieldName, String? value,}) async {
-    await Utils.getStringValue('token').then((value) {
-      _token = value ?? '';
-    });
-    await Utils.getStringValue('id').then((value) {
-      _id = value ?? '';
-    });
-    DIO.FormData _formData;
-    if (_file == null) {
-      _formData = DIO.FormData.fromMap({
-        "field_name": fieldName,
-        fieldName ?? '': value,
-        "id": _userDetails.studentData?.user?.id
-      });
-    } else {
-      _formData = DIO.FormData.fromMap({
-        "field_name": fieldName,
-        fieldName ?? '': value,
-        "id": _userDetails.studentData?.user?.id,
-        "student_photo": await DIO.MultipartFile.fromFile(_file?.path ?? ''),
-      });
-    }
+  Future updateData({String? fieldName, String? value}) async {
+    setState(() => _isLoading = true);
+    _token = await Utils.getStringValue('token') ?? '';
+    _id = await Utils.getStringValue('id') ?? '';
 
-    var response = await _dio.post(
-      EdusApi.updateStudent,
-      options: DIO.Options(
-        headers: Utils.setHeader(_token.toString()),
-      ),
-      data: _formData,
-    );
-    final data = Map<String, dynamic>.from(response.data);
+    DIO.FormData _formData = DIO.FormData.fromMap({
+      "field_name": fieldName,
+      fieldName ?? '': value,
+      "id": _userDetails.studentData?.user?.id,
+      if (_file != null)
+        "student_photo": await DIO.MultipartFile.fromFile(_file!.path),
+    });
 
-    if (data['data']['flag'] == true) {
-      if (_file != null) {
-        await getProfile().then((value) {
-          Utils.saveStringValue(
-              "image", value.studentData?.user?.studentPhoto ?? '');
-        });
+    try {
+      var response = await _dio.post(
+        EdusApi.updateStudent,
+        options: DIO.Options(headers: Utils.setHeader(_token)),
+        data: _formData,
+      );
+
+      if (response.data['data']['flag'] == true && _file != null) {
+        await getProfile();
+        Utils.saveStringValue(
+            "image", _userDetails.studentData?.user?.studentPhoto ?? '');
       }
-      setState(() {});
-      Navigator.of(context).pop(widget.updateData!(1));
-    } else {}
+    } catch (e) {
+      Utils.showToast('Failed to update profile');
+    } finally {
+      setState(() => _isLoading = false);
+    }
   }
 
-  @override
-  void initState() {
-    profile = getProfile();
-    super.initState();
-  }
-
-  File? _file;
   Future pickDocument() async {
     final ImagePicker _picker = ImagePicker();
     final XFile? pickedFile =
@@ -137,384 +100,193 @@ class _EditProfileState extends State<EditProfile> {
     if (pickedFile != null) {
       CroppedFile? croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedFile.path,
-        uiSettings: [
-          AndroidUiSettings(
-            toolbarTitle: 'Cropper',
-            toolbarColor: Utils.baseBlue,
-            toolbarWidgetColor: Colors.white,
-            aspectRatioPresets: [
-              CropAspectRatioPreset.square,
-            ],
-          ),
-          IOSUiSettings(
-            title: 'Cropper',
-            aspectRatioPresets: [
-              CropAspectRatioPreset.square,
-              // IMPORTANT: iOS supports only one custom aspect ratio in preset list
-            ],
-          ),
-        ],
+        uiSettings: [AndroidUiSettings(toolbarTitle: 'Cropper')],
       );
-
-      if (croppedFile != null) {
-        setState(() {
-          _file = File(croppedFile.path);
-        });
-      }
+      if (croppedFile != null) setState(() => _file = File(croppedFile.path));
     } else {
       Utils.showToast('Cancelled');
     }
   }
 
+  Future saveAll() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      await updateData(fieldName: 'first_name', value: _firstNameCtrl.text);
+      await updateData(fieldName: 'last_name', value: _lastNameCtrl.text);
+      await updateData(fieldName: 'current_address', value: _addressCtrl.text);
+      await updateData(fieldName: 'date_of_birth', value: _dobController.text);
+      if (_file != null) await updateData(fieldName: 'student_photo');
+      Utils.showToast('Profile updated successfully');
+      Navigator.of(context).pop(widget.updateData!(1));
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getProfile().then((value) {
+      setState(() {
+        _firstNameCtrl.text = value.studentData?.user?.firstName ?? '';
+        _lastNameCtrl.text = value.studentData?.user?.lastName ?? '';
+        _addressCtrl.text = value.studentData?.user?.currentAddress ?? '';
+
+        // Handle the date parsing safely
+        String dob = value.studentData?.user?.dateOfBirth ?? '';
+        try {
+          date = DateTime.parse(dob);
+          _dobController.text = "${date?.day}/${date?.month}/${date?.year}";
+        } catch (e) {
+          // Handle invalid date format
+          print('Invalid date format: $dob');
+          _dobController.text =
+              ''; // Set a default value if the date format is invalid
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarWidget(title: 'Edit Profile'),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          // mainAxisSize: MainAxisSize.max,
-          children: [
-            FutureBuilder<StudentDetailsModel>(
-                future: profile,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(
-                          'Error: ${snapshot.error}',
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      );
-                      // if we got our data
-                    } else if (snapshot.hasData) {
-                      _firstNameCtrl.text =
-                          snapshot.data?.studentData?.user?.firstName ?? '';
-                      _lastNameCtrl.text =
-                          snapshot.data?.studentData?.user?.lastName ?? '';
-                      _addressCtrl.text =
-                          snapshot.data?.studentData?.user?.currentAddress ??
-                              '';
-                      maxDateTime = "2100-01-01";
-                      minDateTime = "1900-01-01";
-                      date = DateTime.parse(
-                          snapshot.data?.studentData?.user?.dateOfBirth ?? '');
-                      return Form(
-                        key: _formKey,
-                        child: Column(
-                          // physics: NeverScrollableScrollPhysics(),
-                          // shrinkWrap: true,
+      appBar: CustomAppBarWidget(title: 'Edit Profile'),
+      body: _isLoading
+          ? const Center(child: CupertinoActivityIndicator())
+          : SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: <Widget>[
+                      buildTextField('First Name', _firstNameCtrl),
+                      buildTextField('Last Name', _lastNameCtrl),
+                      buildTextField('Address', _addressCtrl),
+                      buildDateField(context),
+                      buildProfilePhoto(),
+                      h8,
+                      // ElevatedButton(
+                      //   onPressed: saveAll,
+                      //   child: const Text('Save'),
+                      // ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16),
+        child: InkWell(
+          onTap: saveAll,
+          child: Container(
+            width: screenWidth(360, context),
+            height: 40,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8), color: Utils.baseBlue),
+            child: const Center(
+                child: Text(
+              'Save Changes',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+            )),
+          ),
+        ),
+      ),
+    );
+  }
 
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0.w, vertical: 15.0.h),
-                              child: Text(
-                                "Profile Photo".tr,
-                                style: Get.textTheme.titleLarge,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0.w, vertical: 15.0.h),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: InkWell(
-                                      onTap: pickDocument,
-                                      child: TextFormField(
-                                        enabled: false,
-                                        keyboardType: TextInputType.text,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleLarge,
-                                        autovalidateMode:
-                                            AutovalidateMode.disabled,
-                                        decoration: InputDecoration(
-                                          labelText: _file == null
-                                              ? 'Select image'.tr
-                                              : _file?.path.split('/').last ??
-                                                  '',
-                                          errorStyle: const TextStyle(
-                                              color: Colors.blue,
-                                              fontSize: 15.0),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 10.w),
-                                  IconButton(
-                                    onPressed: () async {
-                                      if (_file?.path != null) {
-                                        await updateData(
-                                            fieldName: "student_photo",
-                                           
-                                            );
-                                      } else {
-                                        pickDocument();
-                                      }
-                                    },
-                                    icon: Icon(
-                                      _file == null
-                                          ? Icons.edit
-                                          : Icons.save_as,
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            _file == null
-                                ? const SizedBox.shrink()
-                                : Image.file(
-                                    _file ?? File(''),
-                                    width: Get.width * 0.3,
-                                    height: Get.height * 0.3,
-                                  ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0.w, vertical: 15.0.h),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.text,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                      controller: _firstNameCtrl,
-                                      validator: (String? value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please enter your first name'
-                                              .tr;
-                                        }
-                                        return null;
-                                      },
-                                      decoration: InputDecoration(
-                                        hintText: "First Name".tr,
-                                        labelText: "First Name".tr,
-                                        labelStyle: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium,
-                                        errorStyle: const TextStyle(
-                                          color: Colors.blue,
-                                          fontSize: 15.0,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 10.w),
-                                  IconButton(
-                                    onPressed: () async {
-                                      if (_firstNameCtrl.text.isNotEmpty) {
-                                        await updateData(
-                                            fieldName: "first_name",
-                                            value: _firstNameCtrl.text);
-                                      }
-                                    },
-                                    icon: Icon(
-                                      Icons.save_as,
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0.w, vertical: 15.0.h),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.text,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                      controller: _lastNameCtrl,
-                                      validator: (String? value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please enter your last name'
-                                              .tr;
-                                        }
-                                        return null;
-                                      },
-                                      decoration: InputDecoration(
-                                        hintText: "Last Name".tr,
-                                        labelText: "Last Name".tr,
-                                        labelStyle: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium,
-                                        errorStyle: const TextStyle(
-                                          color: Colors.blue,
-                                          fontSize: 15.0,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 10.w),
-                                  IconButton(
-                                    onPressed: () async {
-                                      await updateData(
-                                          fieldName: "last_name",
-                                          value: _lastNameCtrl.text);
-                                    },
-                                    icon: const Icon(
-                                      Icons.save_as,
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0.w, vertical: 15.0.h),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.text,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                      enabled: false,
-                                      initialValue:
-                                          "${date?.day}/${date?.month}/${date?.year}",
-                                      decoration: InputDecoration(
-                                        hintText: "Date of birth".tr,
-                                        labelText: "Date of birth".tr,
-                                        labelStyle: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium,
-                                        errorStyle: const TextStyle(
-                                          color: Colors.blue,
-                                          fontSize: 15.0,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 10.w),
-                                  IconButton(
-                                    onPressed: () {
-                                      DatePicker.showDatePicker(
-                                        context,
-                                        pickerTheme: const DateTimePickerTheme(
-                                          confirm: Text('Done',
-                                              style:
-                                                  TextStyle(color: Colors.red)),
-                                          cancel: Text('Cancel',
-                                              style: TextStyle(
-                                                  color: Colors.cyan)),
-                                        ),
-                                        minDateTime:
-                                            DateTime.parse(minDateTime),
-                                        maxDateTime:
-                                            DateTime.parse(maxDateTime ?? ''),
-                                        initialDateTime: date,
-                                        dateFormat: _format,
-                                        locale: _locale,
-                                        onClose: () =>
-                                            print("----- onClose -----"),
-                                        onCancel: () => print('onCancel'),
-                                        onConfirm:
-                                            (dateTime, List<int> index) async {
-                                          date = dateTime;
-                                          _selectedDate =
-                                              '${date?.year}-${getAbsoluteDate(date?.month ?? 0)}-${getAbsoluteDate(date?.day ?? 0)}';
+  Widget buildProfilePhoto() {
+    return Column(
+      children: [
+        InkWell(
+          onTap: pickDocument,
+          child: Container(
+            width: screenWidth(390, context),
+            //  height: 50,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.black)),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Text(
+                    _file == null
+                        ? 'Select Image'
+                        : _file?.path.split('/').last ?? '',
+                    style: TextStyle(color: Colors.black),
+                    textAlign: TextAlign.start,
+                  ),
+                  if (_file != null) h8,
+                  _file == null
+                      ? const SizedBox.shrink()
+                      : Image.file(_file!, width: 100, height: 100),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
-                                          print(_selectedDate);
-                                          await updateData(
-                                              fieldName: "date_of_birth",
-                                              value: _selectedDate);
-                                        },
-                                      );
-                                    },
-                                    icon: const Icon(
-                                      Icons.save_as,
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0.w, vertical: 15.0.h),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      maxLines: 3,
-                                      keyboardType: TextInputType.text,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                      controller: _addressCtrl,
-                                      validator: (String? value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please enter your address'.tr;
-                                        }
-                                        return null;
-                                      },
-                                      decoration: InputDecoration(
-                                        hintText: "Current Address".tr,
-                                        labelText: "Current Address".tr,
-                                        labelStyle: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium,
-                                        errorStyle: const TextStyle(
-                                          color: Colors.blue,
-                                          fontSize: 15.0,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 10.w),
-                                  IconButton(
-                                    onPressed: () async {
-                                      await updateData(
-                                          fieldName: "current_address",
-                                          value: _addressCtrl.text);
-                                    },
-                                    icon: const Icon(
-                                      Icons.save_as,
-                                      color: Colors.blueAccent,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-                  }
-                  return const Center(
-                    child: CupertinoActivityIndicator(),
-                  );
-                }),
-          ],
+  Widget buildTextField(String label, TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          // Default border when not focused
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            borderSide: const BorderSide(color: Colors.black),
+          ),
+          // Border when focused
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            borderSide: const BorderSide(color: Colors.black, width: 2.0),
+          ),
+        ),
+        validator: (value) =>
+            value?.isEmpty == true ? 'Please enter $label' : null,
+      ),
+    );
+  }
+
+  Widget buildDateField(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: GestureDetector(
+        onTap: () {
+          DatePicker.showDatePicker(
+            context,
+            onConfirm: (dateTime, _) {
+              setState(() {
+                date = dateTime;
+                _selectedDate = '${date?.year}-${date?.month}-${date?.day}';
+                _dobController.text = _selectedDate!;
+              });
+            },
+          );
+        },
+        child: AbsorbPointer(
+          child: TextFormField(
+            controller: _dobController,
+            decoration: InputDecoration(
+              labelText: 'Date of Birth',
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: const BorderSide(color: Colors.black),
+              ),
+              // Border when focused
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                borderSide: const BorderSide(color: Colors.black, width: 2.0),
+              ),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
+            ),
+          ),
         ),
       ),
     );

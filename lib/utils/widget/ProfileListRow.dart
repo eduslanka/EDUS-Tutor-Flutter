@@ -52,7 +52,7 @@ class ProfileRowList extends StatelessWidget {
                                     .textTheme
                                     .titleSmall
                                     ?.copyWith(
-                                      color: const Color(0xff727fc8),
+                                      color: Colors.black,
                                       fontWeight: FontWeight.normal,
                                       fontSize: ScreenUtil().setSp(12),
                                     ),
@@ -62,9 +62,10 @@ class ProfileRowList extends StatelessWidget {
                               ),
                               Container(
                                 height: 0.2.h,
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 decoration: const BoxDecoration(
-                                  color: Color(0xFF828BB2),
+                                  color: Colors.grey,
                                 ),
                               ),
                             ],
@@ -84,7 +85,7 @@ class ProfileRowList extends StatelessWidget {
                                     .textTheme
                                     .titleSmall
                                     ?.copyWith(
-                                      color: const Color(0xff727fc8),
+                                      color: Colors.black,
                                       fontWeight: FontWeight.normal,
                                       fontSize: ScreenUtil().setSp(12),
                                     ),
@@ -95,7 +96,7 @@ class ProfileRowList extends StatelessWidget {
                               Container(
                                 height: 0.2.h,
                                 decoration: const BoxDecoration(
-                                  color: Color(0xFF828BB2),
+                                  color: Colors.grey,
                                 ),
                               ),
                             ],
@@ -119,7 +120,7 @@ class ProfileRowList extends StatelessWidget {
                                   .textTheme
                                   .titleSmall
                                   ?.copyWith(
-                                    color: const Color(0xff727fc8),
+                                    color: Colors.black,
                                     fontWeight: FontWeight.normal,
                                     fontSize: ScreenUtil().setSp(12),
                                   ),
@@ -130,7 +131,7 @@ class ProfileRowList extends StatelessWidget {
                             Container(
                               height: 0.2.h,
                               decoration: const BoxDecoration(
-                                color: Color(0xFF828BB2),
+                                color: Colors.grey,
                               ),
                             ),
                           ],
@@ -152,7 +153,7 @@ class ProfileRowList extends StatelessWidget {
                                   .textTheme
                                   .titleSmall
                                   ?.copyWith(
-                                    color: const Color(0xff727fc8),
+                                    color: Colors.black,
                                     fontWeight: FontWeight.normal,
                                     fontSize: ScreenUtil().setSp(12),
                                   ),
@@ -163,7 +164,7 @@ class ProfileRowList extends StatelessWidget {
                             Container(
                               height: 0.2.h,
                               decoration: const BoxDecoration(
-                                color: Color(0xFF828BB2),
+                                color: Colors.grey,
                               ),
                             ),
                           ],

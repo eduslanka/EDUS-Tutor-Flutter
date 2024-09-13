@@ -40,7 +40,7 @@ ThemeData basicTheme() {
         textStyle: base.headlineSmall?.copyWith(
           fontSize: 12.sp,
           fontWeight: FontWeight.w300,
-          color: const Color(0xFF727FC8),
+          color: Colors.black,
         ),
       ),
       displaySmall: GoogleFonts.poppins(
