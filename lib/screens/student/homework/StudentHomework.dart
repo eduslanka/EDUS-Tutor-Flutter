@@ -24,7 +24,7 @@ import 'package:edus_tutor/utils/widget/Homework_row.dart';
 class StudentHomework extends StatefulWidget {
   String? id;
 
-  StudentHomework({Key? key, this.id}) : super(key: key);
+  StudentHomework({super.key, this.id});
 
   @override
   _StudentHomeworkState createState() => _StudentHomeworkState();
@@ -48,7 +48,9 @@ class _StudentHomeworkState extends State<StudentHomework> {
         _id = idValue;
         print(_id);
         homeworks = fetchHomework(
-          widget.id != null ? int.parse(widget.id ?? '') : int.parse(idValue ?? ''),
+          widget.id != null
+              ? int.parse(widget.id ?? '')
+              : int.parse(idValue ?? ''),
           _userController.studentRecord.value.records?.first.id ?? 0,
         );
       });
@@ -98,7 +100,7 @@ class _StudentHomeworkState extends State<StudentHomework> {
                       child: CupertinoActivityIndicator(),
                     );
                   } else {
-                    if (snapshot.hasData && snapshot != null) {
+                    if (snapshot.hasData) {
                       if (snapshot.data!.homeworks.isNotEmpty) {
                         return ListView.separated(
                           separatorBuilder: (context, index) => const SizedBox(
@@ -108,7 +110,8 @@ class _StudentHomeworkState extends State<StudentHomework> {
                           itemCount: snapshot.data?.homeworks.length ?? 0,
                           itemBuilder: (context, index) {
                             return StudentHomeworkRow(
-                                snapshot.data?.homeworks[index] ?? Homework(), 'student');
+                                snapshot.data?.homeworks[index] ?? Homework(),
+                                'student');
                           },
                         );
                       } else {

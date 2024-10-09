@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 
 class OnlineExamResults extends StatefulWidget {
   final id;
-  const OnlineExamResults({Key? key, this.id}) : super(key: key);
+  const OnlineExamResults({super.key, this.id});
 
   @override
   _OnlineExamResultsState createState() => _OnlineExamResultsState(id: id);
@@ -74,7 +74,8 @@ class _OnlineExamResultsState extends State<OnlineExamResults> {
               ),
               itemBuilder: (context, recordIndex) {
                 Record record =
-                    _userController.studentRecord.value.records?[recordIndex] ?? Record();
+                    _userController.studentRecord.value.records?[recordIndex] ??
+                        Record();
                 return GestureDetector(
                   behavior: HitTestBehavior.translucent,
                   onTap: () async {
@@ -119,7 +120,8 @@ class _OnlineExamResultsState extends State<OnlineExamResults> {
                   ),
                 );
               },
-              itemCount: _userController.studentRecord.value.records?.length ?? 0,
+              itemCount:
+                  _userController.studentRecord.value.records?.length ?? 0,
             ),
           ),
           const SizedBox(
@@ -137,11 +139,13 @@ class _OnlineExamResultsState extends State<OnlineExamResults> {
                   if (snapshot.hasData) {
                     if (snapshot.data!.data!.studentExams!.isNotEmpty) {
                       return ListView.builder(
-                        itemCount: snapshot.data?.data?.studentExams?.length ?? 0,
+                        itemCount:
+                            snapshot.data?.data?.studentExams?.length ?? 0,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return ActiveOnlineExamRow(
-                            exam: snapshot.data?.data?.studentExams?[index] ?? StudentExam(),
+                            exam: snapshot.data?.data?.studentExams?[index] ??
+                                StudentExam(),
                           );
                         },
                       );
@@ -176,9 +180,10 @@ class _OnlineExamResultsState extends State<OnlineExamResults> {
 class ActiveOnlineExamRow extends StatefulWidget {
   final StudentExam? exam;
 
-  const ActiveOnlineExamRow({Key? key, 
+  const ActiveOnlineExamRow({
+    super.key,
     this.exam,
-  }) : super(key: key);
+  });
 
   @override
   State<ActiveOnlineExamRow> createState() => _ActiveOnlineExamRowState();
@@ -252,7 +257,8 @@ class _ActiveOnlineExamRowState extends State<ActiveOnlineExamRow> {
                         height: 10.0,
                       ),
                       Text(
-                        "${widget.exam?.startDate}" " (${widget.exam?.startTime})",
+                        "${widget.exam?.startDate}"
+                        " (${widget.exam?.startTime})",
                         style: Theme.of(context)
                             .textTheme
                             .headlineMedium

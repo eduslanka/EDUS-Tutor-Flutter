@@ -20,7 +20,7 @@ import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import 'StudentRoutineListScreen.dart';
 
 class SearchRoutineScreen extends StatefulWidget {
-  const SearchRoutineScreen({Key? key}) : super(key: key);
+  const SearchRoutineScreen({super.key});
 
   @override
   _SearchRoutineScreenState createState() => _SearchRoutineScreenState();
@@ -54,7 +54,7 @@ class _SearchRoutineScreenState extends State<SearchRoutineScreen> {
 
               classes?.then((value) {
                 print("classes : ${value.classes}");
-               // _selectedClass = value.classes[0].name;
+                // _selectedClass = value.classes[0].name;
                 _selectedClass = AllClasses.classes[0].name;
                 classId = AllClasses.classes[0].id;
                 sections = getAllSection(int.parse(_id ?? ''), classId);
@@ -89,14 +89,16 @@ class _SearchRoutineScreenState extends State<SearchRoutineScreen> {
                       future: sections,
                       builder: (context, secSnap) {
                         if (secSnap.hasData) {
-                          return getSectionDropdown(secSnap.data?.sections ?? []);
+                          return getSectionDropdown(
+                              secSnap.data?.sections ?? []);
                         } else if (secSnap.connectionState.name == 'waiting') {
                           return const Center(
                               child: CupertinoActivityIndicator());
                         } else if (secSnap.connectionState.name == 'none') {
                           return getClassDropdown([]);
                         } else {
-                          return const Center(child: CupertinoActivityIndicator());
+                          return const Center(
+                              child: CupertinoActivityIndicator());
                         }
                       },
                     ),
@@ -126,8 +128,9 @@ class _SearchRoutineScreenState extends State<SearchRoutineScreen> {
         ),
         onTap: () {
           if (classId != null && sectionId != null) {
-            Navigator.push(context, ScaleRoute(page: StudentRoutine(classId, sectionId)));
-          } else{
+            Navigator.push(
+                context, ScaleRoute(page: StudentRoutine(classId, sectionId)));
+          } else {
             Utils.showToast('No Data Available');
           }
         },
@@ -160,9 +163,9 @@ class _SearchRoutineScreenState extends State<SearchRoutineScreen> {
             ?.copyWith(fontSize: ScreenUtil().setSp(15)),
         onChanged: (value) {
           setState(() {
-
             _selectedClass = '$value';
-            int classIndex = AllClasses.classes.indexWhere((element) => value == element.name);
+            int classIndex = AllClasses.classes
+                .indexWhere((element) => value == element.name);
             //classId = getCode(classes, '$value');
             classId = AllClasses.classes[classIndex].id;
 
@@ -179,7 +182,6 @@ class _SearchRoutineScreenState extends State<SearchRoutineScreen> {
   }
 
   Widget getSectionDropdown(List<Section> sectionlist) {
-
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -191,8 +193,8 @@ class _SearchRoutineScreenState extends State<SearchRoutineScreen> {
             value: item.name,
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child:
-                  Text(item.name ?? '', style: Theme.of(context).textTheme.headlineMedium),
+              child: Text(item.name ?? '',
+                  style: Theme.of(context).textTheme.headlineMedium),
             ),
           );
         }).toList(),
@@ -235,7 +237,6 @@ class _SearchRoutineScreenState extends State<SearchRoutineScreen> {
   }
 
   Future getAllClass(dynamic id) async {
-
     final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
 

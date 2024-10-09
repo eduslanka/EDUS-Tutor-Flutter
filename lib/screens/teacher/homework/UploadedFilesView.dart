@@ -14,8 +14,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 // import 'package:edus_tutor/utils/pdf_flutter.dart';
 
 class UploadedFilesView extends StatefulWidget {
-  const UploadedFilesView({Key? key, this.files, this.fileName})
-      : super(key: key);
+  const UploadedFilesView({super.key, this.files, this.fileName});
 
   final List<String>? files;
   final String? fileName;
@@ -46,7 +45,7 @@ class _UploadedFilesViewState extends State<UploadedFilesView> {
                             builder: (context) => DownloadViewer(
                                   title: 'PDF',
                                   filePath:
-                                      EdusApi.root + '${widget.files?[index]}',
+                                      '${EdusApi.root}${widget.files?[index]}',
                                 )));
                       },
                       child: Stack(
@@ -82,7 +81,7 @@ class _UploadedFilesViewState extends State<UploadedFilesView> {
                       ),
                     )
                   : ExtendedImage.network(
-                      EdusApi.root + '${widget.files?[index]}',
+                      '${EdusApi.root}${widget.files?[index]}',
                       fit: BoxFit.cover,
                       cache: true,
                       mode: ExtendedImageMode.gesture,

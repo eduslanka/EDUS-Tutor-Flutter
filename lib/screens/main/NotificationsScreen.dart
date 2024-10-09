@@ -9,7 +9,7 @@ import 'package:edus_tutor/controller/notification_controller.dart';
 class NotificationScreen extends StatefulWidget {
   final String id;
 
-  const NotificationScreen(this.id, {Key? key}) : super(key: key);
+  const NotificationScreen(this.id, {super.key});
 
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
@@ -96,14 +96,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     Expanded(
                       child: Obx(() {
                         return Text(
-                          "You have".tr +
-                              " ${controller.notificationCount.value} " +
-                              "New notification".tr,
+                          "${"You have".tr} ${controller.notificationCount.value} ${"New notification".tr}",
                         );
                       }),
                     ),
                     ElevatedButton(
                       onPressed: readAll,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff053EFF),
+                      ),
                       child: Text(
                         'Mark all as read'.tr,
                         style:
@@ -111,9 +112,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   fontSize: ScreenUtil().setSp(12),
                                   color: Colors.white,
                                 ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff053EFF),
                       ),
                     ),
                   ],

@@ -20,7 +20,7 @@ class RazorPayment extends StatefulWidget {
   FeeElement fee;
   String id;
 
-  RazorPayment(this.fee, this.id, {Key? key}) : super(key: key);
+  RazorPayment(this.fee, this.id, {super.key});
 
   @override
   _RazorPaymentState createState() => _RazorPaymentState(id);
@@ -67,7 +67,7 @@ class _RazorPaymentState extends State<RazorPayment> {
                   height: 40.0,
                   margin: const EdgeInsets.symmetric(horizontal: 20.0),
                   decoration: BoxDecoration(
-                    color: Color(0xff053EFF),
+                    color: const Color(0xff053EFF),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Center(
@@ -95,7 +95,7 @@ class AddRazorAmount extends StatefulWidget {
   FeeElement fee;
   String id;
 
-  AddRazorAmount(this.fee, this.id, {Key? key}) : super(key: key);
+  AddRazorAmount(this.fee, this.id, {super.key});
 
   @override
   _AddRazorAmountState createState() => _AddRazorAmountState(fee);
@@ -160,12 +160,16 @@ class _AddRazorAmountState extends State<AddRazorAmount> {
                   },
                   child: Container(
                     height: 40.0,
-                    color: Color(0xff053EFF),
+                    color: const Color(0xff053EFF),
                     child: Center(
                       child: Text(
                         "Enter amount",
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            color: Colors.white, fontWeight: FontWeight.w700),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
                       ),
                     ),
                   ),

@@ -11,7 +11,7 @@ import 'package:edus_tutor/screens/fees/model/FeeTransactions.dart';
 
 class FeeTransactionView extends StatefulWidget {
   final int? invoiceId;
-  const FeeTransactionView({Key? key, this.invoiceId}) : super(key: key);
+  const FeeTransactionView({super.key, this.invoiceId});
   @override
   _FeeTransactionViewState createState() => _FeeTransactionViewState();
 }
@@ -61,14 +61,16 @@ class _FeeTransactionViewState extends State<FeeTransactionView> {
             if (snapshot.hasData) {
               return ListView.separated(
                 physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 separatorBuilder: (context, index) {
                   return const Divider();
                 },
                 itemCount: snapshot.data?.feeTransactions.length ?? 0,
                 itemBuilder: (context, index) {
                   FeesTranscation transactions =
-                      snapshot.data?.feeTransactions[index] ?? FeesTranscation();
+                      snapshot.data?.feeTransactions[index] ??
+                          FeesTranscation();
 
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
@@ -103,8 +105,9 @@ class _FeeTransactionViewState extends State<FeeTransactionView> {
                                     ),
                                     Text(
                                       transactions.paymentMethod.toString(),
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -127,8 +130,9 @@ class _FeeTransactionViewState extends State<FeeTransactionView> {
                                     ),
                                     Text(
                                       transactions.changeMethod.toString(),
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -152,8 +156,9 @@ class _FeeTransactionViewState extends State<FeeTransactionView> {
                                     Text(
                                       transactions.paidAmount.toString(),
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -177,8 +182,9 @@ class _FeeTransactionViewState extends State<FeeTransactionView> {
                                     Text(
                                       transactions.waiver.toString(),
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -202,8 +208,9 @@ class _FeeTransactionViewState extends State<FeeTransactionView> {
                                     Text(
                                       transactions.fine.toString(),
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),

@@ -17,7 +17,7 @@ import 'package:edus_tutor/utils/widget/ShimmerListWidget.dart';
 class FeeScreen extends StatefulWidget {
   String? id;
 
-  FeeScreen({Key? key, this.id}) : super(key: key);
+  FeeScreen({super.key, this.id});
 
   @override
   _FeeScreenState createState() => _FeeScreenState();
@@ -54,7 +54,8 @@ class _FeeScreenState extends State<FeeScreen> {
                 Expanded(
                   child: Text(
                     'Grand Total',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(),
+                    style:
+                        Theme.of(context).textTheme.headlineSmall?.copyWith(),
                     maxLines: 1,
                   ),
                 ),
@@ -75,8 +76,7 @@ class _FeeScreenState extends State<FeeScreen> {
                           //     widget.id != null ? widget.id : id.data),_token)
                           //     .fetchTotalFee()),
                           future: FeeService(
-                                  int.parse(
-                                      widget.id ?? id.data.toString()),
+                                  int.parse(widget.id ?? id.data.toString()),
                                   _token)
                               .fetchTotalFee(),
                           builder: (context, totalSnapshot) {
@@ -101,7 +101,8 @@ class _FeeScreenState extends State<FeeScreen> {
                                           height: 10.0,
                                         ),
                                         Text(
-                                          totalSnapshot.data?[0].toString() ?? '',
+                                          totalSnapshot.data?[0].toString() ??
+                                              '',
                                           maxLines: 1,
                                           style: Theme.of(context)
                                               .textTheme
@@ -128,7 +129,8 @@ class _FeeScreenState extends State<FeeScreen> {
                                           height: 10.0,
                                         ),
                                         Text(
-                                          totalSnapshot.data?[1].toString() ?? '',
+                                          totalSnapshot.data?[1].toString() ??
+                                              '',
                                           maxLines: 1,
                                           style: Theme.of(context)
                                               .textTheme
@@ -155,7 +157,8 @@ class _FeeScreenState extends State<FeeScreen> {
                                           height: 10.0,
                                         ),
                                         Text(
-                                          totalSnapshot.data?[2].toString() ?? '',
+                                          totalSnapshot.data?[2].toString() ??
+                                              '',
                                           maxLines: 1,
                                           style: Theme.of(context)
                                               .textTheme
@@ -182,7 +185,8 @@ class _FeeScreenState extends State<FeeScreen> {
                                           height: 10.0,
                                         ),
                                         Text(
-                                          totalSnapshot.data?[3].toString() ?? '',
+                                          totalSnapshot.data?[3].toString() ??
+                                              '',
                                           maxLines: 1,
                                           style: Theme.of(context)
                                               .textTheme
@@ -209,7 +213,8 @@ class _FeeScreenState extends State<FeeScreen> {
                                           height: 10.0,
                                         ),
                                         Text(
-                                          totalSnapshot.data?[4].toString() ?? '',
+                                          totalSnapshot.data?[4].toString() ??
+                                              '',
                                           textAlign: TextAlign.center,
                                           maxLines: 1,
                                           style: Theme.of(context)
@@ -222,7 +227,7 @@ class _FeeScreenState extends State<FeeScreen> {
                                 ],
                               );
                             } else {
-                              return ShimmerList(
+                              return const ShimmerList(
                                 height: 40,
                                 itemCount: 1,
                               );
@@ -247,7 +252,10 @@ class _FeeScreenState extends State<FeeScreen> {
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [const Color(0xffd9c1f8).withOpacity(0.5), Colors.white]),
+                  colors: [
+                    const Color(0xffd9c1f8).withOpacity(0.5),
+                    Colors.white
+                  ]),
             ),
           ),
           SizedBox(
@@ -268,7 +276,8 @@ class _FeeScreenState extends State<FeeScreen> {
                           //     widget.id != null ? widget.id : snapId.data),_token)
                           //     .fetchFee()),
                           future: FeeService(
-                                  int.parse(widget.id ?? snapId.data.toString()),
+                                  int.parse(
+                                      widget.id ?? snapId.data.toString()),
                                   _token)
                               .fetchFee(),
                           builder: (context, snapshot) {
@@ -281,7 +290,7 @@ class _FeeScreenState extends State<FeeScreen> {
                                         widget.id ?? snapId.data.toString());
                                   });
                             } else {
-                              return ShimmerList(
+                              return const ShimmerList(
                                 height: 40,
                                 itemCount: 1,
                               );

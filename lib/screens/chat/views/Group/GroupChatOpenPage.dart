@@ -38,8 +38,7 @@ class GroupChatOpenPage extends StatefulWidget {
   final String? groupId;
   final ChatGroup? chatGroup;
   const GroupChatOpenPage(
-      {Key? key, this.photoUrl, this.chatTitle, this.groupId, this.chatGroup})
-      : super(key: key);
+      {super.key, this.photoUrl, this.chatTitle, this.groupId, this.chatGroup});
 
   @override
   _GroupChatOpenPageState createState() => _GroupChatOpenPageState();
@@ -2081,7 +2080,7 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                         image: AssetImage(AppConfig.appToolbarBackground),
                         fit: BoxFit.cover,
                       ),
-                      color: Color(0xff053EFF),
+                      color: const Color(0xff053EFF),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -2203,30 +2202,31 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                 },
                                 itemBuilder: (context) => [
                                   const PopupMenuItem(
-                                    child: Text("User Role"),
                                     value: 1,
+                                    child: Text("User Role"),
                                   ),
                                   const PopupMenuItem(
-                                    child: Text("Add People"),
                                     value: 3,
+                                    child: Text("Add People"),
                                   ),
                                   const PopupMenuItem(
-                                    child: Text("Members"),
                                     value: 4,
+                                    child: Text("Members"),
                                   ),
                                   const PopupMenuItem(
-                                    child: Text("Files"),
                                     value: 5,
+                                    child: Text("Files"),
                                   ),
                                   const PopupMenuItem(
-                                    child: Text("Leave Group"),
                                     value: 6,
+                                    child: Text("Leave Group"),
                                   ),
                                   const PopupMenuItem(
-                                    child: Text("Delete Group"),
                                     value: 7,
+                                    child: Text("Delete Group"),
                                   ),
                                   PopupMenuItem(
+                                    value: 8,
                                     child: _chatGroupOpenController
                                                 ?.chatGroupModel
                                                 .value
@@ -2235,7 +2235,6 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                             0
                                         ? const Text("Mark as Read Only")
                                         : const Text("Remove Read Only"),
-                                    value: 8,
                                   ),
                                 ],
                               )
@@ -2259,20 +2258,20 @@ class _GroupChatOpenPageState extends State<GroupChatOpenPage> {
                                 },
                                 itemBuilder: (context) => [
                                   const PopupMenuItem(
-                                    child: Text("Add People"),
                                     value: 2,
+                                    child: Text("Add People"),
                                   ),
                                   const PopupMenuItem(
-                                    child: Text("Members"),
                                     value: 3,
+                                    child: Text("Members"),
                                   ),
                                   const PopupMenuItem(
-                                    child: Text("Files"),
                                     value: 4,
+                                    child: Text("Files"),
                                   ),
                                   const PopupMenuItem(
-                                    child: Text("Leave Group"),
                                     value: 5,
+                                    child: Text("Leave Group"),
                                   ),
                                 ],
                               ),
@@ -2296,13 +2295,12 @@ class GroupMessageItemWidget extends StatelessWidget {
   final bool? showActions;
   final Function? onTapMenu;
   const GroupMessageItemWidget(
-      {Key? key,
+      {super.key,
       this.groupThread,
       this.currentUserId,
       this.menuVisible,
       this.showActions,
-      this.onTapMenu})
-      : super(key: key);
+      this.onTapMenu});
 
   onAvatarPress(BuildContext context) {
     final child = Center(

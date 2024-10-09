@@ -16,7 +16,7 @@ import 'package:edus_tutor/utils/widget/Line.dart';
 import '../../main.dart';
 
 class AdminSettings extends StatefulWidget {
-  const AdminSettings({Key? key}) : super(key: key);
+  const AdminSettings({super.key});
 
   @override
   _AdminSettingsState createState() => _AdminSettingsState();
@@ -79,7 +79,9 @@ class _AdminSettingsState extends State<AdminSettings> {
               },
               child: Container(
                   decoration: BoxDecoration(
-                      color: perm == 1 ? Color(0xff053EFF) : Colors.redAccent,
+                      color: perm == 1
+                          ? const Color(0xff053EFF)
+                          : Colors.redAccent,
                       borderRadius: BorderRadius.circular(8)),
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -94,7 +96,7 @@ class _AdminSettingsState extends State<AdminSettings> {
             ),
             dense: true,
           ),
-          BottomLine(),
+          const BottomLine(),
           ListTile(
             leading: const Card(
               elevation: 10,
@@ -132,7 +134,7 @@ class _AdminSettingsState extends State<AdminSettings> {
             ),
             dense: true,
           ),
-          BottomLine(),
+          const BottomLine(),
         ],
       ),
     );
@@ -175,7 +177,7 @@ class _AdminSettingsState extends State<AdminSettings> {
                                     Theme.of(context).textTheme.headlineSmall,
                               ),
                             ),
-                            BottomLine(),
+                            const BottomLine(),
                           ],
                         );
                       },

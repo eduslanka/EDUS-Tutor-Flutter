@@ -62,7 +62,7 @@ class AdminFeesController extends GetxController {
     await getIdToken().then((value) async {
       try {
         final response = await http.get(
-            Uri.parse(EdusApi.adminFeesAddPayment + '/$invoiceId'),
+            Uri.parse('${EdusApi.adminFeesAddPayment}/$invoiceId'),
             headers: Utils.setHeader(_token.value.toString()));
 
         if (response.statusCode == 200) {
@@ -73,7 +73,8 @@ class AdminFeesController extends GetxController {
 
           if (feesAdminAddPaymentModel.value.bankAccounts!.isNotEmpty) {
             selectedBank.value =
-                feesAdminAddPaymentModel.value.bankAccounts?.first ?? BankAccount();
+                feesAdminAddPaymentModel.value.bankAccounts?.first ??
+                    BankAccount();
           }
 
           feesAdminAddPaymentModel.value.paymentMethods
@@ -217,7 +218,7 @@ class AdminFeesController extends GetxController {
           log(data.toString());
         }
       }).catchError((error) {
-        if (error is dio.DioError) {
+        if (error is dio.DioException) {
           isPaymentProcessing(false);
 
           final errorData = Map<String, dynamic>.from(error.response?.data);
@@ -226,11 +227,10 @@ class AdminFeesController extends GetxController {
 
           errorData["errors"].forEach((key, messages) {
             for (var message in messages) {
-              combinedMessage = combinedMessage + "$message\n";
+              combinedMessage = "$combinedMessage$message\n";
             }
           });
           CustomSnackBar().snackBarError(combinedMessage);
-
         }
       });
     } finally {}

@@ -19,7 +19,8 @@ import 'package:edus_tutor/utils/model/HomeworkEvaluation.dart';
 import 'package:edus_tutor/utils/widget/HomeWorkEvaluationDetailsRow.dart';
 
 class HomeworkEvaluationScreen extends StatefulWidget {
-  const HomeworkEvaluationScreen({Key? key, this.classId, this.sectionId, this.homeworkId}) : super(key: key);
+  const HomeworkEvaluationScreen(
+      {super.key, this.classId, this.sectionId, this.homeworkId});
 
   final dynamic classId;
   final dynamic sectionId;
@@ -46,11 +47,13 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
       setState(() {
         _token = value ?? '';
         evaluations = fetchEvaluationList(
-            int.tryParse(widget.classId.toString())??0,
-            int.tryParse(widget.sectionId.toString())??0,
-            int.tryParse(widget.homeworkId.toString())??0);
+            int.tryParse(widget.classId.toString()) ?? 0,
+            int.tryParse(widget.sectionId.toString()) ?? 0,
+            int.tryParse(widget.homeworkId.toString()) ?? 0);
         homeWorks = fetchHomeworkDetails(
-            int.tryParse(widget.classId)??0, int.tryParse(widget.sectionId)??0, int.tryParse(widget.homeworkId.toString())??0);
+            int.tryParse(widget.classId) ?? 0,
+            int.tryParse(widget.sectionId) ?? 0,
+            int.tryParse(widget.homeworkId.toString()) ?? 0);
       });
     });
   }
@@ -67,12 +70,13 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
             FutureBuilder<StudentHomeworkEvaluation>(
               future: homeWorks,
               builder: (context, snapshot) {
-                if (snapshot.hasData && snapshot != null) {
+                if (snapshot.hasData) {
                   return StatefulBuilder(builder: (context, state) {
                     state(() {
                       totalMarks = snapshot.data?.marks;
                     });
-                    return HomeWorkEvaluationDetailsRow(snapshot.data ?? StudentHomeworkEvaluation());
+                    return HomeWorkEvaluationDetailsRow(
+                        snapshot.data ?? StudentHomeworkEvaluation());
                   });
                 } else {
                   return const Center(
@@ -94,11 +98,12 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
             Expanded(
               child: StreamBuilder<StudentEvaluationList>(
                 stream: Stream.periodic((const Duration(seconds: 5))).asyncMap(
-                    (event) => fetchEvaluationList( int.tryParse(widget.classId.toString())??0,
-                        int.tryParse(widget.sectionId.toString())??0,
-                        int.tryParse(widget.homeworkId.toString())??0)),
+                    (event) => fetchEvaluationList(
+                        int.tryParse(widget.classId.toString()) ?? 0,
+                        int.tryParse(widget.sectionId.toString()) ?? 0,
+                        int.tryParse(widget.homeworkId.toString()) ?? 0)),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData && snapshot != null) {
+                  if (snapshot.hasData) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -107,17 +112,21 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                         ),
                         Text(
                           'Students',
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                              fontWeight: FontWeight.w500,
-                              fontSize: ScreenUtil().setSp(14),
-                              decoration: TextDecoration.underline),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: ScreenUtil().setSp(14),
+                                  decoration: TextDecoration.underline),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Expanded(
                           child: ListView.builder(
-                            itemCount: snapshot.data?.studentEvaluation.length ?? 0,
+                            itemCount:
+                                snapshot.data?.studentEvaluation.length ?? 0,
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
@@ -142,7 +151,8 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                                               snapshot
                                                       .data
                                                       ?.studentEvaluation[index]
-                                                      .studentName ?? 'N/A',
+                                                      .studentName ??
+                                                  'N/A',
                                               maxLines: 1,
                                               style: Theme.of(context)
                                                   .textTheme
@@ -166,43 +176,47 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                                                 child: InkWell(
                                                   onTap: () {
                                                     Navigator.of(context).push(
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                EvaluateScreen(
-                                                                  totalMarks:
-                                                                      totalMarks,
-                                                                  marks: snapshot
-                                                                      .data
-                                                                      ?.studentEvaluation[
-                                                                          index]
-                                                                      .marks,
-                                                                  teacherComment: snapshot
-                                                                      .data
-                                                                      ?.studentEvaluation[
-                                                                          index]
-                                                                      .teacherComments,
-                                                                  status: snapshot
-                                                                      .data
-                                                                      ?.studentEvaluation[
-                                                                          index]
-                                                                      .completeStatus,
-                                                                  studentId: snapshot
-                                                                      .data
-                                                                      ?.studentEvaluation[
-                                                                          index]
-                                                                      .studentId,
-                                                                  homeworkId: snapshot
-                                                                      .data
-                                                                      ?.studentEvaluation[
-                                                                          index]
-                                                                      .homeworkId,
-                                                                  files: snapshot
-                                                                      .data
-                                                                      ?.studentEvaluation[
-                                                                          index]
-                                                                      .file,
-                                                                  studentName: '${snapshot.data?.studentEvaluation[index].studentName}' + '\'s Homework',
-                                                                ),),);
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            EvaluateScreen(
+                                                          totalMarks:
+                                                              totalMarks,
+                                                          marks: snapshot
+                                                              .data
+                                                              ?.studentEvaluation[
+                                                                  index]
+                                                              .marks,
+                                                          teacherComment: snapshot
+                                                              .data
+                                                              ?.studentEvaluation[
+                                                                  index]
+                                                              .teacherComments,
+                                                          status: snapshot
+                                                              .data
+                                                              ?.studentEvaluation[
+                                                                  index]
+                                                              .completeStatus,
+                                                          studentId: snapshot
+                                                              .data
+                                                              ?.studentEvaluation[
+                                                                  index]
+                                                              .studentId,
+                                                          homeworkId: snapshot
+                                                              .data
+                                                              ?.studentEvaluation[
+                                                                  index]
+                                                              .homeworkId,
+                                                          files: snapshot
+                                                              .data
+                                                              ?.studentEvaluation[
+                                                                  index]
+                                                              .file,
+                                                          studentName:
+                                                              '${snapshot.data?.studentEvaluation[index].studentName}'
+                                                              '\'s Homework',
+                                                        ),
+                                                      ),
+                                                    );
                                                   },
                                                   child: Text(
                                                     'Evaluate',
@@ -240,7 +254,8 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                                                                       FontWeight
                                                                           .w500),
                                                         ),
-                                                        const SizedBox(height: 2.0),
+                                                        const SizedBox(
+                                                            height: 2.0),
                                                         Text(
                                                           snapshot
                                                                           .data
@@ -261,12 +276,13 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                                                                       index]
                                                                   .marks,
                                                           maxLines: 1,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .headlineMedium,
+                                                          style: Theme.of(
+                                                                  context)
+                                                              .textTheme
+                                                              .headlineMedium,
                                                         ),
-                                                        const SizedBox(height: 10.0),
+                                                        const SizedBox(
+                                                            height: 10.0),
                                                       ],
                                                     ),
                                                   ),
@@ -287,7 +303,8 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                                                                       FontWeight
                                                                           .w500),
                                                         ),
-                                                        const SizedBox(height: 2.0),
+                                                        const SizedBox(
+                                                            height: 2.0),
                                                         Text(
                                                           snapshot
                                                                       .data
@@ -305,12 +322,13 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                                                                   ? "Not Good"
                                                                   : "Good",
                                                           maxLines: 1,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .headlineMedium,
+                                                          style: Theme.of(
+                                                                  context)
+                                                              .textTheme
+                                                              .headlineMedium,
                                                         ),
-                                                        const SizedBox(height: 10.0),
+                                                        const SizedBox(
+                                                            height: 10.0),
                                                       ],
                                                     ),
                                                   ),
@@ -331,7 +349,8 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                                                                       FontWeight
                                                                           .w500),
                                                         ),
-                                                        const SizedBox(height: 2.0),
+                                                        const SizedBox(
+                                                            height: 2.0),
                                                         Text(
                                                           snapshot
                                                                       .data
@@ -349,12 +368,13 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                                                                   ? "Completed"
                                                                   : "Not Complete",
                                                           maxLines: 1,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .headlineMedium,
+                                                          style: Theme.of(
+                                                                  context)
+                                                              .textTheme
+                                                              .headlineMedium,
                                                         ),
-                                                        const SizedBox(height: 10.0),
+                                                        const SizedBox(
+                                                            height: 10.0),
                                                       ],
                                                     ),
                                                   ),
@@ -395,34 +415,35 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                                                         .headlineMedium,
                                                   )
                                                 : InkWell(
-                                                  onTap: () {
-                                                    Navigator.of(context).push(
-                                                        MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    UploadedFilesView(
-                                                                      files: snapshot
-                                                                          .data
-                                                                          ?.studentEvaluation[index]
-                                                                          .file,
-                                                                      fileName:
-                                                                          '${snapshot.data?.studentEvaluation[index].studentName}' + '\'s attached file',
-                                                                    )));
-                                                  },
-                                                  child: Text(
-                                                    'View',
-                                                    textAlign:
-                                                        TextAlign.center,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .headlineMedium
-                                                        ?.copyWith(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500,
-                                                            fontSize: 15),
+                                                    onTap: () {
+                                                      Navigator.of(context).push(
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  UploadedFilesView(
+                                                                    files: snapshot
+                                                                        .data
+                                                                        ?.studentEvaluation[
+                                                                            index]
+                                                                        .file,
+                                                                    fileName:
+                                                                        '${snapshot.data?.studentEvaluation[index].studentName}'
+                                                                        '\'s attached file',
+                                                                  )));
+                                                    },
+                                                    child: Text(
+                                                      'View',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headlineMedium
+                                                          ?.copyWith(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 15),
+                                                    ),
                                                   ),
-                                                ),
                                           ],
                                         ),
                                       ),
@@ -430,8 +451,8 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
                                   ),
                                   Container(
                                     height: 0.5,
-                                    margin:
-                                        const EdgeInsets.only(bottom: 5.0, top: 5.0),
+                                    margin: const EdgeInsets.only(
+                                        bottom: 5.0, top: 5.0),
                                     decoration: const BoxDecoration(
                                       gradient: LinearGradient(
                                           begin: Alignment.centerRight,
@@ -473,7 +494,8 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
-      return StudentEvaluationList.fromJson(jsonData['data']['student_homeworks']);
+      return StudentEvaluationList.fromJson(
+          jsonData['data']['student_homeworks']);
     } else {
       throw Exception('failed to load');
     }

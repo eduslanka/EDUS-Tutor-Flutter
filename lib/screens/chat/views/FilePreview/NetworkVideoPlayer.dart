@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class NetworkVideoPlayerView extends StatefulWidget {
   final String? videoUrl;
 
-  const NetworkVideoPlayerView({Key? key, this.videoUrl}) : super(key: key);
+  const NetworkVideoPlayerView({super.key, this.videoUrl});
 
   @override
   _NetworkVideoPlayerViewState createState() => _NetworkVideoPlayerViewState();
@@ -66,7 +66,9 @@ class _NetworkVideoPlayerViewState extends State<NetworkVideoPlayerView> {
                   children: <Widget>[
                     Expanded(
                       child: BetterPlayer(
-                        controller: _betterPlayerController ?? BetterPlayerController(BetterPlayerConfiguration()),
+                        controller: _betterPlayerController ??
+                            BetterPlayerController(
+                                const BetterPlayerConfiguration()),
                         key: _betterPlayerKey,
                       ),
                     ),

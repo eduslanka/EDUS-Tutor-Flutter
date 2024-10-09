@@ -25,7 +25,7 @@ import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import 'LeaveListScreen.dart';
 
 class ApplyLeaveScreen extends StatefulWidget {
-  const ApplyLeaveScreen({Key? key}) : super(key: key);
+  const ApplyLeaveScreen({super.key});
 
   @override
   _ApplyLeaveScreenState createState() => _ApplyLeaveScreenState();
@@ -116,9 +116,12 @@ class _ApplyLeaveScreenState extends State<ApplyLeaveScreen> {
                       decoration: Utils.gradientBtnDecoration,
                       child: Text(
                         "Save".tr,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            color: Colors.white,
-                            fontSize: ScreenUtil().setSp(14)),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                color: Colors.white,
+                                fontSize: ScreenUtil().setSp(14)),
                       ),
                     ),
                   ),
@@ -137,10 +140,10 @@ class _ApplyLeaveScreenState extends State<ApplyLeaveScreen> {
                   },
                 )
               : Text(
-                "No Leave type Available. Please check back later".tr,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
+                  "No Leave type Available. Please check back later".tr,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
           isResponse == true
               ? const LinearProgressIndicator(
                   backgroundColor: Colors.transparent,
@@ -436,7 +439,8 @@ class _ApplyLeaveScreenState extends State<ApplyLeaveScreen> {
                         decoration: InputDecoration(
                             hintText: "Reason".tr,
                             labelText: "Reason".tr,
-                            labelStyle: Theme.of(context).textTheme.headlineMedium,
+                            labelStyle:
+                                Theme.of(context).textTheme.headlineMedium,
                             errorStyle: const TextStyle(
                                 color: Colors.blue, fontSize: 15.0),
                             border: OutlineInputBorder(
@@ -579,8 +583,14 @@ class _ApplyLeaveScreenState extends State<ApplyLeaveScreen> {
   }
 
   void addLeaveData() async {
-    response = await dio.get(EdusApi.sendLeaveData(applyDate ?? '', '$leaveId',
-        fromDate ?? '', toDate ?? '', _id ?? '', reasonController.text, _file?.path ?? ''));
+    response = await dio.get(EdusApi.sendLeaveData(
+        applyDate ?? '',
+        '$leaveId',
+        fromDate ?? '',
+        toDate ?? '',
+        _id ?? '',
+        reasonController.text,
+        _file?.path ?? ''));
     if (response?.statusCode == 200) {
       Utils.showToast('Leave sent successful'.tr);
       sentNotificationTo();

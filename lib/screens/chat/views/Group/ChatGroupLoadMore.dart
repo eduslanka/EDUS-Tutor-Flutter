@@ -27,10 +27,8 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
 
   final Dio _dio = Dio();
 
-
   @override
   bool get hasMore => _hasMore;
-
 
   @override
   Future<bool> refresh([bool clearBeforeRequest = false]) async {
@@ -48,9 +46,9 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
   Future<bool> loadData([bool isloadMoreAction = false]) async {
     bool isSuccess = false;
     try {
-      String _token = "";
+      String token = "";
       await Utils.getStringValue('token').then((value) async {
-        _token = value ?? '';
+        token = value ?? '';
         //to show loading more clearly, in your app,remove this
         // await Future.delayed(Duration(milliseconds: 500));
         Response result;
@@ -59,7 +57,7 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
           result = await _dio.get(
             "${EdusApi.chatGroupOpen}/$groupId",
             options: Options(
-              headers: Utils.setHeader(_token.toString()),
+              headers: Utils.setHeader(token.toString()),
             ),
           );
         } else {
@@ -73,7 +71,7 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
               },
             ),
             options: Options(
-              headers: Utils.setHeader(_token.toString()),
+              headers: Utils.setHeader(token.toString()),
             ),
           );
           // Logger.net(
@@ -196,7 +194,6 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
 
         // Logger.debug('NOT NULL CHECK $msgCheckResultData');
 
-
         data = ChatGroupCheckMsgModel.fromJson(response.data);
         insert(0, data.messages?.entries.first.value ?? GroupThread());
 
@@ -220,7 +217,6 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
       Map jsonData = {
         "thread_id": threadId,
       };
-
 
       final response = await _dio.post(
         EdusApi.chatGroupMessageDelete,
@@ -246,7 +242,6 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
   }
 
   Future submitText({Map? data, bool? hasFile, FormData? formData}) async {
-
     try {
       final response = await _dio.post(
         EdusApi.submitChatGroupText,
@@ -259,8 +254,7 @@ class ChatGroupLoadMore extends LoadingMoreBase<GroupThread> {
       if (response.statusCode == 200) {
         if (_chatController.chatSettings.value.chatSettings?.chatMethod !=
             'pusher') {
-          final msgCheckResultData =
-              Map<String, dynamic>.from(response.data);
+          final msgCheckResultData = Map<String, dynamic>.from(response.data);
           final thread = GroupThread.fromJson(msgCheckResultData['thread']);
 
           insert(0, thread);

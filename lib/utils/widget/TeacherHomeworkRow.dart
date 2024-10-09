@@ -27,7 +27,7 @@ import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 class TeacherHomeworkRow extends StatefulWidget {
   Homework homework;
 
-  TeacherHomeworkRow(this.homework, {Key? key}) : super(key: key);
+  TeacherHomeworkRow(this.homework, {super.key});
 
   @override
   _TeacherHomeworkRowState createState() => _TeacherHomeworkRowState();
@@ -238,7 +238,7 @@ class _TeacherHomeworkRowState extends State<TeacherHomeworkRow> {
                             ),
                           ),
                           Text(
-                            "Marks: " + '${widget.homework.marks}',
+                            "Marks: " '${widget.homework.marks}',
                             style: Theme.of(context).textTheme.headlineSmall,
                             maxLines: 1,
                           ),
@@ -513,7 +513,7 @@ class _TeacherHomeworkRowState extends State<TeacherHomeworkRow> {
         received = ((receivedBytes / totalBytes) * 100);
         setState(() {
           progress =
-              ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";
+              "${((receivedBytes / totalBytes) * 100).toStringAsFixed(0)}%";
         });
         if (received == 100.0) {
           if (url.contains('.pdf')) {

@@ -15,7 +15,7 @@ import 'package:edus_tutor/utils/model/AdminFees.dart';
 import 'package:edus_tutor/utils/widget/Admin_Fees_List_Row.dart';
 
 class AdminFeeListView extends StatefulWidget {
-  const AdminFeeListView({Key? key}) : super(key: key);
+  const AdminFeeListView({super.key});
 
   @override
   _AdminFeeListViewState createState() => _AdminFeeListViewState();
@@ -54,7 +54,8 @@ class _AdminFeeListViewState extends State<AdminFeeListView> {
                 },
                 itemCount: snapshot.data?.adminFees.length ?? 0,
                 itemBuilder: (context, index) {
-                  return AdminFeesListRow(snapshot.data?.adminFees[index] ?? AdminFees());
+                  return AdminFeesListRow(
+                      snapshot.data?.adminFees[index] ?? AdminFees());
                 },
               );
             } else {

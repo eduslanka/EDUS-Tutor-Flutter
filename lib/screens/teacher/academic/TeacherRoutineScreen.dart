@@ -23,14 +23,15 @@ import '../../../model/teachers_weekly_class.dart';
 
 // ignore: must_be_immutable
 class SampleScreemTecherTimeTable extends StatefulWidget {
-  final bool  isHome;
-  const SampleScreemTecherTimeTable({Key? key,required this.isHome}) : super(key: key);
+  final bool isHome;
+  const SampleScreemTecherTimeTable({super.key, required this.isHome});
 
   @override
   State<SampleScreemTecherTimeTable> createState() => _TeacherRoutineState();
 }
 
-class _TeacherRoutineState extends State<SampleScreemTecherTimeTable> with SingleTickerProviderStateMixin {
+class _TeacherRoutineState extends State<SampleScreemTecherTimeTable>
+    with SingleTickerProviderStateMixin {
   // List<String> weeks = AppFunction.weeks;
 
   // var _token;
@@ -58,8 +59,6 @@ class _TeacherRoutineState extends State<SampleScreemTecherTimeTable> with Singl
   //   });
   //   return data;
   // }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -182,8 +181,7 @@ class _TeacherRoutineState extends State<SampleScreemTecherTimeTable> with Singl
   //         ),
   //       );
   // }
-  
-  
+
   TabController? _tabController;
   final UserController _userController = Get.put(UserController());
   List<String> weeks = AppFunction.weeks;
@@ -192,22 +190,23 @@ class _TeacherRoutineState extends State<SampleScreemTecherTimeTable> with Singl
   bool isLoading = true;
   Future<TeacherWeeklyClassResponse> getRoutine() async {
     try {
-   _token=   await Utils.getStringValue('token');
- 
-      final response = await http.get(Uri.parse(EdusApi.techersWeeklyClass),
-          headers: Utils.setHeader(_token.toString()),);
+      _token = await Utils.getStringValue('token');
+
+      final response = await http.get(
+        Uri.parse(EdusApi.techersWeeklyClass),
+        headers: Utils.setHeader(_token.toString()),
+      );
 
       //  print(EdusApi.routineView(widget.id, "student", recordId: sectionId));
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
         var data = TeacherWeeklyClassResponse.fromJson(jsonResponse);
-      
+
         return data;
       } else {
-       
         throw Exception('Failed to load post');
       }
-    } catch (e,t) {
+    } catch (e, t) {
       debugPrint(t.toString());
       debugPrint(e.toString());
       throw Exception(e.toString());
@@ -261,313 +260,303 @@ class _TeacherRoutineState extends State<SampleScreemTecherTimeTable> with Singl
 
   @override
   void didChangeDependencies() async {
- //   _userController.selectedRecord.value = _userController.studentRecord.value.records?.first ?? Record();
+    //   _userController.selectedRecord.value = _userController.studentRecord.value.records?.first ?? Record();
     await Utils.getStringValue('token').then((value) {
       setState(() {
         _token = value ?? '';
-        routine =  getRoutine();
+        routine = getRoutine();
       });
     });
     super.didChangeDependencies();
   }
-   Padding routinBody() {
+
+  Padding routinBody() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child:  Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 10),
-                Expanded(
-                  child: FutureBuilder<TeacherWeeklyClassResponse>(
-                    future: routine,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(
-                            child: CupertinoActivityIndicator());
-                      } else {
-                        if (snapshot.hasData) {
-                          if (snapshot.data!.data.weeklyClass.isNotEmpty) {
-                            return Column(
-                              children: [
-                                PreferredSize(
-                                  preferredSize: const Size.fromHeight(0),
-                                  child: TabBar(
-                                    isScrollable: true,
-                                    controller: _tabController,
-                                    indicator: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2.0),
-                                      gradient: const LinearGradient(
-                                        colors: [
-                                          Colors.lightBlue,
-                                          Color(0xff053EFF)
-                                        ],
-                                      ),
-                                    ),
-                                    labelColor: Colors.white,
-                                    onTap: (index) {
-                                      setState(() {
-                                        routine = getRoutine();
-                                      });
-                                    },
-                                    unselectedLabelColor:
-                                        const Color(0xFF415094),
-                                    indicatorSize: TabBarIndicatorSize.tab,
-                                    automaticIndicatorColorAdjustment: true,
-                                    tabs: List.generate(
-                                      weeks.length,
-                                      (index) => Tab(
-                                        height: 24,
-                                        text: weeks[index]
-                                            .substring(0, 3)
-                                            .toUpperCase(),
-                                      ),
-                                    ),
-                                  ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          Expanded(
+            child: FutureBuilder<TeacherWeeklyClassResponse>(
+              future: routine,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CupertinoActivityIndicator());
+                } else {
+                  if (snapshot.hasData) {
+                    if (snapshot.data!.data.weeklyClass.isNotEmpty) {
+                      return Column(
+                        children: [
+                          PreferredSize(
+                            preferredSize: const Size.fromHeight(0),
+                            child: TabBar(
+                              isScrollable: true,
+                              controller: _tabController,
+                              indicator: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2.0),
+                                gradient: const LinearGradient(
+                                  colors: [Colors.lightBlue, Color(0xff053EFF)],
                                 ),
-                                const SizedBox(height: 20),
-                                Expanded(
-                                  child: PreferredSize(
-                                    preferredSize: const Size.fromHeight(0),
-                                    child: TabBarView(
-                                      controller: _tabController,
-                                      children: List.generate(
-                                        weeks.length,
-                                        (index) {
-                                          Map<String, List<TeachersClassDetail>>
-                                              classRoutines =
-                                              snapshot.data!.data.weeklyClass;
+                              ),
+                              labelColor: Colors.white,
+                              onTap: (index) {
+                                setState(() {
+                                  routine = getRoutine();
+                                });
+                              },
+                              unselectedLabelColor: const Color(0xFF415094),
+                              indicatorSize: TabBarIndicatorSize.tab,
+                              automaticIndicatorColorAdjustment: true,
+                              tabs: List.generate(
+                                weeks.length,
+                                (index) => Tab(
+                                  height: 24,
+                                  text: weeks[index]
+                                      .substring(0, 3)
+                                      .toUpperCase(),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Expanded(
+                            child: PreferredSize(
+                              preferredSize: const Size.fromHeight(0),
+                              child: TabBarView(
+                                controller: _tabController,
+                                children: List.generate(
+                                  weeks.length,
+                                  (index) {
+                                    Map<String, List<TeachersClassDetail>>
+                                        classRoutines =
+                                        snapshot.data!.data.weeklyClass;
 
-                                          return classRoutines.isEmpty
-                                              ? Utils.noDataWidget()
-                                              : Container(
-                                                  margin: const EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: ListView.separated(
-                                                    physics:
-                                                        const BouncingScrollPhysics(),
-                                                    itemCount: classRoutines[weeks[
-                                                                _tabController!
-                                                                    .index]]
-                                                            ?.length ??
-                                                        1,
-                                                    shrinkWrap: true,
-                                                    separatorBuilder:
-                                                        (context, index) {
-                                                      return Container(
-                                                        height: 0.2,
-                                                        margin: const EdgeInsets
-                                                            .symmetric(
-                                                            vertical: 10),
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          gradient:
-                                                              LinearGradient(
-                                                            begin: Alignment
-                                                                .centerRight,
-                                                            end: Alignment
-                                                                .centerLeft,
-                                                            colors: [
-                                                              Color(0xff053EFF),
-                                                              Color(0xff053EFF)
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                    itemBuilder:
-                                                        (context, rowIndex) {
-                                                      final classDetail =
-                                                          classRoutines[weeks[
-                                                                  _tabController!
-                                                                      .index]]
-                                                              ?[rowIndex];
-
-                                                      return classDetail
-                                                                  ?.topic ==
-                                                              null
-                                                          ? Utils.noDataWidget()
-                                                          : Column(
-                                                              children: [
-                                                                Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'Time'.tr +
-                                                                          ":",
-                                                                      style: Theme.of(
-                                                                              context)
-                                                                          .textTheme
-                                                                          .headlineMedium
-                                                                          ?.copyWith(
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                          ),
-                                                                    ),
-                                                                    const SizedBox(
-                                                                        width:
-                                                                            5),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Text(
-                                                                        classDetail?.startTime !=
-                                                                                null
-                                                                            ? '${classDetail?.startTime} - ${classDetail?.endTime}'
-                                                                            : "",
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .headlineMedium
-                                                                            ?.copyWith(
-                                                                              fontWeight: FontWeight.normal,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                const SizedBox(
-                                                                    height: 10),
-                                                                Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'Topic'.tr +
-                                                                          ":",
-                                                                      style: Theme.of(
-                                                                              context)
-                                                                          .textTheme
-                                                                          .headlineMedium
-                                                                          ?.copyWith(
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                          ),
-                                                                    ),
-                                                                    const SizedBox(
-                                                                        width:
-                                                                            5),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Text(
-                                                                        classDetail?.topic ??
-                                                                            '',
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .headlineMedium
-                                                                            ?.copyWith(
-                                                                              fontWeight: FontWeight.normal,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                const SizedBox(
-                                                                    height: 10),
-                                                                Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'Status'.tr +
-                                                                          ":",
-                                                                      style: Theme.of(
-                                                                              context)
-                                                                          .textTheme
-                                                                          .headlineMedium
-                                                                          ?.copyWith(
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                          ),
-                                                                    ),
-                                                                    const SizedBox(
-                                                                        width:
-                                                                            5),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Text(
-                                                                        classDetail?.status ??
-                                                                            '',
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .headlineMedium
-                                                                            ?.copyWith(
-                                                                              fontWeight: FontWeight.normal,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                const SizedBox(
-                                                                    height: 10),
-                                                                Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'Section'
-                                                                              .tr +
-                                                                          ":",
-                                                                      style: Theme.of(
-                                                                              context)
-                                                                          .textTheme
-                                                                          .headlineMedium
-                                                                          ?.copyWith(
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                          ),
-                                                                    ),
-                                                                    const SizedBox(
-                                                                        width:
-                                                                            5),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Text(
-                                                                        classDetail?.classSection ??
-                                                                            '',
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .headlineMedium
-                                                                            ?.copyWith(
-                                                                              fontWeight: FontWeight.normal,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                const SizedBox(
-                                                                    height: 10),
-                                                              
-                                                              ],
-                                                            );
-                                                    },
+                                    return classRoutines.isEmpty
+                                        ? Utils.noDataWidget()
+                                        : Container(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 10),
+                                            child: ListView.separated(
+                                              physics:
+                                                  const BouncingScrollPhysics(),
+                                              itemCount: classRoutines[weeks[
+                                                          _tabController!
+                                                              .index]]
+                                                      ?.length ??
+                                                  1,
+                                              shrinkWrap: true,
+                                              separatorBuilder:
+                                                  (context, index) {
+                                                return Container(
+                                                  height: 0.2,
+                                                  margin: const EdgeInsets
+                                                      .symmetric(vertical: 10),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    gradient: LinearGradient(
+                                                      begin:
+                                                          Alignment.centerRight,
+                                                      end: Alignment.centerLeft,
+                                                      colors: [
+                                                        Color(0xff053EFF),
+                                                        Color(0xff053EFF)
+                                                      ],
+                                                    ),
                                                   ),
                                                 );
-                                        },
-                                      ),
-                                    ),
-                                  ),
+                                              },
+                                              itemBuilder: (context, rowIndex) {
+                                                final classDetail =
+                                                    classRoutines[weeks[
+                                                        _tabController!
+                                                            .index]]?[rowIndex];
+
+                                                return classDetail?.topic ==
+                                                        null
+                                                    ? Utils.noDataWidget()
+                                                    : Column(
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                "${'Time'.tr}:",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .headlineMedium
+                                                                    ?.copyWith(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                              ),
+                                                              const SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  classDetail?.startTime !=
+                                                                          null
+                                                                      ? '${classDetail?.startTime} - ${classDetail?.endTime}'
+                                                                      : "",
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .headlineMedium
+                                                                      ?.copyWith(
+                                                                        fontWeight:
+                                                                            FontWeight.normal,
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 10),
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                "${'Topic'.tr}:",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .headlineMedium
+                                                                    ?.copyWith(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                              ),
+                                                              const SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  classDetail
+                                                                          ?.topic ??
+                                                                      '',
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .headlineMedium
+                                                                      ?.copyWith(
+                                                                        fontWeight:
+                                                                            FontWeight.normal,
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 10),
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                "${'Status'.tr}:",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .headlineMedium
+                                                                    ?.copyWith(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                              ),
+                                                              const SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  classDetail
+                                                                          ?.status ??
+                                                                      '',
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .headlineMedium
+                                                                      ?.copyWith(
+                                                                        fontWeight:
+                                                                            FontWeight.normal,
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 10),
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                "${'Section'.tr}:",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .headlineMedium
+                                                                    ?.copyWith(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                              ),
+                                                              const SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  classDetail
+                                                                          ?.classSection ??
+                                                                      '',
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .headlineMedium
+                                                                      ?.copyWith(
+                                                                        fontWeight:
+                                                                            FontWeight.normal,
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 10),
+                                                        ],
+                                                      );
+                                              },
+                                            ),
+                                          );
+                                  },
                                 ),
-                              ],
-                            );
-                          } else {
-                            return Utils.noDataWidget();
-                          }
-                        } else if (snapshot.hasError) {
-                          return Utils.noDataWidget();
-                        } else {
-                          return Utils.noDataWidget();
-                        }
-                      }
-                    },
-                  ),
-                ),
-              ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Utils.noDataWidget();
+                    }
+                  } else if (snapshot.hasError) {
+                    return Utils.noDataWidget();
+                  } else {
+                    return Utils.noDataWidget();
+                  }
+                }
+              },
             ),
+          ),
+        ],
+      ),
     );
   }
-
 }

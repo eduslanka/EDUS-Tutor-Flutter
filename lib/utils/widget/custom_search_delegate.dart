@@ -156,7 +156,7 @@ class SearchPage<T> extends SearchDelegate<T> {
           // First we collect all [String] representation of each [item]
           (item) => filter(item)
               // Then, transforms all results to lower case letters
-              .map((value) => value?.toLowerCase()?.trim())
+              .map((value) => value.toLowerCase().trim())
               // Finally, checks wheters any coincide with the cleaned query
               // Checks wheter the [startsWith] or [endsWith] are 'true'
               .any(

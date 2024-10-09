@@ -38,8 +38,7 @@ class ChatUser {
         avatarUrl: json["avatar_url"] == null || json["avatar_url"] == ""
             ? null
             : json["avatar_url"],
-        blockedByMe:
-            json["blocked_by_me"],
+        blockedByMe: json["blocked_by_me"],
         block: json["blocked"] ?? false,
         lastMessage: json["last_message"],
         roles: json["roles"] == null ? null : ChatRoles.fromJson(json["roles"]),
@@ -60,7 +59,7 @@ class ChatUser {
         "blocked_by_me": blockedByMe,
         "block": block,
         "last_message": lastMessage,
-        "roles": roles == null ? null : roles?.toJson(),
+        "roles": roles?.toJson(),
         "active_status": activeStatus,
       };
 

@@ -32,7 +32,7 @@ class Profile extends StatefulWidget {
   final String? id;
   final String? image;
 
-  const Profile({Key? key, this.id, this.image}) : super(key: key);
+  const Profile({super.key, this.id, this.image});
 
   @override
   _ProfileState createState() =>
@@ -211,7 +211,7 @@ class _ProfileState extends State<Profile> {
                                   elevation: 0,
                                   title: TabBar(
                                     labelColor: const Color(0xff415094),
-                                    indicatorColor: Color(0xff053EFF),
+                                    indicatorColor: const Color(0xff053EFF),
                                     indicatorWeight: 3,
                                     tabs: tabs,
                                     isScrollable: true,
@@ -574,19 +574,19 @@ class _ProfileState extends State<Profile> {
   String buildGuardianPhoto(Parents parents) {
     if (parents.relation == 'Father') {
       if (parents.fathersPhoto == null || parents.fathersPhoto == '') {
-        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return '${EdusApi.root}public/uploads/staff/demo/staff.jpg';
       } else {
         return "${EdusApi.root}/${parents.fathersPhoto}";
       }
     } else if (parents.relation == 'Mother') {
       if (parents.mothersPhoto == null || parents.mothersPhoto == '') {
-        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return '${EdusApi.root}public/uploads/staff/demo/staff.jpg';
       } else {
         return "${EdusApi.root}/${parents.mothersPhoto}";
       }
     } else {
       if (parents.guardiansPhoto == null || parents.guardiansPhoto == '') {
-        return EdusApi.root + 'public/uploads/staff/demo/staff.jpg';
+        return '${EdusApi.root}public/uploads/staff/demo/staff.jpg';
       } else {
         return "${EdusApi.root}/${parents.guardiansPhoto}";
       }
@@ -930,9 +930,7 @@ class _ProfileState extends State<Profile> {
           height: 5,
         ),
         Text(
-          'Admission'.tr +
-              ' : ' +
-              '${_studentDetails.studentData?.userDetails?.admissionNo.toString()}',
+          '${'Admission'.tr} : ${_studentDetails.studentData?.userDetails?.admissionNo.toString()}',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: Colors.black,
                 fontWeight: FontWeight.normal,
@@ -1007,7 +1005,7 @@ class _ProfileState extends State<Profile> {
           onReceiveProgress: (receivedBytes, totalBytes) async {
         received = ((receivedBytes / totalBytes) * 100);
         progress =
-            ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";
+            "${((receivedBytes / totalBytes) * 100).toStringAsFixed(0)}%";
         if (received == 100.0) {
           if (url.contains('.pdf')) {
             Utils.showToast(
@@ -1042,7 +1040,7 @@ class ParentsDetailsRow extends StatelessWidget {
   final String? title;
   final String? value;
 
-  const ParentsDetailsRow({Key? key, this.title, this.value}) : super(key: key);
+  const ParentsDetailsRow({super.key, this.title, this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -1115,4 +1113,4 @@ class ParentsDetailsRow extends StatelessWidget {
   }
 }
 
-bool isNullOrEmpty(Object o) => o == null || o == "";
+bool isNullOrEmpty(Object o) => o == "";

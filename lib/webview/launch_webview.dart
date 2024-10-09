@@ -14,7 +14,7 @@ class LaunchWebView extends StatefulWidget {
   final String? launchUrl;
   final String? title;
 
-  const LaunchWebView({Key? key, this.launchUrl, this.title}) : super(key: key);
+  const LaunchWebView({super.key, this.launchUrl, this.title});
 
   @override
   _LaunchWebViewState createState() => _LaunchWebViewState();
@@ -83,7 +83,7 @@ class _LaunchWebViewState extends State<LaunchWebView> {
                   image: AssetImage(AppConfig.appToolbarBackground),
                   fit: BoxFit.cover,
                 ),
-                color: Color(0xff053EFF),
+                color: const Color(0xff053EFF),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -196,8 +196,7 @@ class _LaunchWebViewState extends State<LaunchWebView> {
                       urlController.text = this.url;
                     });
                   },
-                  onConsoleMessage: (controller, consoleMessage) {
-                  },
+                  onConsoleMessage: (controller, consoleMessage) {},
                   onCloseWindow: (controller) {},
                 ),
                 progress < 1.0

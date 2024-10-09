@@ -1,10 +1,8 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
 
 // Project imports:
 import '../../src/core/khalti_request_model.dart';
 import '../../src/data/khalti_service.dart';
-import '../../src/helper/model_helpers.dart';
 
 class PaymentInitiationRequestModel extends KhaltiRequestModel {
   PaymentInitiationRequestModel({

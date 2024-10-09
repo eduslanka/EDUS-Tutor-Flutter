@@ -34,13 +34,14 @@ class SubjectStudentListAttendance extends StatefulWidget {
   String? token;
 
   SubjectStudentListAttendance(
-      {Key? key, this.classCode,
+      {super.key,
+      this.classCode,
       this.sectionCode,
       this.subjectCode,
       this.selectedSubject,
       this.url,
       this.date,
-      this.token}) : super(key: key);
+      this.token});
 
   @override
   _SubjectStudentListAttendanceState createState() =>
@@ -180,8 +181,7 @@ class _SubjectStudentListAttendanceState
               ),
               TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor:
-                      _isHoliday ? Colors.red : Colors.blueAccent,
+                  backgroundColor: _isHoliday ? Colors.red : Colors.blueAccent,
                 ),
                 onPressed: () async {
                   Map data = {
@@ -201,8 +201,8 @@ class _SubjectStudentListAttendanceState
                                 'attendance_type': _isHoliday ? null : "H",
                               }));
                     }
-                    _attendanceController.attendanceMap.forEach((key, value) {
-                    });
+                    _attendanceController.attendanceMap
+                        .forEach((key, value) {});
 
                     log(data.toString());
                   });
@@ -243,7 +243,8 @@ class _SubjectStudentListAttendanceState
                                   addAutomaticKeepAlives: true,
                                   itemBuilder: (context, index) {
                                     return SubjectStudentAttendanceRow(
-                                      snapshot.data?.attendances[index] ?? SubjectAttendance(),
+                                      snapshot.data?.attendances[index] ??
+                                          SubjectAttendance(),
                                       classCode,
                                       sectionCode,
                                       subjectCode,
@@ -281,8 +282,7 @@ class _SubjectStudentListAttendanceState
                                     };
 
                                     _attendanceController.attendanceMap
-                                        .forEach((key, value) {
-                                    });
+                                        .forEach((key, value) {});
 
                                     await setDefaultAttendance(data);
                                   },
@@ -292,7 +292,7 @@ class _SubjectStudentListAttendanceState
                           ),
                         );
                       } else {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                     },
                   ),
@@ -318,7 +318,7 @@ class _SubjectStudentListAttendanceState
 
       final data = SubjectAttendanceList.fromJson(jsonData['data']);
 
-      if(data.attendances.isNotEmpty){
+      if (data.attendances.isNotEmpty) {
         if (data.attendances.first.attendanceType == "H") {
           setState(() {
             _isHoliday = true;
@@ -346,9 +346,8 @@ class _SubjectStudentListAttendanceState
   }
 
   void sentNotificationToSection() async {
-    final response = await http.get(Uri.parse(
-        EdusApi.sentNotificationToSection('Attendance', 'Attendance sunmitted',
-            '$classCode', '$sectionCode')));
+    final response = await http.get(Uri.parse(EdusApi.sentNotificationToSection(
+        'Attendance', 'Attendance sunmitted', '$classCode', '$sectionCode')));
     if (response.statusCode == 200) {}
   }
 

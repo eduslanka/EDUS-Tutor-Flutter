@@ -9,7 +9,7 @@ import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 import 'StaffListScreen.dart';
 
 class AdminStaffList extends StatefulWidget {
-  const AdminStaffList({Key? key}) : super(key: key);
+  const AdminStaffList({super.key});
 
   @override
   _AdminStaffListState createState() => _AdminStaffListState();

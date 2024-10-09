@@ -10,7 +10,7 @@ import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/screens/chat/models/ChatUser.dart';
 
 class BlockedUsersPage extends StatefulWidget {
-  const BlockedUsersPage({Key? key}) : super(key: key);
+  const BlockedUsersPage({super.key});
 
   @override
   _BlockedUsersPageState createState() => _BlockedUsersPageState();
@@ -53,8 +53,8 @@ class _BlockedUsersPageState extends State<BlockedUsersPage> {
                       separatorBuilder: (context, index) {
                         return const SizedBox(height: 10);
                       },
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       itemBuilder: (context, index) {
                         ChatUser chatUser = chatController.blockedUsers[index];
                         return Container(
@@ -96,7 +96,7 @@ class _BlockedUsersPageState extends State<BlockedUsersPage> {
                               child: Container(
                                 padding: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                    color: Color(0xff053EFF),
+                                    color: const Color(0xff053EFF),
                                     shape: BoxShape.rectangle,
                                     borderRadius: BorderRadius.circular(5)),
                                 child: Text(

@@ -16,7 +16,7 @@ import 'package:edus_tutor/utils/model/Child.dart';
 import 'package:edus_tutor/utils/widget/ChildRow.dart';
 
 class ChildListScreen extends StatefulWidget {
-  const ChildListScreen({Key? key}) : super(key: key);
+  const ChildListScreen({super.key});
 
   @override
   _ChildListScreenState createState() => _ChildListScreenState();

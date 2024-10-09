@@ -27,7 +27,8 @@ class SubjectStudentAttendanceRow extends StatefulWidget {
   String date, token;
 
   SubjectStudentAttendanceRow(this.attendanceStudents, this.mClass,
-      this.mSection, this.mSubject, this.date, this.token, {Key? key}) : super(key: key);
+      this.mSection, this.mSubject, this.date, this.token,
+      {super.key});
 
   @override
   _SubjectStudentAttendanceRowState createState() =>
@@ -77,7 +78,7 @@ class _SubjectStudentAttendanceRowState
     final String image =
         attendanceStudents.photo == null || attendanceStudents.photo == ''
             ? '${AppConfig.domainName}/public/uploads/staff/demo/staff.jpg'
-            : EdusApi.root + '${attendanceStudents.photo}';
+            : '${EdusApi.root}${attendanceStudents.photo}';
     return Column(
       children: <Widget>[
         ListTile(
@@ -115,8 +116,8 @@ class _SubjectStudentAttendanceRowState
                         ? null
                         : attendanceStudents.attendanceType,
                 elevation: 0,
-                unSelectedColor: Color(0xff053EFF),
-                selectedColor: Color(0xff053EFF),
+                unSelectedColor: const Color(0xff053EFF),
+                selectedColor: const Color(0xff053EFF),
                 buttonLables: const [
                   'Present',
                   'Late',
@@ -131,11 +132,11 @@ class _SubjectStudentAttendanceRowState
                 ],
                 buttonTextStyle: ButtonTextStyle(
                     selectedColor: Colors.white,
-                    unSelectedColor:  Colors.black,
+                    unSelectedColor: Colors.black,
                     textStyle: TextStyle(fontSize: ScreenUtil().setSp(14))),
                 radioButtonValue: (value) {
                   setState(() {
-                    atten = '$value';
+                    atten = value;
                     _attendanceController.attendanceMap.update(
                         attendanceStudents.recordId.toString(),
                         (value) => SubjectAttendanceValue(

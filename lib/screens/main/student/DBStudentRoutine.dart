@@ -15,8 +15,7 @@ import '../../../utils/server/LogoutService.dart';
 class DBStudentRoutine extends StatefulWidget {
   final String? id;
   final bool isHome;
-  const DBStudentRoutine({Key? key, this.id, required this.isHome})
-      : super(key: key);
+  const DBStudentRoutine({super.key, this.id, required this.isHome});
 
   @override
   _DBStudentRoutineState createState() => _DBStudentRoutineState();
@@ -278,7 +277,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Time'.tr + ":", style: _textStyle()),
+                    Text("${'Time'.tr}:", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(
@@ -291,7 +290,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Topic'.tr + ":", style: _textStyle()),
+                    Text("${'Topic'.tr}:", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(classDetail.topic ?? '', style: _textStyle()),
@@ -302,7 +301,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Class'.tr + ":", style: _textStyle()),
+                    Text("${'Class'.tr}:", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(classDetail.classSection ?? '',
@@ -314,7 +313,7 @@ class _DBStudentRoutineState extends State<DBStudentRoutine>
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Teacher'.tr + ":", style: _textStyle()),
+                    Text("${'Teacher'.tr}:", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
                       child:

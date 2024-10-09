@@ -19,21 +19,21 @@ import 'ChangePassword.dart';
 import 'contact_us.dart';
 
 class SettingScreen extends StatefulWidget {
-  
-  const SettingScreen({Key? key, }) : super(key: key);
+  const SettingScreen({
+    super.key,
+  });
 
   @override
   _SettingScreenState createState() => _SettingScreenState();
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-
   final LanguageController languageController = Get.put(LanguageController());
 
   List<bool> isSelected = [false, false];
   final GlobalKey _scaffold = GlobalKey();
-String _fullName='';
-String _id='XXXX';
+  String _fullName = '';
+  String _id = 'XXXX';
   @override
   void initState() {
     super.initState();
@@ -44,19 +44,16 @@ String _id='XXXX';
         //Utils.showToast('$value');
       });
     });
-     Utils.getStringValue('full_name').then((value) {
+    Utils.getStringValue('full_name').then((value) {
       setState(() {
-        _fullName=value??'Mr/s x';
+        _fullName = value ?? 'Mr/s x';
       });
-      
     });
-     Utils.getStringValue('id').then((value) {
+    Utils.getStringValue('id').then((value) {
       setState(() {
-        _id=value??'XXXX';
+        _id = value ?? 'XXXX';
       });
-      
     });
-  
   }
 
   @override
@@ -77,7 +74,7 @@ String _id='XXXX';
           //     elevation: 5.0,
           //   ),
           // ),
-    //      BottomLine(),
+          //      BottomLine(),
           // const SizedBox(
           //   height: 10,
           // ),
@@ -124,7 +121,8 @@ String _id='XXXX';
           // const BottomLine(),
           ListTile(
             onTap: () {
-              Navigator.of(context).push(ScaleRoute(page: const ChangePassword()));
+              Navigator.of(context)
+                  .push(ScaleRoute(page: const ChangePassword()));
             },
             leading: CircleAvatar(
               backgroundColor: Colors.blueAccent,
@@ -139,10 +137,15 @@ String _id='XXXX';
               style: Theme.of(context).textTheme.titleLarge,
             ),
             dense: true,
-          ),h16,
+          ),
+          h16,
           ListTile(
             onTap: () {
-              Navigator.of(context).push(ScaleRoute(page:  HelpDeskMenu(stName: _fullName, stId: _id,) ));
+              Navigator.of(context).push(ScaleRoute(
+                  page: HelpDeskMenu(
+                stName: _fullName,
+                stId: _id,
+              )));
             },
             leading: CircleAvatar(
               backgroundColor: Colors.blueAccent,
@@ -158,11 +161,15 @@ String _id='XXXX';
             ),
             dense: true,
           ),
-       //   const BottomLine(),
-        h16,
+          //   const BottomLine(),
+          h16,
           ListTile(
             onTap: () {
-              Navigator.of(context).push(ScaleRoute(page: const LaunchWebView(launchUrl: 'https://edustutor.com/terms-conditions/',title: 'Terms & Conditions',)));
+              Navigator.of(context).push(ScaleRoute(
+                  page: const LaunchWebView(
+                launchUrl: 'https://edustutor.com/terms-conditions/',
+                title: 'Terms & Conditions',
+              )));
             },
             leading: CircleAvatar(
               backgroundColor: Colors.blueAccent,
@@ -178,11 +185,15 @@ String _id='XXXX';
             ),
             dense: true,
           ),
-       //   const BottomLine(),
-        h16,
+          //   const BottomLine(),
+          h16,
           ListTile(
             onTap: () {
-              Navigator.of(context).push(ScaleRoute(page: const LaunchWebView(launchUrl: 'https://edustutor.com/privacy-policy/',title: 'Privacy Policy',)));
+              Navigator.of(context).push(ScaleRoute(
+                  page: const LaunchWebView(
+                launchUrl: 'https://edustutor.com/privacy-policy/',
+                title: 'Privacy Policy',
+              )));
             },
             leading: CircleAvatar(
               backgroundColor: Colors.blueAccent,
@@ -198,12 +209,11 @@ String _id='XXXX';
             ),
             dense: true,
           ),
-      //    const BottomLine(),
-       h16,
- 
-     //     const BottomLine(),
-      
-         
+          //    const BottomLine(),
+          h16,
+
+          //     const BottomLine(),
+
           // ListTile(
           //   onTap: () {
           //     Get.dialog(
@@ -232,7 +242,6 @@ String _id='XXXX';
           //   dense: true,
           // ),
           // const BottomLine(),
-
         ],
       ),
     );
@@ -251,12 +260,26 @@ String _id='XXXX';
             ),
           ),
           ToggleButtons(
-            borderColor: Color(0xff053EFF),
-            fillColor: Color(0xff053EFF),
+            borderColor: const Color(0xff053EFF),
+            fillColor: const Color(0xff053EFF),
             borderWidth: 2,
-            selectedBorderColor: Color(0xff053EFF),
+            selectedBorderColor: const Color(0xff053EFF),
             selectedColor: Colors.white,
             borderRadius: BorderRadius.circular(0),
+            onPressed: (int index) {
+              setState(() {
+                Utils.saveIntValue('locale', index);
+                rebuildAllChildren(context);
+                for (int i = 0; i < isSelected.length; i++) {
+                  if (i == index) {
+                    isSelected[i] = true;
+                  } else {
+                    isSelected[i] = false;
+                  }
+                }
+              });
+            },
+            isSelected: isSelected,
             children: const <Widget>[
               Padding(
                 padding: EdgeInsets.all(8.0),
@@ -279,20 +302,6 @@ String _id='XXXX';
                 ),
               ),
             ],
-            onPressed: (int index) {
-              setState(() {
-                Utils.saveIntValue('locale', index);
-                rebuildAllChildren(context);
-                for (int i = 0; i < isSelected.length; i++) {
-                  if (i == index) {
-                    isSelected[i] = true;
-                  } else {
-                    isSelected[i] = false;
-                  }
-                }
-              });
-            },
-            isSelected: isSelected,
           ),
         ],
       ),
@@ -345,8 +354,8 @@ String _id='XXXX';
                                   languages[index].languageValue;
                               final sharedPref =
                                   await SharedPreferences.getInstance();
-                              sharedPref.setString(
-                                  'language', languages[index].languageValue ?? '');
+                              sharedPref.setString('language',
+                                  languages[index].languageValue ?? '');
                               controller.appLocale =
                                   languages[index].languageValue;
                               Get.updateLocale(

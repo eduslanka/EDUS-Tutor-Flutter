@@ -13,7 +13,7 @@ import 'package:edus_tutor/screens/chat/views/Single/ChatOpenPage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class ChatPeopleSearchPage extends StatefulWidget {
-  const ChatPeopleSearchPage({Key? key}) : super(key: key);
+  const ChatPeopleSearchPage({super.key});
 
   @override
   _ChatPeopleSearchPageState createState() => _ChatPeopleSearchPageState();
@@ -31,7 +31,6 @@ class _ChatPeopleSearchPageState extends State<ChatPeopleSearchPage> {
   _onSearchChanged(String text) {
     if (debounce?.isActive ?? false) debounce?.cancel();
     debounce = Timer(const Duration(milliseconds: 1000), () async {
-
       if (text != '') {
         _chatController.searchClicked.value = true;
         await _chatController.searchUser(text);
@@ -39,7 +38,6 @@ class _ChatPeopleSearchPageState extends State<ChatPeopleSearchPage> {
         _chatController.searchClicked.value = false;
         _chatController.searchUserModel.value.users = null;
       }
-
     });
   }
 
@@ -110,7 +108,8 @@ class _ChatPeopleSearchPageState extends State<ChatPeopleSearchPage> {
                         ),
                       );
                     } else {
-                      if (_chatController.searchUserModel.value.users!.isNotEmpty) {
+                      if (_chatController
+                          .searchUserModel.value.users!.isNotEmpty) {
                         return ListView.separated(
                           separatorBuilder: (context, index) {
                             return const SizedBox(
@@ -121,10 +120,12 @@ class _ChatPeopleSearchPageState extends State<ChatPeopleSearchPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           shrinkWrap: true,
                           itemCount: _chatController
-                              .searchUserModel.value.users?.length ?? 0,
+                                  .searchUserModel.value.users?.length ??
+                              0,
                           itemBuilder: (context, searchIndex) {
-                            ChatUser chatUser = _chatController
-                                .searchUserModel.value.users?[searchIndex] ?? ChatUser();
+                            ChatUser chatUser = _chatController.searchUserModel
+                                    .value.users?[searchIndex] ??
+                                ChatUser();
                             return ListTile(
                               onTap: () async {
                                 await _chatController
@@ -133,9 +134,12 @@ class _ChatPeopleSearchPageState extends State<ChatPeopleSearchPage> {
                                   Get.to(() => ChatOpenPage(
                                       avatarUrl: chatUser.avatarUrl ?? '',
                                       userId: chatUser.id ?? 0,
-                                      onlineStatus: int.tryParse(chatUser.activeStatus.toString())??0,
-                                      chatTitle:
-                                          chatUser.fullName ?? chatUser.username.toString()));
+                                      onlineStatus: int.tryParse(chatUser
+                                              .activeStatus
+                                              .toString()) ??
+                                          0,
+                                      chatTitle: chatUser.fullName ??
+                                          chatUser.username.toString()));
                                 });
                               },
                               dense: true,

@@ -20,7 +20,7 @@ class EditProfile extends StatefulWidget {
   final String? id;
   final Function? updateData;
 
-  const EditProfile({Key? key, this.id, this.updateData}) : super(key: key);
+  const EditProfile({super.key, this.id, this.updateData});
 
   @override
   _EditProfileState createState() => _EditProfileState();
@@ -65,7 +65,7 @@ class _EditProfileState extends State<EditProfile> {
     _token = await Utils.getStringValue('token') ?? '';
     _id = await Utils.getStringValue('id') ?? '';
 
-    DIO.FormData _formData = DIO.FormData.fromMap({
+    DIO.FormData formData = DIO.FormData.fromMap({
       "field_name": fieldName,
       fieldName ?? '': value,
       "id": _userDetails.studentData?.user?.id,
@@ -77,7 +77,7 @@ class _EditProfileState extends State<EditProfile> {
       var response = await _dio.post(
         EdusApi.updateStudent,
         options: DIO.Options(headers: Utils.setHeader(_token)),
-        data: _formData,
+        data: formData,
       );
 
       if (response.data['data']['flag'] == true && _file != null) {
@@ -93,9 +93,9 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   Future pickDocument() async {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery);
+        await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       CroppedFile? croppedFile = await ImageCropper().cropImage(
@@ -213,7 +213,7 @@ class _EditProfileState extends State<EditProfile> {
                     _file == null
                         ? 'Select Image'
                         : _file?.path.split('/').last ?? '',
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                     textAlign: TextAlign.start,
                   ),
                   if (_file != null) h8,

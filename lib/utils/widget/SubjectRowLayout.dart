@@ -9,7 +9,7 @@ import 'package:edus_tutor/utils/model/Subject.dart';
 class SubjectRowLayout extends StatelessWidget {
   Subject subject;
 
-  SubjectRowLayout(this.subject, {Key? key}) : super(key: key);
+  SubjectRowLayout(this.subject, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SubjectRowLayout extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Text(
-                '${subject.subjectName}' + " (${subject.subjectCode})",
+                '${subject.subjectName}' " (${subject.subjectCode})",
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: 16,
                     ),

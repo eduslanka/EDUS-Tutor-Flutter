@@ -4,28 +4,35 @@
 
 import 'dart:convert';
 
-ExamRoutineReport examRoutineReportFromJson(String str) => ExamRoutineReport.fromJson(json.decode(str));
+ExamRoutineReport examRoutineReportFromJson(String str) =>
+    ExamRoutineReport.fromJson(json.decode(str));
 
-String examRoutineReportToJson(ExamRoutineReport data) => json.encode(data.toJson());
+String examRoutineReportToJson(ExamRoutineReport data) =>
+    json.encode(data.toJson());
 
 class ExamRoutineReport {
-    ExamRoutineReport({
-        this.examType,
-        this.examRoutines,
-    });
+  ExamRoutineReport({
+    this.examType,
+    this.examRoutines,
+  });
 
-    ExamType? examType;
-    Map<String, List<ExamRoutine>>? examRoutines;
+  ExamType? examType;
+  Map<String, List<ExamRoutine>>? examRoutines;
 
-    factory ExamRoutineReport.fromJson(Map<String, dynamic> json) => ExamRoutineReport(
+  factory ExamRoutineReport.fromJson(Map<String, dynamic> json) =>
+      ExamRoutineReport(
         examType: ExamType.fromJson(json["examType"]),
-        examRoutines: Map.from(json["exam_routines"]).map((k, v) => MapEntry<String, List<ExamRoutine>>(k, List<ExamRoutine>.from(v.map((x) => ExamRoutine.fromJson(x))))),
-    );
+        examRoutines: Map.from(json["exam_routines"]).map((k, v) =>
+            MapEntry<String, List<ExamRoutine>>(k,
+                List<ExamRoutine>.from(v.map((x) => ExamRoutine.fromJson(x))))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "examType": examType?.toJson(),
-        "exam_routines": Map.from(examRoutines ?? Map()).map((k, v) => MapEntry<String, dynamic>(k, List<dynamic>.from(v.map((x) => x.toJson())))),
-    };
+        "exam_routines": Map.from(examRoutines ?? {}).map((k, v) =>
+            MapEntry<String, dynamic>(
+                k, List<dynamic>.from(v.map((x) => x.toJson())))),
+      };
 }
 
 class ExamRoutine {

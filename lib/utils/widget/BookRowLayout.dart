@@ -11,7 +11,7 @@ import 'package:edus_tutor/utils/model/Book.dart';
 class BookListRow extends StatefulWidget {
   Book book;
 
-  BookListRow(this.book, {Key? key}) : super(key: key);
+  BookListRow(this.book, {super.key});
 
   @override
   // ignore: no_logic_in_create_state
@@ -61,8 +61,8 @@ class _BookListRowState extends State<BookListRow>
                   width: MediaQuery.of(context).size.width,
                   color: Colors.white,
                   child: Padding(
-                    padding:
-                        const EdgeInsets.only(left: 10.0, top: 20.0, right: 10.0),
+                    padding: const EdgeInsets.only(
+                        left: 10.0, top: 20.0, right: 10.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,9 +75,7 @@ class _BookListRowState extends State<BookListRow>
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                             Text(
-                              book.price == null
-                                  ? " "
-                                  : "\$" + book.price.toString(),
+                              book.price == null ? " " : "\$${book.price}",
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                           ],
@@ -85,12 +83,13 @@ class _BookListRowState extends State<BookListRow>
                         book.categoryName == null || book.categoryName == ''
                             ? Container()
                             : Text(
-                          book.categoryName ?? '',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(fontSize: ScreenUtil().setSp(15.0)),
-                        ),
+                                book.categoryName ?? '',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(
+                                        fontSize: ScreenUtil().setSp(15.0)),
+                              ),
                         const SizedBox(
                           height: 10.0,
                         ),
@@ -106,43 +105,57 @@ class _BookListRowState extends State<BookListRow>
                         const SizedBox(
                           height: 10.0,
                         ),
-                        book.author == null || book.author == "" ? Container() : Text.rich(
-                          TextSpan(
-                            text: 'Author:',
-                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                fontSize: ScreenUtil().setSp(14.0),
-                                decoration: TextDecoration.underline),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: "  ${book.author}",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(fontSize: ScreenUtil().setSp(14.0)),
+                        book.author == null || book.author == ""
+                            ? Container()
+                            : Text.rich(
+                                TextSpan(
+                                  text: 'Author:',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium
+                                      ?.copyWith(
+                                          fontSize: ScreenUtil().setSp(14.0),
+                                          decoration: TextDecoration.underline),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: "  ${book.author}",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium
+                                          ?.copyWith(
+                                              fontSize:
+                                                  ScreenUtil().setSp(14.0)),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
                         const SizedBox(
                           height: 10.0,
                         ),
-                        book.publication == null || book.publication == "" ? Container() :  Text.rich(
-                          TextSpan(
-                            text: 'Published by:',
-                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                fontSize: ScreenUtil().setSp(14.0),
-                                decoration: TextDecoration.underline),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: "  ${book.publication}",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(fontSize: ScreenUtil().setSp(14.0)),
+                        book.publication == null || book.publication == ""
+                            ? Container()
+                            : Text.rich(
+                                TextSpan(
+                                  text: 'Published by:',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium
+                                      ?.copyWith(
+                                          fontSize: ScreenUtil().setSp(14.0),
+                                          decoration: TextDecoration.underline),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: "  ${book.publication}",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium
+                                          ?.copyWith(
+                                              fontSize:
+                                                  ScreenUtil().setSp(14.0)),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
                         const SizedBox(
                           height: 10.0,
                         ),
@@ -173,7 +186,9 @@ class _BookListRowState extends State<BookListRow>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           AnimatedBuilder(
             animation: parentAnimation!,
             builder: (context, child) {
@@ -194,7 +209,6 @@ class _BookListRowState extends State<BookListRow>
           AnimatedBuilder(
             animation: parentAnimation!,
             builder: (context, child) {
-
               return Container(
                 transform: Matrix4.translationValues(
                     parentAnimation?.value * width, 0.0, 0.0),
@@ -274,7 +288,8 @@ class _BookListRowState extends State<BookListRow>
                                         book.subjectName == ""
                                     ? 'N/A'
                                     : book.subjectName ?? '',
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                             ],
                           ),
@@ -371,7 +386,9 @@ class _BookListRowState extends State<BookListRow>
                               height: 10.0,
                             ),
                             Text(
-                             book.reckNo != null ? book.reckNo.toString() : "Not Assigned",
+                              book.reckNo != null
+                                  ? book.reckNo.toString()
+                                  : "Not Assigned",
                               maxLines: 1,
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
@@ -394,7 +411,9 @@ class _BookListRowState extends State<BookListRow>
                   colors: [Color(0xff053EFF), Color(0xff053EFF)]),
             ),
           ),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
         ],
       ),
     );

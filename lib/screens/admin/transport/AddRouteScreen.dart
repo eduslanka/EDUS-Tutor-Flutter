@@ -18,7 +18,7 @@ import 'package:edus_tutor/utils/model/Route.dart';
 
 // ignore: must_be_immutable
 class AddRoute extends StatefulWidget {
-  const AddRoute({Key? key}) : super(key: key);
+  const AddRoute({super.key});
 
   @override
   _AddRouteState createState() => _AddRouteState();
@@ -91,7 +91,7 @@ class _AddRouteState extends State<AddRoute> {
                   title: TabBar(
                     labelColor: Colors.black,
                     labelPadding: EdgeInsets.zero,
-                    indicatorColor: Color(0xff053EFF),
+                    indicatorColor: const Color(0xff053EFF),
                     tabs: tabs,
                     indicatorPadding: EdgeInsets.zero,
                     labelStyle: Theme.of(context).textTheme.headlineMedium,
@@ -166,16 +166,20 @@ class _AddRouteState extends State<AddRoute> {
                                   child: Text(
                                     snapshot.data?.routes[index].title ?? '',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ),
                                 Expanded(
                                   flex: 1,
                                   child: Text(
-                                    snapshot.data?.routes[index].far.toString() ?? '',
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    snapshot.data?.routes[index].far
+                                            .toString() ??
+                                        '',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ),
                               ],
@@ -240,7 +244,7 @@ class _AddRouteState extends State<AddRoute> {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       return VehicleRouteList.fromJson(data['data']);
-    } else{
+    } else {
       return VehicleRouteList([]);
     }
   }

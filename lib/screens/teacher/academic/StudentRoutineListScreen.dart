@@ -21,7 +21,7 @@ class StudentRoutine extends StatefulWidget {
   dynamic classCode;
   dynamic sectionCode;
 
-  StudentRoutine(this.classCode, this.sectionCode, {Key? key}) : super(key: key);
+  StudentRoutine(this.classCode, this.sectionCode, {super.key});
 
   @override
   State<StudentRoutine> createState() => _StudentRoutineState();
@@ -48,13 +48,12 @@ class _StudentRoutineState extends State<StudentRoutine>
           'section_id': widget.sectionCode,
         }));
     if (response.statusCode == 200) {
-
-
       var data = dayWiseRoutineFromJson(response.body);
       print("Routine : ${response.body}");
       weeks.addAll(data.smWeekends ?? []);
       setState(() {
-        tabController = TabController(length: data.smWeekends?.length ?? 0, vsync: this);
+        tabController =
+            TabController(length: data.smWeekends?.length ?? 0, vsync: this);
 
         for (var element in data.smWeekends!) {
           tabs.add(Text(element.name ?? ''));
@@ -90,7 +89,8 @@ class _StudentRoutineState extends State<StudentRoutine>
         future: routine,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(body: Center(child: CupertinoActivityIndicator()));
+            return const Scaffold(
+                body: Center(child: CupertinoActivityIndicator()));
           } else {
             if (snapshot.hasData) {
               return Scaffold(
@@ -106,7 +106,7 @@ class _StudentRoutineState extends State<StudentRoutine>
                         image: AssetImage(AppConfig.appToolbarBackground),
                         fit: BoxFit.cover,
                       ),
-                      color: Color(0xff053EFF),
+                      color: const Color(0xff053EFF),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -170,7 +170,8 @@ class _StudentRoutineState extends State<StudentRoutine>
                     labelPadding: const EdgeInsets.all(10),
                     isScrollable: true,
                     labelStyle: Theme.of(context).textTheme.titleSmall,
-                    unselectedLabelStyle: Theme.of(context).textTheme.titleMedium,
+                    unselectedLabelStyle:
+                        Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
                 body: TabBarView(
@@ -195,15 +196,16 @@ class RoutineListWidget extends StatelessWidget {
   final int? dayId;
   final int? classId;
   final int? sectionId;
-  const RoutineListWidget({Key? key, this.dayId, this.classId, this.sectionId}) : super(key: key);
+  const RoutineListWidget(
+      {super.key, this.dayId, this.classId, this.sectionId});
 
   Future<DayWiseRoutine> getRoutine() async {
-    String? _token;
+    String? token;
     await Utils.getStringValue('token').then((value) {
-      _token = value ?? '';
+      token = value ?? '';
     });
     final response = await http.post(Uri.parse(EdusApi.getDayWiseRoutine),
-        headers: Utils.setHeader(_token.toString()),
+        headers: Utils.setHeader(token.toString()),
         body: jsonEncode({
           'day_id': dayId,
           'class_id': classId,
@@ -230,7 +232,8 @@ class RoutineListWidget extends StatelessWidget {
           } else {
             if (snapshot.hasData) {
               return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -244,11 +247,13 @@ class RoutineListWidget extends StatelessWidget {
                           child: Text(
                             'Subject'.tr,
                             textAlign: TextAlign.start,
-                            style:
-                                Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
                           ),
                         ),
                         Expanded(
@@ -256,11 +261,13 @@ class RoutineListWidget extends StatelessWidget {
                           child: Text(
                             'Time'.tr,
                             textAlign: TextAlign.start,
-                            style:
-                                Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
                           ),
                         ),
                         Expanded(
@@ -268,11 +275,13 @@ class RoutineListWidget extends StatelessWidget {
                           child: Text(
                             'Room'.tr,
                             textAlign: TextAlign.start,
-                            style:
-                                Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
                           ),
                         ),
                       ],
@@ -281,32 +290,39 @@ class RoutineListWidget extends StatelessWidget {
                     Expanded(
                       child: ListView.separated(
                           shrinkWrap: true,
-                          itemCount: snapshot.data?.classRoutines?.length?? 0,
+                          itemCount: snapshot.data?.classRoutines?.length ?? 0,
                           separatorBuilder: (context, index) {
                             return const SizedBox(
                               height: 10,
                             );
                           },
                           itemBuilder: (context, routineIndex) {
-
                             Subject? subject;
                             Room? room;
 
-                            int? indexOfSubject = snapshot.data?.subjects?.indexWhere((element) =>  element.id ==
-                                snapshot.data?.classRoutines?[routineIndex].subjectId);
+                            int? indexOfSubject = snapshot.data?.subjects
+                                ?.indexWhere((element) =>
+                                    element.id ==
+                                    snapshot.data?.classRoutines?[routineIndex]
+                                        .subjectId);
 
-                            if(indexOfSubject != null && indexOfSubject != -1){
-                              subject = snapshot.data?.subjects?[indexOfSubject];
+                            if (indexOfSubject != null &&
+                                indexOfSubject != -1) {
+                              subject =
+                                  snapshot.data?.subjects?[indexOfSubject];
                             }
 
-                            int? indexOfRoom = snapshot.data?.rooms?.indexWhere((element) =>  element.id ==
-                                snapshot.data?.classRoutines?[routineIndex].roomId);
+                            int? indexOfRoom = snapshot.data?.rooms?.indexWhere(
+                                (element) =>
+                                    element.id ==
+                                    snapshot.data?.classRoutines?[routineIndex]
+                                        .roomId);
 
-                            if(indexOfRoom != null && indexOfRoom != -1){
+                            if (indexOfRoom != null && indexOfRoom != -1) {
                               room = snapshot.data?.rooms?[indexOfRoom];
                             }
 
-                            if(subject == null){
+                            if (subject == null) {
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -319,9 +335,9 @@ class RoutineListWidget extends StatelessWidget {
                                           .textTheme
                                           .titleMedium
                                           ?.copyWith(
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 14,
-                                      ),
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 14,
+                                          ),
                                     ),
                                   ),
                                 ],
@@ -329,11 +345,15 @@ class RoutineListWidget extends StatelessWidget {
                             }
 
                             var startTime = DateFormat.jm().format(
-                                DateFormat("hh:mm:ss").parse(snapshot.data
-                                    !.classRoutines?[routineIndex].startTime ?? ''));
-                            var endTime = DateFormat.jm().format(
                                 DateFormat("hh:mm:ss").parse(snapshot
-                                    .data!.classRoutines?[routineIndex].endTime ?? ''));
+                                        .data!
+                                        .classRoutines?[routineIndex]
+                                        .startTime ??
+                                    ''));
+                            var endTime = DateFormat.jm().format(
+                                DateFormat("hh:mm:ss").parse(snapshot.data!
+                                        .classRoutines?[routineIndex].endTime ??
+                                    ''));
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -341,7 +361,7 @@ class RoutineListWidget extends StatelessWidget {
                                 Expanded(
                                   flex: 2,
                                   child: Text(
-                                    '${subject.subjectName??""} (${subject.subjectCode}) ${subject.subjectType}',
+                                    '${subject.subjectName ?? ""} (${subject.subjectCode}) ${subject.subjectType}',
                                     textAlign: TextAlign.start,
                                     style: Theme.of(context)
                                         .textTheme
@@ -369,7 +389,7 @@ class RoutineListWidget extends StatelessWidget {
                                 Expanded(
                                   flex: 1,
                                   child: Text(
-                                   room?.roomNo??"-",
+                                    room?.roomNo ?? "-",
                                     textAlign: TextAlign.start,
                                     style: Theme.of(context)
                                         .textTheme

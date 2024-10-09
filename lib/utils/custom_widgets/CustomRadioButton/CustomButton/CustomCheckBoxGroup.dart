@@ -8,7 +8,7 @@ import 'CustomListViewSpacing.dart';
 // ignore: must_be_immutable
 class CustomCheckBoxGroup<T> extends StatefulWidget {
   CustomCheckBoxGroup({
-    Key? key,
+    super.key,
     this.horizontal = false,
     this.buttonValuesList,
     this.buttonTextStyle = const ButtonTextStyle(),
@@ -32,12 +32,8 @@ class CustomCheckBoxGroup<T> extends StatefulWidget {
     this.enableButtonWrap = false,
   })  : assert(buttonLables?.length == buttonValuesList?.length,
             "Button values list and button lables list should have same number of eliments "),
-        assert(unSelectedColor != null, "Unselected color cannot be null"),
         assert(buttonValuesList?.toSet().length == buttonValuesList?.length,
-            "Multiple buttons with same value cannot exist"),
-        // assert(buttonLables.toSet().length == buttonLables.length,
-        //     "Multiple buttons label wth same value cannot exist"),
-        assert(selectedColor != null, "Selected color cannot be null"), super(key: key);
+            "Multiple buttons with same value cannot exist");
 
   ///Orientation of the Button Group
   final bool horizontal;
@@ -87,7 +83,6 @@ class CustomCheckBoxGroup<T> extends StatefulWidget {
   ///Default Selected button
   final T? defaultSelected;
 
-
   ///Unselected Color of the button
   final Color unSelectedColor;
 
@@ -107,7 +102,11 @@ class CustomCheckBoxGroup<T> extends StatefulWidget {
 class _CustomCheckBoxGroupState extends State<CustomCheckBoxGroup> {
   List<dynamic> selectedLables = [];
 
-  Color borderColor(e) => (selectedLables.contains(e) ? widget.selectedBorderColor : widget.unSelectedBorderColor) ?? Theme.of(context).primaryColor;
+  Color borderColor(e) =>
+      (selectedLables.contains(e)
+          ? widget.selectedBorderColor
+          : widget.unSelectedBorderColor) ??
+      Theme.of(context).primaryColor;
 
   @override
   void initState() {
@@ -131,22 +130,23 @@ class _CustomCheckBoxGroupState extends State<CustomCheckBoxGroup> {
               : widget.unSelectedColor,
           elevation: widget.elevation,
           shape: widget.enableShape
-              ? widget.customShape ?? const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                    )
+              ? widget.customShape ??
+                  const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  )
               : null,
           child: SizedBox(
             height: widget.height,
             child: MaterialButton(
               shape: widget.enableShape
-                  ? widget.customShape ?? OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: borderColor(e), width: 1),
-                          borderRadius: const BorderRadius.all(Radius.circular(20)),
-                        )
+                  ? widget.customShape ??
+                      OutlineInputBorder(
+                        borderSide: BorderSide(color: borderColor(e), width: 1),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                      )
                   : OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: borderColor(e), width: 1),
+                      borderSide: BorderSide(color: borderColor(e), width: 1),
                       borderRadius: BorderRadius.zero,
                     ),
               onPressed: () {
@@ -188,9 +188,10 @@ class _CustomCheckBoxGroupState extends State<CustomCheckBoxGroup> {
             : widget.unSelectedColor,
         elevation: widget.elevation,
         shape: widget.enableShape
-            ? widget.customShape ?? const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  )
+            ? widget.customShape ??
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                )
             : null,
         child: Container(
           height: widget.height,
@@ -198,14 +199,13 @@ class _CustomCheckBoxGroupState extends State<CustomCheckBoxGroup> {
           constraints: const BoxConstraints(maxWidth: 250),
           child: MaterialButton(
             shape: widget.enableShape
-                ? widget.customShape ?? OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: borderColor(e), width: 1),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      )
+                ? widget.customShape ??
+                    OutlineInputBorder(
+                      borderSide: BorderSide(color: borderColor(e), width: 1),
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    )
                 : OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: borderColor(e), width: 1),
+                    borderSide: BorderSide(color: borderColor(e), width: 1),
                     borderRadius: BorderRadius.zero,
                   ),
             onPressed: () {

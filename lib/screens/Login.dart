@@ -17,9 +17,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../webview/launch_webview.dart';
 
-
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -57,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   height: screenHeight(400, context),
                   decoration: BoxDecoration(
-                   // color: Color(0xff053EFF),
+                      // color: Color(0xff053EFF),
                       image: DecorationImage(
                     image: AssetImage(AppConfig.loginBackground),
                     fit: BoxFit.cover,
@@ -245,7 +244,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),
@@ -276,13 +274,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     String email = emailController.text;
                     String password = passwordController.text;
 
-
-                   
                     if (email.isNotEmpty && password.isNotEmpty) {
                       setState(() {
                         isResponse = true;
-                         Utils.saveStringValue('emailAdd', emailController.text);
-                    Utils.saveStringValue('passwordNum', passwordController.text);
+                        Utils.saveStringValue('emailAdd', emailController.text);
+                        Utils.saveStringValue(
+                            'passwordNum', passwordController.text);
                       });
                       Login(email, password).getLogin(context).then((result) {
                         setState(() {
@@ -299,10 +296,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
               ),
-           h16,
-           registerButton(),
-            h16,
-             contactUs(),
+              h16,
+              registerButton(),
+              h16,
+              contactUs(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: isResponse == true
@@ -317,22 +314,33 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-   Widget registerButton() {
+
+  Widget registerButton() {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Route route;
-          route = MaterialPageRoute(builder: (context) => const LaunchWebView(launchUrl: 'https://edustutor.com/register/',title: 'Register',));
-            Navigator.push(context, route);
+        route = MaterialPageRoute(
+            builder: (context) => const LaunchWebView(
+                  launchUrl: 'https://edustutor.com/register/',
+                  title: 'Register',
+                ));
+        Navigator.push(context, route);
       },
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
-        child: Center(
+        child: const Center(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Don\'t have an account ?',style: TextStyle(color: Colors.black),),
-              Text('  Register Now',style: TextStyle(color: Color(0xff053EFF)),),
+              Text(
+                'Don\'t have an account ?',
+                style: TextStyle(color: Colors.black),
+              ),
+              Text(
+                '  Register Now',
+                style: TextStyle(color: Color(0xff053EFF)),
+              ),
             ],
           ),
         ),
@@ -350,28 +358,40 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return jsonData['data'][user]['email'];
   }
-  Widget contactUs(){
-  return Column(children: [
-    const Text('Trouble to login ?   Contact Us'),
-    h16,
-    Row(
-  crossAxisAlignment: CrossAxisAlignment.center,
-  mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-      GestureDetector(
-        onTap: (){
-          // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
-          UrlLauncher.launch('https://wa.me/+94701677488?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
-        },
-        child: SvgPicture.asset('assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',height: 30,width: 40,)),
-      w16,
-      GestureDetector(
-        onTap: (){
-          UrlLauncher.launch("tel:+94701677488");
-        },
-        child: SvgPicture.asset('assets/config/phone-call-svgrepo-com.svg',height: 30,width: 40,))
-    ],)
-  ],);
-}
 
+  Widget contactUs() {
+    return Column(
+      children: [
+        const Text('Trouble to login ?   Contact Us'),
+        h16,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                  UrlLauncher.launch(
+                      'https://wa.me/+94701677488?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                },
+                child: SvgPicture.asset(
+                  'assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',
+                  height: 30,
+                  width: 40,
+                )),
+            w16,
+            GestureDetector(
+                onTap: () {
+                  UrlLauncher.launch("tel:+94701677488");
+                },
+                child: SvgPicture.asset(
+                  'assets/config/phone-call-svgrepo-com.svg',
+                  height: 30,
+                  width: 40,
+                ))
+          ],
+        )
+      ],
+    );
+  }
 }

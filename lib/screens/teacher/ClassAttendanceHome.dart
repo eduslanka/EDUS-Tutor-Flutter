@@ -22,7 +22,7 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'attendance/AttendanceStudentList.dart';
 
 class StudentAttendanceHome extends StatefulWidget {
-  const StudentAttendanceHome({Key? key}) : super(key: key);
+  const StudentAttendanceHome({super.key});
 
   @override
   _StudentAttendanceHomeState createState() => _StudentAttendanceHomeState();

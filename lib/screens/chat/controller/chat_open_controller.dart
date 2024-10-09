@@ -52,7 +52,7 @@ class ChatOpenController extends GetxController {
       isLoading(true);
       await getIdToken().then((value) async {
         final response = await http.get(
-            Uri.parse(EdusApi.getChatOpen + "/$userId"),
+            Uri.parse("${EdusApi.getChatOpen}/$userId"),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
           var jsonData = jsonDecode(response.body);
@@ -63,7 +63,7 @@ class ChatOpenController extends GetxController {
           throw Exception('failed to load');
         }
       });
-    } catch (e,tr) {
+    } catch (e, tr) {
       isLoading(false);
       tr.printInfo();
       throw Exception(e.toString());
@@ -122,7 +122,6 @@ class ChatOpenController extends GetxController {
         headers: Utils.setHeader(_token.value.toString()),
       );
 
-
       if (response.statusCode == 200) {
       } else {
         throw Exception('failed to load');
@@ -139,11 +138,10 @@ class ChatOpenController extends GetxController {
     try {
       final response = await http.get(
         Uri.parse(
-          EdusApi.chatUserBlockAction + "/$action/$userId",
+          "${EdusApi.chatUserBlockAction}/$action/$userId",
         ),
         headers: Utils.setHeader(_token.value.toString()),
       );
-
 
       if (response.statusCode == 200) {
         await getChatOpen();

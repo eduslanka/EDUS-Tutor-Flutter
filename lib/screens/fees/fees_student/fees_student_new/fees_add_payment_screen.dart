@@ -16,7 +16,7 @@ import 'package:intl/intl.dart';
 class FeesAddPaymentScreen extends StatefulWidget {
   final int? invoiceId;
   final Function? updateData;
-  const FeesAddPaymentScreen({Key? key, this.invoiceId, this.updateData}) : super(key: key);
+  const FeesAddPaymentScreen({super.key, this.invoiceId, this.updateData});
 
   @override
   _FeesAddPaymentScreenState createState() => _FeesAddPaymentScreenState();
@@ -88,8 +88,7 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                               height: 10,
                             ),
                             Text(
-                              'Invoice'.tr +
-                                  ": ${_controller.addPaymentModel.value.invoiceInfo?.invoiceId}",
+                              "${'Invoice'.tr}: ${_controller.addPaymentModel.value.invoiceInfo?.invoiceId}",
                               maxLines: 1,
                               style: Theme.of(context)
                                   .textTheme
@@ -97,8 +96,7 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                                   ?.copyWith(fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              'Due Date'.tr +
-                                  ": ${DateFormat.yMMMd().format(_controller.addPaymentModel.value.invoiceInfo?.dueDate ?? DateTime(200))}",
+                              "${'Due Date'.tr}: ${DateFormat.yMMMd().format(_controller.addPaymentModel.value.invoiceInfo?.dueDate ?? DateTime(200))}",
                               maxLines: 1,
                               style: Theme.of(context)
                                   .textTheme
@@ -106,8 +104,7 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                                   ?.copyWith(fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              'Wallet Balance'.tr +
-                                  ": ${_controller.addPaymentModel.value.invoiceInfo?.studentInfo?.user?.walletBalance?.toStringAsFixed(2)}",
+                              "${'Wallet Balance'.tr}: ${_controller.addPaymentModel.value.invoiceInfo?.studentInfo?.user?.walletBalance?.toStringAsFixed(2)}",
                               maxLines: 1,
                               style: Theme.of(context)
                                   .textTheme
@@ -117,8 +114,7 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                             Obx(() {
                               if (_controller.addWalletList.isNotEmpty) {
                                 return Text(
-                                  'Add in Wallet'.tr +
-                                      ": ${_controller.addWalletList.reduce((a, b) => a + b).toStringAsFixed(2)}",
+                                  "${'Add in Wallet'.tr}: ${_controller.addWalletList.reduce((a, b) => a + b).toStringAsFixed(2)}",
                                   maxLines: 1,
                                   style: Theme.of(context)
                                       .textTheme
@@ -127,7 +123,7 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                                 );
                               } else {
                                 return Text(
-                                  'Add in Wallet'.tr + ": 0.00",
+                                  "${'Add in Wallet'.tr}: 0.00",
                                   maxLines: 1,
                                   style: Theme.of(context)
                                       .textTheme
@@ -158,7 +154,8 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                         return const Divider();
                       },
                       itemCount: _controller
-                          .addPaymentModel.value.invoiceDetails?.length ?? 0,
+                              .addPaymentModel.value.invoiceDetails?.length ??
+                          0,
                       itemBuilder: (context, index) {
                         InvoiceDetail? invoiceDetails = _controller
                             .addPaymentModel.value.invoiceDetails?[index];
@@ -193,7 +190,8 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                             .headlineMedium
                             ?.copyWith(fontSize: 13.0),
                         onChanged: (value) {
-                          _controller.selectedPaymentMethod.value = value.toString();
+                          _controller.selectedPaymentMethod.value =
+                              value.toString();
 
                           _controller.chequeBankOrOthers();
                         },
@@ -218,7 +216,8 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                               value: item,
                               child: Text(
                                 "${item.bankName} (${item.accountNumber})",
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                             );
                           }).toList(),
@@ -227,7 +226,8 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                               .headlineMedium
                               ?.copyWith(fontSize: 13.0),
                           onChanged: (value) {
-                            _controller.selectedBank.value = value as BankAccount;
+                            _controller.selectedBank.value =
+                                value as BankAccount;
                           },
                           value: _controller.selectedBank.value,
                         );
@@ -261,10 +261,11 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.black.withOpacity(0.3)),
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(5.0)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(5.0)),
                                 ),
-                                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20.0),
                                 child: Row(
                                   children: <Widget>[
                                     Expanded(
@@ -278,7 +279,8 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
                                                       .tr
                                                   : 'Select Cheque payment slip'
                                                       .tr
-                                              : _file?.path.split('/').last ?? '',
+                                              : _file?.path.split('/').last ??
+                                                  '',
                                           style: Theme.of(context)
                                               .textTheme
                                               .headlineMedium
@@ -367,7 +369,7 @@ class _FeesAddPaymentScreenState extends State<FeesAddPaymentScreen> {
 class FeesListRow extends StatefulWidget {
   final InvoiceDetail? invoiceDetails;
   final int? index;
-  const FeesListRow({Key? key, this.invoiceDetails, this.index}) : super(key: key);
+  const FeesListRow({super.key, this.invoiceDetails, this.index});
   @override
   _FeesListRowState createState() => _FeesListRowState();
 }
@@ -520,13 +522,15 @@ class _FeesListRowState extends State<FeesListRow> {
                                 _controller.addWalletList[(widget.index ?? 0)] =
                                     currentText - (dueAmount ?? 0);
                               } else {
-                                _controller.addWalletList[(widget.index ?? 0)] = 0;
+                                _controller.addWalletList[(widget.index ?? 0)] =
+                                    0;
                               }
 
                               _controller.paidAmountList[(widget.index ?? 0)] =
                                   currentText;
 
-                              _controller.dueList[(widget.index ?? 0)] = currentDue;
+                              _controller.dueList[(widget.index ?? 0)] =
+                                  currentDue;
 
                               _controller.totalPaidAmount.value = _controller
                                   .paidAmountList

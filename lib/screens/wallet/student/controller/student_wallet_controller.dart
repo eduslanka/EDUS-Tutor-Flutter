@@ -146,13 +146,13 @@ class StudentWalletController extends GetxController {
           log("Error: ${value.data}");
         }
       }).catchError((error) {
-        if (error is dio.DioError) {
+        if (error is dio.DioException) {
           isPaymentProcessing(false);
           final errorData = Map<String, dynamic>.from(error.response?.data);
           String combinedMessage = "";
           errorData["errors"].forEach((key, messages) {
             for (var message in messages) {
-              combinedMessage = combinedMessage + "$message\n";
+              combinedMessage = "$combinedMessage$message\n";
             }
           });
           CustomSnackBar().snackBarError(combinedMessage);
@@ -188,12 +188,12 @@ class StudentWalletController extends GetxController {
         isPaymentProcessing(false);
       }).catchError((error) {
         isPaymentProcessing(false);
-        if (error is dio.DioError) {
+        if (error is dio.DioException) {
           final errorData = Map<String, dynamic>.from(error.response?.data);
           String combinedMessage = "";
           errorData["errors"].forEach((key, messages) {
             for (var message in messages) {
-              combinedMessage = combinedMessage + "$message\n";
+              combinedMessage = "$combinedMessage$message\n";
             }
           });
           CustomSnackBar().snackBarError(combinedMessage);

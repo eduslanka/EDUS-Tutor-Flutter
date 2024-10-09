@@ -13,7 +13,7 @@ import 'AdminStaffDetails.dart';
 class StaffListScreen extends StatefulWidget {
   dynamic id;
 
-  StaffListScreen(this.id, {Key? key}) : super(key: key);
+  StaffListScreen(this.id, {super.key});
 
   @override
   _StaffListScreenState createState() => _StaffListScreenState();
@@ -88,8 +88,9 @@ class _StaffListScreenState extends State<StaffListScreen> {
                   backgroundImage: data.staffs[index].photo == null ||
                           data.staffs[index].photo == ""
                       ? NetworkImage(
-                          EdusApi.root + "public/uploads/staff/demo/staff.jpg")
-                      : NetworkImage(EdusApi.root + '${data.staffs[index].photo}'),
+                          "${EdusApi.root}public/uploads/staff/demo/staff.jpg")
+                      : NetworkImage(
+                          '${EdusApi.root}${data.staffs[index].photo}'),
                   backgroundColor: Colors.transparent,
                 ),
                 title: Text(
@@ -108,7 +109,7 @@ class _StaffListScreenState extends State<StaffListScreen> {
                 isThreeLine: true,
               ),
             ),
-            BottomLine(),
+            const BottomLine(),
           ],
         );
       },

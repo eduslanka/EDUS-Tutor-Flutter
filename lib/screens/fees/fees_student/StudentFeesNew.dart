@@ -18,9 +18,9 @@ import 'package:edus_tutor/utils/server/LogoutService.dart';
 import 'package:edus_tutor/screens/fees/fees_student/fees_student_new/fees_new_row_layout.dart';
 
 class StudentFeesNew extends StatefulWidget {
-  
-
-  const StudentFeesNew({Key? key, }) : super(key: key);
+  const StudentFeesNew({
+    super.key,
+  });
   @override
   _StudentFeesNewState createState() => _StudentFeesNewState();
 }
@@ -48,8 +48,7 @@ class _StudentFeesNewState extends State<StudentFeesNew> {
           automaticallyImplyLeading: false,
           flexibleSpace: Container(
             padding: EdgeInsets.only(top: 20.h),
-            decoration: BoxDecoration(
-              
+            decoration: const BoxDecoration(
               color: Color(0xff053EFF),
             ),
             child: Row(
@@ -112,9 +111,8 @@ class _StudentFeesNewState extends State<StudentFeesNew> {
                     _studentFeesController.userController.selectedRecord.value =
                         record;
                     await _studentFeesController.fetchFeesRecord(
-                      _studentFeesController.userController.studentId.value,record.id
-                      
-                    );
+                        _studentFeesController.userController.studentId.value,
+                        record.id);
                   },
                 ),
                 Expanded(
@@ -124,8 +122,8 @@ class _StudentFeesNewState extends State<StudentFeesNew> {
                         child: CupertinoActivityIndicator(),
                       );
                     } else {
-                      if (_studentFeesController
-                              .feesRecord.value.feesInvoice==null) {
+                      if (_studentFeesController.feesRecord.value.feesInvoice ==
+                          null) {
                         return Utils.noDataWidget();
                       } else {
                         return ListView.separated(
@@ -134,14 +132,14 @@ class _StudentFeesNewState extends State<StudentFeesNew> {
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           itemCount: _studentFeesController
-                              .feesRecord.value.feesInvoice?.length ?? 0,
+                                  .feesRecord.value.feesInvoice?.length ??
+                              0,
                           itemBuilder: (context, index) {
                             FeesInvoice? feesRecord = _studentFeesController
                                 .feesRecord.value.feesInvoice?[index];
 
                             return FeesRowNew(
                               feesRecord ?? FeesInvoice(),
-                             
                             );
                           },
                         );

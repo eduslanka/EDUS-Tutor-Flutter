@@ -22,11 +22,12 @@ class GroupMessageWidget extends StatefulWidget {
   final bool? menuVisible;
   final bool? showActions;
   const GroupMessageWidget(
-      {Key? key, this.groupThread,
+      {super.key,
+      this.groupThread,
       this.id,
       this.onTapMenu,
       this.showActions,
-      this.menuVisible}) : super(key: key);
+      this.menuVisible});
   @override
   _GroupMessageWidgetState createState() => _GroupMessageWidgetState();
 }
@@ -254,7 +255,9 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        widget.groupThread?.user?.fullName ?? widget.groupThread?.user?.email ?? "",
+                        widget.groupThread?.user?.fullName ??
+                            widget.groupThread?.user?.email ??
+                            "",
                         textAlign: widget.groupThread?.userId == widget.id
                             ? TextAlign.right
                             : TextAlign.left,
@@ -320,7 +323,8 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                         children: [
                           widget.groupThread?.conversation?.message != null
                               ? Text(
-                                  widget.groupThread?.conversation?.message ?? '',
+                                  widget.groupThread?.conversation?.message ??
+                                      '',
                                   textAlign:
                                       widget.groupThread?.userId == widget.id
                                           ? TextAlign.right
@@ -343,7 +347,8 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4.0),
                         child: Text(
-                          timeago.format(widget.groupThread?.createdAt ?? DateTime.now()),
+                          timeago.format(
+                              widget.groupThread?.createdAt ?? DateTime.now()),
                           textAlign: widget.groupThread?.userId == widget.id
                               ? TextAlign.right
                               : TextAlign.left,
@@ -408,7 +413,9 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        widget.groupThread?.user?.fullName ?? widget.groupThread?.user?.email ?? "",
+                        widget.groupThread?.user?.fullName ??
+                            widget.groupThread?.user?.email ??
+                            "",
                         textAlign: widget.groupThread?.userId == widget.id
                             ? TextAlign.right
                             : TextAlign.left,
@@ -469,7 +476,8 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                                 ? CrossAxisAlignment.start
                                 : CrossAxisAlignment.end,
                         children: [
-                          widget.groupThread?.conversation?.reply?.message != null
+                          widget.groupThread?.conversation?.reply?.message !=
+                                  null
                               ? Column(
                                   crossAxisAlignment:
                                       widget.groupThread?.userId != widget.id
@@ -494,11 +502,12 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                                           ),
                                     Text(
                                       "${widget.groupThread?.conversation?.reply?.message ?? ""}",
-                                      textAlign:
-                                          widget.groupThread?.userId == widget.id
-                                              ? TextAlign.right
-                                              : TextAlign.left,
-                                      style: Get.textTheme.titleMedium?.copyWith(
+                                      textAlign: widget.groupThread?.userId ==
+                                              widget.id
+                                          ? TextAlign.right
+                                          : TextAlign.left,
+                                      style:
+                                          Get.textTheme.titleMedium?.copyWith(
                                         color: Colors.white,
                                         fontSize: 12.sp,
                                       ),
@@ -557,16 +566,14 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                                   widget.groupThread?.conversation?.message !=
                                           null
                                       ? Text(
-                                          "''" +
-                                              (widget.groupThread?.conversation?.message ?? '') +
-                                              "''",
+                                          "''${widget.groupThread?.conversation?.message ?? ''}''",
                                           textAlign:
                                               widget.groupThread?.userId ==
                                                       widget.id
                                                   ? TextAlign.right
                                                   : TextAlign.left,
-                                          style:
-                                              Get.textTheme.titleMedium?.copyWith(
+                                          style: Get.textTheme.titleMedium
+                                              ?.copyWith(
                                             color: Colors.white,
                                             fontSize: 12.sp,
                                           ),
@@ -581,7 +588,9 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 4.0),
                                 child: Text(
-                                  timeago.format(widget.groupThread?.createdAt ?? DateTime(200)),
+                                  timeago.format(
+                                      widget.groupThread?.createdAt ??
+                                          DateTime(200)),
                                   textAlign:
                                       widget.groupThread?.userId == widget.id
                                           ? TextAlign.right
@@ -651,7 +660,9 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        widget.groupThread?.user?.fullName ?? widget.groupThread?.user?.email ?? "",
+                        widget.groupThread?.user?.fullName ??
+                            widget.groupThread?.user?.email ??
+                            "",
                         textAlign: widget.groupThread?.userId == widget.id
                             ? TextAlign.right
                             : TextAlign.left,
@@ -721,23 +732,30 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                                   children: [
                                     Text(
                                       "Forwarded Message",
-                                      textAlign: widget.groupThread?.conversation
-                                                  ?.forwardFrom?.fromId ==
+                                      textAlign: widget
+                                                  .groupThread
+                                                  ?.conversation
+                                                  ?.forwardFrom
+                                                  ?.fromId ==
                                               widget.id
                                           ? TextAlign.right
                                           : TextAlign.left,
-                                      style: Get.textTheme.titleMedium?.copyWith(
+                                      style:
+                                          Get.textTheme.titleMedium?.copyWith(
                                         color: Colors.white,
                                         fontSize: 12.sp,
                                       ),
                                     ),
                                     Text(
-                                      widget.groupThread?.conversation?.forwardFrom?.message ?? "",
-                                      textAlign:
-                                          widget.groupThread?.userId == widget.id
-                                              ? TextAlign.right
-                                              : TextAlign.left,
-                                      style: Get.textTheme.titleMedium?.copyWith(
+                                      widget.groupThread?.conversation
+                                              ?.forwardFrom?.message ??
+                                          "",
+                                      textAlign: widget.groupThread?.userId ==
+                                              widget.id
+                                          ? TextAlign.right
+                                          : TextAlign.left,
+                                      style:
+                                          Get.textTheme.titleMedium?.copyWith(
                                         color: Colors.white,
                                         fontSize: 12.sp,
                                       ),
@@ -796,16 +814,14 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                                   widget.groupThread?.conversation?.message !=
                                           null
                                       ? Text(
-                                          "''" +
-                                              (widget.groupThread?.conversation?.message ?? '') +
-                                              "''",
+                                          "''${widget.groupThread?.conversation?.message ?? ''}''",
                                           textAlign:
                                               widget.groupThread?.userId ==
                                                       widget.id
                                                   ? TextAlign.right
                                                   : TextAlign.left,
-                                          style:
-                                              Get.textTheme.titleMedium?.copyWith(
+                                          style: Get.textTheme.titleMedium
+                                              ?.copyWith(
                                             color: Colors.white,
                                             fontSize: 12.sp,
                                           ),
@@ -820,7 +836,9 @@ class _GroupMessageWidgetState extends State<GroupMessageWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 4.0),
                                 child: Text(
-                                  timeago.format(widget.groupThread?.createdAt ?? DateTime(200)),
+                                  timeago.format(
+                                      widget.groupThread?.createdAt ??
+                                          DateTime(200)),
                                   textAlign:
                                       widget.groupThread?.userId == widget.id
                                           ? TextAlign.right

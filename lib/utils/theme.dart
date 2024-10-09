@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData basicTheme() {
-  TextTheme _basicTextTheme(TextTheme base) {
+  TextTheme basicTextTheme(TextTheme base) {
     return base.copyWith(
       headlineSmall: GoogleFonts.poppins(
         textStyle: base.headlineSmall?.copyWith(
@@ -64,7 +64,7 @@ ThemeData basicTheme() {
 
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-      textTheme: _basicTextTheme(base.textTheme),
+      textTheme: basicTextTheme(base.textTheme),
       //textTheme: Typography().white,
       primaryColor: Colors.indigo,
       //primaryColor: Color(0xff4829b2),
@@ -79,7 +79,6 @@ ThemeData basicTheme() {
         unselectedLabelColor: Colors.grey,
       ),
       colorScheme: const ColorScheme(
-        background: Colors.white,
         brightness: Brightness.light,
         primary: Colors.red,
         onPrimary: Colors.green,
@@ -87,7 +86,6 @@ ThemeData basicTheme() {
         onSecondary: Colors.black12,
         error: Colors.red,
         onError: Colors.redAccent,
-        onBackground: Colors.white,
         surface: Colors.grey,
         onSurface: Colors.blueGrey,
       ));

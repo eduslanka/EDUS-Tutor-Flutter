@@ -23,7 +23,7 @@ import '../../../utils/model/SubjectModel.dart';
 class SubjectStudentSearch extends StatefulWidget {
   String? status;
 
-  SubjectStudentSearch({Key? key, this.status}) : super(key: key);
+  SubjectStudentSearch({super.key, this.status});
 
   @override
   _SubjectStudentSearchState createState() =>
@@ -106,19 +106,21 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
               if (snapshot.hasData) {
                 return ListView(
                   children: <Widget>[
-                     getClassDropdown([]),
+                    getClassDropdown([]),
                     FutureBuilder<SectionList>(
                       future: sections,
                       builder: (context, secSnap) {
                         if (secSnap.hasData) {
-                          return getSectionDropdown(secSnap.data?.sections ?? []);
+                          return getSectionDropdown(
+                              secSnap.data?.sections ?? []);
                         } else if (secSnap.connectionState.name == 'waiting') {
                           return const Center(
                               child: CupertinoActivityIndicator());
                         } else if (secSnap.connectionState.name == 'none') {
                           return getClassDropdown([]);
-                        }  else {
-                          return const Center(child: CupertinoActivityIndicator());
+                        } else {
+                          return const Center(
+                              child: CupertinoActivityIndicator());
                         }
                       },
                     ),
@@ -129,14 +131,16 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
                       future: subjects,
                       builder: (context, subSnap) {
                         if (subSnap.hasData) {
-                          return getSubjectDropdown(subSnap.data?.subjects ?? []);
+                          return getSubjectDropdown(
+                              subSnap.data?.subjects ?? []);
                         } else if (subSnap.connectionState.name == 'waiting') {
                           return const Center(
                               child: CupertinoActivityIndicator());
                         } else if (subSnap.connectionState.name == 'none') {
                           return getClassDropdown([]);
-                        }   else {
-                          return const Center(child: CupertinoActivityIndicator());
+                        } else {
+                          return const Center(
+                              child: CupertinoActivityIndicator());
                         }
                       },
                     ),
@@ -152,7 +156,8 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
                         decoration: InputDecoration(
                             hintText: "Search by name".tr,
                             labelText: "Name".tr,
-                            labelStyle: Theme.of(context).textTheme.headlineMedium,
+                            labelStyle:
+                                Theme.of(context).textTheme.headlineMedium,
                             errorStyle: const TextStyle(
                                 color: Colors.blue, fontSize: 15.0),
                             border: OutlineInputBorder(
@@ -169,7 +174,8 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
                         decoration: InputDecoration(
                             hintText: "Search by roll".tr,
                             labelText: "Roll".tr,
-                            labelStyle: Theme.of(context).textTheme.headlineMedium,
+                            labelStyle:
+                                Theme.of(context).textTheme.headlineMedium,
                             errorStyle: const TextStyle(
                                 color: Colors.blue, fontSize: 15.0),
                             border: OutlineInputBorder(
@@ -305,7 +311,8 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
           setState(() {
             _selectedClass = '$value';
 
-            int classIndex = AllClasses.classes.indexWhere((element) => value == element.name);
+            int classIndex = AllClasses.classes
+                .indexWhere((element) => value == element.name);
             //classId = getCode(classes, '$value');
             classId = AllClasses.classes[classIndex].id;
 
@@ -376,7 +383,7 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
   Future getAllClass(int id) async {
     final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
-    try{
+    try {
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         if (rule == "1" || rule == "5") {
@@ -387,7 +394,7 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
       } else {
         throw Exception('Failed to load');
       }
-    } catch(e, t){
+    } catch (e, t) {
       debugPrint('$e');
       debugPrint('$t');
     }
@@ -405,8 +412,8 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
             value: item.name,
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child:
-                  Text(item.name ?? '', style: Theme.of(context).textTheme.headlineMedium),
+              child: Text(item.name ?? '',
+                  style: Theme.of(context).textTheme.headlineMedium),
             ),
           );
         }).toList(),
@@ -434,7 +441,6 @@ class _SubjectStudentSearchState extends State<SubjectStudentSearch> {
     final response = await http.get(
         Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
-
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);

@@ -15,7 +15,7 @@ import 'package:edus_tutor/utils/exception/DioException.dart';
 
 // ignore: must_be_immutable
 class AddFeeType extends StatefulWidget {
-  const AddFeeType({Key? key}) : super(key: key);
+  const AddFeeType({super.key});
 
   @override
   _AddFeeTypeState createState() => _AddFeeTypeState();

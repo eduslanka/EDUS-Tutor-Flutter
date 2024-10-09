@@ -11,9 +11,8 @@ import '../../../../model/fee_invoice_model.dart';
 // ignore: must_be_immutable
 class FeesRowNew extends StatefulWidget {
   FeesInvoice fee;
-  
 
-  FeesRowNew(this.fee,  {Key? key}) : super(key: key);
+  FeesRowNew(this.fee, {super.key});
 
   @override
   State<FeesRowNew> createState() => _FeesRowNewState();
@@ -21,12 +20,13 @@ class FeesRowNew extends StatefulWidget {
 
 class _FeesRowNewState extends State<FeesRowNew> {
   final TextEditingController amountController = TextEditingController();
-late double blance;
+  late double blance;
   final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     amountController.text = widget.fee.totalFees.toString();
-    blance=(widget.fee.totalFees?.toDouble()??0)-(widget.fee.totalPaid?.toDouble()??0);
+    blance = (widget.fee.totalFees?.toDouble() ?? 0) -
+        (widget.fee.totalPaid?.toDouble() ?? 0);
     super.initState();
   }
 
@@ -43,8 +43,9 @@ late double blance;
                 maxLines: 1,
               ),
             ),
-            PopupMenuButton(color: Colors.white,
-            surfaceTintColor: Colors.white,
+            PopupMenuButton(
+              color: Colors.white,
+              surfaceTintColor: Colors.white,
               child: Row(
                 children: [
                   Text(
@@ -59,7 +60,7 @@ late double blance;
                 ],
               ),
               itemBuilder: (context) {
-                if (widget.fee.totalDue ==0) {
+                if (widget.fee.totalDue == 0) {
                   return [
                     PopupMenuItem(
                       value: 'view',
@@ -81,7 +82,9 @@ late double blance;
               },
               onSelected: (String value) async {
                 if (value == 'view') {
-                  Get.to(() => FeeInvoiceViewStudent(feesInvoice: widget.fee,));
+                  Get.to(() => FeeInvoiceViewStudent(
+                        feesInvoice: widget.fee,
+                      ));
                 } else {
                   Get.to(() => FeesAddPaymentScreen(invoiceId: widget.fee.id));
                 }
@@ -156,8 +159,7 @@ late double blance;
                       height: 10.0,
                     ),
                     Text(
-                      blance
-                          .toStringAsFixed(2),
+                      blance.toStringAsFixed(2),
                       maxLines: 1,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
@@ -226,7 +228,8 @@ late double blance;
                             Expanded(
                               child: Text(
                                 widget.fee.createDate.toString(),
-                                style: Theme.of(context).textTheme.headlineSmall,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
                                 maxLines: 1,
                               ),
                             ),
@@ -255,8 +258,9 @@ late double blance;
                                     Text(
                                       widget.fee.totalFees.toString(),
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -332,8 +336,9 @@ late double blance;
                                     Text(
                                       widget.fee.totalPaid.toString(),
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -355,11 +360,12 @@ late double blance;
                                       height: 10.0,
                                     ),
                                     Text(
-                                     blance.toString(),
+                                      blance.toString(),
                                       textAlign: TextAlign.center,
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -372,8 +378,9 @@ late double blance;
                           child: Material(
                             color: Colors.white,
                             child: TextFormField(
-                              keyboardType: const TextInputType.numberWithOptions(
-                                  decimal: false, signed: false),
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      decimal: false, signed: false),
                               style: Theme.of(context).textTheme.titleLarge,
                               controller: amountController,
                               autovalidateMode:

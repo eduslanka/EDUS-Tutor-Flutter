@@ -13,7 +13,7 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 
 class LogoutService {
   logoutDialog() {
-    String? _token;
+    String? token;
     // set up the buttons
     Widget cancelButton = TextButton(
       child: Text(
@@ -44,10 +44,10 @@ class LogoutService {
         Get.offNamedUntil("/", ModalRoute.withName('/'));
 
         var response = await http.post(Uri.parse(EdusApi.logout()),
-            headers: Utils.setHeader(_token.toString()));
+            headers: Utils.setHeader(token.toString()));
         if (response.statusCode == 200) {
         } else {
-        //  Utils.showToast('Unable to logout');
+          //  Utils.showToast('Unable to logout');
         }
       },
     );
@@ -58,7 +58,7 @@ class LogoutService {
       surfaceTintColor: Colors.white,
       title: Text(
         "Logout",
-        style:TextStyle(color: Utils.baseBlue),
+        style: TextStyle(color: Utils.baseBlue),
       ),
       content: const Text("Would you like to logout?"),
       actions: [

@@ -24,7 +24,8 @@ class ChildHome extends StatefulWidget {
   String name;
 
   ChildHome(this._titles, this._images, this.id, this.profileImage, this.token,
-      this.name, {Key? key}) : super(key: key);
+      this.name,
+      {super.key});
 
   @override
   _ChildHomeState createState() =>
@@ -65,7 +66,7 @@ class _ChildHomeState extends State<ChildHome> {
                 image: AssetImage(AppConfig.appToolbarBackground),
                 fit: BoxFit.cover,
               ),
-              color: Color(0xff053EFF),
+              color: const Color(0xff053EFF),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +86,6 @@ class _ChildHomeState extends State<ChildHome> {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          
                           Get.back();
                         }),
                   ),
@@ -94,7 +94,7 @@ class _ChildHomeState extends State<ChildHome> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 0.0),
                     child: Text(
-                      _name + " " + "Dashboard".tr,
+                      "$_name ${"Dashboard".tr}",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
@@ -127,19 +127,18 @@ class _ChildHomeState extends State<ChildHome> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: GridView.builder(
           itemCount: _titles.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
           itemBuilder: (context, index) {
-
-            if(_titles[index] == "Class"){
-              return SizedBox.shrink();
+            if (_titles[index] == "Class") {
+              return const SizedBox.shrink();
             }
             return CustomWidget(
               index: index,
               isSelected: currentSelectedIndex == index,
               onSelect: () {
                 setState(() {
-                 currentSelectedIndex = index;
+                  currentSelectedIndex = index;
 
                   AppFunction.getDashboardPage(context, _titles[index],
                       id: widget.id.toString(),

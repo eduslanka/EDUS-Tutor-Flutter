@@ -12,11 +12,11 @@ class TodayClassScreen extends StatefulWidget {
   final String rule;
 
   const TodayClassScreen({
-    Key? key,
+    super.key,
     this.studentResponse,
     this.teachersResponse,
     required this.rule,
-  }) : super(key: key);
+  });
 
   @override
   State<TodayClassScreen> createState() => _TodayClassScreenState();

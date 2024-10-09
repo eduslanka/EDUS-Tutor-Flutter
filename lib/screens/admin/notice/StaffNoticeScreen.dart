@@ -15,7 +15,7 @@ import 'package:edus_tutor/utils/model/Notice.dart';
 import 'package:edus_tutor/utils/widget/NoticeRow.dart';
 
 class StaffNoticeScreen extends StatefulWidget {
-  const StaffNoticeScreen({Key? key}) : super(key: key);
+  const StaffNoticeScreen({super.key});
 
   @override
   _StaffNoticeScreenState createState() => _StaffNoticeScreenState();
@@ -60,7 +60,8 @@ class _StaffNoticeScreenState extends State<StaffNoticeScreen> {
                 child: ListView.separated(
                   itemCount: snapshot.data?.notices.length ?? 0,
                   itemBuilder: (context, index) {
-                    return NoticRowLayout(snapshot.data?.notices[index] ?? Notice());
+                    return NoticRowLayout(
+                        snapshot.data?.notices[index] ?? Notice());
                   },
                   separatorBuilder: (context, index) {
                     return const Padding(

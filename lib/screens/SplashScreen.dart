@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'onbording_screen.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
+  const Splash({super.key});
 
   @override
   _SplashState createState() => _SplashState();
@@ -30,14 +30,15 @@ class _SplashState extends State<Splash> {
     Future.delayed(const Duration(seconds: 3), () {
       getBooleanValue('isLogged').then((value) {
         if (value) {
-          final SystemController _systemController = Get.put(SystemController());
-          _systemController.getSystemSettings();
+          final SystemController systemController = Get.put(SystemController());
+          systemController.getSystemSettings();
           Utils.getStringValue('rule').then((rule) {
             AppFunction.getFunctions(context, rule ?? '');
           });
         } else {
           if (mounted) {
-            route = MaterialPageRoute(builder: (context) => const OnbordingScreen());
+            route = MaterialPageRoute(
+                builder: (context) => const OnbordingScreen());
             Navigator.pushReplacement(context, route);
           }
         }
@@ -82,7 +83,7 @@ class _SplashState extends State<Splash> {
                   ),
                   Container(
                     height: 100.0, // Fixed height
-                    width: 100.0,  // Fixed width
+                    width: 100.0, // Fixed width
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: ExactAssetImage(AppConfig.appLogo),

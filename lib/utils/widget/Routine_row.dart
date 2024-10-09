@@ -17,28 +17,26 @@ import 'RoutineRowWidget.dart';
 
 // ignore: must_be_immutable
 class RoutineRow extends StatefulWidget {
-
   String? title;
   dynamic classCode;
   dynamic sectionCode;
   String? id;
 
-
-  RoutineRow({Key? key, this.title, this.classCode, this.sectionCode,this.id}) : super(key: key);
+  RoutineRow(
+      {super.key, this.title, this.classCode, this.sectionCode, this.id});
 
   @override
   // ignore: no_logic_in_create_state
-  _ClassRoutineState createState() => _ClassRoutineState(title ?? '',classCode,sectionCode);
+  _ClassRoutineState createState() =>
+      _ClassRoutineState(title ?? '', classCode, sectionCode);
 }
 
 class _ClassRoutineState extends State<RoutineRow> {
-
   String? title;
   dynamic classCode;
   dynamic sectionCode;
   Future<ScheduleList>? routine;
   String? _token;
-
 
   _ClassRoutineState(this.title, this.classCode, this.sectionCode);
 
@@ -49,98 +47,113 @@ class _ClassRoutineState extends State<RoutineRow> {
     });
     super.initState();
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     Utils.getStringValue('id').then((value) {
       setState(() {
-        if(classCode == null && sectionCode == null){
-          routine = fetchRoutine(int.parse(widget.id ?? value ?? ''), title ?? '');
-        }else{
+        if (classCode == null && sectionCode == null) {
+          routine =
+              fetchRoutine(int.parse(widget.id ?? value ?? ''), title ?? '');
+        } else {
           routine = fetchRoutineByClsSec(int.parse(value ?? ''), title ?? '');
         }
       });
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16.0,left: 10.0,right: 10.0),
+      padding: const EdgeInsets.only(top: 16.0, left: 10.0, right: 10.0),
       child: FutureBuilder<ScheduleList>(
         future: routine,
-        builder: (context,snapshot){
-         if(snapshot.hasData){
-           if(snapshot.data!.schedules.isNotEmpty){
-             return Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: <Widget>[
-                 Padding(
-                   padding: const EdgeInsets.only(bottom:8.0),
-                   child: Text(title ?? '',style:Theme.of(context).textTheme.titleLarge?.copyWith()),
-                 ),
-                 Padding(
-                   padding: const EdgeInsets.only(bottom:5.0),
-                   child: Row(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     children: <Widget>[
-                       Expanded(
-                         child:  Text('Time',style:Theme.of(context).textTheme.headlineMedium?.copyWith()),
-                       ),
-                       Expanded(
-                         child:  Text('Subject',style:Theme.of(context).textTheme.headlineMedium?.copyWith()),
-                       ),
-                       Expanded(
-                         child:  Text('Room',style:Theme.of(context).textTheme.headlineMedium?.copyWith()),
-                       ),
-                     ],
-                   ),
-                 ),
-                 ListView.builder(
-                   physics: const NeverScrollableScrollPhysics(),
-                   itemCount: snapshot.data?.schedules.length ?? 0,
-                   shrinkWrap: true,
-                   itemBuilder: (context,index){
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data!.schedules.isNotEmpty) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Text(title ?? '',
+                        style:
+                            Theme.of(context).textTheme.titleLarge?.copyWith()),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Text('Time',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium
+                                  ?.copyWith()),
+                        ),
+                        Expanded(
+                          child: Text('Subject',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium
+                                  ?.copyWith()),
+                        ),
+                        Expanded(
+                          child: Text('Room',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium
+                                  ?.copyWith()),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: snapshot.data?.schedules.length ?? 0,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return RoutineRowDesign(
+                          '${AppFunction.getAmPm(snapshot.data?.schedules[index].startTime ?? '')}-${AppFunction.getAmPm(snapshot.data?.schedules[index].endTime ?? '')}',
+                          snapshot.data?.schedules[index].subject ?? '',
+                          snapshot.data?.schedules[index].room ?? '');
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Container(
+                      height: 0.5,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF415094),
+                      ),
+                    ),
+                  )
+                ],
+              );
 
-                     return RoutineRowDesign(AppFunction.getAmPm(snapshot.data?.schedules[index].startTime ?? '')+'-'+AppFunction.getAmPm(snapshot.data?.schedules[index].endTime ?? ''),
-                     snapshot.data?.schedules[index].subject ?? '', snapshot.data?.schedules[index].room ?? ''
-                     );
-                   },
-                 ),
-                 Padding(
-                   padding: const EdgeInsets.only(top:8.0),
-                   child: Container(
-                     height: 0.5,
-                     decoration: const BoxDecoration(
-                       color: Color(0xFF415094),
-                     ),
-                   ),
-                 )
-               ],
-             );
-
-               //Text(AppFunction.getAmPm(snapshot.data.schedules[0].startTime)+' - '+AppFunction.getAmPm(snapshot.data.schedules[0].endTime));
-
-           }else{
-             return const Text("");
-           }
-
-         }else{
-           return const ShimmerList(height: 100,itemCount: 7,);
-         }
+              //Text(AppFunction.getAmPm(snapshot.data.schedules[0].startTime)+' - '+AppFunction.getAmPm(snapshot.data.schedules[0].endTime));
+            } else {
+              return const Text("");
+            }
+          } else {
+            return const ShimmerList(
+              height: 100,
+              itemCount: 7,
+            );
+          }
         },
       ),
     );
   }
 
-  Future<ScheduleList> fetchRoutine(dynamic id,String title) async {
-    final response =
-    await http.get(Uri.parse(EdusApi.getRoutineUrl(id)),headers: Utils.setHeader(_token.toString()));
+  Future<ScheduleList> fetchRoutine(dynamic id, String title) async {
+    final response = await http.get(Uri.parse(EdusApi.getRoutineUrl(id)),
+        headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
-
       var jsonData = json.decode(response.body);
       // If server returns an OK response, parse the JSON.
       // print(jsonData);
@@ -151,9 +164,11 @@ class _ClassRoutineState extends State<RoutineRow> {
     }
   }
 
-  Future<ScheduleList> fetchRoutineByClsSec(dynamic id,String title) async {
-    final response =
-    await http.get(Uri.parse(EdusApi.getRoutineByClassAndSection(id,classCode,sectionCode)),headers: Utils.setHeader(_token.toString()));
+  Future<ScheduleList> fetchRoutineByClsSec(dynamic id, String title) async {
+    final response = await http.get(
+        Uri.parse(
+            EdusApi.getRoutineByClassAndSection(id, classCode, sectionCode)),
+        headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
       var jsonData = json.decode(response.body);
@@ -165,4 +180,3 @@ class _ClassRoutineState extends State<RoutineRow> {
     }
   }
 }
-

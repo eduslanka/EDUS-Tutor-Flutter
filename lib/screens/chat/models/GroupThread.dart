@@ -56,7 +56,7 @@ class GroupThread {
         "deleted_at": deletedAt,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-        "conversation": conversation == null ? null : conversation?.toJson(),
-        "user": user == null ? null : user?.toJson(),
+        "conversation": conversation?.toJson(),
+        "user": user?.toJson(),
       };
 }

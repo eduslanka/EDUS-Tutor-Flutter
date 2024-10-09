@@ -24,7 +24,7 @@ class StudentStudyMaterialMain extends StatefulWidget {
   String? id;
   String? type;
 
-  StudentStudyMaterialMain({Key? key, this.id, this.type}) : super(key: key);
+  StudentStudyMaterialMain({super.key, this.id, this.type});
 
   @override
   _StudentStudyMaterialMainState createState() =>
@@ -46,7 +46,9 @@ class _StudentStudyMaterialMainState extends State<StudentStudyMaterialMain> {
       setState(() {
         _id = idValue;
         assignments = fetchAssignment(
-            widget.id != null ? int.parse(widget.id ?? '') : int.parse(idValue ?? ''),
+            widget.id != null
+                ? int.parse(widget.id ?? '')
+                : int.parse(idValue ?? ''),
             _userController.studentRecord.value.records?.first.id ?? 0,
             widget.type ?? '');
       });
@@ -80,7 +82,9 @@ class _StudentStudyMaterialMainState extends State<StudentStudyMaterialMain> {
                 _userController.selectedRecord.value = record;
                 setState(() {
                   assignments = fetchAssignment(
-                      widget.id != null ? int.parse(widget.id ?? '') : int.parse(_id ?? ''),
+                      widget.id != null
+                          ? int.parse(widget.id ?? '')
+                          : int.parse(_id ?? ''),
                       record.id ?? 0,
                       widget.type ?? '');
                 });
@@ -93,13 +97,14 @@ class _StudentStudyMaterialMainState extends State<StudentStudyMaterialMain> {
               child: FutureBuilder<UploadedContentList>(
                 future: assignments,
                 builder: (context, snapshot) {
-                  if (snapshot.hasData && snapshot != null) {
+                  if (snapshot.hasData) {
                     if (snapshot.data!.uploadedContents.isNotEmpty) {
                       return ListView.builder(
                         itemCount: snapshot.data?.uploadedContents.length ?? 0,
                         itemBuilder: (context, index) {
                           return StudyMaterialListRow(
-                              snapshot.data?.uploadedContents[index] ?? UploadedContent());
+                              snapshot.data?.uploadedContents[index] ??
+                                  UploadedContent());
                         },
                       );
                     } else {

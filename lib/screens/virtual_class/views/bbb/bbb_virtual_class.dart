@@ -19,7 +19,7 @@ import '../../models/virtual_class_model.dart';
 
 class BBBVirtualClass extends StatefulWidget {
   final String? type;
-  const BBBVirtualClass({Key? key, this.type}) : super(key: key);
+  const BBBVirtualClass({super.key, this.type});
   @override
   State<BBBVirtualClass> createState() => _BBBVirtualClassState();
 }
@@ -89,7 +89,8 @@ class _BBBVirtualClassState extends State<BBBVirtualClass> {
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     itemCount: snapshot.data?.data?.meetings?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return BBBMeetingRow(snapshot.data?.data?.meetings?[index] ?? Meeting());
+                      return BBBMeetingRow(
+                          snapshot.data?.data?.meetings?[index] ?? Meeting());
                     },
                   );
                 } else {
@@ -104,12 +105,12 @@ class _BBBVirtualClassState extends State<BBBVirtualClass> {
   }
 
   Future<VirtualClass> getAllMeeting({int? recordId}) async {
-    final _url = widget.type == "class"
+    final url = widget.type == "class"
         ? Uri.parse(EdusApi.getVirtualClass(recordId ?? 0, 'bbb'))
         : Uri.parse(EdusApi.getVirtualMeeting('bbb'));
 
     final response =
-        await http.get(_url, headers: Utils.setHeader(_token.toString()));
+        await http.get(url, headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -123,7 +124,7 @@ class _BBBVirtualClassState extends State<BBBVirtualClass> {
 class BBBMeetingRow extends StatelessWidget {
   final Meeting meeting;
 
-  const BBBMeetingRow(this.meeting, {Key? key}) : super(key: key);
+  const BBBMeetingRow(this.meeting, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -238,7 +239,9 @@ class BBBMeetingRow extends StatelessWidget {
                       height: 10.0,
                     ),
                     Text(
-                      DateFormat.yMMMd().add_jm().format(meeting.startTime ?? DateTime(2000)),
+                      DateFormat.yMMMd()
+                          .add_jm()
+                          .format(meeting.startTime ?? DateTime(2000)),
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ],
@@ -289,7 +292,8 @@ class BBBMeetingRow extends StatelessWidget {
                     onPressed: () async {
                       if (meeting.status == "join" ||
                           meeting.status == "started") {
-                        await meetingJoin(meeting.meetingId ?? '').then((value) {
+                        await meetingJoin(meeting.meetingId ?? '')
+                            .then((value) {
                           Navigator.push(
                               context,
                               ScaleRoute(

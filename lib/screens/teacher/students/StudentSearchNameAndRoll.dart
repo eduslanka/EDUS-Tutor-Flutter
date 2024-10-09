@@ -21,7 +21,8 @@ class StudentSearchNameRoll extends StatefulWidget {
   String? url;
   String? token;
 
-  StudentSearchNameRoll({Key? key, this.name, this.roll, this.url, this.token}) : super(key: key);
+  StudentSearchNameRoll(
+      {super.key, this.name, this.roll, this.url, this.token});
 
   @override
   // ignore: no_logic_in_create_state

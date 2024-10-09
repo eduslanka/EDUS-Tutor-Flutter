@@ -23,26 +23,24 @@ class KhaltiInvoicePayment extends StatelessWidget {
   final String? amount;
   final String? transactionId;
 
-  const KhaltiInvoicePayment({Key? key,
+  const KhaltiInvoicePayment({
+    super.key,
     this.email,
     this.method,
     this.amount,
     this.transactionId,
-  }) : super(key: key);
-
-
+  });
 
   @override
   Widget build(BuildContext context) {
-
-    List<Widget> _tabs = [
+    List<Widget> tabs = [
       const Tab(text: 'Wallet Payment'),
       const Tab(text: 'EBanking'),
       const Tab(text: 'MBanking'),
     ];
 
     return DefaultTabController(
-      length: _tabs.length,
+      length: tabs.length,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
@@ -53,7 +51,7 @@ class KhaltiInvoicePayment extends StatelessWidget {
                 image: AssetImage(AppConfig.appToolbarBackground),
                 fit: BoxFit.cover,
               ),
-              color: Color(0xff053EFF),
+              color: const Color(0xff053EFF),
             ),
           ),
           title: Container(
@@ -99,7 +97,7 @@ class KhaltiInvoicePayment extends StatelessWidget {
             labelColor: Colors.white,
             unselectedLabelColor: Colors.grey,
             labelPadding: EdgeInsets.zero,
-            tabs: _tabs,
+            tabs: tabs,
           ),
         ),
         body: TabBarView(
@@ -134,12 +132,13 @@ class WalletPayment extends StatefulWidget {
   final String? amount;
   final String? transactionId;
 
-  const WalletPayment({Key? key,
+  const WalletPayment({
+    super.key,
     this.email,
     this.method,
     this.amount,
     this.transactionId,
-  }) : super(key: key);
+  });
 
   @override
   State<WalletPayment> createState() => _WalletPaymentState();
@@ -211,19 +210,19 @@ class _WalletPaymentState extends State<WalletPayment> {
                   context: context,
                   barrierDismissible: false,
                   builder: (context) {
-                    String _otp = '';
+                    String otp = '';
                     return AlertDialog(
                       title: const Text('OTP Sent!'),
                       content: TextField(
                         decoration: const InputDecoration(
                           label: Text('OTP Code'),
                         ),
-                        onChanged: (v) => _otp = v,
+                        onChanged: (v) => otp = v,
                       ),
                       actions: [
                         SimpleDialogOption(
                           child: const Text('OK'),
-                          onPressed: () => Navigator.pop(context, _otp),
+                          onPressed: () => Navigator.pop(context, otp),
                         )
                       ],
                     );
@@ -260,10 +259,10 @@ class _WalletPaymentState extends State<WalletPayment> {
                     if (jsonString['state'] == "Complete") {
                       Utils.showToast("Payment state: ${jsonString['state']}");
 
-                      final StudentFeesController _studentFeesController =
+                      final StudentFeesController studentFeesController =
                           Get.put(StudentFeesController());
 
-                      await _studentFeesController.confirmPaymentCallBack(
+                      await studentFeesController.confirmPaymentCallBack(
                           widget.transactionId.toString());
                     }
                   } else {
@@ -293,11 +292,12 @@ class Banking extends StatefulWidget {
   final BankPaymentType paymentType;
 
   const Banking(
-      {Key? key, this.email,
+      {super.key,
+      this.email,
       this.method,
       this.amount,
       this.transactionId,
-      required this.paymentType}) : super(key: key);
+      required this.paymentType});
 
   @override
   State<Banking> createState() => _BankingState();
@@ -332,19 +332,19 @@ class _BankingState extends State<Banking> with AutomaticKeepAliveClientMixin {
                     context: context,
                     barrierDismissible: false,
                     builder: (context) {
-                      String _mobile = '';
+                      String mobile0 = '';
                       return AlertDialog(
                         title: const Text('Enter Mobile Number'),
                         content: TextField(
                           decoration: const InputDecoration(
                             label: Text('Mobile Number'),
                           ),
-                          onChanged: (v) => _mobile = v,
+                          onChanged: (v) => mobile0 = v,
                         ),
                         actions: [
                           SimpleDialogOption(
                             child: const Text('OK'),
-                            onPressed: () => Navigator.pop(context, _mobile),
+                            onPressed: () => Navigator.pop(context, mobile0),
                           )
                         ],
                       );

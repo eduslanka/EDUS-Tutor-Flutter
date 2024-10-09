@@ -26,7 +26,7 @@ import 'package:edus_tutor/utils/permission_check.dart';
 class LeaveStudentApply extends StatefulWidget {
   String id;
 
-  LeaveStudentApply(this.id, {Key? key}) : super(key: key);
+  LeaveStudentApply(this.id, {super.key});
 
   @override
   _LeaveStudentApplyState createState() => _LeaveStudentApplyState();
@@ -63,7 +63,9 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
         _token = value ?? '';
         Utils.getStringValue('id').then((value) {
           setState(() {
-            _id = widget.id != null ? int.parse(widget.id) : int.parse(value ?? '');
+            _id = widget.id != null
+                ? int.parse(widget.id)
+                : int.parse(value ?? '');
             date = DateTime.now();
             initDateTime =
                 '${date?.year}-${getAbsoluteDate(date?.month ?? 0)}-${getAbsoluteDate(date?.day ?? 0)}';
@@ -74,8 +76,7 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
                 if (value.types.isNotEmpty) {
                   leaveAvailable = true;
                   leaveId = value.types.isNotEmpty ? value.types[0].id : 0;
-                  leaveType =
-                      value.types.isNotEmpty ? value.types[0].type : '';
+                  leaveType = value.types.isNotEmpty ? value.types[0].type : '';
                 }
               });
             });
@@ -162,7 +163,9 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
                                     const EdgeInsets.only(left: 8.0, top: 8.0),
                                 child: Text(
                                   applyDate ?? 'Apply Date'.tr,
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ),
                             ),
@@ -230,7 +233,9 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
                                     const EdgeInsets.only(left: 8.0, top: 8.0),
                                 child: Text(
                                   fromDate ?? 'From Date'.tr,
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ),
                             ),
@@ -298,7 +303,9 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
                                     const EdgeInsets.only(left: 8.0, top: 8.0),
                                 child: Text(
                                   toDate ?? 'To Date'.tr,
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ),
                             ),
@@ -338,7 +345,9 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
                                   _file == null
                                       ? 'Select file'.tr
                                       : _file?.path.split('/').last ?? '',
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                   maxLines: 2,
                                 ),
                               ),
@@ -371,7 +380,8 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
                         decoration: InputDecoration(
                             hintText: "Reason".tr,
                             labelText: "Reason".tr,
-                            labelStyle: Theme.of(context).textTheme.headlineMedium,
+                            labelStyle:
+                                Theme.of(context).textTheme.headlineMedium,
                             errorStyle: const TextStyle(
                                 color: Colors.blue, fontSize: 15.0),
                             border: OutlineInputBorder(
@@ -454,12 +464,9 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
             .headlineMedium
             ?.copyWith(fontSize: ScreenUtil().setSp(14)),
         onChanged: (value) {
-
-
           setState(() {
             leaveType = value.toString();
             leaveId = getLeaveId(leaves, value.toString());
-
           });
         },
         value: leaveType,
@@ -515,7 +522,6 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
       EdusApi.userApplyLeaveStore,
       data: formData,
       options: Options(
-
         headers: {
           "Accept": "application/json",
           "Authorization": _token.toString(),
@@ -524,7 +530,7 @@ class _LeaveStudentApplyState extends State<LeaveStudentApply> {
       onSendProgress: (received, total) {
         if (total != -1) {
           // progress = (received / total * 100).toDouble();
-          print((received / total * 100).toStringAsFixed(0) + '%');
+          print('${(received / total * 100).toStringAsFixed(0)}%');
         }
       },
     ).catchError((e) {

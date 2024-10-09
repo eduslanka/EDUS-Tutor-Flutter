@@ -20,7 +20,7 @@ class TimeLineView extends StatelessWidget {
   var progress = "";
   Timeline timeline;
 
-  TimeLineView(this.timeline, {Key? key}) : super(key: key);
+  TimeLineView(this.timeline, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +184,7 @@ class TimeLineView extends StatelessWidget {
           .download(EdusApi.root + url, dirloc + AppFunction.getExtention(url),
               onReceiveProgress: (receivedBytes, totalBytes) {
         progress =
-            ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";
+            "${((receivedBytes / totalBytes) * 100).toStringAsFixed(0)}%";
       });
     } catch (e, t) {
       debugPrint(e.toString());
@@ -198,7 +198,7 @@ class TimeLineView extends StatelessWidget {
   void permissionsDenied(BuildContext context) {
     showDialog(
         context: context,
-        builder: (BuildContext _context) {
+        builder: (BuildContext context) {
           return SimpleDialog(
             title: const Text("Permission denied"),
             children: <Widget>[

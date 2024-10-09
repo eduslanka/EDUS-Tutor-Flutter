@@ -21,7 +21,7 @@ class ChatMessageWidget extends StatefulWidget {
   final bool? showActions;
   final int? activeStatus;
   const ChatMessageWidget({
-    Key? key,
+    super.key,
     this.name,
     this.chatMessage,
     this.id,
@@ -29,7 +29,7 @@ class ChatMessageWidget extends StatefulWidget {
     this.menuVisible,
     this.showActions,
     this.activeStatus,
-  }) : super(key: key);
+  });
   @override
   _ChatMessageWidgetState createState() => _ChatMessageWidgetState();
 }

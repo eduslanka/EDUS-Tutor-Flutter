@@ -31,7 +31,7 @@ class EvaluateScreen extends StatefulWidget {
   final String? totalMarks;
 
   const EvaluateScreen(
-      {Key? key,
+      {super.key,
       this.studentName,
       this.marks,
       this.teacherComment,
@@ -39,8 +39,7 @@ class EvaluateScreen extends StatefulWidget {
       this.studentId,
       this.homeworkId,
       this.files,
-      this.totalMarks})
-      : super(key: key);
+      this.totalMarks});
 
   @override
   _EvaluateScreenState createState() => _EvaluateScreenState();
@@ -174,7 +173,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                                   TextStyle(fontSize: ScreenUtil().setSp(14))),
                           radioButtonValue: (value) {
                             setState(() {
-                              selectedComment = '$value';
+                              selectedComment = value;
                             });
                           },
                           selectedColor:
@@ -233,7 +232,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                                     fontSize: ScreenUtil().setSp(14))),
                             radioButtonValue: (value) {
                               setState(() {
-                                selectedStatus = '$value';
+                                selectedStatus = value;
                               });
                             },
                             selectedColor:
@@ -261,6 +260,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5),
                   child: GestureDetector(
+                    onTap: evaluateSubmit,
                     child: Container(
                       alignment: Alignment.center,
                       width: MediaQuery.of(context).size.width * 0.4,
@@ -274,7 +274,6 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                             ?.copyWith(color: Colors.white),
                       ),
                     ),
-                    onTap: evaluateSubmit,
                   ),
                 ),
                 Padding(
@@ -298,8 +297,8 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => DownloadViewer(
                                           title: 'PDF',
-                                          filePath: EdusApi.root +
-                                              '${widget.files?[index]}',
+                                          filePath:
+                                              '${EdusApi.root}${widget.files?[index]}',
                                         )));
                               },
                               child: Stack(
@@ -335,7 +334,7 @@ class _EvaluateScreenState extends State<EvaluateScreen> {
                               ),
                             )
                           : ExtendedImage.network(
-                              EdusApi.root + '${widget.files?[index]}',
+                              '${EdusApi.root}${widget.files?[index]}',
                               fit: BoxFit.cover,
                               cache: true,
                               mode: ExtendedImageMode.gesture,

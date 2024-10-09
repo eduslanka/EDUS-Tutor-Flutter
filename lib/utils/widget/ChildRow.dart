@@ -14,7 +14,7 @@ class ChildRow extends StatefulWidget {
   Child child;
   String token;
 
-  ChildRow(this.child, this.token, {Key? key}) : super(key: key);
+  ChildRow(this.child, this.token, {super.key});
 
   @override
   // ignore: no_logic_in_create_state
@@ -31,7 +31,7 @@ class _ChildRowState extends State<ChildRow> {
   Widget build(BuildContext context) {
     String image = child.photo == null || child.photo == ""
         ? "${AppConfig.domainName}/public/uploads/staff/demo/staff.jpg"
-        : EdusApi.root + '${child.photo}';
+        : '${EdusApi.root}${child.photo}';
     return InkWell(
       onTap: () {
         Get.to(() => DashboardScreen(
@@ -45,7 +45,7 @@ class _ChildRowState extends State<ChildRow> {
               childId: child.id,
             ));
       },
-      splashColor: Color(0xff053EFF),
+      splashColor: const Color(0xff053EFF),
       child: Column(
         children: <Widget>[
           ListTile(

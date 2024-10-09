@@ -62,7 +62,7 @@ class ChatGroupOpenController extends GetxController {
 
   Future<ChatGroupOpenModel?> getAll() async {
     debugPrint(groupId);
-    
+
     ChatGroupOpenModel? sourceData;
     try {
       final result = await http.get(
@@ -79,7 +79,8 @@ class ChatGroupOpenController extends GetxController {
 
         chatGroupModel.value = sourceData;
 
-        selectedUser.value = chatGroupModel.value.group?.users?.first ?? ChatUser();
+        selectedUser.value =
+            chatGroupModel.value.group?.users?.first ?? ChatUser();
 
         selectedGroupRole.value = groupRoles.first;
 
@@ -103,19 +104,19 @@ class ChatGroupOpenController extends GetxController {
 
   void getAddPeopleDialog() {
     members.clear();
-    final ChatController _chatController = Get.put(ChatController());
+    final ChatController chatController = Get.put(ChatController());
 
     List<int> usersOne = [];
     List<int> usersTwo = [];
 
-    for (var users in _chatController.chatModel.value.users ?? []) {
+    for (var users in chatController.chatModel.value.users ?? []) {
       usersOne.add(users.id);
     }
     for (var groupUsers in chatGroupModel.value.group!.users!) {
       usersTwo.add(groupUsers.id ?? 0);
     }
     usersOne.removeWhere((element) => usersTwo.contains(element));
-    for (var element in _chatController.chatModel.value.users ?? []) {
+    for (var element in chatController.chatModel.value.users ?? []) {
       if (usersOne.contains(element.id)) {
         members.add(element);
       }
@@ -162,7 +163,6 @@ class ChatGroupOpenController extends GetxController {
         "user_id": selectedUser.value.id,
       };
 
-
       final response = await http.post(
         Uri.parse(EdusApi.chatGroupAssignRole),
         body: jsonEncode(jsonData),
@@ -195,8 +195,8 @@ class ChatGroupOpenController extends GetxController {
           var jsonData = jsonDecode(response.body);
 
           if (jsonData['notPermitted'] == false) {
-            final ChatController _chatController = Get.put(ChatController());
-            await _chatController.getAllChats().then((value) => Get.back());
+            final ChatController chatController = Get.put(ChatController());
+            await chatController.getAllChats().then((value) => Get.back());
           } else {
             Utils.showToast("You are not allowed to delete this chat");
           }
@@ -216,7 +216,6 @@ class ChatGroupOpenController extends GetxController {
         "user_id": userId,
         "group_id": groupId,
       };
-
 
       final response = await http.post(
         Uri.parse(EdusApi.groupRemovePeople),
@@ -245,13 +244,11 @@ class ChatGroupOpenController extends GetxController {
         "user_id": selectedAddUser.value.id,
       };
 
-
       final response = await http.post(
         Uri.parse(EdusApi.groupAddPeople),
         body: jsonEncode(jsonData),
         headers: Utils.setHeader(_token.toString()),
       );
-
 
       if (response.statusCode == 200) {
         await getAll();
@@ -273,17 +270,15 @@ class ChatGroupOpenController extends GetxController {
         "user_id": id.value,
       };
 
-
       final response = await http.post(
         Uri.parse(EdusApi.chatGroupLeave),
         body: jsonEncode(jsonData),
         headers: Utils.setHeader(_token.toString()),
       );
 
-
       if (response.statusCode == 200) {
-        final ChatController _chatController = Get.put(ChatController());
-        await _chatController.getAllChats().then((value) => Get.back());
+        final ChatController chatController = Get.put(ChatController());
+        await chatController.getAllChats().then((value) => Get.back());
       } else {
         throw Exception('failed to load');
       }
@@ -306,7 +301,6 @@ class ChatGroupOpenController extends GetxController {
         body: jsonEncode(data),
         headers: Utils.setHeader(token.value.toString()),
       );
-
 
       if (response.statusCode == 200) {
       } else {

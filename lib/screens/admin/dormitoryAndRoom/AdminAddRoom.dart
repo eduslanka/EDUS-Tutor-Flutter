@@ -18,7 +18,7 @@ import 'package:edus_tutor/utils/model/AdminDormitory.dart';
 import 'package:edus_tutor/utils/model/RoomType.dart';
 
 class AddRoom extends StatefulWidget {
-  const AddRoom({Key? key}) : super(key: key);
+  const AddRoom({super.key});
 
   @override
   _AddRoomState createState() => _AddRoomState();
@@ -119,7 +119,8 @@ class _AddRoomState extends State<AddRoom> {
                 if (snapshot.hasData) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 10),
-                    child: getRoomTypeDropdown(context, snapshot.data?.rooms ?? []),
+                    child: getRoomTypeDropdown(
+                        context, snapshot.data?.rooms ?? []),
                   );
                 } else {
                   return Container();
@@ -186,10 +187,13 @@ class _AddRoomState extends State<AddRoom> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
-            selectedRoom = value as String?;
+            selectedRoom = value;
             selectedRoomId = getCode(roomList, value ?? '');
           });
         },
@@ -217,11 +221,15 @@ class _AddRoomState extends State<AddRoom> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
-            selectedDormitory = value as String?;
-            selectedDormitoryId = getCode(dormitoryList.cast<AdminRoomType>(), value ?? '');
+            selectedDormitory = value;
+            selectedDormitoryId =
+                getCode(dormitoryList.cast<AdminRoomType>(), value ?? '');
           });
         },
         value: selectedDormitory,

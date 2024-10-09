@@ -29,7 +29,7 @@ class StudyMaterialListRow extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
   var received;
 
-  StudyMaterialListRow(this.uploadedContent, {Key? key}) : super(key: key);
+  StudyMaterialListRow(this.uploadedContent, {super.key});
 
   Random random = Random();
 
@@ -94,8 +94,7 @@ class StudyMaterialListRow extends StatelessWidget {
                     const SizedBox(
                       height: 5.0,
                     ),
-                    uploadedContent.description.toString() == null ||
-                            uploadedContent.description.toString() == "null"
+                    uploadedContent.description.toString() == "null"
                         ? const SizedBox.shrink()
                         : Text(
                             uploadedContent.description.toString(),
@@ -307,7 +306,7 @@ class StudyMaterialListRow extends StatelessWidget {
           onReceiveProgress: (receivedBytes, totalBytes) async {
         received = ((receivedBytes / totalBytes) * 100);
         progress =
-            ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";
+            "${((receivedBytes / totalBytes) * 100).toStringAsFixed(0)}%";
         print("progress::::::::::::::: $received");
 
         if (received == 100.0) {

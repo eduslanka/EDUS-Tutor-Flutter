@@ -20,7 +20,7 @@ import 'package:edus_tutor/utils/model/Staff.dart';
 import 'package:edus_tutor/utils/model/Student.dart';
 
 class AddMember extends StatefulWidget {
-  const AddMember({Key? key}) : super(key: key);
+  const AddMember({super.key});
 
   @override
   _AddMemberState createState() => _AddMemberState();
@@ -83,7 +83,8 @@ class _AddMemberState extends State<AddMember> {
                 classes?.then((value) {
                   selectedClass = value.classes[0].name;
                   selectedClassId = value.classes[0].id;
-                  sections = getAllSection(int.parse(_id ?? ''), selectedClassId);
+                  sections =
+                      getAllSection(int.parse(_id ?? ''), selectedClassId);
                   sections?.then((sectionValue) {
                     selectedSection = sectionValue.sections[0].name;
                     selectedSectionId = sectionValue.sections[0].id;
@@ -139,9 +140,7 @@ class _AddMemberState extends State<AddMember> {
               future: classes,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return isStudentCategory
-                      ? getClassDropdown()
-                      : Container();
+                  return isStudentCategory ? getClassDropdown() : Container();
                 } else {
                   return Container();
                 }
@@ -256,7 +255,10 @@ class _AddMemberState extends State<AddMember> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
             selectedCategory = '$value';
@@ -309,14 +311,16 @@ class _AddMemberState extends State<AddMember> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
-
-           // AdminClasses temp = value as AdminClasses;
+            // AdminClasses temp = value as AdminClasses;
             adminClasses = value;
             selectedClass = adminClasses?.name;
-           // selectedClassId = getCode(classes, '$value');
+            // selectedClassId = getCode(classes, '$value');
             selectedClassId = adminClasses?.id;
 
             students = getAllStudent();
@@ -352,7 +356,10 @@ class _AddMemberState extends State<AddMember> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
             selectedSection = '$value';
@@ -391,7 +398,10 @@ class _AddMemberState extends State<AddMember> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
             selectedStaff = '$value';
@@ -432,7 +442,10 @@ class _AddMemberState extends State<AddMember> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
             selectedStudent = '$value';
@@ -446,8 +459,7 @@ class _AddMemberState extends State<AddMember> {
   }
 
   Future<LibraryMemberList> getAllCategory() async {
-    final response = await http.get(
-        Uri.parse(EdusApi.getLibraryMemberCategory),
+    final response = await http.get(Uri.parse(EdusApi.getLibraryMemberCategory),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

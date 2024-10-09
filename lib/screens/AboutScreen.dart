@@ -15,7 +15,7 @@ import 'package:edus_tutor/utils/server/About.dart';
 
 // ignore: must_be_immutable
 class AboutScreen extends StatefulWidget {
-  const AboutScreen({Key? key}) : super(key: key);
+  const AboutScreen({super.key});
 
   @override
   _AboutScreenState createState() => _AboutScreenState();
@@ -70,29 +70,35 @@ class _AboutScreenState extends State<AboutScreen> {
                           ),
                         ),
                       ),
-                      placeholder: (context, url) => const CupertinoActivityIndicator(),
+                      placeholder: (context, url) =>
+                          const CupertinoActivityIndicator(),
                       errorWidget: (context, url, error) => CachedNetworkImage(
                         imageUrl:
-                            EdusApi.root + 'public/uploads/staff/demo/staff.jpg',
+                            '${EdusApi.root}public/uploads/staff/demo/staff.jpg',
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: imageProvider,
                               fit: BoxFit.cover,
                             ),
-                            borderRadius: const BorderRadius.all(Radius.circular(50)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(50)),
                           ),
                         ),
                         placeholder: (context, url) =>
                             const CupertinoActivityIndicator(),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
                     ),
                     title: Text(
                       snapshot.data?.schoolName ?? '',
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontSize: ScreenUtil().setSp(15),
-                          color: Color(0xff053EFF)),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium
+                          ?.copyWith(
+                              fontSize: ScreenUtil().setSp(15),
+                              color: const Color(0xff053EFF)),
                     ),
                   ),
                   SizedBox(
@@ -102,7 +108,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     snapshot.data?.mainDescription ?? '',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontSize: ScreenUtil().setSp(15),
-                        color: Color(0xff053EFF)),
+                        color: const Color(0xff053EFF)),
                   ),
                   SizedBox(
                     height: 20.h,
@@ -183,8 +189,9 @@ class _AboutScreenState extends State<AboutScreen> {
                             textAlign: TextAlign.start,
                             style: Theme.of(context).textTheme.titleMedium),
                       ),
-                      const SizedBox(height: 70,),
-
+                      const SizedBox(
+                        height: 70,
+                      ),
                     ],
                   ),
                 ],

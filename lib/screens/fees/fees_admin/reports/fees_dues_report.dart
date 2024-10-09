@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 import 'fees_report_search_widget.dart';
 
 class AdminFeesDueReport extends StatefulWidget {
-  const AdminFeesDueReport({Key? key}) : super(key: key);
+  const AdminFeesDueReport({super.key});
 
   @override
   _AdminFeesDueReportState createState() => _AdminFeesDueReportState();
@@ -28,17 +28,15 @@ class _AdminFeesDueReportState extends State<AdminFeesDueReport> {
         body: jsonEncode(data), headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
-
       try {
         var jsonData = jsonDecode(response.body);
 
         return FeesDueReportModel.fromJson(jsonData);
-      }catch(e,tr){
+      } catch (e, tr) {
         debugPrint("$e");
         tr.printInfo();
         return FeesDueReportModel.fromJson({});
       }
-
     } else {
       throw Exception('Failed to load');
     }
@@ -65,7 +63,7 @@ class _AdminFeesDueReportState extends State<AdminFeesDueReport> {
         children: [
           FeesReportSearchWidget(
             onTap: (dateTime, classId, sectionId) {
-              if (dateTime == null || dateTime == "") {
+              if (dateTime == "") {
                 Utils.showToast("Select a date first");
               } else {
                 Map data = {
@@ -126,7 +124,7 @@ class _AdminFeesDueReportState extends State<AdminFeesDueReport> {
 class PaymentReportWidget extends StatelessWidget {
   final FeesDue feesDue;
 
-  const PaymentReportWidget(this.feesDue, {Key? key}) : super(key: key);
+  const PaymentReportWidget(this.feesDue, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -228,8 +226,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Amount'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w600, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w600, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -252,8 +253,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Paid'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w600, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w600, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -276,8 +280,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Waiver'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w600, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w600, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -300,8 +307,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Fine'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w600, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w600, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -324,8 +334,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Balance'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w600, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w600, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,

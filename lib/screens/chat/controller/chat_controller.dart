@@ -69,7 +69,7 @@ class ChatController extends GetxController {
     try {
       await getIdToken().then((value) async {
         final response = await http.get(
-            Uri.parse(EdusApi.changeChatStatus + "/$type"),
+            Uri.parse("${EdusApi.changeChatStatus}/$type"),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
           // status = true;
@@ -88,7 +88,7 @@ class ChatController extends GetxController {
       isStatusLoading(true);
       await getIdToken().then((value) async {
         final response = await http.get(
-            Uri.parse(EdusApi.getChatStatus + "/${id.value}"),
+            Uri.parse("${EdusApi.getChatStatus}/${id.value}"),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
           var jsonData = jsonDecode(response.body);
@@ -123,7 +123,7 @@ class ChatController extends GetxController {
       isSearching(true);
       await getIdToken().then((value) async {
         final response = await http.get(
-            Uri.parse(EdusApi.searchChatUser + "?keywords=$keyword"),
+            Uri.parse("${EdusApi.searchChatUser}?keywords=$keyword"),
             headers: Utils.setHeader(_token.toString()));
         if (response.statusCode == 200) {
           var jsonData = jsonDecode(response.body);
@@ -206,8 +206,6 @@ class ChatController extends GetxController {
   Future invitation(to) async {
     EasyLoading.show(status: 'Loading...');
     try {
-
-
       return;
     } catch (e) {
       // throw Exception('${e.toString()}');
@@ -250,14 +248,12 @@ class ChatController extends GetxController {
     try {
       final response = await http.get(
         Uri.parse(
-          EdusApi.chatUserBlockAction + "/$action/$userId",
+          "${EdusApi.chatUserBlockAction}/$action/$userId",
         ),
         headers: Utils.setHeader(_token.value.toString()),
       );
 
-
       if (response.statusCode == 200) {
-
         await getAllBlockedUsers();
       } else {
         throw Exception('failed to load');

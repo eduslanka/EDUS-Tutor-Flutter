@@ -8,7 +8,7 @@ import 'package:edus_tutor/utils/model/ClassExam.dart';
 class ClassExamResultRow extends StatefulWidget {
   ClassExamResult result;
 
-  ClassExamResultRow(this.result, {Key? key}) : super(key: key);
+  ClassExamResultRow(this.result, {super.key});
 
   @override
   // ignore: no_logic_in_create_state

@@ -10,7 +10,7 @@ class AttendanceHomeScreen extends StatefulWidget {
   final _titles;
   final _images;
 
-  const AttendanceHomeScreen(this._titles, this._images, {Key? key}) : super(key: key);
+  const AttendanceHomeScreen(this._titles, this._images, {super.key});
 
   @override
   _HomeState createState() => _HomeState(_titles, _images);
@@ -41,8 +41,8 @@ class _HomeState extends State<AttendanceHomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: GridView.builder(
           itemCount: _titles.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
           itemBuilder: (context, index) {
             return CustomWidget(
               index: index,

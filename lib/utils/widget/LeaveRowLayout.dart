@@ -27,7 +27,7 @@ import '../permission_check.dart';
 class LeaveRowLayout extends StatefulWidget {
   LeaveAdmin leave;
 
-  LeaveRowLayout(this.leave, {Key? key}) : super(key: key);
+  LeaveRowLayout(this.leave, {super.key});
 
   @override
   _LeaveRowLayoutState createState() => _LeaveRowLayoutState();
@@ -224,7 +224,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                 children: <Widget>[
                                   Expanded(
                                     child: Text(
-                                      'Reason: ' + '${widget.leave.reason}',
+                                      'Reason: ' '${widget.leave.reason}',
                                       style: Theme.of(context)
                                           .textTheme
                                           .headlineSmall,
@@ -236,8 +236,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                 children: <Widget>[
                                   Expanded(
                                     child: Text(
-                                      'Applied by: ' +
-                                          '${widget.leave.fullName}',
+                                      'Applied by: ' '${widget.leave.fullName}',
                                       style: Theme.of(context)
                                           .textTheme
                                           .headlineSmall,
@@ -245,7 +244,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                   ),
                                 ],
                               ),
-                              BottomLine(),
+                              const BottomLine(),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10.0),
                                 child: Row(
@@ -413,7 +412,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                         ),
                                       ),
                                     ),
-                              BottomLine(),
+                              const BottomLine(),
                               Padding(
                                 padding: const EdgeInsets.only(top: 20.0),
                                 child: Text(
@@ -440,7 +439,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                     radioStr = '$val';
                                   });
                                 },
-                                activeColor: Color(0xff053EFF),
+                                activeColor: const Color(0xff053EFF),
                                 selected: true,
                                 dense: true,
                               ),
@@ -458,7 +457,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                     radioStr = '$val';
                                   });
                                 },
-                                activeColor: Color(0xff053EFF),
+                                activeColor: const Color(0xff053EFF),
                                 selected: true,
                                 dense: true,
                               ),
@@ -476,7 +475,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                     radioStr = '$val';
                                   });
                                 },
-                                activeColor: Color(0xff053EFF),
+                                activeColor: const Color(0xff053EFF),
                                 selected: true,
                                 dense: true,
                               ),
@@ -489,7 +488,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
                                     height: 50.0,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20.0),
-                                      color: Color(0xff053EFF),
+                                      color: const Color(0xff053EFF),
                                     ),
                                     child: Text(
                                       "Save",
@@ -604,7 +603,7 @@ class _LeaveRowLayoutState extends State<LeaveRowLayout> {
         received = ((receivedBytes / totalBytes) * 100);
         setState(() {
           progress =
-              ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";
+              "${((receivedBytes / totalBytes) * 100).toStringAsFixed(0)}%";
         });
         if (received == 100.0) {
           if (url.contains('.pdf')) {

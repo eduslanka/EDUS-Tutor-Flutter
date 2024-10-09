@@ -8,8 +8,9 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+
 class OnbordingScreen extends StatefulWidget {
-  const OnbordingScreen({Key? key}) : super(key: key);
+  const OnbordingScreen({super.key});
 
   @override
   State<OnbordingScreen> createState() => _OnbordingScreenState();
@@ -28,46 +29,36 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
     'Results are guaranteed',
     'Join now, unlock your full potential!'
   ];
-  List<Widget> subtitle = [
-   
-   
-    
-   
-  ];
-Widget getWidget(int index){
-  if(index==0){
-    return  const Text(
-      'Qualified, verified tutors for high-quality, effective online learning sessions.',
-      style: TextStyle(
-          fontWeight: FontWeight.w400, fontSize: 16, color: Colors.black45),
-      textAlign: TextAlign.center,
-    );
-  }else if(index==1){return  const Text(
-      'Qualified, verified tutors for high-quality, effective online learning sessions.',
-      style: TextStyle(
-          fontWeight: FontWeight.w400, fontSize: 16, color: Colors.black45),
-      textAlign: TextAlign.center,
-    );}else if(index==2){
+  List<Widget> subtitle = [];
+  Widget getWidget(int index) {
+    if (index == 0) {
       return const Text(
-      'Qualified, verified tutors for high-quality, effective online learning sessions.',
-      style: TextStyle(
-          fontWeight: FontWeight.w400, fontSize: 16, color: Colors.black45),
-      textAlign: TextAlign.center,
-    );
-    }else{
-      return  Column(
-        children: [
-           loginButton(),
-           h8,
-          registerButton(),
-          h16,
-          contactUs()
-          
-         
-        ],
+        'Qualified, verified tutors for high-quality, effective online learning sessions.',
+        style: TextStyle(
+            fontWeight: FontWeight.w400, fontSize: 16, color: Colors.black45),
+        textAlign: TextAlign.center,
+      );
+    } else if (index == 1) {
+      return const Text(
+        'Qualified, verified tutors for high-quality, effective online learning sessions.',
+        style: TextStyle(
+            fontWeight: FontWeight.w400, fontSize: 16, color: Colors.black45),
+        textAlign: TextAlign.center,
+      );
+    } else if (index == 2) {
+      return const Text(
+        'Qualified, verified tutors for high-quality, effective online learning sessions.',
+        style: TextStyle(
+            fontWeight: FontWeight.w400, fontSize: 16, color: Colors.black45),
+        textAlign: TextAlign.center,
+      );
+    } else {
+      return Column(
+        children: [loginButton(), h8, registerButton(), h16, contactUs()],
       );
     }
-}
+  }
+
   final SwiperController _swiperController = SwiperController();
 
   int _currentIndex = 0;
@@ -82,7 +73,7 @@ Widget getWidget(int index){
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               h8,
-           //   leaniarBar(),
+              //   leaniarBar(),
               h8,
               Expanded(
                 child: Swiper(
@@ -123,45 +114,64 @@ Widget getWidget(int index){
 
   Widget loginButton() {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Route route;
-          route = MaterialPageRoute(builder: (context) => const LoginScreen());
-            Navigator.pushReplacement(context, route);
+        route = MaterialPageRoute(builder: (context) => const LoginScreen());
+        Navigator.pushReplacement(context, route);
       },
       child: Container(
         width: screenWidth(380, context),
         height: screenHeight(50, context),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: const Color(0xff053EFF)),
-        child: const Center(child: Text('Log in',style: TextStyle(color: Colors.white),)),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            color: const Color(0xff053EFF)),
+        child: const Center(
+            child: Text(
+          'Log in',
+          style: TextStyle(color: Colors.white),
+        )),
       ),
     );
   }
- Widget registerButton() {
+
+  Widget registerButton() {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Route route;
-          route = MaterialPageRoute(builder: (context) => const LaunchWebView(launchUrl: 'https://edustutor.com/register/',title: 'Register',));
-            Navigator.push(context, route);
+        route = MaterialPageRoute(
+            builder: (context) => const LaunchWebView(
+                  launchUrl: 'https://edustutor.com/register/',
+                  title: 'Register',
+                ));
+        Navigator.push(context, route);
       },
       child: Container(
         width: screenWidth(380, context),
         height: screenHeight(50, context),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color:  Colors.white,border: Border.all(color:Colors.black)),
-        child: const Center(child: Text('Register',style: TextStyle(color: Colors.black),)),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            color: Colors.white,
+            border: Border.all(color: Colors.black)),
+        child: const Center(
+            child: Text(
+          'Register',
+          style: TextStyle(color: Colors.black),
+        )),
       ),
     );
   }
+
   Widget centerContainer(String image, String heading, Widget sub) {
-    return Container(
+    return SizedBox(
       width: screenWidth(380, context),
-     // height: screenHeight( 700, context),
+      // height: screenHeight( 700, context),
       child: Column(
         children: [
           h16,
           h16,
           Container(
             width: screenWidth(287, context),
-            height: screenHeight(_currentIndex==3 ? 300: 360, context),
+            height: screenHeight(_currentIndex == 3 ? 300 : 360, context),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(image),
@@ -180,7 +190,8 @@ Widget getWidget(int index){
                   color: Colors.black),
               textAlign: TextAlign.center,
             ),
-          ),h16,
+          ),
+          h16,
           SizedBox(
             width: screenWidth(380, context),
             child: sub,
@@ -201,7 +212,7 @@ Widget getWidget(int index){
         ),
         AnimatedContainer(
           duration: const Duration(milliseconds: 500),
-          width: screenWidth((380 / 4)*(_currentIndex+1), context),
+          width: screenWidth((380 / 4) * (_currentIndex + 1), context),
           height: 6,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15), color: Colors.black),
@@ -210,27 +221,39 @@ Widget getWidget(int index){
     );
   }
 
-Widget contactUs(){
-  return Column(children: [
-    Text('Contact Us'),
-    h16,
-    Row(
-  crossAxisAlignment: CrossAxisAlignment.center,
-  mainAxisAlignment: MainAxisAlignment.center,
+  Widget contactUs() {
+    return Column(
       children: [
-      GestureDetector(
-        onTap: (){
-          // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
-          UrlLauncher.launch('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
-        },
-        child: SvgPicture.asset('assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',height: 30,width: 40,)),
-      w16,
-      GestureDetector(
-        onTap: (){
-          UrlLauncher.launch("tel:+94774487774");
-        },
-        child: SvgPicture.asset('assets/config/phone-call-svgrepo-com.svg',height: 30,width: 40,))
-    ],)
-  ],);
-}
+        const Text('Contact Us'),
+        h16,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                  UrlLauncher.launch(
+                      'https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                },
+                child: SvgPicture.asset(
+                  'assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',
+                  height: 30,
+                  width: 40,
+                )),
+            w16,
+            GestureDetector(
+                onTap: () {
+                  UrlLauncher.launch("tel:+94774487774");
+                },
+                child: SvgPicture.asset(
+                  'assets/config/phone-call-svgrepo-com.svg',
+                  height: 30,
+                  width: 40,
+                ))
+          ],
+        )
+      ],
+    );
+  }
 }

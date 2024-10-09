@@ -13,7 +13,7 @@ import 'fees_report_search_widget.dart';
 import 'package:http/http.dart' as http;
 
 class AdminFeesBalanceReport extends StatefulWidget {
-  const AdminFeesBalanceReport({Key? key}) : super(key: key);
+  const AdminFeesBalanceReport({super.key});
 
   @override
   _AdminFeesBalanceReportState createState() => _AdminFeesBalanceReportState();
@@ -58,7 +58,7 @@ class _AdminFeesBalanceReportState extends State<AdminFeesBalanceReport> {
         children: [
           FeesReportSearchWidget(
             onTap: (dateTime, classId, sectionId) async {
-              if (dateTime == null || dateTime == "") {
+              if (dateTime == "") {
                 Utils.showToast("Select a date first");
               } else {
                 Map data = {
@@ -94,9 +94,7 @@ class _AdminFeesBalanceReportState extends State<AdminFeesBalanceReport> {
                           alignment: Alignment.centerRight,
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
-                            "Total".tr +
-                                ": " +
-                                "${double.parse(total.toString()).toStringAsFixed(2)}${_systemController.systemSettings.value.data?.currencySymbol}",
+                            "${"Total".tr}: ${double.parse(total.toString()).toStringAsFixed(2)}${_systemController.systemSettings.value.data?.currencySymbol}",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium
@@ -117,13 +115,10 @@ class _AdminFeesBalanceReportState extends State<AdminFeesBalanceReport> {
                           itemCount: snapshot.data?.balanceReport?.length ?? 0,
                           itemBuilder: (context, index) {
                             BalanceReport balanceReport =
-                                snapshot.data?.balanceReport?[index] ?? BalanceReport();
+                                snapshot.data?.balanceReport?[index] ??
+                                    BalanceReport();
 
-                            if (balanceReport != null) {
-                              return PaymentReportWidget(balanceReport);
-                            } else {
-                              return const SizedBox.shrink();
-                            }
+                            return PaymentReportWidget(balanceReport);
                           },
                         ),
                       ],
@@ -144,7 +139,7 @@ class _AdminFeesBalanceReportState extends State<AdminFeesBalanceReport> {
 class PaymentReportWidget extends StatelessWidget {
   final BalanceReport paymentReport;
 
-  const PaymentReportWidget(this.paymentReport, {Key? key}) : super(key: key);
+  const PaymentReportWidget(this.paymentReport, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -166,8 +161,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Admission No.'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -189,8 +187,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Roll'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -212,8 +213,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Balance'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -236,8 +240,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Due Date'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,

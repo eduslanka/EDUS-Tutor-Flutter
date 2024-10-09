@@ -7,12 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class BigBlueButtonTest extends StatefulWidget {
   final String? meetingUrl;
   final String? meetingName;
 
-  const BigBlueButtonTest({Key? key, this.meetingUrl,this.meetingName}) : super(key: key);
+  const BigBlueButtonTest({super.key, this.meetingUrl, this.meetingName});
 
   @override
   _BigBlueButtonTestState createState() => _BigBlueButtonTestState();
@@ -24,9 +23,9 @@ class _BigBlueButtonTestState extends State<BigBlueButtonTest> {
   InAppWebViewController? webViewController;
   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
       crossPlatform: InAppWebViewOptions(
-          useShouldOverrideUrlLoading: true,
-          mediaPlaybackRequiresUserGesture: false,
-          // userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36"
+        useShouldOverrideUrlLoading: true,
+        mediaPlaybackRequiresUserGesture: false,
+        // userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36"
       ),
       android: AndroidInAppWebViewOptions(
         useHybridComposition: true,
@@ -71,91 +70,89 @@ class _BigBlueButtonTestState extends State<BigBlueButtonTest> {
         appBar: AppBar(),
         body: SafeArea(
             child: Column(children: <Widget>[
-              Expanded(
-                child: Stack(
-                  children: [
-                    InAppWebView(
-                      key: webViewKey,
-                      initialUrlRequest: URLRequest(url: Uri.parse(url)),
-                      initialOptions: options,
-                      pullToRefreshController: pullToRefreshController,
-                      onWebViewCreated: (controller) {
-                        webViewController = controller;
-                      },
-                      onLoadStart: (controller, url) {
-                        setState(() {
-                          this.url = url.toString();
-                        });
-                        debugPrint(this.url);
-                      },
-                      androidOnPermissionRequest:
-                          (controller, origin, resources) async {
-                        return PermissionRequestResponse(
-                            resources: resources,
-                            action: PermissionRequestResponseAction.GRANT);
-                      },
-                      shouldOverrideUrlLoading:
-                          (controller, navigationAction) async {
-                        var uri = navigationAction.request.url;
+          Expanded(
+            child: Stack(
+              children: [
+                InAppWebView(
+                  key: webViewKey,
+                  initialUrlRequest: URLRequest(url: Uri.parse(url)),
+                  initialOptions: options,
+                  pullToRefreshController: pullToRefreshController,
+                  onWebViewCreated: (controller) {
+                    webViewController = controller;
+                  },
+                  onLoadStart: (controller, url) {
+                    setState(() {
+                      this.url = url.toString();
+                    });
+                    debugPrint(this.url);
+                  },
+                  androidOnPermissionRequest:
+                      (controller, origin, resources) async {
+                    return PermissionRequestResponse(
+                        resources: resources,
+                        action: PermissionRequestResponseAction.GRANT);
+                  },
+                  shouldOverrideUrlLoading:
+                      (controller, navigationAction) async {
+                    var uri = navigationAction.request.url;
 
-                        if (![
-                          "http",
-                          "https",
-                          "file",
-                          "chrome",
-                          "data",
-                          "javascript",
-                          "about"
-                        ].contains(uri?.scheme)) {
-                          // ignore: deprecated_member_use
-                          if (await canLaunch(url)) {
-                            // Launch the App
-                            // ignore: deprecated_member_use
-                            await launch(
-                              url,
-                            );
-                            // and cancel the request
-                            return NavigationActionPolicy.CANCEL;
-                          }
-                        }
+                    if (![
+                      "http",
+                      "https",
+                      "file",
+                      "chrome",
+                      "data",
+                      "javascript",
+                      "about"
+                    ].contains(uri?.scheme)) {
+                      // ignore: deprecated_member_use
+                      if (await canLaunch(url)) {
+                        // Launch the App
+                        // ignore: deprecated_member_use
+                        await launch(
+                          url,
+                        );
+                        // and cancel the request
+                        return NavigationActionPolicy.CANCEL;
+                      }
+                    }
 
-                        return NavigationActionPolicy.ALLOW;
-                      },
-                      onLoadStop: (controller, url) async {
-                        pullToRefreshController?.endRefreshing();
-                        setState(() {
-                          this.url = url.toString();
-                        });
-                      },
-                      onLoadError: (controller, url, code, message) {
-                        pullToRefreshController?.endRefreshing();
-                      },
-                      onProgressChanged: (controller, progress) {
-                        if (progress == 100) {
-                          pullToRefreshController?.endRefreshing();
-                        }
-                        setState(() {
-                          this.progress = progress / 100;
-                        });
-                      },
-                      onUpdateVisitedHistory: (controller, url, androidIsReload) {
-                        setState(() {
-                          this.url = url.toString();
-                        });
-                      },
-                      onConsoleMessage: (controller, consoleMessage) {
-                        debugPrint('$consoleMessage');
-                      },
-                      onCloseWindow: (controller){
-
-                      },
-                    ),
-                    progress < 1.0
-                        ? LinearProgressIndicator(value: progress)
-                        : Container(),
-                  ],
+                    return NavigationActionPolicy.ALLOW;
+                  },
+                  onLoadStop: (controller, url) async {
+                    pullToRefreshController?.endRefreshing();
+                    setState(() {
+                      this.url = url.toString();
+                    });
+                  },
+                  onLoadError: (controller, url, code, message) {
+                    pullToRefreshController?.endRefreshing();
+                  },
+                  onProgressChanged: (controller, progress) {
+                    if (progress == 100) {
+                      pullToRefreshController?.endRefreshing();
+                    }
+                    setState(() {
+                      this.progress = progress / 100;
+                    });
+                  },
+                  onUpdateVisitedHistory: (controller, url, androidIsReload) {
+                    setState(() {
+                      this.url = url.toString();
+                    });
+                  },
+                  onConsoleMessage: (controller, consoleMessage) {
+                    debugPrint('$consoleMessage');
+                  },
+                  onCloseWindow: (controller) {},
                 ),
-              ),
-            ])));
+                progress < 1.0
+                    ? LinearProgressIndicator(value: progress)
+                    : Container(),
+              ],
+            ),
+          ),
+        ])));
   }
 }

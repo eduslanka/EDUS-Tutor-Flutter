@@ -9,23 +9,20 @@ import 'package:edus_tutor/utils/model/BookIssued.dart';
 
 // ignore: must_be_immutable
 class BookListRow extends StatefulWidget {
-
   BookIssued books;
 
-
-  BookListRow(this.books, {Key? key}) : super(key: key);
+  BookListRow(this.books, {super.key});
 
   @override
   // ignore: no_logic_in_create_state
   _BookListRowState createState() => _BookListRowState(books);
 }
 
-class _BookListRowState extends State<BookListRow> with SingleTickerProviderStateMixin{
-
+class _BookListRowState extends State<BookListRow>
+    with SingleTickerProviderStateMixin {
   AnimationController? controller;
-  Animation? parentAnimation,childAnimation;
+  Animation? parentAnimation, childAnimation;
   BookIssued books;
-
 
   _BookListRowState(this.books);
 
@@ -33,9 +30,12 @@ class _BookListRowState extends State<BookListRow> with SingleTickerProviderStat
   void initState() {
     super.initState();
 
-    controller = AnimationController(duration: const Duration(seconds: 2),vsync: this);
-    parentAnimation = Tween(begin: -1.0,end: 0.0).animate(CurvedAnimation(parent: controller!, curve: Curves.fastOutSlowIn));
-    childAnimation = Tween(begin: 1.0,end: 0.0).animate(CurvedAnimation(parent: controller!, curve: Curves.fastOutSlowIn));
+    controller =
+        AnimationController(duration: const Duration(seconds: 2), vsync: this);
+    parentAnimation = Tween(begin: -1.0, end: 0.0).animate(
+        CurvedAnimation(parent: controller!, curve: Curves.fastOutSlowIn));
+    childAnimation = Tween(begin: 1.0, end: 0.0).animate(
+        CurvedAnimation(parent: controller!, curve: Curves.fastOutSlowIn));
     controller!.forward();
   }
 
@@ -47,7 +47,6 @@ class _BookListRowState extends State<BookListRow> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-
     double width = MediaQuery.of(context).size.width;
 
     return Column(
@@ -55,15 +54,16 @@ class _BookListRowState extends State<BookListRow> with SingleTickerProviderStat
       children: <Widget>[
         AnimatedBuilder(
           animation: parentAnimation!,
-          builder: (context,child){
+          builder: (context, child) {
             return Container(
-              transform: Matrix4.translationValues(parentAnimation?.value * width, 0.0, 0.0),
+              transform: Matrix4.translationValues(
+                  parentAnimation?.value * width, 0.0, 0.0),
               child: Text(
                 books.title ?? '',
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
-                    ?.copyWith(fontSize: 15.0,fontWeight: FontWeight.w700),
+                    ?.copyWith(fontSize: 15.0, fontWeight: FontWeight.w700),
                 maxLines: 1,
               ),
             );
@@ -71,15 +71,15 @@ class _BookListRowState extends State<BookListRow> with SingleTickerProviderStat
         ),
         AnimatedBuilder(
           animation: parentAnimation!,
-          builder: (context,child){
+          builder: (context, child) {
             return Container(
-              transform: Matrix4.translationValues(parentAnimation?.value * width, 0.0, 0.0),
+              transform: Matrix4.translationValues(
+                  parentAnimation?.value * width, 0.0, 0.0),
               child: Text(
                 books.author ?? '',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium
-                    ?.copyWith(fontSize: ScreenUtil().setSp(14.0),fontWeight: FontWeight.w500),
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontSize: ScreenUtil().setSp(14.0),
+                    fontWeight: FontWeight.w500),
                 maxLines: 1,
               ),
             );
@@ -87,9 +87,10 @@ class _BookListRowState extends State<BookListRow> with SingleTickerProviderStat
         ),
         AnimatedBuilder(
           animation: parentAnimation!,
-          builder: (context,child){
+          builder: (context, child) {
             return Container(
-              transform: Matrix4.translationValues(childAnimation?.value * width, 0.0, 0.0),
+              transform: Matrix4.translationValues(
+                  childAnimation?.value * width, 0.0, 0.0),
               child: Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Row(
@@ -110,7 +111,7 @@ class _BookListRowState extends State<BookListRow> with SingleTickerProviderStat
                             height: 10.0,
                           ),
                           Text(
-                           books.issuedDate ?? '',
+                            books.issuedDate ?? '',
                             maxLines: 1,
                             style: Theme.of(context).textTheme.headlineMedium,
                           ),
@@ -156,7 +157,7 @@ class _BookListRowState extends State<BookListRow> with SingleTickerProviderStat
                             height: 10.0,
                           ),
                           Text(
-                           books.bookNo ?? '',
+                            books.bookNo ?? '',
                             maxLines: 1,
                             style: Theme.of(context).textTheme.headlineMedium,
                           ),
@@ -190,7 +191,7 @@ class _BookListRowState extends State<BookListRow> with SingleTickerProviderStat
         ),
         Container(
           height: 0.5,
-          margin: const EdgeInsets.only(top: 10.0,bottom: 10.0),
+          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.centerRight,
@@ -220,8 +221,7 @@ class _BookListRowState extends State<BookListRow> with SingleTickerProviderStat
           ),
         ),
       );
-    }
-    else if (status == 'R') {
+    } else if (status == 'R') {
       return Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(color: Colors.green.shade400),
@@ -238,9 +238,8 @@ class _BookListRowState extends State<BookListRow> with SingleTickerProviderStat
           ),
         ),
       );
-    }else{
+    } else {
       return Container();
     }
   }
-
 }

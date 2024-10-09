@@ -23,7 +23,7 @@ import 'package:edus_tutor/utils/widget/Line.dart';
 class LeaveListStudent extends StatefulWidget {
   String? id;
 
-  LeaveListStudent({Key? key, this.id}) : super(key: key);
+  LeaveListStudent({super.key, this.id});
 
   @override
   _LeaveListStudentState createState() => _LeaveListStudentState();
@@ -54,14 +54,24 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
       });
       Utils.getStringValue('id').then((value) {
         setState(() {
-          myLeaves = getMyLeaves(
-              widget.id != null ? int.parse(widget.id ?? '') : int.parse(value ?? ''));
+          myLeaves = getMyLeaves(widget.id != null
+              ? int.parse(widget.id ?? '')
+              : int.parse(value ?? ''));
           pendingLeaves = getPendingLeaves(
-              widget.id != null ? int.parse(widget.id ?? '') : int.parse(value ?? ''), "P");
+              widget.id != null
+                  ? int.parse(widget.id ?? '')
+                  : int.parse(value ?? ''),
+              "P");
           approvedLeaves = getPendingLeaves(
-              widget.id != null ? int.parse(widget.id ?? '') : int.parse(value ?? ''), "A");
+              widget.id != null
+                  ? int.parse(widget.id ?? '')
+                  : int.parse(value ?? ''),
+              "A");
           rejectedLeaves = getPendingLeaves(
-              widget.id != null ? int.parse(widget.id ?? '') : int.parse(value ?? ''), "C");
+              widget.id != null
+                  ? int.parse(widget.id ?? '')
+                  : int.parse(value ?? ''),
+              "C");
         });
       });
     });
@@ -104,7 +114,8 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                       return Container(
                         child: ListView.builder(
                             shrinkWrap: true,
-                            itemCount: snapshot.data?.studentMyLeave.length ?? 0,
+                            itemCount:
+                                snapshot.data?.studentMyLeave.length ?? 0,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Padding(
@@ -113,8 +124,9 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                                   children: <Widget>[
                                     Expanded(
                                       child: Text(
-                                        snapshot
-                                            .data?.studentMyLeave[index].type ?? '',
+                                        snapshot.data?.studentMyLeave[index]
+                                                .type ??
+                                            '',
                                         maxLines: 1,
                                         style: Theme.of(context)
                                             .textTheme
@@ -123,7 +135,9 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        '${snapshot.data?.studentMyLeave[index].days.toString()}' + ' ' + "days".tr,
+                                        '${snapshot.data?.studentMyLeave[index].days.toString()}'
+                                                ' ' +
+                                            "days".tr,
                                         maxLines: 1,
                                         style: Theme.of(context)
                                             .textTheme
@@ -191,19 +205,26 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                             bottom: TabBar(
                               labelColor: Colors.black,
                               labelPadding: EdgeInsets.zero,
-                              indicatorColor: Color(0xff053EFF),
+                              indicatorColor: const Color(0xff053EFF),
                               tabs: tabs,
                               indicatorPadding: EdgeInsets.zero,
-                              labelStyle: Theme.of(context).textTheme.headlineMedium,
+                              labelStyle:
+                                  Theme.of(context).textTheme.headlineMedium,
                             ),
                           ),
                           body: Padding(
                             padding: const EdgeInsets.only(top: 14.0),
                             child: TabBarView(
                               children: [
-                                pendingLeaves == null ? SizedBox() : getLeaves(pendingLeaves!),
-                                approvedLeaves == null ? SizedBox() : getLeaves(approvedLeaves!),
-                                rejectedLeaves == null ? SizedBox() : getLeaves(rejectedLeaves!),
+                                pendingLeaves == null
+                                    ? const SizedBox()
+                                    : getLeaves(pendingLeaves!),
+                                approvedLeaves == null
+                                    ? const SizedBox()
+                                    : getLeaves(approvedLeaves!),
+                                rejectedLeaves == null
+                                    ? const SizedBox()
+                                    : getLeaves(rejectedLeaves!),
                               ],
                             ),
                           ),
@@ -290,8 +311,9 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                                     Text(
                                       data[index].applyDate ?? 'N/A',
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -315,8 +337,9 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                                     Text(
                                       data[index].leaveFrom ?? 'N/A',
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -340,8 +363,9 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                                     Text(
                                       data[index].leaveTo ?? 'N/A',
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -370,12 +394,16 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                           ),
                           Container(
                             height: 0.5,
-                            margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                            margin:
+                                const EdgeInsets.only(top: 10.0, bottom: 10.0),
                             decoration: const BoxDecoration(
                               gradient: LinearGradient(
                                   begin: Alignment.centerRight,
                                   end: Alignment.centerLeft,
-                                  colors: [Color(0xff053EFF), Color(0xff053EFF)]),
+                                  colors: [
+                                    Color(0xff053EFF),
+                                    Color(0xff053EFF)
+                                  ]),
                             ),
                           ),
                         ],
@@ -473,7 +501,7 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                         children: <Widget>[
                           Expanded(
                             child: Text(
-                              'Reason'.tr + ': ' + '${data.reason}',
+                              '${'Reason'.tr}: ${data.reason}',
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                           ),
@@ -501,8 +529,9 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                                   Text(
                                     data.leaveTo ?? '',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -525,8 +554,9 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                                   Text(
                                     data.applyDate ?? '',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -556,8 +586,9 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                                   Text(
                                     data.type ?? '',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -580,8 +611,9 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                                   Text(
                                     data.leaveFrom ?? '',
                                     maxLines: 1,
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 ],
                               ),
@@ -589,7 +621,7 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                           ],
                         ),
                       ),
-                      BottomLine(),
+                      const BottomLine(),
                       data.file == null || data.file == ''
                           ? Container()
                           : GestureDetector(
@@ -609,7 +641,7 @@ class _LeaveListStudentState extends State<LeaveListStudent> {
                               child: Row(
                                 children: [
                                   Text(
-                                    'Attached File'.tr + ': ',
+                                    '${'Attached File'.tr}: ',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headlineMedium

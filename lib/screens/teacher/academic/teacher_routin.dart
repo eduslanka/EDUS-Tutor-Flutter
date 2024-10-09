@@ -22,10 +22,6 @@ class TeacherMyRoutineScreen extends StatefulWidget {
 }
 
 class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
- 
-
-
-
   List<String> weeks = AppFunction.weeks;
   var _token;
 
@@ -108,17 +104,17 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
     super.initState();
     getInitialDay();
     selectedDay = weeks[initialIndex];
-    pageController=PageController(initialPage: initialIndex);
+    pageController = PageController(initialPage: initialIndex);
     fetchData();
   }
 
   String selectedDay = '';
- late PageController pageController ; 
+  late PageController pageController;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    //  backgroundColor: Colors.white,
+      //  backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.h),
         child: AppBar(
@@ -226,22 +222,20 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
             controller: pageController,
             itemCount: weeks.length,
             onPageChanged: (index) {
-              
               setState(() {
-                initialIndex=index;
+                initialIndex = index;
                 selectedDay = weeks[initialIndex];
               });
             },
             itemBuilder: (context, index) {
               final classes =
                   weeklyClassResponse?.data.weeklyClass[selectedDay] ?? [];
-                   if (classes.isEmpty) {
+              if (classes.isEmpty) {
                 return Utils.noDataWidget();
               }
               return ListView.builder(
-                itemCount: classes.length ,
+                itemCount: classes.length,
                 itemBuilder: (context, classIndex) {
-                 
                   return _tutionCard(context, classes[classIndex]);
                 },
               );
@@ -254,21 +248,20 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
 
   Widget _tutionCard(BuildContext context, TeachersClassDetail classDetail) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal:  16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Card(
         color: Colors.transparent,
         surfaceTintColor: Colors.white,
         child: Container(
-         // margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          // margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            // gradient: const LinearGradient(
-            //   colors: [
-                
-            //   ],
-            // ),
-            color: Colors.white
-          ),
+              borderRadius: BorderRadius.circular(15),
+              // gradient: const LinearGradient(
+              //   colors: [
+
+              //   ],
+              // ),
+              color: Colors.white),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -278,14 +271,14 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Time'.tr + ":",
+                      "${'Time'.tr}:",
                       style: _textStyle(),
                     ),
                     const SizedBox(width: 5),
                     Expanded(
                       child: Text(
                         '${classDetail.startTime} - ${classDetail.endTime}',
-                        style:  _textStyle(),
+                        style: _textStyle(),
                       ),
                     ),
                   ],
@@ -294,16 +287,10 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Topic'.tr + ":",
-                      style: _textStyle()
-                    ),
+                    Text("${'Topic'.tr}:", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
-                      child: Text(
-                        classDetail.topic ?? '',
-                        style:  _textStyle()
-                      ),
+                      child: Text(classDetail.topic ?? '', style: _textStyle()),
                     ),
                   ],
                 ),
@@ -311,16 +298,11 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Class'.tr + ":",
-                      style: _textStyle()
-                    ),
+                    Text("${'Class'.tr}:", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
-                      child: Text(
-                        classDetail.classSection ?? '',
-                        style: _textStyle()
-                      ),
+                      child: Text(classDetail.classSection ?? '',
+                          style: _textStyle()),
                     ),
                   ],
                 ),
@@ -328,16 +310,11 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Status'.tr + ":",
-                      style: _textStyle()
-                    ),
+                    Text("${'Status'.tr}:", style: _textStyle()),
                     const SizedBox(width: 5),
                     Expanded(
-                      child: Text(
-                        classDetail.status ?? '',
-                        style: _textStyle()
-                      ),
+                      child:
+                          Text(classDetail.status ?? '', style: _textStyle()),
                     ),
                   ],
                 ),
@@ -350,7 +327,6 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
   }
 
   TextStyle _textStyle() {
-    return const TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.w700);
+    return const TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
   }
 }

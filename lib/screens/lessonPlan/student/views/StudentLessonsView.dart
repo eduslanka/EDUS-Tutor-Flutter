@@ -18,7 +18,7 @@ import 'package:url_launcher/url_launcher.dart';
 class StudentLessonsView extends StatefulWidget {
   final String id;
 
-  const StudentLessonsView(this.id, {Key? key}) : super(key: key);
+  const StudentLessonsView(this.id, {super.key});
 
   @override
   State<StudentLessonsView> createState() => _StudentLessonsViewState();
@@ -35,7 +35,7 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
   Future<LessonPlan> getLessonPlan(int recordId, studentId) async {
     try {
       final response = await http.get(
-        Uri.parse(EdusApi.studentLessonPlan + "/${widget.id}/$recordId"),
+        Uri.parse("${EdusApi.studentLessonPlan}/${widget.id}/$recordId"),
         headers: Utils.setHeader(
           _userController.token.value.toString(),
         ),
@@ -58,8 +58,8 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
       int recordId, studentId, date, dayId) async {
     try {
       final response = await http.get(
-        Uri.parse(EdusApi.studentLessonPlanByDate +
-            "/${widget.id}/$recordId/$date/$dayId"),
+        Uri.parse(
+            "${EdusApi.studentLessonPlanByDate}/${widget.id}/$recordId/$date/$dayId"),
         headers: Utils.setHeader(
           _userController.token.value.toString(),
         ),
@@ -79,8 +79,8 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
   Future<LessonPlan> getPreviousWeek(int recordId, studentId, startDate) async {
     try {
       final response = await http.get(
-        Uri.parse(EdusApi.studentLessonPreviousWeek +
-            "/${widget.id}/$recordId/$startDate"),
+        Uri.parse(
+            "${EdusApi.studentLessonPreviousWeek}/${widget.id}/$recordId/$startDate"),
         headers: Utils.setHeader(
           _userController.token.value.toString(),
         ),
@@ -99,8 +99,8 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
   Future<LessonPlan> getNextWeek(int recordId, studentId, endDate) async {
     try {
       final response = await http.get(
-        Uri.parse(EdusApi.studentLessonNextWeek +
-            "/${widget.id}/$recordId/$endDate"),
+        Uri.parse(
+            "${EdusApi.studentLessonNextWeek}/${widget.id}/$recordId/$endDate"),
         headers: Utils.setHeader(
           _userController.token.value.toString(),
         ),
@@ -124,7 +124,8 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
         _userController.studentRecord.value.records?.first ?? Record();
     await Utils.getStringValue('token').then((value) {
       lessonPlan = getLessonPlan(
-          _userController.studentRecord.value.records?.first.id ?? 0, widget.id);
+          _userController.studentRecord.value.records?.first.id ?? 0,
+          widget.id);
 
       lessonPlan?.then((value) {
         setState(() {
@@ -157,7 +158,8 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
                   setState(
                     () {
                       lessonPlan = getLessonPlan(
-                          _userController.selectedRecord.value.id ?? 0, widget.id);
+                          _userController.selectedRecord.value.id ?? 0,
+                          widget.id);
 
                       lessonPlan?.then((value) {
                         setState(() {
@@ -198,16 +200,19 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
 
                                       lessonPlan = getPreviousWeek(
                                           _userController
-                                              .selectedRecord.value.id ?? 0,
+                                                  .selectedRecord.value.id ??
+                                              0,
                                           widget.id,
                                           snapshot.data?.weeks?.first.date);
 
                                       lessonPlan?.then((value) {
                                         setState(() {
-                                          selectedWeek = value.weeks?.first.name ?? '';
+                                          selectedWeek =
+                                              value.weeks?.first.name ?? '';
                                           planDetails = getLessonByDay(
-                                              _userController
-                                                  .selectedRecord.value.id ?? 0,
+                                              _userController.selectedRecord
+                                                      .value.id ??
+                                                  0,
                                               widget.id,
                                               value.weeks?.first.date,
                                               value.weeks?.first.id);
@@ -231,16 +236,19 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
 
                                       lessonPlan = getNextWeek(
                                           _userController
-                                              .selectedRecord.value.id ?? 0,
+                                                  .selectedRecord.value.id ??
+                                              0,
                                           widget.id,
                                           snapshot.data?.weeks?.last.date);
 
                                       lessonPlan?.then((value) {
                                         setState(() {
-                                          selectedWeek = value.weeks?.first.name ?? '';
+                                          selectedWeek =
+                                              value.weeks?.first.name ?? '';
                                           planDetails = getLessonByDay(
-                                              _userController
-                                                  .selectedRecord.value.id ?? 0,
+                                              _userController.selectedRecord
+                                                      .value.id ??
+                                                  0,
                                               widget.id,
                                               value.weeks?.first.date,
                                               value.weeks?.first.id);
@@ -262,7 +270,8 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {
-                                    Week week = snapshot.data?.weeks?[index] ?? Week();
+                                    Week week =
+                                        snapshot.data?.weeks?[index] ?? Week();
 
                                     return GestureDetector(
                                       onTap: () {
@@ -270,8 +279,9 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
                                           selectedWeek = week.name ?? '';
 
                                           planDetails = getLessonByDay(
-                                              _userController
-                                                  .selectedRecord.value.id ?? 0,
+                                              _userController.selectedRecord
+                                                      .value.id ??
+                                                  0,
                                               widget.id,
                                               week.date,
                                               week.id);
@@ -392,14 +402,16 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
                                           ListView.separated(
                                             physics:
                                                 const BouncingScrollPhysics(),
-                                            itemCount: snapshot.data?.length ?? 0,
+                                            itemCount:
+                                                snapshot.data?.length ?? 0,
                                             shrinkWrap: true,
                                             separatorBuilder: (context, index) {
                                               return const Divider();
                                             },
                                             itemBuilder: (context, rowIndex) {
                                               PlanDetails plan =
-                                                  snapshot.data?[rowIndex] ?? PlanDetails();
+                                                  snapshot.data?[rowIndex] ??
+                                                      PlanDetails();
                                               return InkWell(
                                                 onTap: () {
                                                   if (plan.plan != null) {
@@ -603,8 +615,8 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.4,
                               child: Text(
-                                DateFormat('EEE, MMM dd')
-                                    .format(plan.plan?.lessonDate ?? DateTime(200)),
+                                DateFormat('EEE, MMM dd').format(
+                                    plan.plan?.lessonDate ?? DateTime(200)),
                                 style:
                                     Theme.of(context).textTheme.headlineMedium,
                               ),
@@ -641,7 +653,8 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.4,
                               child: Text(
-                                plan.plan?.lessonName?.lessonTitle.toString() ?? '',
+                                plan.plan?.lessonName?.lessonTitle.toString() ??
+                                    '',
                                 style:
                                     Theme.of(context).textTheme.headlineMedium,
                               ),
@@ -683,8 +696,8 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
                                   children: List.generate(
                                       topicNames.length,
                                       (index) => Text(
-                                            "${topicNames[index]}" +
-                                                "${topicNames.length == topicNames.length - 1 ? "" : ","}",
+                                            topicNames[
+                                                index], //(topicNames.length == topicNames.length - 1 ? "" : ",")
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headlineMedium,

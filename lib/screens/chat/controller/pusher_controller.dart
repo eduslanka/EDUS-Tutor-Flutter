@@ -29,9 +29,11 @@ class PusherController extends GetxController {
   onConnectPressed() async {
     try {
       await pusher.init(
-        apiKey: _chatController.chatSettings.value.chatSettings?.pusherAppKey ?? '',
+        apiKey:
+            _chatController.chatSettings.value.chatSettings?.pusherAppKey ?? '',
         cluster:
-            _chatController.chatSettings.value.chatSettings?.pusherAppCluster ?? '',
+            _chatController.chatSettings.value.chatSettings?.pusherAppCluster ??
+                '',
         onConnectionStateChange: onConnectionStateChange,
         onError: onError,
         onSubscriptionSucceeded: onSubscriptionSucceeded,
@@ -87,7 +89,7 @@ class PusherController extends GetxController {
         id: chatMessage.thread?.id,
         userId: chatMessage.user?.id,
         conversationId: chatMessage.conversation?.id,
-        groupId: chatMessage.group?.id  ??'',
+        groupId: chatMessage.group?.id ?? '',
         readAt: chatMessage.thread?.readAt,
         createdAt: chatMessage.conversation?.createdAt ?? DateTime.now(),
         conversation: chatMessage.conversation ?? ChatMessage(),
@@ -136,7 +138,7 @@ class PusherController extends GetxController {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': _chatController.token.value,
       },
-      body: 'socket_id=' + socketId + '&channel_name=' + channelName,
+      body: 'socket_id=$socketId&channel_name=$channelName',
     );
     return jsonDecode(result.body);
   }
@@ -145,11 +147,11 @@ class PusherController extends GetxController {
     source = chatLoadMore;
     chatOpenId = id;
     try {
-      await pusher.subscribe(
-          channelName: 'private-single-chat' '.$chatOpenId');
+      await pusher.subscribe(channelName: 'private-single-chat' '.$chatOpenId');
       await pusher.connect();
       await pusher.subscribe(
-          channelName: 'private-single-chat' '.${int.parse(_chatController.id.value)}');
+          channelName:
+              'private-single-chat' '.${int.parse(_chatController.id.value)}');
       await pusher.connect();
     } catch (e) {
       log("ERROR: $e");
@@ -160,8 +162,7 @@ class PusherController extends GetxController {
     groupSource = chatLoadMore;
     chatGroupId = id;
     try {
-      await pusher.subscribe(
-          channelName: 'private-group-chat' '.$chatGroupId');
+      await pusher.subscribe(channelName: 'private-group-chat' '.$chatGroupId');
       await pusher.connect();
     } catch (e) {
       log("ERROR: $e");

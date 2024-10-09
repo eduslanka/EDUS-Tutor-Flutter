@@ -30,11 +30,6 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
   bool get hasMore => _hasMore;
 
   @override
-  void onStateChanged(LoadingMoreBase<ChatMessage> source) {
-    super.onStateChanged(source);
-  }
-
-  @override
   Future<bool> refresh([bool clearBeforeRequest = false]) async {
     _hasMore = true;
     // pageIndex = 1;
@@ -157,7 +152,7 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
       pageIndex++;
       isSuccess = true;
     } catch (exception, _) {
-      if (exception is DioError) {
+      if (exception is DioException) {
         if (exception.response?.statusCode == 404) {
           length = 0;
         }
@@ -186,7 +181,6 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
       if (response.statusCode == 200) {
         // print(msgCheckResultData['message']);
 
-
         data = ChatMessageOpenModel.fromJson(response.data);
         insert(0, data.messages.entries.first.value);
 
@@ -202,9 +196,7 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
       }
     } catch (e) {
       // throw Exception('${e.toString()}');
-    } finally {
-
-    }
+    } finally {}
   }
 
   Future deleteSingleMessage(ChatMessage chatMessage) async {
@@ -214,7 +206,6 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
         "conversation_id": chatMessage.id,
         "user_id": userId,
       };
-
 
       final response = await _dio.post(
         EdusApi.chatSingleMsgDelete,
@@ -227,7 +218,6 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
       final msgCheckResultData = Map<String, dynamic>.from(response.data);
 
       if (response.statusCode == 200) {
-
         chatOpenController.msgIds.remove(chatMessage.id);
 
         remove(chatMessage);
@@ -259,13 +249,6 @@ class ChatLoadMore extends LoadingMoreBase<ChatMessage> {
         if (_chatController.chatSettings.value.chatSettings?.chatMethod !=
             'pusher') {
           var chatMessage = ChatMessage.fromJson(response.data['message']);
-
-          if (chatOpenController.lastConversationId.value == null) {
-            chatOpenController.msgIds.add(chatMessage.id);
-            insert(0, chatMessage);
-            onStateChanged(this);
-            chatOpenController.lastConversationId.value = chatMessage.id;
-          }
         }
         if (_chatController.chatSettings.value.chatSettings?.chatMethod ==
                 'pusher' &&

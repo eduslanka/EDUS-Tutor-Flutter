@@ -37,12 +37,11 @@ class ChatOpenPage extends StatefulWidget {
   final int? userId;
   final int? onlineStatus;
   const ChatOpenPage(
-      {Key? key,
+      {super.key,
       this.avatarUrl,
       this.chatTitle,
       this.userId,
-      this.onlineStatus})
-      : super(key: key);
+      this.onlineStatus});
 
   @override
   _ChatOpenPageState createState() => _ChatOpenPageState();
@@ -1397,7 +1396,7 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                   image: AssetImage(AppConfig.appToolbarBackground),
                   fit: BoxFit.cover,
                 ),
-                color: Color(0xff053EFF),
+                color: const Color(0xff053EFF),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1537,8 +1536,8 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                           },
                           itemBuilder: (context) => [
                             const PopupMenuItem(
-                              child: Text("Files"),
                               value: 1,
+                              child: Text("Files"),
                             ),
                           ],
                         );
@@ -1558,12 +1557,12 @@ class _ChatOpenPageState extends State<ChatOpenPage> {
                           },
                           itemBuilder: (context) => [
                             const PopupMenuItem(
-                              child: Text("Files"),
                               value: 1,
+                              child: Text("Files"),
                             ),
                             const PopupMenuItem(
-                              child: Text("Block User"),
                               value: 2,
+                              child: Text("Block User"),
                             ),
                           ],
                         );
@@ -1592,7 +1591,7 @@ class MessageItemWidget extends StatelessWidget {
   final Function? onTapMenu;
   final int? activeStatus;
   const MessageItemWidget({
-    Key? key,
+    super.key,
     this.chatMessage,
     this.name,
     this.avatarUrl,
@@ -1601,7 +1600,7 @@ class MessageItemWidget extends StatelessWidget {
     this.showActions,
     this.onTapMenu,
     required this.activeStatus,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

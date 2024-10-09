@@ -78,7 +78,7 @@ class Home extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   var rule;
 
-  Home(this._titles, this._images, this.rule, {Key? key}) : super(key: key);
+  Home(this._titles, this._images, this.rule, {super.key});
 
   @override
   // ignore: no_logic_in_create_state
@@ -120,7 +120,7 @@ class _HomeState extends State<Home> {
 
   final SystemController _systemController = Get.put(SystemController());
 
-  bool isBlock = false;
+  //bool isBlock = false;
   @override
   void dispose() {
     didReceiveLocalNotificationSubject.close();
@@ -335,7 +335,7 @@ class _HomeState extends State<Home> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "Welcome".tr + " $_fullName" + " 🎓",
+                                  "${"Welcome".tr} $_fullName 🎓",
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context)
@@ -1007,7 +1007,7 @@ class _HomeState extends State<Home> {
                       const CupertinoActivityIndicator(),
                   errorWidget: (context, url, error) => CachedNetworkImage(
                     imageUrl:
-                        EdusApi.root + 'public/uploads/staff/demo/staff.jpg',
+                        '${EdusApi.root}public/uploads/staff/demo/staff.jpg',
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(

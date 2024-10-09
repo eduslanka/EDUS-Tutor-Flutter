@@ -15,7 +15,12 @@ class OrderSheet extends StatelessWidget {
   final String? balance;
   final String? email;
 
-  const OrderSheet({Key? key, this.balance, this.googlePayEnabled, this.applePayEnabled,this.email}) : super(key: key);
+  const OrderSheet(
+      {super.key,
+      this.balance,
+      this.googlePayEnabled,
+      this.applePayEnabled,
+      this.email});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -42,7 +47,9 @@ class OrderSheet extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      _ShippingInformation(email: email ?? '',),
+                      _ShippingInformation(
+                        email: email ?? '',
+                      ),
                       _LineDivider(),
                       _PaymentTotal(double.parse(balance ?? '')),
                       _LineDivider(),
@@ -96,13 +103,13 @@ class OrderSheet extends StatelessWidget {
                       }
                     }
                   : null,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueAccent,
+              ),
               child: Image(
                   image: Platform.isIOS
                       ? const AssetImage("assets/images/applePayLogo.png")
                       : const AssetImage("assets/images/googlePayLogo.png")),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueAccent,
-              ),
             ),
           ),
         ],

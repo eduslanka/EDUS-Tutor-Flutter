@@ -10,7 +10,7 @@ class AdminTransportHome extends StatefulWidget {
   final _titles;
   final _images;
 
-  const AdminTransportHome(this._titles, this._images, {Key? key}) : super(key: key);
+  const AdminTransportHome(this._titles, this._images, {super.key});
 
   @override
   _AdminTransportHomeState createState() =>
@@ -41,8 +41,8 @@ class _AdminTransportHomeState extends State<AdminTransportHome> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: GridView.builder(
           itemCount: _titles.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
           itemBuilder: (context, index) {
             return CustomWidget(
               index: index,

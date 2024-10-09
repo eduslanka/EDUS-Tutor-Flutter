@@ -17,7 +17,7 @@ import 'package:edus_tutor/utils/widget/ShimmerListWidget.dart';
 import 'package:edus_tutor/utils/widget/TeacherSubjectRow.dart';
 
 class MySubjectScreen extends StatefulWidget {
-  const MySubjectScreen({Key? key}) : super(key: key);
+  const MySubjectScreen({super.key});
 
   @override
   _MySubjectScreenState createState() => _MySubjectScreenState();
@@ -46,9 +46,8 @@ class _MySubjectScreenState extends State<MySubjectScreen> {
 
   @override
   void initState() {
-
     Utils.getStringValue('token').then(
-          (value) {
+      (value) {
         setState(() {
           _token = value ?? '';
         });
@@ -103,9 +102,7 @@ class _MySubjectScreenState extends State<MySubjectScreen> {
             FutureBuilder<TeacherSubjectList>(
               future: subjects,
               builder: (context, snapshot) {
-               
                 if (snapshot.hasData) {
-                 
                   return ListView.builder(
                     shrinkWrap: true,
                     itemCount: snapshot.data?.subjects.length ?? 0,
@@ -132,8 +129,7 @@ class _MySubjectScreenState extends State<MySubjectScreen> {
   Future<TeacherSubjectList> getAllSubject(int id) async {
     print('This is calling');
 
-    try{
-
+    try {
       final response = await http.get(Uri.parse(EdusApi.getTeacherSubject(id)),
           headers: Utils.setHeader(_token.toString()));
 
@@ -144,8 +140,7 @@ class _MySubjectScreenState extends State<MySubjectScreen> {
       } else {
         throw Exception('Failed to load');
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       print(e);
       print(t);
     }

@@ -10,7 +10,7 @@ import 'package:edus_tutor/screens/fees/model/FeesGroup.dart';
 import 'package:http/http.dart' as http;
 
 class FeesGroupScreen extends StatefulWidget {
-  const FeesGroupScreen({Key? key}) : super(key: key);
+  const FeesGroupScreen({super.key});
 
   @override
   _FeesGroupScreenState createState() => _FeesGroupScreenState();
@@ -38,13 +38,12 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
     final response = await http.get(Uri.parse(EdusApi.adminFeeList),
         headers: Utils.setHeader(_token.toString()));
 
-
-      if (response.statusCode == 200) {
-        var jsonData = jsonDecode(response.body);
-        return FeeGroupList.fromJson(jsonData['feesGroups']);
-      } else {
-        throw Exception('Failed to load');
-      }
+    if (response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body);
+      return FeeGroupList.fromJson(jsonData['feesGroups']);
+    } else {
+      throw Exception('Failed to load');
+    }
   }
 
   @override
@@ -67,7 +66,8 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
                 },
                 itemCount: snapshot.data?.feeGroups.length ?? 0,
                 itemBuilder: (context, index) {
-                  FeeGroup feeGroup = snapshot.data?.feeGroups[index] ?? FeeGroup();
+                  FeeGroup feeGroup =
+                      snapshot.data?.feeGroups[index] ?? FeeGroup();
 
                   return ListTile(
                     title: Text(
@@ -91,7 +91,7 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () async{
+                          onPressed: () async {
                             final response = await http.post(
                               Uri.parse(EdusApi.adminFeesGroupDelete),
                               headers: Utils.setHeader(_token ?? ''),
@@ -129,7 +129,7 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
         onPressed: () {
           showAddDialog();
         },
-        backgroundColor: Color(0xff053EFF),
+        backgroundColor: const Color(0xff053EFF),
         foregroundColor: Colors.blueAccent,
         child: const Icon(
           Icons.add,
@@ -165,8 +165,8 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
                           TextField(
                             controller: titleController,
                             style: Theme.of(context).textTheme.headlineMedium,
-                            decoration:
-                                const InputDecoration(hintText: 'Enter title here'),
+                            decoration: const InputDecoration(
+                                hintText: 'Enter title here'),
                           ),
                           TextField(
                             controller: descripController,
@@ -235,7 +235,7 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
     titleController = TextEditingController();
     descripController = TextEditingController();
     titleController?.text = feeGroup.name ?? '';
-    descripController?.text = feeGroup.description??"";
+    descripController?.text = feeGroup.description ?? "";
 
     Get.dialog(
       Scaffold(
@@ -259,8 +259,8 @@ class _FeesGroupScreenState extends State<FeesGroupScreen> {
                           TextField(
                             controller: titleController,
                             style: Theme.of(context).textTheme.headlineMedium,
-                            decoration:
-                                const InputDecoration(hintText: 'Enter title here'),
+                            decoration: const InputDecoration(
+                                hintText: 'Enter title here'),
                           ),
                           TextField(
                             controller: descripController,

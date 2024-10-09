@@ -19,7 +19,7 @@ import 'package:edus_tutor/utils/model/Vehicle.dart';
 import 'package:edus_tutor/utils/widget/Line.dart';
 
 class AddVehicle extends StatefulWidget {
-  const AddVehicle({Key? key}) : super(key: key);
+  const AddVehicle({super.key});
 
   @override
   _AddVehicleState createState() => _AddVehicleState();
@@ -103,7 +103,7 @@ class _AddVehicleState extends State<AddVehicle> {
                   title: TabBar(
                     labelColor: Colors.black,
                     labelPadding: EdgeInsets.zero,
-                    indicatorColor: Color(0xff053EFF),
+                    indicatorColor: const Color(0xff053EFF),
                     tabs: tabs,
                     indicatorPadding: EdgeInsets.zero,
                   ),
@@ -184,7 +184,7 @@ class _AddVehicleState extends State<AddVehicle> {
                       return ListView.separated(
                           itemCount: snapshot.data?.assignVehicle.length ?? 0,
                           separatorBuilder: (context, index) {
-                            return BottomLine();
+                            return const BottomLine();
                           },
                           itemBuilder: (context, index) {
                             return Column(
@@ -194,7 +194,8 @@ class _AddVehicleState extends State<AddVehicle> {
                                     Expanded(
                                       child: Text(
                                         snapshot.data?.assignVehicle[index]
-                                            .vehicleModel ?? '',
+                                                .vehicleModel ??
+                                            '',
                                         maxLines: 1,
                                         style: Theme.of(context)
                                             .textTheme
@@ -203,9 +204,10 @@ class _AddVehicleState extends State<AddVehicle> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        snapshot
-                                            .data?.assignVehicle[index].vehicleNo
-                                            .toString() ?? '',
+                                        snapshot.data?.assignVehicle[index]
+                                                .vehicleNo
+                                                .toString() ??
+                                            '',
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineMedium,
@@ -213,9 +215,10 @@ class _AddVehicleState extends State<AddVehicle> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        snapshot
-                                            .data?.assignVehicle[index].madeYear
-                                            .toString() ?? '',
+                                        snapshot.data?.assignVehicle[index]
+                                                .madeYear
+                                                .toString() ??
+                                            '',
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineMedium,
@@ -223,7 +226,9 @@ class _AddVehicleState extends State<AddVehicle> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        snapshot.data?.assignVehicle[index].note ?? '',
+                                        snapshot.data?.assignVehicle[index]
+                                                .note ??
+                                            '',
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineMedium,
@@ -282,7 +287,8 @@ class _AddVehicleState extends State<AddVehicle> {
               if (snapshot.hasData) {
                 return Padding(
                   padding: const EdgeInsets.only(left: 10),
-                  child: getDriverDropdown(context, snapshot.data?.staffs ?? []),
+                  child:
+                      getDriverDropdown(context, snapshot.data?.staffs ?? []),
                 );
               } else {
                 return Container();
@@ -355,7 +361,10 @@ class _AddVehicleState extends State<AddVehicle> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
             selectedDriver = value.toString();

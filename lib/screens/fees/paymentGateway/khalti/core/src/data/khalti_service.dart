@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:edus_tutor/screens/fees/paymentGateway/khalti/core/src/config/url.dart';
@@ -26,8 +25,7 @@ class KhaltiService {
 
   KhaltiService({required KhaltiClient client}) : _client = client;
 
-  Future<BankListModel> getBanks(
-      {required BankPaymentType paymentType}) async {
+  Future<BankListModel> getBanks({required BankPaymentType paymentType}) async {
     final params = {
       'page': '1',
       'page_size': '200',

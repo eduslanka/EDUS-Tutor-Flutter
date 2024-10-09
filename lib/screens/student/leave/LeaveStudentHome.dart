@@ -12,7 +12,7 @@ class LeaveStudentHome extends StatefulWidget {
   final _images;
   var id;
 
-  LeaveStudentHome(this._titles, this._images, {Key? key, this.id}) : super(key: key);
+  LeaveStudentHome(this._titles, this._images, {super.key, this.id});
 
   @override
   _LeaveStudentHomeState createState() =>
@@ -43,8 +43,8 @@ class _LeaveStudentHomeState extends State<LeaveStudentHome> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: GridView.builder(
           itemCount: _titles.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
           itemBuilder: (context, index) {
             return CustomWidget(
               index: index,

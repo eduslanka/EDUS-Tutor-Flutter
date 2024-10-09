@@ -34,7 +34,7 @@ class DBStudentProfile extends StatefulWidget {
   String? id;
   String? image;
 
-  DBStudentProfile({Key? key, this.id, this.image}) : super(key: key);
+  DBStudentProfile({super.key, this.id, this.image});
 
   @override
   _DBStudentProfileState createState() =>
@@ -123,7 +123,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
           automaticallyImplyLeading: false,
           flexibleSpace: Container(
             padding: EdgeInsets.only(top: 20.h),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xff053EFF),
             ),
             child: Row(
@@ -255,7 +255,7 @@ class _DBStudentProfileState extends State<DBStudentProfile> {
                                   elevation: 0,
                                   title: TabBar(
                                     labelColor: const Color(0xff415094),
-                                    indicatorColor: Color(0xff053EFF),
+                                    indicatorColor: const Color(0xff053EFF),
                                     indicatorWeight: 3,
                                     tabs: tabs,
                                     isScrollable: true,
@@ -1109,7 +1109,7 @@ class ParentsDetailsRow extends StatelessWidget {
   final String? title;
   final String? value;
 
-  const ParentsDetailsRow({Key? key, this.title, this.value}) : super(key: key);
+  const ParentsDetailsRow({super.key, this.title, this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -1182,4 +1182,4 @@ class ParentsDetailsRow extends StatelessWidget {
   }
 }
 
-bool isNullOrEmpty(Object o) => o == null || o == "";
+bool isNullOrEmpty(Object o) => o == "";

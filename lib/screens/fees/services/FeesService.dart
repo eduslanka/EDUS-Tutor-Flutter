@@ -13,8 +13,6 @@ import '../../../utils/Utils.dart';
 
 // import 'dart:developer';
 
-
-
 class FeeService {
   final int _id;
   final String _token;
@@ -24,10 +22,10 @@ class FeeService {
   List<FeeElement> feeMap = [];
   List<double> totalMap = [];
 
-  bool isNullOrEmpty(Object o) => o == null || "" == o;
+  bool isNullOrEmpty(Object o) => "" == o;
 
   Future<List<FeeElement>> fetchFee() async {
-    try{
+    try {
       feeMap.clear();
 
       //Utils.showToast(InfixApi.getFeesUrl(_id));
@@ -49,7 +47,7 @@ class FeeService {
               paid: f.paid,
               balance: f.balance,
               discountAmount:
-              isNullOrEmpty(f.discountAmount) ? 0 : f.discountAmount,
+                  isNullOrEmpty(f.discountAmount) ? 0 : f.discountAmount,
               fine: f.fine,
               feesTypeId: f.feesTypeId,
               currencySymbol: data.data?.currencySymbol?.currencySymbol));
@@ -57,19 +55,19 @@ class FeeService {
       } else {
         Utils.showToast('try again later');
       }
-    }catch (e){
+    } catch (e) {
       debugPrint(e.toString());
     }
     return feeMap;
   }
 
   Future<List<double>> fetchTotalFee() async {
-    try{
-      double _amount = 0;
-      double _discount = 0;
-      double _fine = 0;
-      double _paid = 0;
-      double _balance = 0;
+    try {
+      double amount = 0;
+      double discount = 0;
+      double fine = 0;
+      double paid = 0;
+      double balance = 0;
 
       final response = await http.get(Uri.parse(EdusApi.getFeesUrl(_id)),
           headers: Utils.setHeader(_token.toString()));
@@ -81,31 +79,32 @@ class FeeService {
 
       if (isSuccess) {
         for (var element in data.data?.fees ?? []) {
-          _amount = _amount + double.parse(element.amount.toString());
+          amount = amount + double.parse(element.amount.toString());
 
           element.paid == 0
-              ? _paid = _paid + 0.0
-              : _paid = _paid + double.parse(element.paid.toString());
+              ? paid = paid + 0.0
+              : paid = paid + double.parse(element.paid.toString());
 
           element.fine == 0
-              ? _fine = _fine + 0.0
-              : _fine = _fine + double.parse(element.fine.toString());
+              ? fine = fine + 0.0
+              : fine = fine + double.parse(element.fine.toString());
 
           element.discountAmount == null || element.discountAmount == ""
-              ? _discount = _discount + 0.0
-              : _discount = _discount + double.parse(element.discountAmount.toString());
+              ? discount = discount + 0.0
+              : discount =
+                  discount + double.parse(element.discountAmount.toString());
 
-          _balance = _balance + double.parse(element.balance.toString());
+          balance = balance + double.parse(element.balance.toString());
         }
-        totalMap.add(_amount);
-        totalMap.add(_discount);
-        totalMap.add(_fine);
-        totalMap.add(_paid);
-        totalMap.add(_balance);
+        totalMap.add(amount);
+        totalMap.add(discount);
+        totalMap.add(fine);
+        totalMap.add(paid);
+        totalMap.add(balance);
       } else {
         Utils.showToast('try again later');
       }
-    }catch (e){
+    } catch (e) {
       print(e);
     }
     return totalMap;

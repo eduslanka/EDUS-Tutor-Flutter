@@ -11,7 +11,7 @@ import 'package:edus_tutor/screens/fees/model/FeesType.dart';
 import 'package:http/http.dart' as http;
 
 class FeesTypeScreen extends StatefulWidget {
-  const FeesTypeScreen({Key? key}) : super(key: key);
+  const FeesTypeScreen({super.key});
 
   @override
   _FeesTypeScreenState createState() => _FeesTypeScreenState();
@@ -130,9 +130,9 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
                               } else {
                                 Utils.showToast('Deleted successfully');
                               }
-                               return Future.value(true);
+                              return Future.value(true);
                             } else {
-                               return Future.value(false);
+                              return Future.value(false);
                             }
                           },
                           icon: const Icon(
@@ -157,7 +157,7 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
             showAddDialog(value);
           });
         },
-        backgroundColor: Color(0xff053EFF),
+        backgroundColor: const Color(0xff053EFF),
         foregroundColor: Colors.blueAccent,
         child: const Icon(
           Icons.add,
@@ -194,8 +194,8 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
                             TextField(
                               controller: titleController,
                               style: Theme.of(context).textTheme.headlineMedium,
-                              decoration:
-                                  const InputDecoration(hintText: 'Enter title here'),
+                              decoration: const InputDecoration(
+                                  hintText: 'Enter title here'),
                             ),
                             const SizedBox(
                               height: 5,
@@ -208,8 +208,9 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
                                   value: item.id,
                                   child: Text(
                                     item.name.toString(),
-                                    style:
-                                        Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium,
                                   ),
                                 );
                               }).toList(),
@@ -219,7 +220,7 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
                                   ?.copyWith(fontSize: 13.0),
                               onChanged: (value) {
                                 state(() {
-                                  selectedFeeGroup = value as int?;
+                                  selectedFeeGroup = value;
                                 });
                               },
                               value: selectedFeeGroup,
@@ -258,9 +259,9 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
                                       fees = getFeesTypes();
                                     });
                                     Get.back();
-                                     return Future.value(true);
+                                    return Future.value(true);
                                   } else {
-                                     return Future.value(false);
+                                    return Future.value(false);
                                   }
                                 },
                                 child: Text("Add".tr),
@@ -320,8 +321,8 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
                           TextField(
                             controller: titleController,
                             style: Theme.of(context).textTheme.headlineMedium,
-                            decoration:
-                                const InputDecoration(hintText: 'Enter title here'),
+                            decoration: const InputDecoration(
+                                hintText: 'Enter title here'),
                           ),
                           TextField(
                             controller: descripController,
@@ -355,9 +356,9 @@ class _FeesTypeScreenState extends State<FeesTypeScreen> {
                                     fees = getFeesTypes();
                                   });
                                   Get.back();
-                                   return Future.value(true);
+                                  return Future.value(true);
                                 } else {
-                                   return Future.value(false);
+                                  return Future.value(false);
                                 }
                               },
                               child: Text("Update".tr),

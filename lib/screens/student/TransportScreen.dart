@@ -16,7 +16,7 @@ import 'package:edus_tutor/utils/model/Transport.dart';
 import 'package:edus_tutor/utils/widget/TransportRow.dart';
 
 class TransportScreen extends StatefulWidget {
-  const TransportScreen({Key? key}) : super(key: key);
+  const TransportScreen({super.key});
 
   @override
   _TransportState createState() => _TransportState();
@@ -34,10 +34,9 @@ class _TransportState extends State<TransportScreen> {
       setState(() {
         _token = value ?? '';
       });
-    })
-      .then((value) {
-        transports = getAllTransport();
-      });
+    }).then((value) {
+      transports = getAllTransport();
+    });
   }
 
   @override
@@ -52,9 +51,11 @@ class _TransportState extends State<TransportScreen> {
               if (snapshot.data!.transports.isNotEmpty) {
                 return ListView.builder(
                   itemCount: snapshot.data?.transports.length ?? 0,
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   itemBuilder: (context, index) {
-                    return TransportRow(snapshot.data?.transports[index] ?? Transport());
+                    return TransportRow(
+                        snapshot.data?.transports[index] ?? Transport());
                   },
                 );
               } else {

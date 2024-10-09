@@ -24,7 +24,7 @@ class StudentTeacher extends StatefulWidget {
   String? id;
   String? token;
 
-  StudentTeacher({Key? key, this.id, this.token}) : super(key: key);
+  StudentTeacher({super.key, this.id, this.token});
 
   @override
   _StudentTeacherState createState() => _StudentTeacherState();
@@ -46,7 +46,9 @@ class _StudentTeacherState extends State<StudentTeacher>
 
     Utils.getStringValue('id').then((value) {
       setState(() {
-        mId = widget.id != null ? int.parse(widget.id ?? '') : int.parse(value ?? '');
+        mId = widget.id != null
+            ? int.parse(widget.id ?? '')
+            : int.parse(value ?? '');
         teachers = getAllTeacher(
             mId, _userController.studentRecord.value.records?.first.id ?? 0);
       });
@@ -109,14 +111,16 @@ class _StudentTeacherState extends State<StudentTeacher>
                             },
                             itemBuilder: (context, index) {
                               return StudentTeacherRowLayout(
-                                  snapshot.data?.teachers[index] ?? Teacher(), perm);
+                                  snapshot.data?.teachers[index] ?? Teacher(),
+                                  perm);
                             },
                           );
                         } else {
                           return Utils.noDataWidget();
                         }
                       } else {
-                        return const Center(child: CupertinoActivityIndicator());
+                        return const Center(
+                            child: CupertinoActivityIndicator());
                       }
                     }
                   },

@@ -5,20 +5,20 @@ class CookieButton extends StatelessWidget {
   final String? text;
   final Function? onPressed;
 
-  const CookieButton({Key? key, this.text, this.onPressed}) : super(key: key);
+  const CookieButton({super.key, this.text, this.onPressed});
 
   @override
   Widget build(BuildContext context) => SizedBox(
       height: 64,
       width: MediaQuery.of(context).size.width * .4,
       child: ElevatedButton(
-        child: FittedBox(
-            child: Text(text ?? '',
-                style: const TextStyle(color: Colors.white, fontSize: 18))),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blueAccent,
         ),
         // onPressed: onPressed,
         onPressed: onPressed as void Function(),
+        child: FittedBox(
+            child: Text(text ?? '',
+                style: const TextStyle(color: Colors.white, fontSize: 18))),
       ));
 }

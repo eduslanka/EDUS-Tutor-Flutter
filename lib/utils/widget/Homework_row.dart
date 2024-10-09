@@ -29,7 +29,7 @@ class StudentHomeworkRow extends StatefulWidget {
   Homework homework;
   String type;
 
-  StudentHomeworkRow(this.homework, this.type, {Key? key}) : super(key: key);
+  StudentHomeworkRow(this.homework, this.type, {super.key});
 
   @override
   _StudentHomeworkRowState createState() => _StudentHomeworkRowState();
@@ -285,14 +285,14 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
                           ),
                           widget.homework.obtainedMarks == ""
                               ? Text(
-                                  "Marks: ".tr + '${widget.homework.marks}',
+                                  '${"Marks: ".tr}${widget.homework.marks}',
                                   style:
                                       Theme.of(context).textTheme.headlineSmall,
                                   maxLines: 1,
                                 )
                               : Text(
-                                  "Obtained Marks: " +
-                                      '${widget.homework.obtainedMarks}',
+                                  "Obtained Marks: "
+                                  '${widget.homework.obtainedMarks}',
                                   style:
                                       Theme.of(context).textTheme.headlineSmall,
                                   maxLines: 1,
@@ -646,7 +646,7 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
         received = ((receivedBytes / totalBytes) * 100);
         setState(() {
           progress =
-              ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";
+              "${((receivedBytes / totalBytes) * 100).toStringAsFixed(0)}%";
         });
         if (received == 100.0) {
           if (url.contains('.pdf')) {

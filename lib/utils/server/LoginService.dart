@@ -33,7 +33,7 @@ class Login {
     dynamic phone;
     dynamic isBlock;
 
-    bool isNullOrEmpty(Object o) => o == null || o == "";
+    bool isNullOrEmpty(Object o) => o == "";
 
     try {
       final response = await http.post(
@@ -46,7 +46,8 @@ class Login {
 
       if (response.statusCode == 200) {
         var user = json.decode(response.body);
-        isBlock = user['data']['student_have_due_fees'];
+        isBlock = user['data']['student_have_due_fees'] ||
+            user['data']['user']['active_status'] != 1;
         isSuccess = user['success'];
         message = user['message'];
         id = user['data']['user']['id'];
@@ -91,9 +92,8 @@ class Login {
           if (rule == 2 || rule == "2") {
             saveIntValue('studentId', int.parse(studentId.toString()));
           }
-          final SystemController _systemController =
-              Get.put(SystemController());
-          await _systemController.getSystemSettings();
+          final SystemController systemController = Get.put(SystemController());
+          await systemController.getSystemSettings();
           AppFunction.getFunctions(context, rule.toString());
         }
         return message;
@@ -101,7 +101,6 @@ class Login {
         message = "Error: ${response.statusCode}";
       }
     } catch (e, t) {
-      
       debugPrint(e.toString());
       debugPrint(t.toString());
     }

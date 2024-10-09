@@ -20,7 +20,7 @@ import 'package:edus_tutor/utils/widget/ShimmerListWidget.dart';
 class StudentFeesOld extends StatefulWidget {
   final String? id;
 
-  const StudentFeesOld({Key? key, this.id}) : super(key: key);
+  const StudentFeesOld({super.key, this.id});
   @override
   _StudentFeesOldState createState() => _StudentFeesOldState();
 }
@@ -54,7 +54,7 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                 image: AssetImage(AppConfig.appToolbarBackground),
                 fit: BoxFit.cover,
               ),
-              color: Color(0xff053EFF),
+              color: const Color(0xff053EFF),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -113,7 +113,8 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                 Expanded(
                   child: Text(
                     'Grand Total'.tr,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(),
+                    style:
+                        Theme.of(context).textTheme.headlineSmall?.copyWith(),
                     maxLines: 1,
                   ),
                 ),
@@ -129,7 +130,8 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                   return StreamBuilder<List<double>>(
                       stream: Stream.periodic(const Duration(seconds: 5))
                           .asyncMap((i) => FeeService(
-                                int.parse(widget.id.toString() ?? id.data.toString()),
+                                int.parse(
+                                    widget.id.toString() ?? id.data.toString()),
                                 _token ?? '',
                               ).fetchTotalFee()),
                       builder: (context, totalSnapshot) {
@@ -138,8 +140,7 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                             children: <Widget>[
                               Expanded(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
                                       'Amount'.tr,
@@ -165,8 +166,7 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                               ),
                               Expanded(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
                                       'Discount'.tr,
@@ -192,8 +192,7 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                               ),
                               Expanded(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
                                       'Fine'.tr,
@@ -219,8 +218,7 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                               ),
                               Expanded(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
                                       'Paid'.tr,
@@ -246,8 +244,7 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                               ),
                               Expanded(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
                                       'Balance'.tr,
@@ -275,7 +272,7 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                             ],
                           );
                         } else {
-                          return ShimmerList(
+                          return const ShimmerList(
                             height: 40,
                             itemCount: 1,
                           );
@@ -296,7 +293,10 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [const Color(0xffd9c1f8).withOpacity(0.5), Colors.white]),
+                  colors: [
+                    const Color(0xffd9c1f8).withOpacity(0.5),
+                    Colors.white
+                  ]),
             ),
           ),
           SizedBox(
@@ -313,7 +313,8 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                     return StreamBuilder<List<FeeElement>>(
                         stream: Stream.periodic(const Duration(seconds: 5))
                             .asyncMap((i) => FeeService(
-                                  int.parse(widget.id ?? snapId.data.toString()),
+                                  int.parse(
+                                      widget.id ?? snapId.data.toString()),
                                   _token ?? '',
                                 ).fetchFee()),
                         // future: FeeService(int.parse(
@@ -329,7 +330,7 @@ class _StudentFeesOldState extends State<StudentFeesOld> {
                                       widget.id ?? snapId.data.toString());
                                 });
                           } else {
-                            return ShimmerList(
+                            return const ShimmerList(
                               height: 40,
                               itemCount: 1,
                             );

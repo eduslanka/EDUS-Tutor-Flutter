@@ -17,7 +17,7 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/model/StudentAttendance.dart';
 
 class TeacherAttendanceScreen extends StatefulWidget {
-  const TeacherAttendanceScreen({Key? key}) : super(key: key);
+  const TeacherAttendanceScreen({super.key});
 
   @override
   _TeacherAttendanceScreenState createState() =>
@@ -48,8 +48,8 @@ class _TeacherAttendanceScreenState extends State<TeacherAttendanceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime? _currentDate;
-    var _markedDateMap;
+    DateTime? currentDate;
+    var markedDateMap;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -61,7 +61,7 @@ class _TeacherAttendanceScreenState extends State<TeacherAttendanceScreen> {
             margin: const EdgeInsets.symmetric(horizontal: 16.0),
             child: CalendarCarousel<Event>(
               onDayPressed: (DateTime date, List<Event> events) {
-                setState(() => _currentDate = date);
+                setState(() => currentDate = date);
               },
               onCalendarChanged: (DateTime date) {
                 setState(() {
@@ -162,9 +162,9 @@ class _TeacherAttendanceScreenState extends State<TeacherAttendanceScreen> {
                 );
               },
               weekFormat: false,
-              markedDatesMap: _markedDateMap,
+              markedDatesMap: markedDateMap,
               height: MediaQuery.of(context).size.height / 2,
-              selectedDateTime: _currentDate,
+              selectedDateTime: currentDate,
               daysHaveCircularBorder: true,
 
               /// null for not rendering any border, true for circular border, false for rectangular border
@@ -178,7 +178,7 @@ class _TeacherAttendanceScreenState extends State<TeacherAttendanceScreen> {
                 bottomDesign('Present', 'P', Colors.green),
                 bottomDesign('Absent', 'A', Colors.red),
                 bottomDesign('Late', 'L', Colors.yellow),
-                bottomDesign('Halfday', 'H', Color(0xff053EFF)),
+                bottomDesign('Halfday', 'H', const Color(0xff053EFF)),
                 bottomDesign('Holiday', 'F', Colors.blueAccent),
               ],
             ),
@@ -278,10 +278,10 @@ class _TeacherAttendanceScreenState extends State<TeacherAttendanceScreen> {
         return Colors.yellow;
         break;
       case 'H':
-        return Color(0xff053EFF);
+        return const Color(0xff053EFF);
         break;
       case 'F':
-        return Color(0xff053EFF);
+        return const Color(0xff053EFF);
         break;
       default:
         return Colors.black12;

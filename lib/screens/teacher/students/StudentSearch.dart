@@ -22,11 +22,12 @@ import 'StudentListScreen.dart';
 class StudentSearch extends StatefulWidget {
   String? status;
 
-  StudentSearch({Key? key, this.status}) : super(key: key);
+  StudentSearch({super.key, this.status});
 
   @override
   // ignore: no_logic_in_create_state
-  _StudentSearchState createState() => _StudentSearchState(status: status ?? '');
+  _StudentSearchState createState() =>
+      _StudentSearchState(status: status ?? '');
 }
 
 class _StudentSearchState extends State<StudentSearch> {
@@ -94,19 +95,20 @@ class _StudentSearchState extends State<StudentSearch> {
               if (snapshot.hasData) {
                 return ListView(
                   children: <Widget>[
-                     getClassDropdown([]),
+                    getClassDropdown([]),
                     FutureBuilder<SectionList>(
                       future: sections,
                       builder: (context, secSnap) {
                         if (secSnap.hasData) {
-                          return getSectionDropdown(secSnap.data?.sections ?? []);
+                          return getSectionDropdown(
+                              secSnap.data?.sections ?? []);
                         } else if (secSnap.connectionState.name == 'waiting') {
                           return const Center(
                               child: CupertinoActivityIndicator());
                         } else if (secSnap.connectionState.name == 'none') {
                           return getClassDropdown([]);
                         } else {
-                          return SizedBox();
+                          return const SizedBox();
                         }
                       },
                     ),
@@ -122,7 +124,8 @@ class _StudentSearchState extends State<StudentSearch> {
                         decoration: InputDecoration(
                             hintText: "Search by name".tr,
                             labelText: "Name".tr,
-                            labelStyle: Theme.of(context).textTheme.headlineMedium,
+                            labelStyle:
+                                Theme.of(context).textTheme.headlineMedium,
                             errorStyle: const TextStyle(
                                 color: Colors.blue, fontSize: 15.0),
                             border: OutlineInputBorder(
@@ -139,7 +142,8 @@ class _StudentSearchState extends State<StudentSearch> {
                         decoration: InputDecoration(
                             hintText: "Search by roll".tr,
                             labelText: "Roll".tr,
-                            labelStyle: Theme.of(context).textTheme.headlineMedium,
+                            labelStyle:
+                                Theme.of(context).textTheme.headlineMedium,
                             errorStyle: const TextStyle(
                                 color: Colors.blue, fontSize: 15.0),
                             border: OutlineInputBorder(
@@ -270,11 +274,11 @@ class _StudentSearchState extends State<StudentSearch> {
             ?.copyWith(fontSize: ScreenUtil().setSp(15)),
         onChanged: (value) {
           setState(() {
-
             _selectedClass = '$value';
             // classId = getCode(classes, '$value');
 
-            int classIndex = AllClasses.classes.indexWhere((element) => value == element.name);
+            int classIndex = AllClasses.classes
+                .indexWhere((element) => value == element.name);
             //classId = getCode(classes, '$value');
             classId = AllClasses.classes[classIndex].id;
 
@@ -361,7 +365,6 @@ class _StudentSearchState extends State<StudentSearch> {
     final response = await http.get(
         Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
-
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);

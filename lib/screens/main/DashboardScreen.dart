@@ -37,13 +37,12 @@ class DashboardScreen extends StatefulWidget {
   final childUID, image, token, childName, childId;
 
   const DashboardScreen(this.titles, this.images, this.role,
-      {Key? key,
+      {super.key,
       this.childUID,
       this.image,
       this.token,
       this.childName,
-      this.childId})
-      : super(key: key);
+      this.childId});
 
   @override
   _DashboardScreenState createState() => _DashboardScreenState();

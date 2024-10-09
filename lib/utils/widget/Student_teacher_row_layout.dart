@@ -12,7 +12,7 @@ class StudentTeacherRowLayout extends StatefulWidget {
   Teacher teacher;
   dynamic per;
 
-  StudentTeacherRowLayout(this.teacher, this.per, {Key? key}) : super(key: key);
+  StudentTeacherRowLayout(this.teacher, this.per, {super.key});
 
   @override
   _StudentTeacherRowLayoutState createState() =>
@@ -68,9 +68,10 @@ class _StudentTeacherRowLayoutState extends State<StudentTeacherRowLayout> {
                     ),
                     Text(
                       widget.teacher.teacherEmail.toString(),
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontSize: 14,
-                          ),
+                      style:
+                          Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                fontSize: 14,
+                              ),
                     ),
                   ],
                 ),
@@ -101,10 +102,12 @@ class _StudentTeacherRowLayoutState extends State<StudentTeacherRowLayout> {
                           ),
                           Text(
                             widget.teacher.teacherPhone ?? '',
-                            style:
-                                Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                      fontSize: 14,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  fontSize: 14,
+                                ),
                           ),
                         ],
                       ),

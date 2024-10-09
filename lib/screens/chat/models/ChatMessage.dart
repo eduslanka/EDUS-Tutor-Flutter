@@ -48,8 +48,11 @@ class ChatMessage {
         fileName: json["file_name"],
         originalFileName: json["original_file_name"],
         initial: json["initial"],
-        reply:
-            json["reply"] == null ? null : json["reply"] is int ? json["reply"] : ReplyMessage.fromJson(json["reply"]),
+        reply: json["reply"] == null
+            ? null
+            : json["reply"] is int
+                ? json["reply"]
+                : ReplyMessage.fromJson(json["reply"]),
         forward: json["forward"],
         deletedByTo: json["deleted_by_to"],
         createdAt: DateTime.parse(json["created_at"]),
@@ -74,12 +77,12 @@ class ChatMessage {
         "file_name": fileName,
         "original_file_name": originalFileName,
         "initial": initial,
-        "reply": reply == null ? null : reply.toJson(),
+        "reply": reply?.toJson(),
         "forward": forward,
         "deleted_by_to": deletedByTo,
         "created_at": createdAt?.toIso8601String(),
-        "forward_from": forwardFrom == null ? null : forwardFrom?.toJson(),
-        "from_user": fromUser == null ? null : fromUser?.toJson(),
-        "to_user": toUser == null ? null : toUser?.toJson(),
+        "forward_from": forwardFrom?.toJson(),
+        "from_user": fromUser?.toJson(),
+        "to_user": toUser?.toJson(),
       };
 }

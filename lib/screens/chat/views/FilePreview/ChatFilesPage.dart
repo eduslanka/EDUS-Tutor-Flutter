@@ -16,7 +16,7 @@ import 'package:timeago/timeago.dart' as time;
 class ChatFilesPage extends StatefulWidget {
   final String? chatId;
   final bool? isGroup;
-  const ChatFilesPage({Key? key, this.chatId, this.isGroup}) : super(key: key);
+  const ChatFilesPage({super.key, this.chatId, this.isGroup});
   @override
   _ChatFilesPageState createState() => _ChatFilesPageState();
 }
@@ -93,7 +93,8 @@ class _ChatFilesPageState extends State<ChatFilesPage> {
                   : _chatFilesController?.chatFilesModel.value.messages.entries
                       .elementAt(index)
                       .value;
-              var timeago = time.format(chatMessage.createdAt ?? DateTime.now());
+              var timeago =
+                  time.format(chatMessage.createdAt ?? DateTime.now());
               if (chatMessage.messageType == 1) {
                 //** png jpg jpeg
                 return Container(
@@ -126,7 +127,8 @@ class _ChatFilesPageState extends State<ChatFilesPage> {
                       ),
                       Text(
                         timeago,
-                        style: Get.textTheme.titleMedium?.copyWith(fontSize: 12),
+                        style:
+                            Get.textTheme.titleMedium?.copyWith(fontSize: 12),
                       ),
                     ],
                   ),

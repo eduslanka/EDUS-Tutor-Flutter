@@ -18,8 +18,7 @@ class SubjectStudentRow extends StatefulWidget {
   String? subjectName;
 
   SubjectStudentRow(this.student,
-      {Key? key, this.status, this.token, this.subjectCode, this.subjectName})
-      : super(key: key);
+      {super.key, this.status, this.token, this.subjectCode, this.subjectName});
 
   @override
   // ignore: no_logic_in_create_state
@@ -51,7 +50,7 @@ class _SubjectStudentRowState extends State<SubjectStudentRow> {
   Widget build(BuildContext context) {
     String image = student.photo == null || student.photo == ''
         ? '${AppConfig.domainName}/public/uploads/staff/demo/staff.jpg'
-        : EdusApi.root + '${student.photo}';
+        : '${EdusApi.root}${student.photo}';
     return InkWell(
       onTap: () {
         if (status == 'attendance') {
@@ -74,7 +73,7 @@ class _SubjectStudentRowState extends State<SubjectStudentRow> {
               )));
         }
       },
-      splashColor: Color(0xff053EFF),
+      splashColor: const Color(0xff053EFF),
       child: Column(
         children: <Widget>[
           ListTile(

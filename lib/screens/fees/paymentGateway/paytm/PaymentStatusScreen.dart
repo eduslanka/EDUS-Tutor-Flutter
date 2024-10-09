@@ -10,7 +10,7 @@ class PaymentStatusScreen extends StatefulWidget {
   FeeElement fee;
   String amount;
 
-  PaymentStatusScreen(this.fee, this.amount, {Key? key}) : super(key: key);
+  PaymentStatusScreen(this.fee, this.amount, {super.key});
 
   @override
   _PaymentStatusScreenState createState() => _PaymentStatusScreenState();

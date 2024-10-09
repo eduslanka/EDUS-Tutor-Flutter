@@ -5,11 +5,12 @@ class CustomBottomSheet extends StatefulWidget {
   final String? title;
   final List<Widget>? children;
   final double initialChildSize;
-  const CustomBottomSheet({Key? key, 
+  const CustomBottomSheet({
+    super.key,
     this.title,
     this.children,
     this.initialChildSize = 0.5,
-  }) : super(key: key);
+  });
   @override
   State<CustomBottomSheet> createState() => _CustomBottomSheetState();
 }

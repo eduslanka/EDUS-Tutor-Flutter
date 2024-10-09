@@ -1,5 +1,3 @@
-import 'package:get/get.dart';
-
 class ActiveOnlineExam {
   int? id;
   String? title;
@@ -11,7 +9,8 @@ class ActiveOnlineExam {
   dynamic isClosed;
 
   ActiveOnlineExam(
-      {this.id,this.title,
+      {this.id,
+      this.title,
       this.subject,
       this.date,
       this.status,
@@ -20,18 +19,16 @@ class ActiveOnlineExam {
       this.isClosed});
 
   factory ActiveOnlineExam.fromJson(Map<String, dynamic> json) {
-
-
-      return ActiveOnlineExam(
-        id: int.tryParse(json['exam_id']),
-        title: json['exam_title'],
-        subject: json['subject_name'],
-        date: json['date'],
-        status: json['onlineExamTakeStatus'],
-        isRunning: json['is_running'],
-        isWaiting: json['is_waiting'],
-        isClosed: json['is_closed'],
-      );
+    return ActiveOnlineExam(
+      id: int.tryParse(json['exam_id']),
+      title: json['exam_title'],
+      subject: json['subject_name'],
+      date: json['date'],
+      status: json['onlineExamTakeStatus'],
+      isRunning: json['is_running'],
+      isWaiting: json['is_waiting'],
+      isClosed: json['is_closed'],
+    );
   }
 }
 

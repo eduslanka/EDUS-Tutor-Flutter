@@ -19,7 +19,7 @@ import '../error.dart';
 import '../theme.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -48,7 +48,7 @@ class _MainPageState extends State<MainPage> {
     return Portal(
       child: ScreenUtilInit(
           designSize: const Size(360, 690),
-          builder: (_,child) {
+          builder: (_, child) {
             return Obx(() {
               if (controller.isLoading.value) {
                 return MaterialApp(
@@ -60,39 +60,41 @@ class _MainPageState extends State<MainPage> {
                 if (controller.connected.value) {
                   return isRTL != null
                       ? GetMaterialApp(
-                    title: AppConfig.appName,
-                    debugShowCheckedModeBanner: false,
-                    theme: basicTheme(),
-                    locale: langValue ? Get.deviceLocale
-                        : Locale(LanguageSelection.instance.val),
-                    translations: LanguageController(),
-                    fallbackLocale: const Locale('en_US'),
-                    builder: EasyLoading.init(),
-                    home: FutureBuilder(
-                        future: _initialization,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Scaffold(
-                              body: Center(
-                                child: Text(
-                                  snapshot.error.toString(),
-                                ),
-                              ),
-                            );
-                          }
-                          if (snapshot.connectionState == ConnectionState.done) {
-                            return const Scaffold(
-                              body: Splash(),
-                            );
-                          }
-                          return const CircularProgressIndicator();
-                        }),
-                  )
+                          title: AppConfig.appName,
+                          debugShowCheckedModeBanner: false,
+                          theme: basicTheme(),
+                          locale: langValue
+                              ? Get.deviceLocale
+                              : Locale(LanguageSelection.instance.val),
+                          translations: LanguageController(),
+                          fallbackLocale: const Locale('en_US'),
+                          builder: EasyLoading.init(),
+                          home: FutureBuilder(
+                              future: _initialization,
+                              builder: (context, snapshot) {
+                                if (snapshot.hasError) {
+                                  return Scaffold(
+                                    body: Center(
+                                      child: Text(
+                                        snapshot.error.toString(),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return const Scaffold(
+                                    body: Splash(),
+                                  );
+                                }
+                                return const CircularProgressIndicator();
+                              }),
+                        )
                       : const Material(
-                      child: Directionality(
-                          textDirection: TextDirection.ltr,
-                          child:
-                          Center(child: CupertinoActivityIndicator())));
+                          child: Directionality(
+                              textDirection: TextDirection.ltr,
+                              child:
+                                  Center(child: CupertinoActivityIndicator())));
                 } else {
                   return GetMaterialApp(
                     builder: EasyLoading.init(),
@@ -102,20 +104,28 @@ class _MainPageState extends State<MainPage> {
                     translations: LanguageController(),
                     fallbackLocale: const Locale('en_US'),
                     debugShowCheckedModeBanner: false,
-                    home: internetController.internet.isTrue ? controller.connectedStatus.isTrue ? ErrorPage(message: controller.serverMessage.toString(),) : const ErrorPage() : Center(
-                      child: Container(
-                        height: Get.height,
-                        color: Colors.white,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Lottie.asset('assets/images/no_internet.json'),
-                            const Text('Connect with Internet and Restart App.')
-                          ],
-                        ),
-                      ),
-                    ),
+                    home: internetController.internet.isTrue
+                        ? controller.connectedStatus.isTrue
+                            ? ErrorPage(
+                                message: controller.serverMessage.toString(),
+                              )
+                            : const ErrorPage()
+                        : Center(
+                            child: Container(
+                              height: Get.height,
+                              color: Colors.white,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Lottie.asset(
+                                      'assets/images/no_internet.json'),
+                                  const Text(
+                                      'Connect with Internet and Restart App.')
+                                ],
+                              ),
+                            ),
+                          ),
                   );
                 }
               }

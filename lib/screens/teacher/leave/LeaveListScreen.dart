@@ -16,7 +16,7 @@ import 'package:edus_tutor/utils/model/Leave.dart';
 import 'package:edus_tutor/utils/widget/Leave_row.dart';
 
 class LeaveListScreen extends StatefulWidget {
-  const LeaveListScreen({Key? key}) : super(key: key);
+  const LeaveListScreen({super.key});
 
   @override
   _LeaveListScreenState createState() => _LeaveListScreenState();
@@ -50,7 +50,7 @@ class _LeaveListScreenState extends State<LeaveListScreen> {
       body: FutureBuilder<LeaveList>(
         future: leaves,
         builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot != null) {
+          if (snapshot.hasData) {
             return ListView.builder(
               itemCount: snapshot.data?.leaves.length ?? 0,
               itemBuilder: (context, index) {
@@ -68,7 +68,8 @@ class _LeaveListScreenState extends State<LeaveListScreen> {
   }
 
   Future<LeaveList> fetchLeave(int id) async {
-    final response = await http.get(Uri.parse(EdusApi.getLeaveList(id)),headers: Utils.setHeader(_token.toString()));
+    final response = await http.get(Uri.parse(EdusApi.getLeaveList(id)),
+        headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
 

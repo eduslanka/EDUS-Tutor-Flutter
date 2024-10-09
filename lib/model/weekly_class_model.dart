@@ -40,9 +40,9 @@ class WeeklyClassData {
         element.forEach((day, classes) {
           List<ClassDetail> classList = [];
           if (classes is List) {
-            classes.forEach((classJson) {
+            for (var classJson in classes) {
               classList.add(ClassDetail.fromJson(classJson));
-            });
+            }
           }
           weeklyClassMap[day] = classList;
         });
@@ -54,7 +54,8 @@ class WeeklyClassData {
   Map<String, dynamic> toJson() {
     Map<String, dynamic> weeklyClassMap = {};
     weeklyClass.forEach((day, classes) {
-      weeklyClassMap[day] = classes.map((classDetail) => classDetail.toJson()).toList();
+      weeklyClassMap[day] =
+          classes.map((classDetail) => classDetail.toJson()).toList();
     });
     return {
       'weekly_class': [weeklyClassMap],

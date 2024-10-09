@@ -11,7 +11,7 @@ class FeesRow extends StatefulWidget {
   FeeElement fee;
   String id;
 
-  FeesRow(this.fee, this.id, {Key? key}) : super(key: key);
+  FeesRow(this.fee, this.id, {super.key});
 
   @override
   State<FeesRow> createState() => _FeesRowState();
@@ -55,9 +55,12 @@ class _FeesRowState extends State<FeesRow> {
                     child: Text(
                       'View',
                       textAlign: TextAlign.end,
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          decoration: TextDecoration.underline,
-                          fontWeight: FontWeight.bold),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium
+                          ?.copyWith(
+                              decoration: TextDecoration.underline,
+                              fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -85,12 +88,14 @@ class _FeesRowState extends State<FeesRow> {
                         widget.fee.dueDate == null
                             ? Text(
                                 'N/A',
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               )
                             : Text(
                                 widget.fee.dueDate.toLocal().toString(),
                                 maxLines: 1,
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                       ],
                     ),
@@ -228,7 +233,8 @@ class _FeesRowState extends State<FeesRow> {
                             Expanded(
                               child: Text(
                                 widget.fee.feesName.toString(),
-                                style: Theme.of(context).textTheme.headlineSmall,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
                                 maxLines: 1,
                               ),
                             ),
@@ -258,8 +264,9 @@ class _FeesRowState extends State<FeesRow> {
                                       widget.fee.currencySymbol.toString() +
                                           widget.fee.amount.toString(),
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -283,12 +290,14 @@ class _FeesRowState extends State<FeesRow> {
                                     Text(
                                       widget.fee.discountAmount == null
                                           ? 'N/A'
-                                          : widget.fee.currencySymbol.toString() +
+                                          : widget.fee.currencySymbol
+                                                  .toString() +
                                               widget.fee.discountAmount
                                                   .toString(),
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -313,8 +322,9 @@ class _FeesRowState extends State<FeesRow> {
                                       widget.fee.currencySymbol.toString() +
                                           widget.fee.fine.toString(),
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -339,8 +349,9 @@ class _FeesRowState extends State<FeesRow> {
                                       widget.fee.currencySymbol.toString() +
                                           widget.fee.paid.toString(),
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -366,8 +377,9 @@ class _FeesRowState extends State<FeesRow> {
                                           widget.fee.balance.toString(),
                                       textAlign: TextAlign.center,
                                       maxLines: 1,
-                                      style:
-                                          Theme.of(context).textTheme.headlineMedium,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium,
                                     ),
                                   ],
                                 ),
@@ -381,8 +393,9 @@ class _FeesRowState extends State<FeesRow> {
                             child: Material(
                               color: Colors.white,
                               child: TextFormField(
-                                keyboardType: const TextInputType.numberWithOptions(
-                                    decimal: false, signed: false),
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                        decimal: false, signed: false),
                                 style: Theme.of(context).textTheme.titleLarge,
                                 controller: amountController,
                                 autovalidateMode:
@@ -398,7 +411,9 @@ class _FeesRowState extends State<FeesRow> {
                                   if (!regExp.hasMatch(value)) {
                                     return 'Please enter a number';
                                   }
-                                  if (int.tryParse(value)! > int.tryParse(widget.fee.balance.toString())!) {
+                                  if (int.tryParse(value)! >
+                                      int.tryParse(
+                                          widget.fee.balance.toString())!) {
                                     return 'Amount must not greater than balance';
                                   }
                                   return null;
@@ -406,8 +421,9 @@ class _FeesRowState extends State<FeesRow> {
                                 decoration: InputDecoration(
                                   hintText: "Amount",
                                   labelText: "Amount",
-                                  labelStyle:
-                                      Theme.of(context).textTheme.headlineMedium,
+                                  labelStyle: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                   errorStyle: const TextStyle(
                                       color: Colors.blue, fontSize: 15.0),
                                   border: OutlineInputBorder(

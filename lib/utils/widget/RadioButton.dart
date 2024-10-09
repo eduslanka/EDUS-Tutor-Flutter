@@ -8,15 +8,12 @@ class RadioWidget extends StatefulWidget {
   final String headline;
 
   const RadioWidget({
-    Key? key,
+    super.key,
     required this.index,
     required this.isSelected,
     required this.onSelect,
     required this.headline,
-  })  : assert(index != null),
-        assert(isSelected != null),
-        assert(onSelect != null),
-        super(key: key);
+  }) : assert(index != null);
 
   @override
   _RadioWidgetState createState() => _RadioWidgetState();
@@ -50,7 +47,8 @@ class _RadioWidgetState extends State<RadioWidget> {
               Text(
                 widget.headline,
                 style: TextStyle(
-                  color: widget.isSelected ? Color(0xff053EFF) : Colors.grey,
+                  color:
+                      widget.isSelected ? const Color(0xff053EFF) : Colors.grey,
                   fontSize: 10.0,
                 ),
                 maxLines: 1,

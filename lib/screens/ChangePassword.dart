@@ -13,7 +13,7 @@ import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
 
 class ChangePassword extends StatefulWidget {
-  const ChangePassword({Key? key}) : super(key: key);
+  const ChangePassword({super.key});
 
   @override
   _ChangePasswordState createState() => _ChangePasswordState();
@@ -25,9 +25,11 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   bool isResponse = false;
 
-  final TextEditingController _currentPasswordController = TextEditingController();
+  final TextEditingController _currentPasswordController =
+      TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -77,7 +79,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   decoration: InputDecoration(
                     hintText: "Current Password".tr,
                     labelText: "Current Password".tr,
-                   // labelStyle: Theme.of(context).textTheme.headlineMedium,
+                    // labelStyle: Theme.of(context).textTheme.headlineMedium,
                     errorStyle:
                         const TextStyle(color: Colors.blue, fontSize: 15.0),
                     border: OutlineInputBorder(
@@ -106,7 +108,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   decoration: InputDecoration(
                     hintText: "New Password".tr,
                     labelText: "New Password".tr,
-                   // labelStyle: Theme.of(context).textTheme.headlineMedium,
+                    // labelStyle: Theme.of(context).textTheme.headlineMedium,
                     errorStyle:
                         const TextStyle(color: Colors.blue, fontSize: 15.0),
                     border: OutlineInputBorder(
@@ -139,7 +141,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   decoration: InputDecoration(
                     hintText: "Confirm Password".tr,
                     labelText: "Confirm Password".tr,
-                  //  labelStyle: Theme.of(context).textTheme.headlineMedium,
+                    //  labelStyle: Theme.of(context).textTheme.headlineMedium,
                     errorStyle:
                         const TextStyle(color: Colors.blue, fontSize: 15.0),
                     border: OutlineInputBorder(
@@ -180,8 +182,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           headers: Utils.setHeader(_token.toString()));
 
                       if (response.statusCode == 200) {
-                        Map data =
-                            jsonDecode(response.body) as Map;
+                        Map data = jsonDecode(response.body) as Map;
 
                         if (data['success'] == true) {
                           Utils.showToast('Password changed successfully'.tr);
@@ -198,8 +199,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           isResponse = false;
                         });
                       } else if (response.statusCode == 404) {
-                        Map data =
-                            jsonDecode(response.body) as Map;
+                        Map data = jsonDecode(response.body) as Map;
 
                         if (data['success'] == false) {
                           Utils.showToast(

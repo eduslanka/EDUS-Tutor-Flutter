@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 
 class ImagePickDialog extends StatelessWidget {
   const ImagePickDialog(
-      {Key? key, required this.onCameraTap, required this.onGalleryTap})
-      : super(key: key);
+      {super.key, required this.onCameraTap, required this.onGalleryTap});
 
   final Function() onCameraTap;
   final Function() onGalleryTap;
@@ -39,7 +38,11 @@ class ImagePickDialog extends StatelessWidget {
                   ),
                 ),
                 10.verticalSpace,
-                const Text("Camera",style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),)
+                const Text(
+                  "Camera",
+                  style: TextStyle(
+                      color: Colors.black87, fontWeight: FontWeight.w600),
+                )
               ],
             ),
           ),
@@ -61,7 +64,11 @@ class ImagePickDialog extends StatelessWidget {
                   ),
                 ),
                 10.verticalSpace,
-                const Text("File",style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),)
+                const Text(
+                  "File",
+                  style: TextStyle(
+                      color: Colors.black87, fontWeight: FontWeight.w600),
+                )
               ],
             ),
           ),

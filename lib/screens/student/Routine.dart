@@ -11,7 +11,7 @@ class Routine extends StatelessWidget {
   List<String> weeks = AppFunction.weeks;
   String? id;
 
-  Routine({Key? key, this.id}) : super(key: key);
+  Routine({super.key, this.id});
 
   @override
   Widget build(BuildContext context) {

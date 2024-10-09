@@ -15,7 +15,7 @@ import 'package:intl/intl.dart';
 
 class FeesAdminAddPayment extends StatefulWidget {
   final int invoiceId;
-  const FeesAdminAddPayment(this.invoiceId, {Key? key}) : super(key: key);
+  const FeesAdminAddPayment(this.invoiceId, {super.key});
   @override
   _FeesAdminAddPaymentState createState() => _FeesAdminAddPaymentState();
 }
@@ -85,8 +85,7 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                               height: 10,
                             ),
                             Text(
-                              'Invoice'.tr +
-                                  ": ${_controller.feesAdminAddPaymentModel.value.invoiceInfo?.invoiceId}",
+                              "${'Invoice'.tr}: ${_controller.feesAdminAddPaymentModel.value.invoiceInfo?.invoiceId}",
                               maxLines: 1,
                               style: Theme.of(context)
                                   .textTheme
@@ -94,8 +93,7 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                                   ?.copyWith(fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              'Due Date'.tr +
-                                  ": ${DateFormat.yMMMd().format(_controller.feesAdminAddPaymentModel.value.invoiceInfo?.dueDate ?? DateTime(200))}",
+                              "${'Due Date'.tr}: ${DateFormat.yMMMd().format(_controller.feesAdminAddPaymentModel.value.invoiceInfo?.dueDate ?? DateTime(200))}",
                               maxLines: 1,
                               style: Theme.of(context)
                                   .textTheme
@@ -103,8 +101,7 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                                   ?.copyWith(fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              'Wallet Balance'.tr +
-                                  ": ${_controller.feesAdminAddPaymentModel.value.walletBalance?.toStringAsFixed(2)}",
+                              "${'Wallet Balance'.tr}: ${_controller.feesAdminAddPaymentModel.value.walletBalance?.toStringAsFixed(2)}",
                               maxLines: 1,
                               style: Theme.of(context)
                                   .textTheme
@@ -114,8 +111,7 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                             Obx(() {
                               if (_controller.addWalletList.isNotEmpty) {
                                 return Text(
-                                  'Add in Wallet'.tr +
-                                      ": ${_controller.addWalletList.reduce((a, b) => a + b).toStringAsFixed(2)}",
+                                  "${'Add in Wallet'.tr}: ${_controller.addWalletList.reduce((a, b) => a + b).toStringAsFixed(2)}",
                                   maxLines: 1,
                                   style: Theme.of(context)
                                       .textTheme
@@ -124,7 +120,7 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                                 );
                               } else {
                                 return Text(
-                                  'Add in Wallet'.tr + ": 0.00",
+                                  "${'Add in Wallet'.tr}: 0.00",
                                   maxLines: 1,
                                   style: Theme.of(context)
                                       .textTheme
@@ -143,11 +139,12 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                     Text(
                       'Fees List'.tr,
                       maxLines: 1,
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            decoration: TextDecoration.underline,
-                          ),
+                      style:
+                          Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                decoration: TextDecoration.underline,
+                              ),
                     ),
                     ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
@@ -155,8 +152,9 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                       separatorBuilder: (context, index) {
                         return const Divider();
                       },
-                      itemCount: _controller
-                          .feesAdminAddPaymentModel.value.invoiceDetails?.length ?? 0,
+                      itemCount: _controller.feesAdminAddPaymentModel.value
+                              .invoiceDetails?.length ??
+                          0,
                       itemBuilder: (context, index) {
                         InvoiceDetail? invoiceDetails = _controller
                             .feesAdminAddPaymentModel
@@ -194,7 +192,8 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                             .headlineMedium
                             ?.copyWith(fontSize: 13.0),
                         onChanged: (value) {
-                          _controller.selectedPaymentMethod.value = value.toString();
+                          _controller.selectedPaymentMethod.value =
+                              value.toString();
 
                           _controller.chequeBankOrOthers();
                         },
@@ -220,7 +219,8 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                               value: item,
                               child: Text(
                                 "${item.bankName} (${item.accountNumber})",
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                               ),
                             );
                           }).toList(),
@@ -229,7 +229,8 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                               .headlineMedium
                               ?.copyWith(fontSize: 13.0),
                           onChanged: (value) {
-                            _controller.selectedBank.value = value as BankAccount;
+                            _controller.selectedBank.value =
+                                value as BankAccount;
                           },
                           value: _controller.selectedBank.value,
                         );
@@ -263,10 +264,11 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.black.withOpacity(0.3)),
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(5.0)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(5.0)),
                                 ),
-                                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20.0),
                                 child: Row(
                                   children: <Widget>[
                                     Expanded(
@@ -280,7 +282,8 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
                                                       .tr
                                                   : 'Select Cheque payment slip'
                                                       .tr
-                                              : _file?.path.split('/').last ?? '',
+                                              : _file?.path.split('/').last ??
+                                                  '',
                                           style: Theme.of(context)
                                               .textTheme
                                               .headlineMedium
@@ -369,7 +372,7 @@ class _FeesAdminAddPaymentState extends State<FeesAdminAddPayment> {
 class FeesListRow extends StatefulWidget {
   final InvoiceDetail? invoiceDetails;
   final int? index;
-  const FeesListRow({Key? key, this.invoiceDetails, this.index}) : super(key: key);
+  const FeesListRow({super.key, this.invoiceDetails, this.index});
   @override
   _FeesListRowState createState() => _FeesListRowState();
 }
@@ -441,9 +444,10 @@ class _FeesListRowState extends State<FeesListRow> {
                           ],
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.zero,
-                            hintText:
-                                widget.invoiceDetails?.amount?.toStringAsFixed(2),
-                            hintStyle: Theme.of(context).textTheme.headlineMedium,
+                            hintText: widget.invoiceDetails?.amount
+                                ?.toStringAsFixed(2),
+                            hintStyle:
+                                Theme.of(context).textTheme.headlineMedium,
                           ),
                         ),
                       ),
@@ -475,10 +479,13 @@ class _FeesListRowState extends State<FeesListRow> {
                           ],
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.zero,
-                            hintText:
-                                double.parse(_controller.dueList[widget.index ?? 0].toString()).toStringAsFixed(2)
-                                    .tr,
-                            hintStyle: Theme.of(context).textTheme.headlineMedium,
+                            hintText: double.parse(_controller
+                                    .dueList[widget.index ?? 0]
+                                    .toString())
+                                .toStringAsFixed(2)
+                                .tr,
+                            hintStyle:
+                                Theme.of(context).textTheme.headlineMedium,
                           ),
                         ),
                       ),
@@ -513,20 +520,21 @@ class _FeesListRowState extends State<FeesListRow> {
                                 var currentText = double.parse(text.toString());
                                 currentDue = (dueAmount ?? 0) - currentText;
 
-
                                 if (currentText >= (dueAmount ?? 0)) {
                                   currentDue = 0.0;
 
                                   _controller.addWalletList[widget.index ?? 0] =
                                       currentText - (dueAmount ?? 0);
                                 } else {
-                                  _controller.addWalletList[widget.index ?? 0] = 0;
+                                  _controller.addWalletList[widget.index ?? 0] =
+                                      0;
                                 }
 
                                 _controller.paidAmountList[widget.index ?? 0] =
                                     currentText;
 
-                                _controller.dueList[widget.index ?? 0] = currentDue;
+                                _controller.dueList[widget.index ?? 0] =
+                                    currentDue;
 
                                 _controller.totalPaidAmount.value = _controller
                                     .paidAmountList
@@ -542,7 +550,8 @@ class _FeesListRowState extends State<FeesListRow> {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.zero,
                             hintText: "Paid Amount".tr,
-                            hintStyle: Theme.of(context).textTheme.headlineMedium,
+                            hintStyle:
+                                Theme.of(context).textTheme.headlineMedium,
                           ),
                         ),
                       ),
@@ -574,8 +583,8 @@ class _FeesListRowState extends State<FeesListRow> {
                       child: TextFormField(
                         maxLines: 1,
                         enabled: false,
-                        initialValue:
-                            _controller.weaverList[widget.index ?? 0].toString(),
+                        initialValue: _controller.weaverList[widget.index ?? 0]
+                            .toString(),
                         onChanged: (text) {
                           setState(() {
                             if (text.isNotEmpty) {
@@ -588,7 +597,8 @@ class _FeesListRowState extends State<FeesListRow> {
                                 _controller.addWalletList[widget.index ?? 0] =
                                     currentText - (weaverAmount ?? 0);
                               } else {
-                                _controller.addWalletList[widget.index ?? 0] = 0;
+                                _controller.addWalletList[widget.index ?? 0] =
+                                    0;
                               }
                               _controller.weaverList[widget.index ?? 0] =
                                   currentText;
@@ -633,7 +643,8 @@ class _FeesListRowState extends State<FeesListRow> {
                             if (text.isNotEmpty) {
                               var currentText = double.parse(text.toString());
                               currentDue = (dueAmount ?? 0) + currentText;
-                              _controller.fineList[widget.index ?? 0] = currentText;
+                              _controller.fineList[widget.index ?? 0] =
+                                  currentText;
                             } else {
                               currentDue = widget.invoiceDetails?.dueAmount;
                             }

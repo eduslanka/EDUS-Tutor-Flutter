@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:edus_tutor/utils/model/Transport.dart';
 
-
 // ignore: must_be_immutable
 class TransportRow extends StatelessWidget {
   Transport transport;
 
-  TransportRow(this.transport, {Key? key}) : super(key: key);
+  TransportRow(this.transport, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,9 @@ class TransportRow extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium
-                          ?.copyWith(fontWeight: FontWeight.w500, fontSize: ScreenUtil().setSp(14.0)),
+                          ?.copyWith(
+                              fontWeight: FontWeight.w500,
+                              fontSize: ScreenUtil().setSp(14.0)),
                     ),
                   ),
                   Text(
@@ -84,7 +85,8 @@ class TransportRow extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 color: Colors.white,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 10.0,top: 20.0),
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 10.0, top: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -119,7 +121,9 @@ class TransportRow extends StatelessWidget {
                                 Text(
                                   transport.no ?? '',
                                   maxLines: 1,
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ],
                             ),
@@ -142,7 +146,9 @@ class TransportRow extends StatelessWidget {
                                 Text(
                                   transport.model ?? '',
                                   maxLines: 1,
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ],
                             ),
@@ -172,7 +178,9 @@ class TransportRow extends StatelessWidget {
                                 Text(
                                   transport.madeYear.toString(),
                                   maxLines: 1,
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ],
                             ),
@@ -195,7 +203,9 @@ class TransportRow extends StatelessWidget {
                                 Text(
                                   transport.driverName ?? '',
                                   maxLines: 1,
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ],
                             ),
@@ -225,7 +235,9 @@ class TransportRow extends StatelessWidget {
                                 Text(
                                   transport.license ?? "",
                                   maxLines: 1,
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ],
                             ),
@@ -248,7 +260,9 @@ class TransportRow extends StatelessWidget {
                                 Text(
                                   transport.mobile ?? "",
                                   maxLines: 1,
-                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ],
                             ),

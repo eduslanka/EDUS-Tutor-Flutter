@@ -19,7 +19,7 @@ import 'package:edus_tutor/utils/widget/TimeLineView.dart';
 class TimelineScreen extends StatefulWidget {
   String? id;
 
-  TimelineScreen({Key? key, this.id}) : super(key: key);
+  TimelineScreen({super.key, this.id});
 
   @override
   _TimelineScreenState createState() => _TimelineScreenState();
@@ -42,8 +42,9 @@ class _TimelineScreenState extends State<TimelineScreen> {
     super.didChangeDependencies();
     Utils.getStringValue('id').then((value) {
       setState(() {
-        timelinelist = getAllTimeline(
-            widget.id != null ? int.parse(widget.id ?? '') : int.parse(value ?? ''));
+        timelinelist = getAllTimeline(widget.id != null
+            ? int.parse(widget.id ?? '')
+            : int.parse(value ?? ''));
       });
     });
   }
@@ -65,7 +66,8 @@ class _TimelineScreenState extends State<TimelineScreen> {
                   shrinkWrap: true,
                   itemCount: snapshot.data?.timelines.length ?? 0,
                   itemBuilder: (context, index) {
-                    return TimeLineView(snapshot.data?.timelines[index] ?? Timeline());
+                    return TimeLineView(
+                        snapshot.data?.timelines[index] ?? Timeline());
                   },
                 ),
               );

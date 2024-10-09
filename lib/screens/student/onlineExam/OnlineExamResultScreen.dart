@@ -23,7 +23,7 @@ import 'package:edus_tutor/utils/widget/OnlineExamResultRow.dart';
 class OnlineExamResultScreen extends StatefulWidget {
   var id;
 
-  OnlineExamResultScreen({Key? key, this.id}) : super(key: key);
+  OnlineExamResultScreen({super.key, this.id});
 
   @override
   _OnlineExamResultScreenState createState() => _OnlineExamResultScreenState();
@@ -59,8 +59,8 @@ class _OnlineExamResultScreenState extends State<OnlineExamResultScreen> {
         exams?.then((val) {
           _selected = val.names.isNotEmpty ? val.names[0].title : '';
           code = val.names.isNotEmpty ? val.names[0].id : 0;
-          results = getAllOnlineExamResult(
-              id, code, _userController.studentRecord.value.records?.first.id ?? 0);
+          results = getAllOnlineExamResult(id, code,
+              _userController.studentRecord.value.records?.first.id ?? 0);
         });
       });
     });
@@ -87,7 +87,8 @@ class _OnlineExamResultScreenState extends State<OnlineExamResultScreen> {
                       _selected =
                           val.names.isNotEmpty ? val.names[0].title : '';
                       code = val.names.isNotEmpty ? val.names[0].id : 0;
-                      results = getAllOnlineExamResult(id, code, record.id ?? 0);
+                      results =
+                          getAllOnlineExamResult(id, code, record.id ?? 0);
                     });
                   },
                 );
@@ -149,7 +150,10 @@ class _OnlineExamResultScreenState extends State<OnlineExamResultScreen> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 15.0),
         onChanged: (value) {
           setState(() {
             _selected = value;
@@ -169,8 +173,7 @@ class _OnlineExamResultScreenState extends State<OnlineExamResultScreen> {
   Future<OnlineExamResultList> getAllOnlineExamResult(
       var id, dynamic code, int recordId) async {
     final response = await http.get(
-        Uri.parse(
-            EdusApi.getStudentOnlineActiveExamResult(id, code, recordId)),
+        Uri.parse(EdusApi.getStudentOnlineActiveExamResult(id, code, recordId)),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -220,7 +223,8 @@ class _OnlineExamResultScreenState extends State<OnlineExamResultScreen> {
               itemCount: snapshot.data?.results.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return OnlineExamResultRow(snapshot.data?.results[index] ?? OnlineExamResult());
+                return OnlineExamResultRow(
+                    snapshot.data?.results[index] ?? OnlineExamResult());
               },
             );
           } else {

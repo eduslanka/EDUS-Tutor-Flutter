@@ -7,27 +7,18 @@ class AccountDeleteDialogue extends StatelessWidget {
 
   const AccountDeleteDialogue({
     required this.onYesTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-
     return CupertinoAlertDialog(
       title: const Text('Confirmation'),
       content: const Text('Are you sure want to delete account?'),
       actions: [
-        TextButton(
-            onPressed: ()=> Get.back(),
-            child: const Text('CANCEL')
-        ),
-        TextButton(
-            onPressed: onYesTap,
-            child: const Text('DELETE')
-        ),
+        TextButton(onPressed: () => Get.back(), child: const Text('CANCEL')),
+        TextButton(onPressed: onYesTap, child: const Text('DELETE')),
       ],
     );
   }
 }
-
-

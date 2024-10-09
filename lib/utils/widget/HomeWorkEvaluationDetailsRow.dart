@@ -23,8 +23,8 @@ import '../Utils.dart';
 import 'ScaleRoute.dart';
 
 class HomeWorkEvaluationDetailsRow extends StatefulWidget {
-  const HomeWorkEvaluationDetailsRow(this.studentHomeworkEvaluation, {Key? key})
-      : super(key: key);
+  const HomeWorkEvaluationDetailsRow(this.studentHomeworkEvaluation,
+      {super.key});
 
   final StudentHomeworkEvaluation studentHomeworkEvaluation;
 
@@ -102,7 +102,7 @@ class _HomeWorkEvaluationDetailsRowState
         received = ((receivedBytes / totalBytes) * 100);
         setState(() {
           progress =
-              ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";
+              "${((receivedBytes / totalBytes) * 100).toStringAsFixed(0)}%";
         });
         if (received == 100.0) {
           if (url.contains('.pdf')) {

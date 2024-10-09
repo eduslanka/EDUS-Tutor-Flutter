@@ -16,7 +16,7 @@ import 'package:edus_tutor/utils/model/Book.dart';
 import 'package:edus_tutor/utils/widget/BookRowLayout.dart';
 
 class BookListScreen extends StatefulWidget {
-  const BookListScreen({Key? key}) : super(key: key);
+  const BookListScreen({super.key});
 
   @override
   _BookListState createState() => _BookListState();
@@ -32,12 +32,11 @@ class _BookListState extends State<BookListScreen> {
       setState(() {
         _token = value ?? '';
       });
-    })
-      .then((value) {
-        setState(() {
-          books = getAllBooks();
-        });
+    }).then((value) {
+      setState(() {
+        books = getAllBooks();
       });
+    });
   }
 
   @override

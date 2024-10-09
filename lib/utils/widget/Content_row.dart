@@ -33,8 +33,7 @@ class ContentRow extends StatefulWidget {
   dynamic index;
 
   ContentRow(this.content, this.animation,
-      {Key? key, this.onPressed, this.token, this.index})
-      : super(key: key);
+      {super.key, this.onPressed, this.token, this.index});
 
   @override
   // ignore: no_logic_in_create_state
@@ -376,7 +375,7 @@ class _ContentRowState extends State<ContentRow> {
         received = ((receivedBytes / totalBytes) * 100);
         setState(() {
           progress =
-              ((receivedBytes / totalBytes) * 100).toStringAsFixed(0) + "%";
+              "${((receivedBytes / totalBytes) * 100).toStringAsFixed(0)}%";
         });
         if (received == 100.0) {
           if (url.contains('.pdf')) {

@@ -19,7 +19,7 @@ import 'package:edus_tutor/utils/widget/BookIssuedRow.dart';
 class BookIssuedScreen extends StatefulWidget {
   var id;
 
-  BookIssuedScreen({Key? key, this.id}) : super(key: key);
+  BookIssuedScreen({super.key, this.id});
 
   @override
   _BookIssuedScreenState createState() => _BookIssuedScreenState();
@@ -64,7 +64,8 @@ class _BookIssuedScreenState extends State<BookIssuedScreen> {
                 child: ListView.builder(
                   itemCount: snapshot.data?.bookIssues.length ?? 0,
                   itemBuilder: (context, index) {
-                    return BookListRow(snapshot.data?.bookIssues[index] ?? BookIssued());
+                    return BookListRow(
+                        snapshot.data?.bookIssues[index] ?? BookIssued());
                   },
                 ),
               );
@@ -80,8 +81,7 @@ class _BookIssuedScreenState extends State<BookIssuedScreen> {
   }
 
   Future<BookIssuedList> getIssuedBooks(dynamic id) async {
-    final response = await http.get(
-        Uri.parse(EdusApi.getStudentIssuedBook(id)),
+    final response = await http.get(Uri.parse(EdusApi.getStudentIssuedBook(id)),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {

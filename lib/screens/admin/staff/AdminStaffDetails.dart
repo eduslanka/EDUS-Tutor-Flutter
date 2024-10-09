@@ -10,7 +10,7 @@ import 'package:edus_tutor/utils/widget/Line.dart';
 class StaffDetailsScreen extends StatefulWidget {
   Staff staff;
 
-  StaffDetailsScreen(this.staff, {Key? key}) : super(key: key);
+  StaffDetailsScreen(this.staff, {super.key});
 
   @override
   _StaffDetailsScreenState createState() => _StaffDetailsScreenState();
@@ -55,10 +55,10 @@ class _StaffDetailsScreenState extends State<StaffDetailsScreen> {
                           radius: 70.0,
                           backgroundImage: widget.staff.photo == null ||
                                   widget.staff.photo == ""
-                              ? NetworkImage(EdusApi.root +
-                                  "public/uploads/staff/demo/staff.jpg")
+                              ? NetworkImage(
+                                  "${EdusApi.root}public/uploads/staff/demo/staff.jpg")
                               : NetworkImage(
-                                  EdusApi.root + '${widget.staff.photo}'),
+                                  '${EdusApi.root}${widget.staff.photo}'),
                           backgroundColor: Colors.transparent,
                         ),
                       ),
@@ -101,8 +101,7 @@ class _StaffDetailsScreenState extends State<StaffDetailsScreen> {
             ),
             const BottomLine(),
             Padding(
-              padding:
-                  const EdgeInsets.only(top: 8.0, left: 16.0, bottom: 8.0),
+              padding: const EdgeInsets.only(top: 8.0, left: 16.0, bottom: 8.0),
               child: Text(
                 'Qualification: ${widget.staff.qualification}',
                 style: Theme.of(context).textTheme.titleLarge,
@@ -118,8 +117,7 @@ class _StaffDetailsScreenState extends State<StaffDetailsScreen> {
             ),
             const BottomLine(),
             Padding(
-              padding:
-                  const EdgeInsets.only(top: 8.0, left: 16.0, bottom: 8.0),
+              padding: const EdgeInsets.only(top: 8.0, left: 16.0, bottom: 8.0),
               child: Text(
                 'Joining Date: ${widget.staff.dateOfJoining}',
                 style: Theme.of(context).textTheme.titleLarge,

@@ -4,8 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:get/get.dart';
-
 FeesAdminAddPaymentModel feesAdminAddPaymentModelFromJson(String str) =>
     FeesAdminAddPaymentModel.fromJson(json.decode(str));
 
@@ -47,10 +45,12 @@ class FeesAdminAddPaymentModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "feesTypes": List<dynamic>.from(feesTypes?.map((x) => x.toJson()) ?? []),
+        "feesTypes":
+            List<dynamic>.from(feesTypes?.map((x) => x.toJson()) ?? []),
         "paymentMethods":
             List<dynamic>.from(paymentMethods?.map((x) => x.toJson()) ?? []),
-        "bankAccounts": List<dynamic>.from(bankAccounts?.map((x) => x.toJson()) ?? []),
+        "bankAccounts":
+            List<dynamic>.from(bankAccounts?.map((x) => x.toJson()) ?? []),
         "invoiceInfo": invoiceInfo?.toJson(),
         "invoiceDetails":
             List<dynamic>.from(invoiceDetails?.map((x) => x.toJson()) ?? []),
@@ -60,35 +60,35 @@ class FeesAdminAddPaymentModel {
 }
 
 class FeesType {
-    FeesType({
-        this.id,
-        this.name,
-        this.description,
-        this.feesGroupId,
-        this.type,
-        this.courseId,
-        this.createdBy,
-        this.updatedBy,
-        this.schoolId,
-        this.academicId,
-        this.createdAt,
-        this.updatedAt,
-    });
+  FeesType({
+    this.id,
+    this.name,
+    this.description,
+    this.feesGroupId,
+    this.type,
+    this.courseId,
+    this.createdBy,
+    this.updatedBy,
+    this.schoolId,
+    this.academicId,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-    int? id;
-    String? name;
-    String? description;
-    int? feesGroupId;
-    String? type;
-    dynamic courseId;
-    int? createdBy;
-    int? updatedBy;
-    int? schoolId;
-    int? academicId;
-    DateTime? createdAt;
-    DateTime? updatedAt;
+  int? id;
+  String? name;
+  String? description;
+  int? feesGroupId;
+  String? type;
+  dynamic courseId;
+  int? createdBy;
+  int? updatedBy;
+  int? schoolId;
+  int? academicId;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-    factory FeesType.fromJson(Map<String, dynamic> json) => FeesType(
+  factory FeesType.fromJson(Map<String, dynamic> json) => FeesType(
         id: json["id"],
         name: json["name"],
         description: json["description"],
@@ -101,9 +101,9 @@ class FeesType {
         academicId: json["academic_id"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "description": description,
@@ -116,9 +116,8 @@ class FeesType {
         "academic_id": academicId,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-    };
+      };
 }
-
 
 class BankAccount {
   BankAccount({
@@ -209,32 +208,26 @@ class InvoiceDetail {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  factory InvoiceDetail.fromJson(Map<String, dynamic> json){
-
-
-      return InvoiceDetail(
-        id: json["id"],
-        feesInvoiceId: json["fees_invoice_id"],
-        feesType: json["fees_type"],
-        amount: json["amount"] == null ? 0.0 : json["amount"].toDouble(),
-        weaver: json["weaver"] == null ? 0.0 : json["weaver"].toDouble(),
-        fine: json["fine"] == null ? 0.0 : json["fine"].toDouble(),
-        subTotal:
-        json["sub_total"] == null ? 0.0 : json["sub_total"].toDouble(),
-        paidAmount:
-        json["paid_amount"] == null ? 0.0 : json["paid_amount"].toDouble(),
-        dueAmount:
-        json["due_amount"] == null ? 0.0 : json["due_amount"].toDouble(),
-        note: json["note"] == null ? "" : json["note"].toString(),
-        schoolId: json["school_id"],
-        academicId: json["academic_id"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-      );
-
-
+  factory InvoiceDetail.fromJson(Map<String, dynamic> json) {
+    return InvoiceDetail(
+      id: json["id"],
+      feesInvoiceId: json["fees_invoice_id"],
+      feesType: json["fees_type"],
+      amount: json["amount"] == null ? 0.0 : json["amount"].toDouble(),
+      weaver: json["weaver"] == null ? 0.0 : json["weaver"].toDouble(),
+      fine: json["fine"] == null ? 0.0 : json["fine"].toDouble(),
+      subTotal: json["sub_total"] == null ? 0.0 : json["sub_total"].toDouble(),
+      paidAmount:
+          json["paid_amount"] == null ? 0.0 : json["paid_amount"].toDouble(),
+      dueAmount:
+          json["due_amount"] == null ? 0.0 : json["due_amount"].toDouble(),
+      note: json["note"] == null ? "" : json["note"].toString(),
+      schoolId: json["school_id"],
+      academicId: json["academic_id"],
+      createdAt: DateTime.parse(json["created_at"]),
+      updatedAt: DateTime.parse(json["updated_at"]),
+    );
   }
-
 
   Map<String, dynamic> toJson() => {
         "id": id,

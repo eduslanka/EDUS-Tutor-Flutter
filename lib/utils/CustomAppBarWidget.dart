@@ -25,10 +25,10 @@ import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 
 // ignore: must_be_immutable
 class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
-  CustomAppBarWidget({Key? key, this.title,this.isAcadamic}) : super(key: key);
+  CustomAppBarWidget({super.key, this.title, this.isAcadamic});
 
   String? title;
-  bool ?isAcadamic;
+  bool? isAcadamic;
 
   @override
   _CustomAppBarWidgetState createState() => _CustomAppBarWidgetState();
@@ -102,8 +102,9 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                     Expanded(
                                       child: ListView.builder(
                                         shrinkWrap: false,
-                                        itemCount: snapshot
-                                            .data?.userNotifications?.length ?? 0,
+                                        itemCount: snapshot.data
+                                                ?.userNotifications?.length ??
+                                            0,
                                         itemBuilder: (context, index) {
                                           final item = snapshot
                                               .data?.userNotifications?[index];
@@ -113,7 +114,8 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                             child: InkWell(
                                               onTap: () {},
                                               child: Dismissible(
-                                                key: Key(item?.id.toString() ?? ''),
+                                                key: Key(
+                                                    item?.id.toString() ?? ''),
                                                 background: Container(
                                                   decoration: BoxDecoration(
                                                     gradient:
@@ -157,8 +159,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
 
                                                   if (response.statusCode ==
                                                       200) {
-                                                    Map
-                                                        notifications =
+                                                    Map notifications =
                                                         jsonDecode(
                                                                 response.body)
                                                             as Map;
@@ -176,7 +177,8 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                                   setState(() {
                                                     notificationCount =
                                                         getNotificationCount(
-                                                            int.parse(_id ?? ''));
+                                                            int.parse(
+                                                                _id ?? ''));
                                                   });
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(SnackBar(
@@ -192,7 +194,8 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                                     Icon(
                                                       FontAwesomeIcons
                                                           .solidBell,
-                                                      color: Color(0xff053EFF),
+                                                      color: const Color(
+                                                          0xff053EFF),
                                                       size: ScreenUtil()
                                                           .setSp(15),
                                                     ),
@@ -219,8 +222,9 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                                                   ),
                                                         ),
                                                         Text(
-                                                          timeago.format(
-                                                              item?.createdAt ?? DateTime(200)),
+                                                          timeago.format(item
+                                                                  ?.createdAt ??
+                                                              DateTime(200)),
                                                           textAlign:
                                                               TextAlign.end,
                                                           style:
@@ -276,6 +280,10 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                           Navigator.of(context).pop();
                                         });
                                       },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xff053EFF),
+                                      ),
                                       child: Text(
                                         'Mark all as read',
                                         style: Theme.of(context)
@@ -285,9 +293,6 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                               fontSize: ScreenUtil().setSp(12),
                                               color: Colors.white,
                                             ),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xff053EFF),
                                       ),
                                     ),
                                   ],
@@ -481,7 +486,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                 child: Container(
                   height: MediaQuery.of(context).size.height / 6,
                   width: MediaQuery.of(context).size.width / 1.2,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       shape: BoxShape
                           .rectangle, // BoxShape.circle or BoxShape.retangle
                       //color: const Color(0xFF66BB6A),
@@ -557,7 +562,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
               child: CircleAvatar(
                 radius: ScreenUtil().setSp(22),
                 child: CachedNetworkImage(
-                  imageUrl: EdusApi.root + '${snapshot.data}',
+                  imageUrl: '${EdusApi.root}${snapshot.data}',
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -571,7 +576,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                       const CupertinoActivityIndicator(),
                   errorWidget: (context, url, error) => CachedNetworkImage(
                     imageUrl:
-                        EdusApi.root + 'public/uploads/staff/demo/staff.jpg',
+                        '${EdusApi.root}public/uploads/staff/demo/staff.jpg',
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -628,10 +633,8 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
   Future<String> getImageUrl(String email, String password, String rule) async {
     var image = 'http://saskolhmg.com/images/studentprofile.png';
 
-    var response =  await http.post(Uri.parse(EdusApi.login),body: {
-      "email":email,
-      "password":password
-    },
+    var response = await http.post(Uri.parse(EdusApi.login),
+        body: {"email": email, "password": password},
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -778,12 +781,14 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
             //if you don't set any condition here setState call again and again
             Utils.getStringValue('lang').then((value) {
               if (value == null) {
-                Utils.getTranslatedLanguage('en', widget.title ?? '').then((val) {
+                Utils.getTranslatedLanguage('en', widget.title ?? '')
+                    .then((val) {
                   setState(() => widget.title = val);
                   i++;
                 });
               } else {
-                Utils.getTranslatedLanguage(value, widget.title ?? '').then((val) {
+                Utils.getTranslatedLanguage(value, widget.title ?? '')
+                    .then((val) {
                   setState(() => widget.title = val);
                   i++;
                 });
@@ -795,7 +800,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
             automaticallyImplyLeading: false,
             flexibleSpace: Container(
               padding: EdgeInsets.only(top: 20.h),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 // image: DecorationImage(
                 //   image: AssetImage(AppConfig.appToolbarBackground),
                 //   fit: BoxFit.cover,
@@ -807,33 +812,37 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-             
-               widget.isAcadamic==true? Container(width: 24,):    Material(
-                    color: Colors.transparent,
-                    child: SizedBox(
-                      height: 70.h,
-                      width: 70.w,
-                      child: IconButton(
-                          tooltip: 'Back',
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: ScreenUtil().setSp(20),
-                            color: Colors.white,
+                  widget.isAcadamic == true
+                      ? Container(
+                          width: 24,
+                        )
+                      : Material(
+                          color: Colors.transparent,
+                          child: SizedBox(
+                            height: 70.h,
+                            width: 70.w,
+                            child: IconButton(
+                                tooltip: 'Back',
+                                icon: Icon(
+                                  Icons.arrow_back,
+                                  size: ScreenUtil().setSp(20),
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  navigateToPreviousPage(context);
+                                }),
                           ),
-                          onPressed: () {
-                            navigateToPreviousPage(context);
-                          }),
-                    ),
-                  ),
+                        ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 0.0),
                       child: Text(
                         '${widget.title}'.tr,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontSize: 18.sp,
-                              color: Colors.white,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontSize: 18.sp,
+                                  color: Colors.white,
+                                ),
                       ),
                     ),
                   ),

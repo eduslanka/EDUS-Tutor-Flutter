@@ -13,7 +13,7 @@ class LeaveHomeScreen extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   final _images;
 
-  const LeaveHomeScreen(this._titles, this._images, {Key? key}) : super(key: key);
+  const LeaveHomeScreen(this._titles, this._images, {super.key});
 
   @override
   // ignore: no_logic_in_create_state
@@ -45,8 +45,8 @@ class _HomeState extends State<LeaveHomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: GridView.builder(
           itemCount: _titles.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
           itemBuilder: (context, index) {
             return CustomWidget(
               index: index,

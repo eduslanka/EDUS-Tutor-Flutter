@@ -41,7 +41,7 @@ class SystemController extends GetxController {
       isLoading(true);
       await getSchoolId().then((value) async {
         final response = await http.get(
-            Uri.parse(EdusApi.generalSettings + '/$schoolId'),
+            Uri.parse('${EdusApi.generalSettings}/$schoolId'),
             headers: Utils.setHeader(_token.toString()));
 
         if (response.statusCode == 200) {
@@ -112,11 +112,11 @@ class SystemController extends GetxController {
           //  'Failed to load today classes: ${response.body} ${response.statusCode}');
         }
       });
-    } catch (e,t) {
+    } catch (e, t) {
       todayClassResponse.value =
           TodayClassResponse(success: false, classes: []);
       debugPrint(e.toString());
-       debugPrint(t.toString());
+      debugPrint(t.toString());
     }
   }
 
@@ -153,7 +153,7 @@ class SystemController extends GetxController {
     });
   }
 
-  Rx<String> _rule = ''.obs;
+  final Rx<String> _rule = ''.obs;
   Rx<String> get rule => _rule;
   @override
   void onInit() {

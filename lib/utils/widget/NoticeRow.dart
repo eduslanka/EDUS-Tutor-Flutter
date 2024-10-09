@@ -13,7 +13,7 @@ import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 class NoticRowLayout extends StatefulWidget {
   Notice notice;
 
-  NoticRowLayout(this.notice, {Key? key}) : super(key: key);
+  NoticRowLayout(this.notice, {super.key});
 
   @override
   // ignore: no_logic_in_create_state
@@ -28,9 +28,7 @@ class _NoticRowLayoutState extends State<NoticRowLayout> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: const BorderRadius.all(
-          Radius.circular(10)
-      ),
+      borderRadius: const BorderRadius.all(Radius.circular(10)),
       child: ListTile(
         onTap: () {
           Navigator.push(context, ScaleRoute(page: NoticDetailsLayout(notice)));
@@ -38,18 +36,14 @@ class _NoticRowLayoutState extends State<NoticRowLayout> {
         title: Text(
           notice.title ?? '',
           maxLines: 1,
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall
-              ?.copyWith(fontWeight: FontWeight.w500, fontSize: ScreenUtil().setSp(15.0)),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.w500, fontSize: ScreenUtil().setSp(15.0)),
         ),
         subtitle: Text(
           notice.date ?? '',
           maxLines: 1,
-          style: Theme.of(context)
-              .textTheme
-              .headlineMedium
-              ?.copyWith(fontWeight: FontWeight.w300, fontSize: ScreenUtil().setSp(13.0)),
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.w300, fontSize: ScreenUtil().setSp(13.0)),
         ),
       ),
     );

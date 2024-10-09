@@ -32,7 +32,12 @@ class StudentListAttendance extends StatefulWidget {
   String? token;
 
   StudentListAttendance(
-      {Key? key, this.classCode, this.sectionCode, this.url, this.date, this.token}) : super(key: key);
+      {super.key,
+      this.classCode,
+      this.sectionCode,
+      this.url,
+      this.date,
+      this.token});
 
   @override
   _StudentListAttendanceState createState() => _StudentListAttendanceState(
@@ -159,8 +164,7 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
               ),
               TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor:
-                      _isHoliday ? Colors.red : Colors.blueAccent,
+                  backgroundColor: _isHoliday ? Colors.red : Colors.blueAccent,
                 ),
                 onPressed: () async {
                   Map data = {
@@ -179,8 +183,8 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
                                 'attendance_type': _isHoliday ? null : "H",
                               }));
                     }
-                    _attendanceController.attendanceMap.forEach((key, value) {
-                    });
+                    _attendanceController.attendanceMap
+                        .forEach((key, value) {});
 
                     log(data.toString());
                   });
@@ -221,7 +225,8 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
                                   addAutomaticKeepAlives: true,
                                   itemBuilder: (context, index) {
                                     return StudentAttendanceRow(
-                                      snapshot.data?.attendances[index] ?? Attendance(),
+                                      snapshot.data?.attendances[index] ??
+                                          Attendance(),
                                       classCode,
                                       sectionCode,
                                       date ?? '',
@@ -258,8 +263,7 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
                                     };
 
                                     _attendanceController.attendanceMap
-                                        .forEach((key, value) {
-                                    });
+                                        .forEach((key, value) {});
 
                                     await setDefaultAttendance(data);
                                   },
@@ -268,21 +272,21 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
                             ],
                           ),
                         );
-                      }  else if (snapshot.connectionState.name == 'waiting') {
-                        return  Center(
+                      } else if (snapshot.connectionState.name == 'waiting') {
+                        return Center(
                             child: ListView.builder(
-                              itemCount: 5,
-                              itemBuilder: (context, index) {
-                                return const ShimmerList(
-                                  itemCount: 1,
-                                  height: 80,
-                                );
-                              },
-                            ));
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return const ShimmerList(
+                              itemCount: 1,
+                              height: 80,
+                            );
+                          },
+                        ));
                       } else if (snapshot.connectionState.name == 'none') {
-                        return SizedBox();
-                      }  else {
-                        return SizedBox();
+                        return const SizedBox();
+                      } else {
+                        return const SizedBox();
                         //   ListView.builder(
                         //   itemCount: 5,
                         //   itemBuilder: (context, index) {
@@ -320,7 +324,7 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
 
       final data = AttendanceList.fromJson(jsonData['data']);
 
-      if(data.attendances.isNotEmpty){
+      if (data.attendances.isNotEmpty) {
         if (data.attendances.first.attendanceType == "H") {
           setState(() {
             _isHoliday = true;
@@ -348,9 +352,8 @@ class _StudentListAttendanceState extends State<StudentListAttendance> {
   }
 
   void sentNotificationToSection() async {
-    final response = await http.get(Uri.parse(
-        EdusApi.sentNotificationToSection('Attendance', 'Attendance sunmitted',
-            '$classCode', '$sectionCode')));
+    final response = await http.get(Uri.parse(EdusApi.sentNotificationToSection(
+        'Attendance', 'Attendance sunmitted', '$classCode', '$sectionCode')));
     if (response.statusCode == 200) {}
   }
 

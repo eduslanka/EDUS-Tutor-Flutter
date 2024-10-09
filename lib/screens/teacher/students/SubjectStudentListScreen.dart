@@ -26,7 +26,7 @@ class SubjectStudentListScreen extends StatefulWidget {
   String? subjectName;
 
   SubjectStudentListScreen(
-      {Key? key,
+      {super.key,
       this.classCode,
       this.sectionCode,
       this.subjectCode,
@@ -35,8 +35,7 @@ class SubjectStudentListScreen extends StatefulWidget {
       this.url,
       this.status,
       this.token,
-      this.subjectName})
-      : super(key: key);
+      this.subjectName});
 
   @override
   _SubjectStudentListScreenState createState() =>

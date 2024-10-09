@@ -15,7 +15,7 @@ class VirtualClassMain extends StatelessWidget {
 
   final UserController userController = Get.put(UserController());
 
-  VirtualClassMain({Key? key}) : super(key: key);
+  VirtualClassMain({super.key});
 
   @override
   Widget build(BuildContext context) {

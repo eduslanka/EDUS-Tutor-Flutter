@@ -10,7 +10,7 @@ class ProfileRowList extends StatelessWidget {
   final String _key;
   final String _value;
 
-  const ProfileRowList(this._key, this._value, {Key? key}) : super(key: key);
+  const ProfileRowList(this._key, this._value, {super.key});
 
   @override
   Widget build(BuildContext context) {

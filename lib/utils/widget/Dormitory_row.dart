@@ -11,7 +11,7 @@ import 'package:edus_tutor/utils/model/Dormitory.dart';
 class DormitoryRow extends StatefulWidget {
   Dormitory dormitory;
 
-  DormitoryRow(this.dormitory, {Key? key}) : super(key: key);
+  DormitoryRow(this.dormitory, {super.key});
 
   @override
   // ignore: no_logic_in_create_state

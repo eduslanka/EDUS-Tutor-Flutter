@@ -16,7 +16,7 @@ import 'package:edus_tutor/utils/model/Notice.dart';
 import 'package:edus_tutor/utils/widget/NoticeRow.dart';
 
 class NoticeScreen extends StatefulWidget {
-  const NoticeScreen({Key? key}) : super(key: key);
+  const NoticeScreen({super.key});
 
   @override
   _NoticeScreenState createState() => _NoticeScreenState();
@@ -57,7 +57,8 @@ class _NoticeScreenState extends State<NoticeScreen> {
               return ListView.separated(
                 itemCount: snapshot.data?.notices.length ?? 0,
                 itemBuilder: (context, index) {
-                  return NoticRowLayout(snapshot.data?.notices[index] ?? Notice());
+                  return NoticRowLayout(
+                      snapshot.data?.notices[index] ?? Notice());
                 },
                 separatorBuilder: (context, index) {
                   return const Padding(
@@ -85,7 +86,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
   Future<NoticeList> getNotices(dynamic id) async {
     final response = await http.get(Uri.parse(EdusApi.getNoticeUrl(id)),
         headers: Utils.setHeader(_token.toString()));
-        print(EdusApi.getNoticeUrl(id));
+    print(EdusApi.getNoticeUrl(id));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
       return NoticeList.fromJson(jsonData['data']['allNotices']);

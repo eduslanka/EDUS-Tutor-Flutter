@@ -16,7 +16,7 @@ import 'package:edus_tutor/utils/model/AdminDormitory.dart';
 import 'package:edus_tutor/utils/model/RoomType.dart';
 
 class AddDormitory extends StatefulWidget {
-  const AddDormitory({Key? key}) : super(key: key);
+  const AddDormitory({super.key});
 
   @override
   _AddDormitoryState createState() => _AddDormitoryState();
@@ -146,7 +146,10 @@ class _AddDormitoryState extends State<AddDormitory> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
             selectedType = value as String;

@@ -17,7 +17,7 @@ import 'ScaleRoute.dart';
 class ZoomMeetingRow extends StatefulWidget {
   ZoomMeeting zoomMeeting;
 
-  ZoomMeetingRow(this.zoomMeeting, {Key? key}) : super(key: key);
+  ZoomMeetingRow(this.zoomMeeting, {super.key});
 
   @override
   // ignore: no_logic_in_create_state
@@ -133,22 +133,26 @@ class _DormitoryScreenState extends State<ZoomMeetingRow> {
                       // borderSide:
                       //     BorderSide(width: 1, color: Color(0xff053EFF)),
                       onPressed: () async {
-                        final _url = EdusApi.getJoinMeetingUrlApp(
+                        final url = EdusApi.getJoinMeetingUrlApp(
                             mid: zoomMeeting.meetingId);
 
-                        debugPrint('App URL: ${EdusApi.getJoinMeetingUrlApp(mid: zoomMeeting.meetingId)}');
-                        debugPrint('Web URL: ${EdusApi.getJoinMeetingUrlWeb(mid: zoomMeeting.meetingId)}');
+                        debugPrint(
+                            'App URL: ${EdusApi.getJoinMeetingUrlApp(mid: zoomMeeting.meetingId)}');
+                        debugPrint(
+                            'Web URL: ${EdusApi.getJoinMeetingUrlWeb(mid: zoomMeeting.meetingId)}');
                         // ignore: deprecated_member_use
-                        if (await canLaunch(_url)) {
+                        if (await canLaunch(url)) {
                           // ignore: deprecated_member_use
-                          await launch(_url);
+                          await launch(url);
                         } else {
                           Navigator.push(
                               context,
                               ScaleRoute(
                                   page: LaunchWebView(
-                                      launchUrl: EdusApi.getJoinMeetingUrlWeb(
-                                          mid: zoomMeeting.meetingId),title: zoomMeeting.topic,)));
+                                launchUrl: EdusApi.getJoinMeetingUrlWeb(
+                                    mid: zoomMeeting.meetingId),
+                                title: zoomMeeting.topic,
+                              )));
                         }
                       }),
                 ),

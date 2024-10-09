@@ -2,7 +2,6 @@
 import 'dart:io';
 
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 
 const bool _kIsWeb = identical(0, 0.0);
 

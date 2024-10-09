@@ -19,7 +19,7 @@ EdgeInsetsGeometry customPadding =
     const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
 
 class ChatPageMain extends StatefulWidget {
-  const ChatPageMain({Key? key}) : super(key: key);
+  const ChatPageMain({super.key});
 
   @override
   _ChatPageMainState createState() => _ChatPageMainState();
@@ -70,7 +70,7 @@ class _ChatPageMainState extends State<ChatPageMain>
                   image: AssetImage(AppConfig.appToolbarBackground),
                   fit: BoxFit.cover,
                 ),
-                color: Color(0xff053EFF),
+                color: const Color(0xff053EFF),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -182,8 +182,8 @@ class _ChatPageMainState extends State<ChatPageMain>
                     },
                     itemBuilder: (context) => [
                       const PopupMenuItem(
-                        child: Text("Blocked Users"),
                         value: 1,
+                        child: Text("Blocked Users"),
                       ),
                     ],
                   ),
@@ -219,7 +219,7 @@ class _ChatPageMainState extends State<ChatPageMain>
                   child: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: tabController,
-                    children: [
+                    children: const [
                       ChatListPage(),
                       GroupListPage(),
                     ],
@@ -247,7 +247,7 @@ class _ChatPageMainState extends State<ChatPageMain>
                   child: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: tabController,
-                    children: [
+                    children: const [
                       Column(
                         children: [
                           SizedBox(
@@ -281,7 +281,7 @@ class _ChatPageMainState extends State<ChatPageMain>
 }
 
 class ChatListPage extends StatefulWidget {
-  const ChatListPage({Key? key}) : super(key: key);
+  const ChatListPage({super.key});
 
   @override
   _ChatListPageState createState() => _ChatListPageState();
@@ -301,7 +301,7 @@ class _ChatListPageState extends State<ChatListPage> {
           Expanded(
             child: Obx(() {
               if (_chatController.chatModel.value.users == null) {
-                return ChatShimmerList();
+                return const ChatShimmerList();
               } else {
                 if (_chatController.chatModel.value.users!.isEmpty) {
                   return Center(
@@ -332,7 +332,8 @@ class _ChatListPageState extends State<ChatListPage> {
                             () => ChatOpenPage(
                                 avatarUrl: chatUser.avatarUrl ?? '',
                                 userId: chatUser.id ?? 0,
-                                onlineStatus: int.tryParse('${chatUser.activeStatus}'),
+                                onlineStatus:
+                                    int.tryParse('${chatUser.activeStatus}'),
                                 chatTitle:
                                     chatUser.fullName ?? chatUser.email ?? ""),
                           );
@@ -443,7 +444,7 @@ class _ChatListPageState extends State<ChatListPage> {
           color: Colors.white,
         ),
         onPressed: () {
-          Get.to(() => ChatPeopleSearchPage());
+          Get.to(() => const ChatPeopleSearchPage());
         },
       ),
     );
@@ -451,7 +452,7 @@ class _ChatListPageState extends State<ChatListPage> {
 }
 
 class GroupListPage extends StatefulWidget {
-  const GroupListPage({Key? key}) : super(key: key);
+  const GroupListPage({super.key});
 
   @override
   State<GroupListPage> createState() => _GroupListPageState();
@@ -480,7 +481,7 @@ class _GroupListPageState extends State<GroupListPage> {
           ),
           Obx(() {
             if (_chatController.chatModel.value.groups == null) {
-              return ChatShimmerList();
+              return const ChatShimmerList();
             } else {
               return Expanded(
                 child: ListView.separated(
@@ -578,7 +579,7 @@ class _GroupListPageState extends State<GroupListPage> {
 }
 
 class ChatShimmerList extends StatelessWidget {
-  const ChatShimmerList({Key? key}) : super(key: key);
+  const ChatShimmerList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -589,6 +590,8 @@ class ChatShimmerList extends StatelessWidget {
       itemBuilder: (context, index) {
         return ListTile(
           leading: Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
             child: Container(
               height: 50,
               width: 50,
@@ -597,10 +600,10 @@ class ChatShimmerList extends StatelessWidget {
                 color: Colors.grey.shade300,
               ),
             ),
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
           ),
           title: Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
             child: Container(
               height: 15,
               width: 10,
@@ -609,10 +612,10 @@ class ChatShimmerList extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
             ),
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
           ),
           subtitle: Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
             child: Container(
               height: 10,
               decoration: BoxDecoration(
@@ -620,8 +623,6 @@ class ChatShimmerList extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
             ),
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
           ),
         );
       },

@@ -27,7 +27,7 @@ class FeeWaiverReportModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "waiverReport": Map.from(waiverReport ?? Map())
+        "waiverReport": Map.from(waiverReport ?? {})
             .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
         "totalWaiver": totalWaiver,
       };

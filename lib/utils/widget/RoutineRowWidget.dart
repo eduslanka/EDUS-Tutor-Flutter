@@ -21,8 +21,8 @@ class RoutineRowDesign extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Expanded(
-          child:
-              Text(time ?? "", style: Theme.of(context).textTheme.headlineMedium),
+          child: Text(time ?? "",
+              style: Theme.of(context).textTheme.headlineMedium),
         ),
         const SizedBox(
           width: 5,
@@ -52,7 +52,7 @@ class RoutineRowDesignTeacher extends StatelessWidget {
   String? section;
 
   RoutineRowDesignTeacher(this.time, this.subject, this.room,
-      {Key? key, this.classRoutineClass, this.section}) : super(key: key);
+      {super.key, this.classRoutineClass, this.section});
 
   @override
   Widget build(BuildContext context) {

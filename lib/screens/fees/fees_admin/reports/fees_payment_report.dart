@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 import 'fees_report_search_widget.dart';
 
 class AdminFeesPaymentReport extends StatefulWidget {
-  const AdminFeesPaymentReport({Key? key}) : super(key: key);
+  const AdminFeesPaymentReport({super.key});
 
   @override
   _AdminFeesPaymentReportState createState() => _AdminFeesPaymentReportState();
@@ -29,11 +29,8 @@ class _AdminFeesPaymentReportState extends State<AdminFeesPaymentReport> {
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
-     
 
-
-        return FeePaymentReportModel.fromJson(jsonData);
-
+      return FeePaymentReportModel.fromJson(jsonData);
     } else {
       throw Exception('Failed to load');
     }
@@ -60,7 +57,7 @@ class _AdminFeesPaymentReportState extends State<AdminFeesPaymentReport> {
         children: [
           FeesReportSearchWidget(
             onTap: (dateTime, classId, sectionId) async {
-              if (dateTime == null || dateTime == "") {
+              if (dateTime == "") {
                 Utils.showToast("Select a date first");
               } else {
                 Map data = {
@@ -80,15 +77,13 @@ class _AdminFeesPaymentReportState extends State<AdminFeesPaymentReport> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CupertinoActivityIndicator());
               } else {
-                if (snapshot.hasData ) {
+                if (snapshot.hasData) {
                   if (snapshot.data!.paymentReport!.isEmpty) {
                     return Utils.noDataWidget();
                   } else {
                     var total = 0.0;
                     for (var element in snapshot.data!.paymentReport!) {
-                      if (element != null) {
-                        total += (element.paid ?? 0);
-                      }
+                      total += (element.paid ?? 0);
                     }
                     return Column(
                       children: [
@@ -96,9 +91,7 @@ class _AdminFeesPaymentReportState extends State<AdminFeesPaymentReport> {
                           alignment: Alignment.centerRight,
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
-                            "Total".tr +
-                                ": " +
-                                double.parse(total.toString()).toStringAsFixed(2),
+                            "${"Total".tr}: ${double.parse(total.toString()).toStringAsFixed(2)}",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium
@@ -117,7 +110,8 @@ class _AdminFeesPaymentReportState extends State<AdminFeesPaymentReport> {
                             PaymentReport? paymentReport =
                                 snapshot.data?.paymentReport?[index];
 
-                            return PaymentReportWidget(paymentReport ?? PaymentReport());
+                            return PaymentReportWidget(
+                                paymentReport ?? PaymentReport());
                           },
                         ),
                       ],
@@ -138,7 +132,7 @@ class _AdminFeesPaymentReportState extends State<AdminFeesPaymentReport> {
 class PaymentReportWidget extends StatelessWidget {
   final PaymentReport paymentReport;
 
-  const PaymentReportWidget(this.paymentReport, {Key? key}) : super(key: key);
+  const PaymentReportWidget(this.paymentReport, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -160,8 +154,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Admission No.'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -183,8 +180,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Roll'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -206,8 +206,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Paid'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -230,8 +233,11 @@ class PaymentReportWidget extends StatelessWidget {
                       Text(
                         'Due Date'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,

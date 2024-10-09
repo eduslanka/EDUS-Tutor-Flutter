@@ -62,7 +62,7 @@ class PaypalServices {
           }
           return {"executeUrl": executeUrl, "approvalUrl": approvalUrl};
         }
-        return Map();
+        return <String, String>{};
       } else {
         throw Exception(body["message"]);
       }

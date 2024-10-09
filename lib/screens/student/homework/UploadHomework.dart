@@ -20,7 +20,7 @@ class UploadHomework extends StatefulWidget {
   final Homework? homework;
   final String? userID;
 
-  const UploadHomework({Key? key, this.homework, this.userID}) : super(key: key);
+  const UploadHomework({super.key, this.homework, this.userID});
 
   @override
   _UploadHomeworkState createState() => _UploadHomeworkState();
@@ -180,9 +180,8 @@ class _UploadHomeworkState extends State<UploadHomework> {
                               onSendProgress: (received, total) {
                                 if (total != -1) {
                                   // progress = (received / total * 100).toDouble();
-                                  print((received / total * 100)
-                                          .toStringAsFixed(0) +
-                                      '%');
+                                  print(
+                                      '${(received / total * 100).toStringAsFixed(0)}%');
                                 }
                               },
                             ).catchError((e) {

@@ -16,7 +16,7 @@ import 'package:edus_tutor/utils/model/Dormitory.dart';
 import 'package:edus_tutor/utils/widget/Dormitory_row.dart';
 
 class DormitoryScreen extends StatefulWidget {
-  const DormitoryScreen({Key? key}) : super(key: key);
+  const DormitoryScreen({super.key});
 
   @override
   _DormitoryScreenState createState() => _DormitoryScreenState();
@@ -34,10 +34,9 @@ class _DormitoryScreenState extends State<DormitoryScreen> {
       setState(() {
         _token = value ?? '';
       });
-    })
-      .then((value) {
-        dormitories = getAllDormitory();
-      });
+    }).then((value) {
+      dormitories = getAllDormitory();
+    });
   }
 
   @override
@@ -51,7 +50,8 @@ class _DormitoryScreenState extends State<DormitoryScreen> {
           if (snapshot.hasData) {
             if (snapshot.data!.dormitories.isNotEmpty) {
               return ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 itemCount: snapshot.data?.dormitories.length ?? 0,
                 itemBuilder: (context, index) {
                   return DormitoryRow(snapshot.data!.dormitories[index]);

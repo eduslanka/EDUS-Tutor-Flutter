@@ -19,7 +19,7 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/widget/ScaleRoute.dart';
 
 class DownloadDialog extends StatefulWidget {
-  const DownloadDialog({Key? key, this.file, this.title}) : super(key: key);
+  const DownloadDialog({super.key, this.file, this.title});
 
   final String? file;
   final String? title;

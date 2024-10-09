@@ -16,7 +16,7 @@ import 'package:dio/dio.dart' as DIO;
 
 class CreateGroupPage extends StatefulWidget {
   final List<ChatUser>? chatUsers;
-  const CreateGroupPage({Key? key, this.chatUsers}) : super(key: key);
+  const CreateGroupPage({super.key, this.chatUsers});
   @override
   _CreateGroupPageState createState() => _CreateGroupPageState();
 }
@@ -307,8 +307,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                                         },
                                       ),
                                       onSendProgress: (received, total) {
-                                        if (total != -1) {
-                                        }
+                                        if (total != -1) {}
                                       },
                                     ).catchError((e) {
                                       final errorMessage =
@@ -345,7 +344,10 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.transparent,
-                              disabledForegroundColor: Colors.transparent.withOpacity(0.38), disabledBackgroundColor: Colors.transparent.withOpacity(0.12),
+                              disabledForegroundColor:
+                                  Colors.transparent.withOpacity(0.38),
+                              disabledBackgroundColor:
+                                  Colors.transparent.withOpacity(0.12),
                               shadowColor: Colors.transparent,
                             ),
                             child: Text(

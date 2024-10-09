@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
 
 class HttpResponse {
   const HttpResponse._({this.data, this.statusCode, this.message});

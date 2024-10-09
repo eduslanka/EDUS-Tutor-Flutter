@@ -11,7 +11,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 class DownloadViewer extends StatefulWidget {
   final String? title;
   final String? filePath;
-  const DownloadViewer({Key? key, this.title, this.filePath}) : super(key: key);
+  const DownloadViewer({super.key, this.title, this.filePath});
   @override
   _DownloadViewerState createState() => _DownloadViewerState();
 }

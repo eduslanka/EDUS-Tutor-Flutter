@@ -14,7 +14,7 @@ import 'package:edus_tutor/utils/model/ActiveOnlineExam.dart';
 class ActiveOnlineExamRow extends StatelessWidget {
   ActiveOnlineExam exam;
 
-  ActiveOnlineExamRow(this.exam, {Key? key}) : super(key: key);
+  ActiveOnlineExamRow(this.exam, {super.key});
 
   Random random = Random();
 
@@ -103,8 +103,8 @@ class ActiveOnlineExamRow extends StatelessWidget {
                     const SizedBox(
                       height: 5.0,
                     ),
-                    getStatus(context, exam.isRunning, exam.isClosed,
-                        exam.isWaiting),
+                    getStatus(
+                        context, exam.isRunning, exam.isClosed, exam.isWaiting),
                   ],
                 ),
               ),

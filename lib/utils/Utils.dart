@@ -48,17 +48,17 @@ class Utils extends GetxController {
 
   static Future<bool> clearAllValue() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-   
+
     return prefs.clear();
   }
 
   static Future<String> getTranslatedLanguage(
       String languageCode, String key) async {
-    Map<dynamic, dynamic> _localisedValues;
+    Map<dynamic, dynamic> localisedValues;
     String jsonContent = await rootBundle
         .loadString("assets/locale/localization_$languageCode.json");
-    _localisedValues = json.decode(jsonContent);
-    return _localisedValues[key] ?? key;
+    localisedValues = json.decode(jsonContent);
+    return localisedValues[key] ?? key;
   }
 
   static setHeader(String token) {
@@ -74,12 +74,13 @@ class Utils extends GetxController {
     Fluttertoast.showToast(
       msg: message,
       textColor: Colors.white,
-      backgroundColor: Color(0xff053EFF),
+      backgroundColor: const Color(0xff053EFF),
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
     );
   }
-static Color baseBlue= Color(0xff053EFF);
+
+  static Color baseBlue = const Color(0xff053EFF);
   static BoxDecoration gradientBtnDecoration = BoxDecoration(
       borderRadius: BorderRadius.circular(25.0),
       gradient: const LinearGradient(
@@ -91,7 +92,7 @@ static Color baseBlue= Color(0xff053EFF);
 
   static Text checkTextValue(text, value) {
     return Text(
-      "$text:: " + value.toString(),
+      "$text:: $value",
       style: const TextStyle(fontSize: 18),
     );
   }

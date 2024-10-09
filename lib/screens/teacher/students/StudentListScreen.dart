@@ -25,13 +25,14 @@ class StudentListScreen extends StatefulWidget {
   String? token;
 
   StudentListScreen(
-      {Key? key, this.classCode,
+      {super.key,
+      this.classCode,
       this.sectionCode,
       this.name,
       this.roll,
       this.url,
       this.status,
-      this.token}) : super(key: key);
+      this.token});
 
   @override
   _StudentListScreenState createState() => _StudentListScreenState(

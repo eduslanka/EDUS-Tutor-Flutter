@@ -14,7 +14,7 @@ import 'package:edus_tutor/utils/model/Section.dart';
 import 'package:intl/intl.dart';
 
 class FeeBankPaymentSearch extends StatefulWidget {
-  const FeeBankPaymentSearch({Key? key}) : super(key: key);
+  const FeeBankPaymentSearch({super.key});
 
   @override
   _FeeBankPaymentSearchState createState() => _FeeBankPaymentSearchState();
@@ -71,8 +71,7 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
   }
 
   Future<FeeBankPaymentModel> getBankPayments() async {
-    final response = await http.get(
-        Uri.parse(EdusApi.adminFeesBankPaymentList),
+    final response = await http.get(Uri.parse(EdusApi.adminFeesBankPaymentList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -98,7 +97,6 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
       } else {
         throw Exception('Failed to load');
         return FeeBankPaymentModel();
-
       }
     } catch (e, t) {
       debugPrint(e.toString());
@@ -126,7 +124,6 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
     final response = await http.get(
         Uri.parse(EdusApi.getSectionById(id, classId)),
         headers: Utils.setHeader(_token.toString()));
-
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
@@ -172,7 +169,7 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                                 builder: (BuildContext context, Widget? child) {
                                   return Theme(
                                     data: Theme.of(context).copyWith(
-                                      primaryColor: Color(0xff053EFF),
+                                      primaryColor: const Color(0xff053EFF),
                                       appBarTheme: const AppBarTheme(
                                         color: Color(0xff053EFF),
                                       ),
@@ -190,17 +187,20 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                               }
                             },
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
                               child: TextFormField(
                                 controller: datePickerController,
                                 enabled: false,
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                                 decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(horizontal: 10),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
                                   hintText: "Select Date",
-                                  hintStyle:
-                                      Theme.of(context).textTheme.headlineMedium,
+                                  hintStyle: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ),
                             ),
@@ -303,7 +303,9 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                                       children: <Widget>[
                                         Expanded(
                                           child: Text(
-                                            DateFormat.yMMMd().format(feePayment?.createdAt ?? DateTime(200)),
+                                            DateFormat.yMMMd().format(
+                                                feePayment?.createdAt ??
+                                                    DateTime(200)),
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleLarge
@@ -334,8 +336,8 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                                               final response = await http.post(
                                                 Uri.parse(EdusApi
                                                     .adminApproveBankPayment),
-                                                headers:
-                                                    Utils.setHeader(_token ?? ''),
+                                                headers: Utils.setHeader(
+                                                    _token ?? ''),
                                                 body: jsonEncode({
                                                   'transcation_id':
                                                       feePayment?.id,
@@ -357,8 +359,8 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                                               final response = await http.post(
                                                 Uri.parse(EdusApi
                                                     .adminRejectBankPayment),
-                                                headers:
-                                                    Utils.setHeader(_token ?? ''),
+                                                headers: Utils.setHeader(
+                                                    _token ?? ''),
                                                 body: jsonEncode({
                                                   'transcation_id':
                                                       feePayment?.id,
@@ -404,7 +406,8 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                                                   height: 10.0,
                                                 ),
                                                 Text(
-                                                  getPaidAmount(feePayment ?? FeesPayment())
+                                                  getPaidAmount(feePayment ??
+                                                          FeesPayment())
                                                       .toString(),
                                                   style: Theme.of(context)
                                                       .textTheme
@@ -459,8 +462,9 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                                                                               .topLeft,
                                                                       child:
                                                                           Padding(
-                                                                        padding:
-                                                                            const EdgeInsets.all(20),
+                                                                        padding: const EdgeInsets
+                                                                            .all(
+                                                                            20),
                                                                         child:
                                                                             Text(
                                                                           "Note"
@@ -498,8 +502,7 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                                                                     ),
                                                                     shrinkWrap:
                                                                         true,
-                                                                    children: <
-                                                                        Widget>[
+                                                                    children: <Widget>[
                                                                       Text(feePayment
                                                                               ?.paymentNote ??
                                                                           ""),
@@ -591,7 +594,8 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
                                                   height: 10.0,
                                                 ),
                                                 getStatus(
-                                                    feePayment?.paidStatus ?? ''),
+                                                    feePayment?.paidStatus ??
+                                                        ''),
                                               ],
                                             ),
                                           ),
@@ -618,18 +622,18 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.search,
-          color: Colors.white,
-        ),
-        foregroundColor: Color(0xff053EFF),
-        backgroundColor: Color(0xff053EFF),
+        foregroundColor: const Color(0xff053EFF),
+        backgroundColor: const Color(0xff053EFF),
         tooltip: 'Search Bank Payment',
         onPressed: () {
           setState(() {
             showSearch = !showSearch;
           });
         },
+        child: const Icon(
+          Icons.search,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -701,14 +705,14 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
     return amount;
   }
 
-  Widget getStatusList(List<String> _statusList) {
+  Widget getStatusList(List<String> statusList) {
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: DropdownButton(
         elevation: 0,
         isExpanded: true,
-        items: _statusList.map((item) {
+        items: statusList.map((item) {
           return DropdownMenuItem<String>(
             value: item,
             child: Padding(
@@ -721,7 +725,8 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15),
+        style:
+            Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15),
         onChanged: (value) {
           setState(() {
             _selectedStatus = value.toString();
@@ -753,7 +758,8 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15),
+        style:
+            Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15),
         onChanged: (value) {
           setState(() {
             _selectedClass = value.toString();
@@ -793,7 +799,8 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15),
+        style:
+            Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15),
         onChanged: (value) {
           setState(() {
             _selectedSection = value.toString();
@@ -823,7 +830,7 @@ class _FeeBankPaymentSearchState extends State<FeeBankPaymentSearch> {
 }
 
 class FeesBankPaymentResultScreen extends StatefulWidget {
-  const FeesBankPaymentResultScreen({Key? key}) : super(key: key);
+  const FeesBankPaymentResultScreen({super.key});
 
   @override
   _FeesBankPaymentResultScreenState createState() =>
@@ -850,8 +857,7 @@ class _FeesBankPaymentResultScreenState
   }
 
   Future<FeeBankPaymentModel> getFeesGroups() async {
-    final response = await http.get(
-        Uri.parse(EdusApi.adminFeesBankPaymentList),
+    final response = await http.get(Uri.parse(EdusApi.adminFeesBankPaymentList),
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -882,7 +888,8 @@ class _FeesBankPaymentResultScreenState
                 },
                 itemCount: snapshot.data?.feesPayments?.length ?? 0,
                 itemBuilder: (context, index) {
-                  FeesPayment feesPayment = snapshot.data?.feesPayments?[index] ?? FeesPayment();
+                  FeesPayment feesPayment =
+                      snapshot.data?.feesPayments?[index] ?? FeesPayment();
 
                   return ListTile(
                     title: Text(

@@ -23,7 +23,7 @@ import 'package:edus_tutor/utils/widget/SubjectRowLayout.dart';
 class SubjectScreen extends StatefulWidget {
   String? id;
 
-  SubjectScreen({Key? key, this.id}) : super(key: key);
+  SubjectScreen({super.key, this.id});
 
   @override
   _SubjectScreenState createState() => _SubjectScreenState();
@@ -52,7 +52,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
       setState(() {
         _id = value;
         subjects = getAllSubject(
-            widget.id != null ? int.parse(widget.id ?? '') : int.parse(value ?? ''),
+            widget.id != null
+                ? int.parse(widget.id ?? '')
+                : int.parse(value ?? ''),
             _userController.studentRecord.value.records?.first.id ?? 0);
       });
     });
@@ -139,10 +141,12 @@ class _SubjectScreenState extends State<SubjectScreen> {
                               if (snapshot.data!.subjects.isNotEmpty) {
                                 return ListView.builder(
                                   shrinkWrap: true,
-                                  itemCount: snapshot.data?.subjects.length ?? 0,
+                                  itemCount:
+                                      snapshot.data?.subjects.length ?? 0,
                                   itemBuilder: (context, index) {
                                     return SubjectRowLayout(
-                                        snapshot.data?.subjects[index] ?? Subject());
+                                        snapshot.data?.subjects[index] ??
+                                            Subject());
                                   },
                                 );
                               } else {

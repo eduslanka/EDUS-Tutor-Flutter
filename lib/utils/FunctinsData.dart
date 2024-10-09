@@ -85,6 +85,7 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../screens/main/student/DBStudentRoutine.dart';
 import '../screens/student/exam/exam_home.dart';
+import '../screens/student/student_record/presentation/record_class_screen.dart';
 import '../screens/teacher/academic/teacher_routin.dart';
 import '../screens/teacher/students/SubjectStudentSearch.dart';
 import '../screens/virtual_class/virtual_class_main.dart';
@@ -98,7 +99,7 @@ class AppFunction {
     'Homework',
     'Lesson',
     'Exams',
-    // 'Online Exam',
+    'Record',
     // 'Timeline',
     'Attendance',
     //'Leave',
@@ -121,7 +122,7 @@ class AppFunction {
     'assets/images/homework.png',
     'assets/images/myroutine.png',
     'assets/images/examination.png',
-    // 'assets/images/onlineexam.png',
+    'assets/images/onlineexam.png',
     'assets/images/attendance.png',
 
     //   'assets/images/leave.png',
@@ -501,9 +502,9 @@ class AppFunction {
                 page: LeaveStudentHome(studentLeaves, studentLeavesIcons,
                     id: id)));
         break;
-      // case 'Dormitory':
-      //   Navigator.push(context, ScaleRoute(page: const DormitoryScreen()));
-      //   break;
+      case 'Record':
+        Navigator.push(context, ScaleRoute(page: RecordedClassesScreen()));
+        break;
       // case 'Transport':
       //   Navigator.push(context, ScaleRoute(page: const TransportScreen()));
       //   break;
@@ -854,7 +855,7 @@ class AppFunction {
         Navigator.push(
             context,
             ScaleRoute(
-                page: StudentSubjectAttendanceHome(
+                page: const StudentSubjectAttendanceHome(
               isHome: false,
             )));
         break;

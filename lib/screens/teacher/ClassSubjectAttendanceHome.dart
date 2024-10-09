@@ -24,8 +24,7 @@ import 'attendance/SubjectAttendanceStudentList.dart';
 
 class StudentSubjectAttendanceHome extends StatefulWidget {
   final bool isHome;
-  const StudentSubjectAttendanceHome({Key? key, required this.isHome})
-      : super(key: key);
+  const StudentSubjectAttendanceHome({super.key, required this.isHome});
 
   @override
   _StudentSubjectAttendanceHomeState createState() =>

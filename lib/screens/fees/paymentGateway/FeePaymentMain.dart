@@ -41,8 +41,7 @@ class FeePaymentMain extends StatefulWidget {
   final String id;
   final String amount;
 
-  const FeePaymentMain(this.fee, this.id, this.amount, {Key? key})
-      : super(key: key);
+  const FeePaymentMain(this.fee, this.id, this.amount, {super.key});
 
   @override
   _FeePaymentMainState createState() => _FeePaymentMainState();
@@ -318,8 +317,7 @@ class BankOrCheque extends StatefulWidget {
   final String amount;
 
   BankOrCheque(this.id, this.fee, this.email, this.paymentType, this.amount,
-      {Key? key})
-      : super(key: key);
+      {super.key});
 
   @override
   _BankOrChequeState createState() => _BankOrChequeState();
@@ -349,15 +347,14 @@ class _BankOrChequeState extends State<BankOrCheque> {
         _token = value ?? '';
         bank = getBankList();
         bank?.then((value) {
-          _selectedBank =
-              value.banks.length != 0 ? value.banks[0].bankName : '';
-          bankId = value.banks.length != 0 ? value.banks[0].id : 0;
+          _selectedBank = value.banks.isNotEmpty ? value.banks[0].bankName : '';
+          bankId = value.banks.isNotEmpty ? value.banks[0].id : 0;
           bankAccountName =
-              value.banks.length != 0 ? value.banks[0].accountName : '';
+              value.banks.isNotEmpty ? value.banks[0].accountName : '';
           bankAccountNumber =
-              value.banks.length != 0 ? value.banks[0].accountNumber : '';
+              value.banks.isNotEmpty ? value.banks[0].accountNumber : '';
           if (widget.paymentType == "Bank Payment") {
-            if (value.banks.length == 0) {
+            if (value.banks.isEmpty) {
               bankAvailable = false;
             }
           } else {
@@ -577,7 +574,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
                                                 padding: const EdgeInsets.only(
                                                     left: 8.0),
                                                 child: Text(
-                                                    item?.bankName.toString() ??
+                                                    item.bankName.toString() ??
                                                         ''),
                                               ),
                                             );
@@ -588,7 +585,7 @@ class _BankOrChequeState extends State<BankOrCheque> {
                                               ?.copyWith(fontSize: 15.0),
                                           onChanged: (value) {
                                             setState(() {
-                                              _selectedBank = value as String?;
+                                              _selectedBank = value;
                                               bankId = getCode(
                                                   snapshot.data!.banks,
                                                   value ?? '');

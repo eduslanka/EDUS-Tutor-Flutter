@@ -23,7 +23,7 @@ import 'package:edus_tutor/utils/widget/ActiveOnlineExam.dart';
 class ActiveOnlineExamScreen extends StatefulWidget {
   var id;
 
-  ActiveOnlineExamScreen({Key? key, this.id}) : super(key: key);
+  ActiveOnlineExamScreen({super.key, this.id});
 
   @override
   _ActiveOnlineExamScreenState createState() =>
@@ -108,7 +108,8 @@ class _ActiveOnlineExamScreenState extends State<ActiveOnlineExamScreen> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return ActiveOnlineExamRow(
-                              snapshot.data?.activeExams[index] ?? ActiveOnlineExam());
+                              snapshot.data?.activeExams[index] ??
+                                  ActiveOnlineExam());
                         },
                       );
                     } else {

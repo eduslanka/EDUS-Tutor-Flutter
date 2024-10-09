@@ -20,7 +20,7 @@ import 'package:edus_tutor/utils/model/AdminBookSubject.dart';
 import 'package:edus_tutor/utils/widget/Line.dart';
 
 class AddAdminBook extends StatefulWidget {
-  const AddAdminBook({Key? key}) : super(key: key);
+  const AddAdminBook({super.key});
 
   @override
   _AddAdminBookState createState() => _AddAdminBookState();
@@ -76,20 +76,18 @@ class _AddAdminBookState extends State<AddAdminBook> {
 
           subjectList = getAllSubject();
           subjectList?.then((value) {
-            if(value.subjects.isNotEmpty){
+            if (value.subjects.isNotEmpty) {
               selectedSubject = value.subjects[0].title;
               selectedSubjectId = value.subjects[0].id;
             }
-
           });
 
           categoryList = getAllCategory();
           categoryList?.then((value) {
-            if(value.categories.isNotEmpty){
+            if (value.categories.isNotEmpty) {
               selectedCategory = value.categories[0].title;
               selectedCategoryId = value.categories[0].id;
             }
-
           });
           //date time init
           date = DateTime.now();
@@ -122,7 +120,8 @@ class _AddAdminBookState extends State<AddAdminBook> {
                         future: subjectList,
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
-                            return getSubjectsDropdown(snapshot.data?.subjects ?? []);
+                            return getSubjectsDropdown(
+                                snapshot.data?.subjects ?? []);
                           } else {
                             return Container();
                           }
@@ -152,7 +151,7 @@ class _AddAdminBookState extends State<AddAdminBook> {
                       hintText: 'Enter title here'.tr,
                       border: InputBorder.none),
                 ),
-                BottomLine(),
+                const BottomLine(),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -176,7 +175,7 @@ class _AddAdminBookState extends State<AddAdminBook> {
                     ),
                   ],
                 ),
-                BottomLine(),
+                const BottomLine(),
                 TextField(
                   controller: publisherNameController,
                   style: Theme.of(context).textTheme.headlineMedium,
@@ -184,7 +183,7 @@ class _AddAdminBookState extends State<AddAdminBook> {
                   decoration: InputDecoration(
                       hintText: 'Publisher name'.tr, border: InputBorder.none),
                 ),
-                BottomLine(),
+                const BottomLine(),
                 TextField(
                   controller: authorController,
                   style: Theme.of(context).textTheme.headlineMedium,
@@ -192,7 +191,7 @@ class _AddAdminBookState extends State<AddAdminBook> {
                   decoration: InputDecoration(
                       hintText: 'Author name'.tr, border: InputBorder.none),
                 ),
-                BottomLine(),
+                const BottomLine(),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -216,7 +215,7 @@ class _AddAdminBookState extends State<AddAdminBook> {
                     ),
                   ],
                 ),
-                BottomLine(),
+                const BottomLine(),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -269,7 +268,7 @@ class _AddAdminBookState extends State<AddAdminBook> {
                     ),
                   ],
                 ),
-                BottomLine(),
+                const BottomLine(),
                 TextField(
                   controller: descriptionController,
                   style: Theme.of(context).textTheme.headlineMedium,
@@ -277,7 +276,7 @@ class _AddAdminBookState extends State<AddAdminBook> {
                   decoration: InputDecoration(
                       hintText: 'Description'.tr, border: InputBorder.none),
                 ),
-                BottomLine(),
+                const BottomLine(),
                 Container(
                   padding: const EdgeInsets.only(bottom: 16.0, top: 100.0),
                   width: double.infinity,
@@ -358,7 +357,10 @@ class _AddAdminBookState extends State<AddAdminBook> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
             //_selectedClass = value;
@@ -389,12 +391,16 @@ class _AddAdminBookState extends State<AddAdminBook> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
             //_selectedClass = value;
             selectedCategory = value;
-            selectedCategoryId = getCode(categories.cast<AdminSubject>(), value.toString());
+            selectedCategoryId =
+                getCode(categories.cast<AdminSubject>(), value.toString());
           });
         },
         value: selectedCategory,

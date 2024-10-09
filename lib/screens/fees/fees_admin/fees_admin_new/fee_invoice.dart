@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 import 'package:edus_tutor/utils/widget/custom_search_delegate.dart';
 
 class FeesInvoiceScreen extends StatefulWidget {
-  const FeesInvoiceScreen({Key? key}) : super(key: key);
+  const FeesInvoiceScreen({super.key});
 
   @override
   _FeesInvoiceScreenState createState() => _FeesInvoiceScreenState();
@@ -41,21 +41,18 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
   }
 
   Future<FeesRecordList> getFeesInvoice() async {
+    final response = await http.get(Uri.parse(EdusApi.adminFeesInvoiceList),
+        headers: Utils.setHeader(_token.toString()));
 
-
-      final response = await http.get(Uri.parse(EdusApi.adminFeesInvoiceList),
-          headers: Utils.setHeader(_token.toString()));
-
-      if (response.statusCode == 200) {
-        var jsonData = jsonDecode(response.body);
-        invoices.addAll(
-            FeesRecordList
-                .fromJson(jsonData['studentInvoices'])
-                .feesRecords ?? []);
-        return FeesRecordList.fromJson(jsonData['studentInvoices']);
-      } else {
-        throw Exception('Failed to load');
-      }
+    if (response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body);
+      invoices.addAll(
+          FeesRecordList.fromJson(jsonData['studentInvoices']).feesRecords ??
+              []);
+      return FeesRecordList.fromJson(jsonData['studentInvoices']);
+    } else {
+      throw Exception('Failed to load');
+    }
   }
 
   @override
@@ -74,7 +71,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                 image: AssetImage(AppConfig.appToolbarBackground),
                 fit: BoxFit.cover,
               ),
-              color: Color(0xff053EFF),
+              color: const Color(0xff053EFF),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -164,7 +161,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                               ));
                         },
                         title: Text(
-                          '${record.student}' +
+                          '${record.student}'
                                   " (${record.recordClass} - ${record.section})" ??
                               'NA',
                           style: Theme.of(context)
@@ -254,9 +251,9 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                                           fees = getFeesInvoice();
                                         });
 
-                                         return Future.value(true);
+                                        return Future.value(true);
                                       } else {
-                                         return Future.value(false);
+                                        return Future.value(false);
                                       }
                                     }
                                   },
@@ -409,10 +406,14 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                   },
                   itemCount: snapshot.data?.feesRecords?.length ?? 0,
                   itemBuilder: (context, index) {
-                    FeesRecord feeRecord = snapshot.data?.feesRecords?[index] ?? FeesRecord();
+                    FeesRecord feeRecord =
+                        snapshot.data?.feesRecords?[index] ?? FeesRecord();
 
                     return ListTile(
-                      title: Text('${feeRecord.student}' + " (${feeRecord.recordClass} - ${feeRecord.section})" ?? 'NA',
+                      title: Text(
+                        '${feeRecord.student}'
+                                " (${feeRecord.recordClass} - ${feeRecord.section})" ??
+                            'NA',
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium
@@ -424,7 +425,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                             children: <Widget>[
                               Expanded(
                                 child: Text(
-                                  feeRecord?.date.toString() ?? '',
+                                  feeRecord.date.toString() ?? '',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleLarge
@@ -490,8 +491,7 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                                   } else if (value == 'edit') {
                                   } else if (value == 'delete') {
                                     final response = await http.post(
-                                      Uri.parse(
-                                          EdusApi.adminFeesInvoiceDelete),
+                                      Uri.parse(EdusApi.adminFeesInvoiceDelete),
                                       headers: Utils.setHeader(_token ?? ''),
                                       body: jsonEncode({
                                         'id': feeRecord.id,
@@ -504,9 +504,9 @@ class _FeesInvoiceScreenState extends State<FeesInvoiceScreen> {
                                         fees = getFeesInvoice();
                                       });
 
-                                       return Future.value(true);
+                                      return Future.value(true);
                                     } else {
-                                       return Future.value(false);
+                                      return Future.value(false);
                                     }
                                   }
                                 },

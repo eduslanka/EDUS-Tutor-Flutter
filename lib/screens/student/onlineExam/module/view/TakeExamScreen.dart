@@ -16,7 +16,7 @@ import 'package:reorderables/reorderables.dart';
 
 class TakeExamScreen extends StatefulWidget {
   final TakeExamModel? takeExamModel;
-  const TakeExamScreen({Key? key, this.takeExamModel}) : super(key: key);
+  const TakeExamScreen({super.key, this.takeExamModel});
 
   @override
   _TakeExamScreenState createState() => _TakeExamScreenState();
@@ -78,8 +78,8 @@ class _TakeExamScreenState extends State<TakeExamScreen> {
                   Obx(
                     () => Text.rich(
                       TextSpan(
-                        text: "Question".tr +
-                            " ${_questionController.questionNumber.value}",
+                        text:
+                            "${"Question".tr} ${_questionController.questionNumber.value}",
                         style: Theme.of(context).textTheme.titleMedium,
                         children: [
                           TextSpan(
@@ -119,7 +119,7 @@ class _TakeExamScreenState extends State<TakeExamScreen> {
 }
 
 class QuestionSelectorWidget extends StatelessWidget {
-  const QuestionSelectorWidget({Key? key}) : super(key: key);
+  const QuestionSelectorWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +203,7 @@ class QuestionSelectorWidget extends StatelessWidget {
 }
 
 class QuestionCard extends StatefulWidget {
-  const QuestionCard({Key? key, this.assign, this.index}) : super(key: key);
+  const QuestionCard({super.key, this.assign, this.index});
 
   final ExamQuestion? assign;
   final int? index;
@@ -445,17 +445,17 @@ class _QuestionCardState extends State<QuestionCard>
                                         widget.index ?? 0, data, false);
                                   },
                                   style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
+                                    shape: WidgetStateProperty.all<
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0),
                                       ),
                                     ),
-                                    backgroundColor: MaterialStateProperty.all(
+                                    backgroundColor: WidgetStateProperty.all(
                                         Colors.transparent),
                                     // elevation: MaterialStateProperty.all(3),
-                                    shadowColor: MaterialStateProperty.all(
+                                    shadowColor: WidgetStateProperty.all(
                                         Colors.transparent),
                                   ),
                                   child: Text(
@@ -572,17 +572,17 @@ class _QuestionCardState extends State<QuestionCard>
                                         widget.index ?? 0, data, false);
                                   },
                                   style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
+                                    shape: WidgetStateProperty.all<
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0),
                                       ),
                                     ),
-                                    backgroundColor: MaterialStateProperty.all(
+                                    backgroundColor: WidgetStateProperty.all(
                                         Colors.transparent),
                                     // elevation: MaterialStateProperty.all(3),
-                                    shadowColor: MaterialStateProperty.all(
+                                    shadowColor: WidgetStateProperty.all(
                                         Colors.transparent),
                                   ),
                                   child: Text(
@@ -700,17 +700,17 @@ class _QuestionCardState extends State<QuestionCard>
                                         widget.index ?? 0, data, false);
                                   },
                                   style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
+                                    shape: WidgetStateProperty.all<
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0),
                                       ),
                                     ),
-                                    backgroundColor: MaterialStateProperty.all(
+                                    backgroundColor: WidgetStateProperty.all(
                                         Colors.transparent),
                                     // elevation: MaterialStateProperty.all(3),
-                                    shadowColor: MaterialStateProperty.all(
+                                    shadowColor: WidgetStateProperty.all(
                                         Colors.transparent),
                                   ),
                                   child: Text(
@@ -782,7 +782,7 @@ class _QuestionCardState extends State<QuestionCard>
                                         ?.copyWith(color: Colors.black),
                                   )),
                             );
-                          }).toList(),
+                          }),
                           const SizedBox(height: 50),
                         ],
                       ),
@@ -851,7 +851,7 @@ class _QuestionCardState extends State<QuestionCard>
                                               color: assignIds.contains(
                                                       multipleImageList[index]
                                                           .id)
-                                                  ? Color(0xff053EFF)
+                                                  ? const Color(0xff053EFF)
                                                   : Colors.transparent,
                                               width: assignIds.contains(
                                                       multipleImageList[index]
@@ -984,7 +984,7 @@ class _QuestionCardState extends State<QuestionCard>
                                         border: Border.all(
                                           color: assignIds.contains(
                                                   imageQuestionList[index].id)
-                                              ? Color(0xff053EFF)
+                                              ? const Color(0xff053EFF)
                                               : Colors.transparent,
                                           width: assignIds.contains(
                                                   imageQuestionList[index].id)
@@ -1280,10 +1280,10 @@ class _QuestionCardState extends State<QuestionCard>
 
 class ContinueSkipSubmitBtn extends StatelessWidget {
   const ContinueSkipSubmitBtn({
-    Key? key,
+    super.key,
     this.qnController,
     this.index,
-  }) : super(key: key);
+  });
 
   final OnlineExamController? qnController;
   final int? index;
@@ -1317,16 +1317,16 @@ class ContinueSkipSubmitBtn extends StatelessWidget {
                         },
                         style: ButtonStyle(
                           shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                           ),
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.transparent),
+                              WidgetStateProperty.all(Colors.transparent),
                           // elevation: MaterialStateProperty.all(3),
                           shadowColor:
-                              MaterialStateProperty.all(Colors.transparent),
+                              WidgetStateProperty.all(Colors.transparent),
                         ),
                         child: Text(
                           "Submit Exam".tr,
@@ -1355,16 +1355,16 @@ class ContinueSkipSubmitBtn extends StatelessWidget {
                         },
                         style: ButtonStyle(
                           shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                           ),
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.transparent),
+                              WidgetStateProperty.all(Colors.transparent),
                           // elevation: MaterialStateProperty.all(3),
                           shadowColor:
-                              MaterialStateProperty.all(Colors.transparent),
+                              WidgetStateProperty.all(Colors.transparent),
                         ),
                         child: Text(
                           "Next".tr,
@@ -1382,7 +1382,7 @@ class ContinueSkipSubmitBtn extends StatelessWidget {
 }
 
 class TimerWidget extends StatelessWidget {
-  const TimerWidget({Key? key}) : super(key: key);
+  const TimerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1396,7 +1396,7 @@ class TimerWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(remainingTime + " " + "min".tr),
+            Text("$remainingTime ${"min".tr}"),
             controller.quiz.value.onlineExam?.durationType == "exam"
                 ? Text("Left for the exam".tr)
                 : Text("Left for this question".tr),
@@ -1410,7 +1410,7 @@ class TimerWidget extends StatelessWidget {
 class PhotoViewerWidget extends StatelessWidget {
   final String? image;
 
-  const PhotoViewerWidget({Key? key, this.image}) : super(key: key);
+  const PhotoViewerWidget({super.key, this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -1418,7 +1418,7 @@ class PhotoViewerWidget extends StatelessWidget {
       appBar: CustomAppBarWidget(title: ""),
       body: PhotoView(
         imageProvider: NetworkImage(
-          AppConfig.domainName + '/' + (image ?? ''),
+          '${AppConfig.domainName}/${image ?? ''}',
         ),
         loadingBuilder: (context, event) => Center(
           child: SizedBox(
@@ -1443,7 +1443,7 @@ class PhotoViewerWidget extends StatelessWidget {
 
 class QuestionTypeWidget extends StatelessWidget {
   final String? title;
-  const QuestionTypeWidget({Key? key, this.title}) : super(key: key);
+  const QuestionTypeWidget({super.key, this.title});
 
   @override
   Widget build(BuildContext context) {

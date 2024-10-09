@@ -13,7 +13,7 @@ import 'package:edus_tutor/utils/Utils.dart';
 import 'package:intl/intl.dart';
 
 class StudentWalletTransactions extends StatefulWidget {
-  const StudentWalletTransactions({Key? key}) : super(key: key);
+  const StudentWalletTransactions({super.key});
 
   @override
   State<StudentWalletTransactions> createState() =>
@@ -53,10 +53,10 @@ class _StudentWalletTransactionsState extends State<StudentWalletTransactions> {
                               colors: [
                                 Colors.lightBlue,
                                 Color(0xff053EFF),
-                                
                               ],
                             )),
-                        child: Text("Balance: ".tr + '${_controller.wallet.value.currencySymbol??0}' + '${_controller.wallet.value.myBalance??0}',
+                        child: Text(
+                          '${"Balance: ".tr}${_controller.wallet.value.currencySymbol ?? 0}${_controller.wallet.value.myBalance ?? 0}',
                           style:
                               Theme.of(context).textTheme.titleSmall?.copyWith(
                                     color: Colors.white,
@@ -85,11 +85,13 @@ class _StudentWalletTransactionsState extends State<StudentWalletTransactions> {
                               )),
                           child: Text(
                             "Add Balance".tr,
-                            style:
-                                Theme.of(context).textTheme.titleSmall?.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
                           ),
                         ),
                       ),
@@ -156,8 +158,9 @@ class _StudentWalletTransactionsState extends State<StudentWalletTransactions> {
                               },
                               child: ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemCount: _controller
-                                    .wallet.value.walletTransactions?.length ?? 0,
+                                itemCount: _controller.wallet.value
+                                        .walletTransactions?.length ??
+                                    0,
                                 shrinkWrap: true,
                                 itemBuilder: ((context, index) {
                                   WalletTransaction? walletTransaction =
@@ -175,8 +178,9 @@ class _StudentWalletTransactionsState extends State<StudentWalletTransactions> {
                                               DateFormat.yMMMd()
                                                   .format(DateTime.parse(
                                                       walletTransaction
-                                                          ?.createdAt
-                                                          .toString() ?? ''))
+                                                              ?.createdAt
+                                                              .toString() ??
+                                                          ''))
                                                   .toString(),
                                               style: Theme.of(context)
                                                   .textTheme
@@ -184,14 +188,18 @@ class _StudentWalletTransactionsState extends State<StudentWalletTransactions> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                              walletTransaction?.paymentMethod.toString() ?? '',
+                                              walletTransaction?.paymentMethod
+                                                      .toString() ??
+                                                  '',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .headlineMedium),
                                         ),
                                         Expanded(
                                           child: Text(
-                                              walletTransaction?.amount?.toStringAsFixed(2) ?? '',
+                                              walletTransaction?.amount
+                                                      ?.toStringAsFixed(2) ??
+                                                  '',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .headlineMedium),
@@ -206,7 +214,8 @@ class _StudentWalletTransactionsState extends State<StudentWalletTransactions> {
                                                 }
                                               },
                                               child: getStatus(
-                                                  walletTransaction?.status ?? '')),
+                                                  walletTransaction?.status ??
+                                                      '')),
                                         ),
                                       ],
                                     ),
@@ -257,32 +266,35 @@ class _StudentWalletTransactionsState extends State<StudentWalletTransactions> {
         title: "Add Balance",
         initialChildSize: 0.7,
         children: <Widget>[
-       TextField(
-      style: Theme.of(context).textTheme.headlineMedium,
-      controller: _controller.amountController,
-      keyboardType: TextInputType.number,
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'^(?!\.)(\d+)?\.?\d{0,2}'))
-      ],
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.zero,
-        hintText: "Amount".tr,
-        labelText: "Amount".tr,
-        hintStyle: Theme.of(context).textTheme.headlineMedium,
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.grey, // Customize the color
-            width: 2.0, // Customize the width
+          TextField(
+            style: Theme.of(context).textTheme.headlineMedium,
+            controller: _controller.amountController,
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(
+                  RegExp(r'^(?!\.)(\d+)?\.?\d{0,2}'))
+            ],
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              hintText: "Amount".tr,
+              labelText: "Amount".tr,
+              hintStyle: Theme.of(context).textTheme.headlineMedium,
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey, // Customize the color
+                  width: 2.0, // Customize the width
+                ),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .secondary, // Customize the color
+                  width: 2.0, // Customize the width
+                ),
+              ),
+            ),
           ),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.secondary, // Customize the color
-            width: 2.0, // Customize the width
-          ),
-        ),
-      ),
-    ),
           const SizedBox(
             height: 20,
           ),
@@ -393,8 +405,7 @@ class _StudentWalletTransactionsState extends State<StudentWalletTransactions> {
                                 return Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: Text(
-                                    _controller.file.value == null ||
-                                            _controller.file.value.path == ""
+                                    _controller.file.value.path == ""
                                         ? _controller.isBank.value == true
                                             ? 'Select Bank payment slip'.tr
                                             : 'Select Cheque payment slip'.tr
@@ -447,15 +458,9 @@ class _StudentWalletTransactionsState extends State<StudentWalletTransactions> {
                         if (_controller.selectedPaymentMethod.value == "Bank" ||
                             _controller.selectedPaymentMethod.value ==
                                 "Cheque") {
-                          if (_controller.file.value == null) {
-                            CustomSnackBar().snackBarWarning(
-                              "Select a payment slip first".tr,
-                            );
-                          } else {
-                            _controller.submitPayment(
-                              file: _controller.file.value,
-                            );
-                          }
+                          _controller.submitPayment(
+                            file: _controller.file.value,
+                          );
                         } else {
                           _controller.submitPayment(context: context);
                         }

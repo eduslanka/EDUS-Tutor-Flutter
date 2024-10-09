@@ -13,7 +13,7 @@ import '../../../utils/model/Notice.dart';
 class NoticDetailsLayout extends StatefulWidget {
   Notice notice;
 
-  NoticDetailsLayout(this.notice, {Key? key}) : super(key: key);
+  NoticDetailsLayout(this.notice, {super.key});
 
   @override
   _NoticDetailsLayoutState createState() => _NoticDetailsLayoutState(notice);

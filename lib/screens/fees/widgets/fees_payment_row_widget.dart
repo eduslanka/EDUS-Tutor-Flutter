@@ -6,9 +6,8 @@ import 'package:edus_tutor/screens/fees/model/Fee.dart';
 
 // ignore: must_be_immutable
 class FeePaymentRow extends StatelessWidget {
-
   FeeElement fee;
-  FeePaymentRow(this.fee, {Key? key}) : super(key: key);
+  FeePaymentRow(this.fee, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +37,14 @@ class FeePaymentRow extends StatelessWidget {
                       Text(
                         'Due Date',
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w500),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.w500),
                       ),
-                      const SizedBox(height: 10.0,),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
                       Text(
                         fee.dueDate.toString(),
                         maxLines: 1,
@@ -56,11 +60,16 @@ class FeePaymentRow extends StatelessWidget {
                       Text(
                         'Amount',
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w500),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.w500),
                       ),
-                      const SizedBox(height: 10.0,),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
                       Text(
-                        '\$'+fee.amount.toString(),
+                        '\$${fee.amount}',
                         maxLines: 1,
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
@@ -74,11 +83,16 @@ class FeePaymentRow extends StatelessWidget {
                       Text(
                         'Paid',
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w500),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.w500),
                       ),
-                      const SizedBox(height: 10.0,),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
                       Text(
-                        '\$'+fee.paid.toString(),
+                        '\$${fee.paid}',
                         maxLines: 1,
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
@@ -92,11 +106,16 @@ class FeePaymentRow extends StatelessWidget {
                       Text(
                         'Balance',
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w500),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.w500),
                       ),
-                      const SizedBox(height: 10.0,),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
                       Text(
-                        '\$'+fee.balance.toString(),
+                        '\$${fee.balance}',
                         maxLines: 1,
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
@@ -110,5 +129,4 @@ class FeePaymentRow extends StatelessWidget {
       ),
     );
   }
-
 }

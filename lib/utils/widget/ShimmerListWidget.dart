@@ -8,7 +8,7 @@ class ShimmerList extends StatelessWidget {
   final int? itemCount;
   final double? height;
 
-  const ShimmerList({Key? key, this.itemCount,this.height}) : super(key: key);
+  const ShimmerList({super.key, this.itemCount, this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,8 @@ class ShimmerList extends StatelessWidget {
           itemCount: itemCount,
           itemBuilder: (context, index) {
             return Shimmer.fromColors(
+                baseColor: Colors.grey.shade300,
+                highlightColor: Colors.grey.shade100,
                 child: Container(
                   width: 50,
                   height: height,
@@ -27,9 +29,7 @@ class ShimmerList extends StatelessWidget {
                     color: Colors.grey.shade300,
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
-                ),
-                baseColor: Colors.grey.shade300,
-                highlightColor: Colors.grey.shade100);
+                ));
           }),
     );
   }

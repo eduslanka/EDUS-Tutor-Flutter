@@ -24,7 +24,7 @@ import 'package:edus_tutor/utils/model/Vehicle.dart';
 
 // ignore: must_be_immutable
 class AssignVehicle extends StatefulWidget {
-  const AssignVehicle({Key? key}) : super(key: key);
+  const AssignVehicle({super.key});
 
   @override
   _AssignVehicleState createState() => _AssignVehicleState();
@@ -131,7 +131,8 @@ class _AssignVehicleState extends State<AssignVehicle> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     if (snapshot.data!.assignVehicle.isNotEmpty) {
-                      return getVehicleDropDown(snapshot.data?.assignVehicle ?? []);
+                      return getVehicleDropDown(
+                          snapshot.data?.assignVehicle ?? []);
                     } else {
                       return Utils.noDataWidget();
                     }
@@ -143,6 +144,7 @@ class _AssignVehicleState extends State<AssignVehicle> {
               height: 20,
             ),
             GestureDetector(
+              onTap: assignVehicle,
               child: Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
@@ -156,7 +158,6 @@ class _AssignVehicleState extends State<AssignVehicle> {
                       ?.copyWith(color: Colors.white),
                 ),
               ),
-              onTap: assignVehicle,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -190,7 +191,10 @@ class _AssignVehicleState extends State<AssignVehicle> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
             selectedRoute = value.toString();
@@ -220,7 +224,10 @@ class _AssignVehicleState extends State<AssignVehicle> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 13.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 13.0),
         onChanged: (value) {
           setState(() {
             selectedVehicle = value.toString();
@@ -256,13 +263,12 @@ class _AssignVehicleState extends State<AssignVehicle> {
 
   // ignore: missing_return
   Future<VehicleRouteList> getRouteList() async {
-    final response = await http.get(
-        Uri.parse(EdusApi.transportRoute),
+    final response = await http.get(Uri.parse(EdusApi.transportRoute),
         headers: Utils.setHeader(_token.toString()));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       return VehicleRouteList.fromJson(data['data']);
-    } else{
+    } else {
       return VehicleRouteList([]);
     }
   }
@@ -308,8 +314,7 @@ class _AssignVehicleState extends State<AssignVehicle> {
     });
 
     if (response?.statusCode == 200) {
-      Utils.showToast(
-          '$selectedVehicle ' + 'assigned to'.tr + ' $selectedRoute');
+      Utils.showToast('$selectedVehicle ${'assigned to'.tr} $selectedRoute');
       setState(() {
         isResponse = false;
       });
@@ -320,7 +325,7 @@ class _AssignVehicleState extends State<AssignVehicle> {
       });
       if (response?.data['success'] == false) {
         Utils.showToast(
-            '$selectedVehicle ' + 'already assigned to'.tr + ' $selectedRoute');
+            '$selectedVehicle ${'already assigned to'.tr} $selectedRoute');
       }
       return true;
     } else {

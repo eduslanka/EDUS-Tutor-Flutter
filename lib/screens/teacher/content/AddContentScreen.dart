@@ -25,7 +25,7 @@ import 'package:edus_tutor/utils/model/TeacherSubject.dart';
 import 'package:edus_tutor/utils/permission_check.dart';
 
 class AddContentScreeen extends StatefulWidget {
-  const AddContentScreeen({Key? key}) : super(key: key);
+  const AddContentScreeen({super.key});
 
   @override
   _AddContentScreeenState createState() => _AddContentScreeenState();
@@ -209,8 +209,8 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                       textAlign: TextAlign.start,
                       decoration: InputDecoration(
                         labelStyle: Theme.of(context).textTheme.headlineMedium,
-                        errorStyle: const TextStyle(
-                            color: Colors.blue, fontSize: 12),
+                        errorStyle:
+                            const TextStyle(color: Colors.blue, fontSize: 12),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           borderSide: const BorderSide(
@@ -242,7 +242,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                               .headlineMedium
                               ?.copyWith(fontSize: ScreenUtil().setSp(12))),
                       value: 'admin',
-                      activeColor: Color(0xff053EFF),
+                      activeColor: const Color(0xff053EFF),
                       selected: radioStr == 'admin' ? true : false,
                       enableFeedback: false,
                       dense: true,
@@ -264,7 +264,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                               .headlineMedium
                               ?.copyWith(fontSize: ScreenUtil().setSp(12))),
                       value: 'student',
-                      activeColor: Color(0xff053EFF),
+                      activeColor: const Color(0xff053EFF),
                       enableFeedback: false,
                       selected: radioStr == 'student' ? true : false,
                       dense: true,
@@ -400,8 +400,8 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                         hintText: "Description".tr,
                         labelText: "Description".tr,
                         labelStyle: Theme.of(context).textTheme.headlineMedium,
-                        errorStyle: const TextStyle(
-                            color: Colors.blue, fontSize: 15.0),
+                        errorStyle:
+                            const TextStyle(color: Colors.blue, fontSize: 15.0),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           borderSide: const BorderSide(
@@ -466,66 +466,66 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
     );
   }
 
- void uploadContent() async {
-  FormData formData = FormData.fromMap({
-    "class": '$classId',
-    "section": '$sectionId',
-    "school_id": _schoolId,
-    "upload_date": _selectedaAssignDate,
-    "available_for": radioStr,
-    "description": descriptionController.text,
-    "created_by": _id,
-    "all_classes": '$allClasses',
-    "content_title": titleController.text,
-    "content_type": _selectedContentType?.toLowerCase().substring(0, 2),
-    "attach_file": _file != null
-        ? await MultipartFile.fromFile(_file?.path ?? '', filename: _file?.path.split('/').last)
-        : "",
-  });
+  void uploadContent() async {
+    FormData formData = FormData.fromMap({
+      "class": '$classId',
+      "section": '$sectionId',
+      "school_id": _schoolId,
+      "upload_date": _selectedaAssignDate,
+      "available_for": radioStr,
+      "description": descriptionController.text,
+      "created_by": _id,
+      "all_classes": '$allClasses',
+      "content_title": titleController.text,
+      "content_type": _selectedContentType?.toLowerCase().substring(0, 2),
+      "attach_file": _file != null
+          ? await MultipartFile.fromFile(_file?.path ?? '',
+              filename: _file?.path.split('/').last)
+          : "",
+    });
 
-  try {
-    final response = await dio.post(
-      EdusApi.uploadContent,
-      data: formData,
-      options: Options(
-        headers: {
-          "Accept": "application/json",
-          "Authorization": _token.toString(),
+    try {
+      final response = await dio.post(
+        EdusApi.uploadContent,
+        data: formData,
+        options: Options(
+          headers: {
+            "Accept": "application/json",
+            "Authorization": _token.toString(),
+          },
+        ),
+        onSendProgress: (received, total) {
+          if (total != -1) {
+            print('${(received / total * 100).toStringAsFixed(0)}%');
+          }
         },
-      ),
-      onSendProgress: (received, total) {
-        if (total != -1) {
-          print('${(received / total * 100).toStringAsFixed(0)}%');
-        }
-      },
-    );
+      );
 
-    print(EdusApi.uploadContent);
+      print(EdusApi.uploadContent);
 
-    if (response.statusCode == 200) {
-      Utils.showToast('Upload successful');
-      if (radioStr == 'admin') {
-        sentNotificationTo(1);
-      } else {
-        if (allClasses == 1) {
-          sentNotificationTo(2);
+      if (response.statusCode == 200) {
+        Utils.showToast('Upload successful');
+        if (radioStr == 'admin') {
+          sentNotificationTo(1);
         } else {
-          sentNotificationToSection(classId, sectionId);
+          if (allClasses == 1) {
+            sentNotificationTo(2);
+          } else {
+            sentNotificationToSection(classId, sectionId);
+          }
         }
+        Navigator.pop(context);
+      } else {
+        print('Failed to upload content. Status code: ${response.statusCode}');
+        print('Response data: ${response.data}');
+        Utils.showToast('Upload failed. Please try again.');
       }
-      Navigator.pop(context);
-    } else {
-      print('Failed to upload content. Status code: ${response.statusCode}');
-      print('Response data: ${response.data}');
-      Utils.showToast('Upload failed. Please try again.');
+    } catch (e, stackTrace) {
+      print('Upload error: $e');
+      print('Stack trace: $stackTrace');
+      Utils.showToast('An error occurred during upload. Please try again.');
     }
-  } catch (e, stackTrace) {
-    print('Upload error: $e');
-    print('Stack trace: $stackTrace');
-    Utils.showToast('An error occurred during upload. Please try again.');
   }
-}
-
 
   int? getCode<T>(List t, String title) {
     int? code;
@@ -542,16 +542,12 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
     final response = await http.get(Uri.parse(EdusApi.getClassById(id)),
         headers: Utils.setHeader(_token.toString()));
 
-
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
       if (rule == "1" || rule == "5") {
-
         print("rule : $rule => Classes : ${response.body}");
         return AdminClassList.fromJson(jsonData['data']['teacher_classes']);
-
       } else {
-
         return ClassList.fromJson(jsonData['data']['teacher_classes']);
       }
     } else {
@@ -573,12 +569,9 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
   }
 
   _studentListWidget(BuildContext context) {
-
     return FutureBuilder(
       future: classes,
       builder: (context, snapshot) {
-
-
         if (snapshot.hasData) {
           // final List classes = snapshot.data.toString() as List;
 
@@ -592,7 +585,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
             }
           }
 
-        // print("Class :  ${AdminClassList.classes.length}");
+          // print("Class :  ${AdminClassList.classes.length}");
 
           return ListView(
             shrinkWrap: true,
@@ -602,7 +595,7 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
               CheckboxListTile(
                   contentPadding: EdgeInsets.zero,
                   value: allStudent,
-                  activeColor: Color(0xff053EFF),
+                  activeColor: const Color(0xff053EFF),
                   controlAffinity: ListTileControlAffinity.leading,
                   title: Text("All Student".tr,
                       style: Theme.of(context)
@@ -613,147 +606,151 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
                     setState(() {
                       allStudent = value ?? false;
                       allStudent ? allClasses = 1 : allClasses = 0;
-
                     });
                   }),
 
-
-              if(!allStudent) SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Class",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(fontSize: 15.0),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: Colors.blueAccent,
-                          width: 0.5,
-                        ),
+              if (!allStudent)
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Class",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontSize: 15.0),
                       ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                          elevation: 0,
-                          isExpanded: true,
-                          items: AllClasses.classes.map((item) {
-                            return DropdownMenuItem<String>(
-                              value: item.name,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text(item.name.toString()),
-                              ),
-                            );
-                          }).toList(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(fontSize: 15.0),
-                          onChanged: (value) {
-                            setState(() {
-
-                              _selectedClass = value;
-                             // classController.text = adminClasses.name.toString();
-
-                              int classIndex = AllClasses.classes.indexWhere((element) => value == element.name);
-                              //classId = getCode(classes, '$value');
-                              classId = AllClasses.classes[classIndex].id;
-
-                              sections = getAllSection(int.parse(_id ?? ''), classId);
-                              sections?.then((sectionValue) {
-                                _selectedSection =
-                                    sectionValue.sections[0].name;
-                                sectionId = sectionValue.sections[0].id;
-                              });
-                            });
-                          },
-                           value: _selectedClass,
-                        ),
+                      const SizedBox(
+                        height: 5,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-
-              if(!allStudent) const SizedBox(
-                height: 10,
-              ),
-
-              if(!allStudent) FutureBuilder<SectionList>(
-                future: sections,
-                builder: (context, secSnap) {
-                  if (secSnap.hasData) {
-                    return SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Section",
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: Colors.blueAccent,
+                            width: 0.5,
+                          ),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            elevation: 0,
+                            isExpanded: true,
+                            items: AllClasses.classes.map((item) {
+                              return DropdownMenuItem<String>(
+                                value: item.name,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text(item.name.toString()),
+                                ),
+                              );
+                            }).toList(),
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium
                                 ?.copyWith(fontSize: 15.0),
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedClass = value;
+                                // classController.text = adminClasses.name.toString();
+
+                                int classIndex = AllClasses.classes.indexWhere(
+                                    (element) => value == element.name);
+                                //classId = getCode(classes, '$value');
+                                classId = AllClasses.classes[classIndex].id;
+
+                                sections = getAllSection(
+                                    int.parse(_id ?? ''), classId);
+                                sections?.then((sectionValue) {
+                                  _selectedSection =
+                                      sectionValue.sections[0].name;
+                                  sectionId = sectionValue.sections[0].id;
+                                });
+                              });
+                            },
+                            value: _selectedClass,
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          DropdownButtonHideUnderline(
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(
-                                  color: Colors.blueAccent,
-                                  width: 0.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              if (!allStudent)
+                const SizedBox(
+                  height: 10,
+                ),
+
+              if (!allStudent)
+                FutureBuilder<SectionList>(
+                  future: sections,
+                  builder: (context, secSnap) {
+                    if (secSnap.hasData) {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Section",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium
+                                  ?.copyWith(fontSize: 15.0),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            DropdownButtonHideUnderline(
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                    color: Colors.blueAccent,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                child: DropdownButton(
+                                  elevation: 0,
+                                  isExpanded: true,
+                                  items: secSnap.data?.sections.map((item) {
+                                    return DropdownMenuItem<String>(
+                                      value: item.name,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Text(item.name ?? ''),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium
+                                      ?.copyWith(fontSize: 15.0),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedSection = '$value';
+
+                                      sectionId = getCode(
+                                          secSnap.data!.sections, '$value');
+                                    });
+                                  },
+                                  value: _selectedSection,
                                 ),
                               ),
-                              child: DropdownButton(
-                                elevation: 0,
-                                isExpanded: true,
-                                items: secSnap.data?.sections.map((item) {
-                                  return DropdownMenuItem<String>(
-                                    value: item.name,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(item.name ?? ''),
-                                    ),
-                                  );
-                                }).toList(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(fontSize: 15.0),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _selectedSection = '$value';
-
-                                    sectionId = getCode(
-                                        secSnap.data!.sections, '$value');
-                                  });
-                                },
-                                value: _selectedSection,
-                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
-              ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
+                ),
 
               const SizedBox(
                 height: 10,
@@ -812,9 +809,11 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
   }
 
   void sentNotificationToSection(dynamic classCode, dynamic sectionCode) async {
-    final response = await http.get(Uri.parse(
-        EdusApi.sentNotificationToSection('Content',
-            'New content request has come', '$classCode', '$sectionCode')));
+    final response = await http.get(Uri.parse(EdusApi.sentNotificationToSection(
+        'Content',
+        'New content request has come',
+        '$classCode',
+        '$sectionCode')));
     if (response.statusCode == 200) {}
   }
 

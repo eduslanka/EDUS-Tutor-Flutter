@@ -26,7 +26,7 @@ import 'package:edus_tutor/utils/widget/ClassExamResultRow.dart';
 class ClassExamResultScreen extends StatefulWidget {
   var id;
 
-  ClassExamResultScreen({Key? key, this.id}) : super(key: key);
+  ClassExamResultScreen({super.key, this.id});
 
   @override
   _ClassExamResultScreenState createState() => _ClassExamResultScreenState();

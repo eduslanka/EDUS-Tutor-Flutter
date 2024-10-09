@@ -7,7 +7,8 @@ import 'CustomButton/CustomListViewSpacing.dart';
 
 // ignore: must_be_immutable
 class CustomRadioButton<T> extends StatefulWidget {
-  CustomRadioButton({Key? key, 
+  CustomRadioButton({
+    super.key,
     this.buttonLables,
     this.buttonValues,
     this.buttonTextStyle = const ButtonTextStyle(),
@@ -30,13 +31,9 @@ class CustomRadioButton<T> extends StatefulWidget {
     this.absoluteZeroSpacing = false,
     this.wrapAlignment = WrapAlignment.start,
   })  : assert(buttonLables?.length == buttonValues?.length,
-  "Button values list and button lables list should have same number of eliments "),
-        assert(unSelectedColor != null, "Unselected color cannot be null"),
+            "Button values list and button lables list should have same number of eliments "),
         assert(buttonValues?.toSet().length == buttonValues?.length,
-        "Multiple buttons with same value cannot exist"),
-  // assert(buttonLables.toSet().length == buttonLables.length,
-  //     "Multiple buttons label wth same value cannot exist"),
-        assert(selectedColor != null, "Selected color cannot be null"), super(key: key);
+            "Multiple buttons with same value cannot exist");
 
   ///Orientation of the Button Group
   final bool horizontal;
@@ -105,7 +102,11 @@ class CustomRadioButton<T> extends StatefulWidget {
 class _CustomRadioButtonState extends State<CustomRadioButton> {
   String? _currentSelectedLabel;
 
-  Color borderColor(index) => (_currentSelectedLabel == widget.buttonLables?[index] ? widget.selectedBorderColor : widget.unSelectedBorderColor) ?? Theme.of(context).primaryColor;
+  Color borderColor(index) =>
+      (_currentSelectedLabel == widget.buttonLables?[index]
+          ? widget.selectedBorderColor
+          : widget.unSelectedBorderColor) ??
+      Theme.of(context).primaryColor;
 
   @override
   void initState() {
@@ -132,24 +133,27 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
               : widget.unSelectedColor,
           elevation: widget.elevation,
           shape: widget.enableShape
-              ? widget.customShape ?? const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
-          )
+              ? widget.customShape ??
+                  const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  )
               : null,
           child: SizedBox(
             height: widget.height,
             child: MaterialButton(
               shape: widget.enableShape
-                  ? widget.customShape ?? OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: borderColor(index), width: 1),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              )
+                  ? widget.customShape ??
+                      OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: borderColor(index), width: 1),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                      )
                   : OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: borderColor(index), width: 1),
-                borderRadius: BorderRadius.zero,
-              ),
+                      borderSide:
+                          BorderSide(color: borderColor(index), width: 1),
+                      borderRadius: BorderRadius.zero,
+                    ),
               onPressed: () {
                 widget.radioButtonValue!(e);
                 setState(() {
@@ -186,9 +190,10 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
             : widget.unSelectedColor,
         elevation: widget.elevation,
         shape: widget.enableShape
-            ? widget.customShape ?? const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(50)),
-        )
+            ? widget.customShape ??
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                )
             : null,
         child: Container(
           height: widget.height,
@@ -198,16 +203,16 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
             padding: EdgeInsets.zero,
             minWidth: 10,
             shape: widget.enableShape
-                ? widget.customShape ?? OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: borderColor(index), width: 1),
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
-            )
+                ? widget.customShape ??
+                    OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: borderColor(index), width: 1),
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    )
                 : OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: borderColor(index), width: 1),
-              borderRadius: BorderRadius.zero,
-            ),
+                    borderSide: BorderSide(color: borderColor(index), width: 1),
+                    borderRadius: BorderRadius.zero,
+                  ),
             onPressed: () {
               widget.radioButtonValue!(e.toString());
               setState(() {

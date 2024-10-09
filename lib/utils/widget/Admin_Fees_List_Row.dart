@@ -15,7 +15,7 @@ import 'Line.dart';
 class AdminFeesListRow extends StatefulWidget {
   AdminFees adminFees;
 
-  AdminFeesListRow(this.adminFees, {Key? key}) : super(key: key);
+  AdminFeesListRow(this.adminFees, {super.key});
 
   @override
   _AdminFeesListRowState createState() => _AdminFeesListRowState();
@@ -65,7 +65,7 @@ class _AdminFeesListRowState extends State<AdminFeesListRow> {
             },
           ),
         ),
-        BottomLine(),
+        const BottomLine(),
       ],
     );
   }
@@ -102,8 +102,8 @@ class _AdminFeesListRowState extends State<AdminFeesListRow> {
                             TextField(
                               controller: titleController,
                               style: Theme.of(context).textTheme.headlineMedium,
-                              decoration:
-                                  const InputDecoration(hintText: 'Enter title here'),
+                              decoration: const InputDecoration(
+                                  hintText: 'Enter title here'),
                             ),
                             TextField(
                               controller: descripController,
@@ -146,9 +146,13 @@ class _AdminFeesListRowState extends State<AdminFeesListRow> {
                         alignment: Alignment.topRight,
                         child: GestureDetector(
                             onTap: () {
-                              Navigator.of(context, rootNavigator: true).pop('dialog');
+                              Navigator.of(context, rootNavigator: true)
+                                  .pop('dialog');
                             },
-                            child: const Icon(Icons.close,color: Colors.black,)),
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.black,
+                            )),
                       ),
                     ],
                   ),

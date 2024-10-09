@@ -6,10 +6,9 @@ import 'package:edus_tutor/utils/model/Leave.dart';
 
 // ignore: must_be_immutable
 class LeaveRow extends StatelessWidget {
-
   Leave leave;
 
-  LeaveRow(this.leave, {Key? key}) : super(key: key);
+  LeaveRow(this.leave, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +165,7 @@ class LeaveRow extends StatelessWidget {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      getStatus(context,leave.status ?? ''),
+                      getStatus(context, leave.status ?? ''),
                     ],
                   ),
                 ),
@@ -206,8 +205,7 @@ class LeaveRow extends StatelessWidget {
           ),
         ),
       );
-    }
-    else if (status == 'A') {
+    } else if (status == 'A') {
       return Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(color: Colors.green.shade400),
@@ -224,8 +222,7 @@ class LeaveRow extends StatelessWidget {
           ),
         ),
       );
-    }
-    else if (status == 'R') {
+    } else if (status == 'R') {
       return Container(
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(color: Colors.red),
@@ -242,7 +239,7 @@ class LeaveRow extends StatelessWidget {
           ),
         ),
       );
-    }else if (status == 'C') {
+    } else if (status == 'C') {
       return Container(
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(color: Colors.redAccent),
@@ -259,7 +256,7 @@ class LeaveRow extends StatelessWidget {
           ),
         ),
       );
-    }else{
+    } else {
       return Container();
     }
   }

@@ -16,7 +16,7 @@ import 'package:edus_tutor/utils/model/Content.dart';
 import 'package:edus_tutor/utils/widget/Content_row.dart';
 
 class ContentListScreen extends StatefulWidget {
-  const ContentListScreen({Key? key}) : super(key: key);
+  const ContentListScreen({super.key});
 
   @override
   _ContentListScreenState createState() => _ContentListScreenState();
@@ -87,6 +87,7 @@ class _ContentListScreenState extends State<ContentListScreen> {
     builder(context, animation) {
       return ContentRow(removeItem, animation, index: index);
     }
+
     _listKey.currentState?.removeItem(removeIndex, builder);
   }
 

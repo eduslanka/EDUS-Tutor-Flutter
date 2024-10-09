@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 
 class FeeInvoiceDetailsView extends StatefulWidget {
   final int? invoiceId;
-  const FeeInvoiceDetailsView({Key? key, this.invoiceId}) : super(key: key);
+  const FeeInvoiceDetailsView({super.key, this.invoiceId});
   @override
   _FeeInvoiceDetailsViewState createState() => _FeeInvoiceDetailsViewState();
 }
@@ -67,7 +67,8 @@ class _FeeInvoiceDetailsViewState extends State<FeeInvoiceDetailsView> {
             if (snapshot.hasData) {
               return ListView(
                 physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,8 +84,7 @@ class _FeeInvoiceDetailsViewState extends State<FeeInvoiceDetailsView> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            'Invoice'.tr +
-                                ": ${snapshot.data?.invoiceInfo?.invoiceId}",
+                            "${'Invoice'.tr}: ${snapshot.data?.invoiceInfo?.invoiceId}",
                             maxLines: 1,
                             style: Theme.of(context)
                                 .textTheme
@@ -92,8 +92,7 @@ class _FeeInvoiceDetailsViewState extends State<FeeInvoiceDetailsView> {
                                 ?.copyWith(fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            'Create Date'.tr +
-                                ": ${DateFormat.yMMMd().format(snapshot.data?.invoiceInfo?.createDate ?? DateTime(2000))}",
+                            "${'Create Date'.tr}: ${DateFormat.yMMMd().format(snapshot.data?.invoiceInfo?.createDate ?? DateTime(2000))}",
                             maxLines: 1,
                             style: Theme.of(context)
                                 .textTheme
@@ -101,8 +100,7 @@ class _FeeInvoiceDetailsViewState extends State<FeeInvoiceDetailsView> {
                                 ?.copyWith(fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            'Due Date'.tr +
-                                ": ${DateFormat.yMMMd().format(snapshot.data?.invoiceInfo?.dueDate ?? DateTime(2000))}",
+                            "${'Due Date'.tr}: ${DateFormat.yMMMd().format(snapshot.data?.invoiceInfo?.dueDate ?? DateTime(2000))}",
                             maxLines: 1,
                             style: Theme.of(context)
                                 .textTheme
@@ -125,7 +123,8 @@ class _FeeInvoiceDetailsViewState extends State<FeeInvoiceDetailsView> {
                     itemCount: snapshot.data?.invoiceDetails?.length ?? 0,
                     itemBuilder: (context, index) {
                       InvoiceDetail feeRecord =
-                          snapshot.data?.invoiceDetails?[index] ?? InvoiceDetail();
+                          snapshot.data?.invoiceDetails?[index] ??
+                              InvoiceDetail();
 
                       return ListTile(
                         contentPadding: EdgeInsets.zero,

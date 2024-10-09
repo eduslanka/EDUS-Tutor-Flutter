@@ -8,7 +8,7 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'AdminLeavePager.dart';
 
 class LeaveAdminHomeScreen extends StatefulWidget {
-  const LeaveAdminHomeScreen({Key? key}) : super(key: key);
+  const LeaveAdminHomeScreen({super.key});
 
   @override
   _LeaveAdminHomeScreenState createState() => _LeaveAdminHomeScreenState();

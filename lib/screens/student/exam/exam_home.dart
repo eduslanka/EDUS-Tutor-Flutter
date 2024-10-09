@@ -14,7 +14,7 @@ class ExamHome extends StatefulWidget {
   final _images;
   var id;
 
-  ExamHome(this._titles, this._images, {Key? key, this.id}) : super(key: key);
+  ExamHome(this._titles, this._images, {super.key, this.id});
 
   @override
   _HomeState createState() => _HomeState(_titles, _images);

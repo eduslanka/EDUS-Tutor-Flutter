@@ -16,7 +16,7 @@ import 'TakeExamScreen.dart';
 class ActiveOnlineExams extends StatefulWidget {
   final id;
 
-  const ActiveOnlineExams({Key? key, this.id}) : super(key: key);
+  const ActiveOnlineExams({super.key, this.id});
 
   @override
   _ActiveOnlineExamsState createState() => _ActiveOnlineExamsState(id: id);
@@ -75,7 +75,8 @@ class _ActiveOnlineExamsState extends State<ActiveOnlineExams> {
               ),
               itemBuilder: (context, recordIndex) {
                 Record record =
-                    _userController.studentRecord.value.records?[recordIndex] ?? Record();
+                    _userController.studentRecord.value.records?[recordIndex] ??
+                        Record();
                 return GestureDetector(
                   behavior: HitTestBehavior.translucent,
                   onTap: () async {
@@ -118,7 +119,8 @@ class _ActiveOnlineExamsState extends State<ActiveOnlineExams> {
                   ),
                 );
               },
-              itemCount: _userController.studentRecord.value.records?.length ?? 0,
+              itemCount:
+                  _userController.studentRecord.value.records?.length ?? 0,
             ),
           ),
           const SizedBox(
@@ -138,13 +140,17 @@ class _ActiveOnlineExamsState extends State<ActiveOnlineExams> {
                 } else {
                   if (_examCtrl.exams.value.data!.onlineExams!.isNotEmpty) {
                     return ListView.builder(
-                      itemCount: _examCtrl.exams.value.data?.onlineExams?.length ?? 0,
+                      itemCount:
+                          _examCtrl.exams.value.data?.onlineExams?.length ?? 0,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return ActiveOnlineExamRow(
-                          status: _examCtrl
-                              .exams.value.data?.onlineExams?[index].status ?? '',
-                          exam: _examCtrl.exams.value.data?.onlineExams?[index] ?? OnlineExam(),
+                          status: _examCtrl.exams.value.data
+                                  ?.onlineExams?[index].status ??
+                              '',
+                          exam:
+                              _examCtrl.exams.value.data?.onlineExams?[index] ??
+                                  OnlineExam(),
                           recordId: _userController.selectedRecord.value.id,
                         );
                       },
@@ -167,11 +173,12 @@ class ActiveOnlineExamRow extends StatefulWidget {
   final String? status;
   final int? recordId;
 
-  const ActiveOnlineExamRow({Key? key, 
+  const ActiveOnlineExamRow({
+    super.key,
     this.exam,
     this.status,
     this.recordId,
-  }) : super(key: key);
+  });
 
   @override
   State<ActiveOnlineExamRow> createState() => _ActiveOnlineExamRowState();
@@ -249,8 +256,8 @@ class _ActiveOnlineExamRowState extends State<ActiveOnlineExamRow> {
                           height: 10.0,
                         ),
                         Text(
-                          "${widget.exam?.startDate}" +
-                              " (${widget.exam?.startTime})",
+                          "${widget.exam?.startDate}"
+                          " (${widget.exam?.startTime})",
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium
@@ -275,8 +282,8 @@ class _ActiveOnlineExamRowState extends State<ActiveOnlineExamRow> {
                           height: 10.0,
                         ),
                         Text(
-                          "${widget.exam?.endDate}" +
-                              " (${widget.exam?.endTime})",
+                          "${widget.exam?.endDate}"
+                          " (${widget.exam?.endTime})",
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium
@@ -403,16 +410,16 @@ class _ActiveOnlineExamRowState extends State<ActiveOnlineExamRow> {
                               ),
                               child: ElevatedButton(
                                 style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
+                                  shape: WidgetStateProperty.all<
                                       RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5.0),
                                     ),
                                   ),
-                                  backgroundColor: MaterialStateProperty.all(
+                                  backgroundColor: WidgetStateProperty.all(
                                       Colors.transparent),
                                   // elevation: MaterialStateProperty.all(3),
-                                  shadowColor: MaterialStateProperty.all(
+                                  shadowColor: WidgetStateProperty.all(
                                       Colors.transparent),
                                 ),
                                 onPressed: () async {

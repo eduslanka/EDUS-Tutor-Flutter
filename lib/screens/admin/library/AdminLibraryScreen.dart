@@ -12,7 +12,7 @@ class AdminLibraryHome extends StatefulWidget {
   dynamic id;
   String? profileImage;
 
-  AdminLibraryHome(this._titles, this._images, {Key? key}) : super(key: key);
+  AdminLibraryHome(this._titles, this._images, {super.key});
 
   @override
   _AdminLibraryHomeState createState() =>
@@ -45,8 +45,8 @@ class _AdminLibraryHomeState extends State<AdminLibraryHome> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: GridView.builder(
           itemCount: _titles.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
           itemBuilder: (context, index) {
             return CustomWidget(
               index: index,

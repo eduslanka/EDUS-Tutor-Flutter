@@ -7,11 +7,9 @@ import '../FunctinsData.dart';
 
 // ignore: must_be_immutable
 class StudentExamRow extends StatelessWidget {
-
   Exam exam;
 
-
-  StudentExamRow(this.exam, {Key? key}) : super(key: key);
+  StudentExamRow(this.exam, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,10 @@ class StudentExamRow extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Exam: ',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
                 exam.examName ?? '',
@@ -40,116 +41,125 @@ class StudentExamRow extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Subject: ',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
               Expanded(
                 child: Text(
-                exam.subjectName ?? 'N/A',
+                  exam.subjectName ?? 'N/A',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Flexible(
-             fit: FlexFit.loose,
-             child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Room No',
-                          maxLines: 1,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Text(
-                            exam.roomNo ?? 'N/A',
-                          maxLines: 1,
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                      ],
-                    ),
+            fit: FlexFit.loose,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Room No',
+                        maxLines: 1,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        exam.roomNo ?? 'N/A',
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Date',
-                          maxLines: 1,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Text(
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Date',
+                        maxLines: 1,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
                         exam.date ?? 'N/A',
-                          maxLines: 1,
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                      ],
-                    ),
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Start',
-                          maxLines: 1,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Text(
-                        exam.startTime == null ? 'N/A': AppFunction.getAmPm(exam.startTime ?? ''),
-                          maxLines: 1,
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                      ],
-                    ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Start',
+                        maxLines: 1,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        exam.startTime == null
+                            ? 'N/A'
+                            : AppFunction.getAmPm(exam.startTime ?? ''),
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'End',
-                          maxLines: 1,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Text(
-                        exam.endTime == null ? 'N/A': AppFunction.getAmPm(exam.endTime ?? ''),
-                          maxLines: 1,
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                      ],
-                    ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'End',
+                        maxLines: 1,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        exam.endTime == null
+                            ? 'N/A'
+                            : AppFunction.getAmPm(exam.endTime ?? ''),
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-           ),
+                ),
+              ],
+            ),
+          ),
           // Container(
           //   height: 0.5,
           //   margin: EdgeInsets.only(top: 10.0),

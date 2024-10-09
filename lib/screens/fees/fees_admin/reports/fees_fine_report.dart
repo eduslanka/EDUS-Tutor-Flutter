@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 import 'fees_report_search_widget.dart';
 
 class AdminFeesFineReport extends StatefulWidget {
-  const AdminFeesFineReport({Key? key}) : super(key: key);
+  const AdminFeesFineReport({super.key});
 
   @override
   _AdminFeesFineReportState createState() => _AdminFeesFineReportState();
@@ -25,7 +25,6 @@ class _AdminFeesFineReportState extends State<AdminFeesFineReport> {
 
   Future<FeeFineReportModel> getSearchData(Map data) async {
     final response = await http.post(Uri.parse(EdusApi.adminFeesFineSearch),
-
         body: jsonEncode(data), headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
@@ -57,7 +56,7 @@ class _AdminFeesFineReportState extends State<AdminFeesFineReport> {
         children: [
           FeesReportSearchWidget(
             onTap: (dateTime, classId, sectionId) {
-              if (dateTime == null || dateTime == "") {
+              if (dateTime == "") {
                 Utils.showToast("Select a date first");
               } else {
                 Map data = {
@@ -91,9 +90,7 @@ class _AdminFeesFineReportState extends State<AdminFeesFineReport> {
                           alignment: Alignment.centerRight,
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
-                            "Total".tr +
-                                ": " +
-                                double.parse(total.toString()).toStringAsFixed(2),
+                            "${"Total".tr}: ${double.parse(total.toString()).toStringAsFixed(2)}",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium
@@ -109,7 +106,8 @@ class _AdminFeesFineReportState extends State<AdminFeesFineReport> {
                           },
                           itemCount: snapshot.data?.fineReport?.length ?? 0,
                           itemBuilder: (context, index) {
-                            FineReport? report = snapshot.data?.fineReport?.values
+                            FineReport? report = snapshot
+                                .data?.fineReport?.values
                                 .elementAt(index);
 
                             if (report != null) {
@@ -137,7 +135,7 @@ class _AdminFeesFineReportState extends State<AdminFeesFineReport> {
 class FineReportWidget extends StatelessWidget {
   final FineReport fineReport;
 
-  const FineReportWidget(this.fineReport, {Key? key}) : super(key: key);
+  const FineReportWidget(this.fineReport, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -159,8 +157,11 @@ class FineReportWidget extends StatelessWidget {
                       Text(
                         'Admission No.'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -182,8 +183,11 @@ class FineReportWidget extends StatelessWidget {
                       Text(
                         'Roll'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -205,8 +209,11 @@ class FineReportWidget extends StatelessWidget {
                       Text(
                         'Fine'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -229,8 +236,11 @@ class FineReportWidget extends StatelessWidget {
                       Text(
                         'Due Date'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,

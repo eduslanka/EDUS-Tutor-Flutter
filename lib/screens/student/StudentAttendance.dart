@@ -28,8 +28,7 @@ class StudentAttendanceScreen extends StatefulWidget {
   String? schoolId;
   var token;
 
-  StudentAttendanceScreen({Key? key, this.id, this.token, this.schoolId})
-      : super(key: key);
+  StudentAttendanceScreen({super.key, this.id, this.token, this.schoolId});
 
   @override
   _StudentAttendanceScreenState createState() => _StudentAttendanceScreenState(
@@ -130,8 +129,8 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime? _currentDate;
-    var _markedDateMap;
+    DateTime? currentDate;
+    var markedDateMap;
 
     return Scaffold(
       appBar: CustomAppBarWidget(title: 'Attendance'),
@@ -190,7 +189,7 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
                   child: CalendarCarousel<Event>(
                       weekDayPadding: EdgeInsets.zero,
                       onDayPressed: (DateTime date, List<Event> events) {
-                        setState(() => _currentDate = date);
+                        setState(() => currentDate = date);
                       },
                       onCalendarChanged: (DateTime date) {
                         setState(() {
@@ -364,8 +363,8 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
                         );
                       },
                       weekFormat: false,
-                      markedDatesMap: _markedDateMap,
-                      selectedDateTime: _currentDate,
+                      markedDatesMap: markedDateMap,
+                      selectedDateTime: currentDate,
                       // daysHaveCircularBorder: true,
                       todayButtonColor: Colors.transparent,
                       todayBorderColor: Colors.transparent,
@@ -381,7 +380,7 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
                       bottomDesign('Present'.tr, 'P', Colors.green),
                       bottomDesign('Absent'.tr, 'A', Colors.red),
                       bottomDesign('Late'.tr, 'L', const Color(0xFFEDD200)),
-                      bottomDesign('Halfday'.tr, 'F', Color(0xff053EFF)),
+                      bottomDesign('Halfday'.tr, 'F', const Color(0xff053EFF)),
                       bottomDesign('Holiday'.tr, 'H', Colors.blueAccent),
                     ],
                   ),
@@ -477,7 +476,7 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
         return const Color(0xFFEDD200);
         break;
       case 'F':
-        return Color(0xff053EFF);
+        return const Color(0xff053EFF);
         break;
       case 'H':
         return Colors.blueAccent;
@@ -495,6 +494,6 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
         count = count + 1;
       }
     }
-    return '$count ' + "days".tr;
+    return '$count ${"days".tr}';
   }
 }

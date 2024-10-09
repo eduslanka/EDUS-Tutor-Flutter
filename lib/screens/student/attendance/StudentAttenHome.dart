@@ -13,7 +13,8 @@ class StudentAttenHome extends StatefulWidget {
   var id;
   var token;
 
-  StudentAttenHome(this._titles, this._images, {Key? key, this.id, this.token}) : super(key: key);
+  StudentAttenHome(this._titles, this._images,
+      {super.key, this.id, this.token});
 
   @override
   _StudentAttenHomeState createState() =>
@@ -40,13 +41,13 @@ class _StudentAttenHomeState extends State<StudentAttenHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBarWidget(title: 'Attendance'),
-      backgroundColor: Color.fromARGB(255, 246, 246, 246),
+      backgroundColor: const Color.fromARGB(255, 246, 246, 246),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: GridView.builder(
           itemCount: _titles.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
           itemBuilder: (context, index) {
             return CustomWidget(
               index: index,

@@ -11,7 +11,7 @@ import 'package:edus_tutor/utils/model/ONlineExamResult.dart';
 class OnlineExamResultRow extends StatefulWidget {
   OnlineExamResult result;
 
-  OnlineExamResultRow(this.result, {Key? key}) : super(key: key);
+  OnlineExamResultRow(this.result, {super.key});
 
   @override
   // ignore: no_logic_in_create_state

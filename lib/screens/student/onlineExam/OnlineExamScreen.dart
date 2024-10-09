@@ -14,7 +14,7 @@ class OnlineExaminationHome extends StatefulWidget {
   final _images;
   var id;
 
-  OnlineExaminationHome(this._titles, this._images, {Key? key, this.id}) : super(key: key);
+  OnlineExaminationHome(this._titles, this._images, {super.key, this.id});
 
   @override
   _HomeState createState() => _HomeState(_titles, _images);
@@ -44,8 +44,8 @@ class _HomeState extends State<OnlineExaminationHome> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: GridView.builder(
           itemCount: _titles.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
           itemBuilder: (context, index) {
             return CustomWidget(
               index: index,

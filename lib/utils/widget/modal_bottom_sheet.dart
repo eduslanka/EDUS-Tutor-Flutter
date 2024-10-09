@@ -11,15 +11,12 @@ const double _kCloseProgressThreshold = 0.5;
 
 class BottomSheet extends StatefulWidget {
   const BottomSheet(
-      {Key? key,
+      {super.key,
       this.animationController,
       this.enableDrag = true,
       required this.onClosing,
       required this.builder})
-      : assert(enableDrag != null),
-        assert(onClosing != null),
-        assert(builder != null),
-        super(key: key);
+      : assert(onClosing != null);
 
   final AnimationController? animationController;
   final VoidCallback onClosing;
@@ -42,7 +39,8 @@ class _BottomSheetState extends State<BottomSheet> {
 
   double? get _childHeight {
     // final RenderBox renderBox = _childKey.currentContext.findRenderObject();
-    final RenderBox? renderBox = _childKey.currentContext?.findRenderObject() as RenderBox?;
+    final RenderBox? renderBox =
+        _childKey.currentContext?.findRenderObject() as RenderBox?;
 
     return renderBox?.size.height;
   }
@@ -52,19 +50,21 @@ class _BottomSheetState extends State<BottomSheet> {
 
   void _handleDragUpdate(DragUpdateDetails details) {
     if (_dismissUnderway) return;
-    widget.animationController?.value -=
-        (details.primaryDelta ?? 0) / (_childHeight ?? details.primaryDelta)!.toDouble();
+    widget.animationController?.value -= (details.primaryDelta ?? 0) /
+        (_childHeight ?? details.primaryDelta)!.toDouble();
   }
 
   void _handleDragEnd(DragEndDetails details) {
     if (_dismissUnderway) return;
     if (details.velocity.pixelsPerSecond.dy > _kMinFlingVelocity) {
-      final flingVelocity = -details.velocity.pixelsPerSecond.dy / (_childHeight ?? 0);
+      final flingVelocity =
+          -details.velocity.pixelsPerSecond.dy / (_childHeight ?? 0);
       if ((widget.animationController?.value ?? 0) > 0.0) {
         widget.animationController?.fling(velocity: flingVelocity);
       }
       if (flingVelocity < 0.0) widget.onClosing();
-    } else if ((widget.animationController?.value ?? 0) < _kCloseProgressThreshold) {
+    } else if ((widget.animationController?.value ?? 0) <
+        _kCloseProgressThreshold) {
       if ((widget.animationController?.value ?? 0) > 0.0) {
         widget.animationController?.fling(velocity: -1.0);
       }
@@ -85,8 +85,8 @@ class _BottomSheetState extends State<BottomSheet> {
         : GestureDetector(
             onVerticalDragUpdate: _handleDragUpdate,
             onVerticalDragEnd: _handleDragEnd,
-            child: bottomSheet,
             excludeFromSemantics: true,
+            child: bottomSheet,
           );
   }
 }
@@ -114,7 +114,7 @@ class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
 }
 
 class _ModalBottomSheet<T> extends StatefulWidget {
-  const _ModalBottomSheet({Key? key, this.route}) : super(key: key);
+  const _ModalBottomSheet({super.key, this.route});
 
   final _ModalBottomSheetRoute<T>? route;
 
@@ -175,8 +175,8 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
     this.builder,
     this.theme,
     this.barrierLabel,
-    RouteSettings? settings,
-  }) : super(settings: settings);
+    super.settings,
+  });
 
   final WidgetBuilder? builder;
   final ThemeData? theme;
@@ -213,7 +213,8 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
       removeTop: true,
       child: _ModalBottomSheet<T>(route: this),
     );
-    if (theme != null) bottomSheet = Theme(data: theme ?? ThemeData(), child: bottomSheet);
+    if (theme != null)
+      bottomSheet = Theme(data: theme ?? ThemeData(), child: bottomSheet);
     return bottomSheet;
   }
 }
@@ -222,8 +223,6 @@ Future<T?> showModalBottomSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,
 }) {
-  assert(context != null);
-  assert(builder != null);
   assert(debugCheckHasMaterialLocalizations(context));
   return Navigator.push(
       context,

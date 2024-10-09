@@ -22,7 +22,7 @@ class CustomExpansionTileCard extends StatefulWidget {
   /// the tile to reveal or hide the [children]. The [initiallyExpanded] property must
   /// be non-null.
   const CustomExpansionTileCard({
-    Key? key,
+    super.key,
     this.leading,
     required this.title,
     this.subtitle,
@@ -48,8 +48,7 @@ class CustomExpansionTileCard extends StatefulWidget {
     this.isThreeLine = false,
     this.shadowColor = const Color(0xffaaaaaa),
     this.animateTrailing = false,
-  })  : assert(initiallyExpanded != null),
-        super(key: key);
+  }) : assert(initiallyExpanded != null);
 
   final bool isThreeLine;
 
@@ -224,8 +223,8 @@ class CustomExpansionTileCardState extends State<CustomExpansionTileCard>
         Tween<double>(begin: widget.initialElevation, end: widget.elevation)
             .chain(_elevationTween!));
     _padding = _controller?.drive(_edgeInsetsTween!.chain(_paddingTween!));
-    _isExpanded = PageStorage.of(context).readState(context) ??
-        widget.initiallyExpanded;
+    _isExpanded =
+        PageStorage.of(context).readState(context) ?? widget.initiallyExpanded;
     if (_isExpanded) _controller?.value = 1.0;
   }
 
@@ -272,7 +271,7 @@ class CustomExpansionTileCardState extends State<CustomExpansionTileCard>
 
   Widget _buildChildren(BuildContext context, Widget? child) {
     return Padding(
-      padding: _padding?.value ?? EdgeInsets.all(0.0),
+      padding: _padding?.value ?? const EdgeInsets.all(0.0),
       child: Material(
         type: MaterialType.card,
         color: _materialColor?.value,

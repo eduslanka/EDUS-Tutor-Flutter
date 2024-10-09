@@ -15,7 +15,7 @@ class AdminFeesHome extends StatefulWidget {
   dynamic id;
   String? profileImage;
 
-  AdminFeesHome(this._titles, this._images, {Key? key}) : super(key: key);
+  AdminFeesHome(this._titles, this._images, {super.key});
 
   @override
   _AdminFeesHomeState createState() => _AdminFeesHomeState(_titles, _images);
@@ -47,8 +47,8 @@ class _AdminFeesHomeState extends State<AdminFeesHome> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: GridView.builder(
           itemCount: _titles.length,
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
           itemBuilder: (context, index) {
             return CustomWidget(
               index: index,

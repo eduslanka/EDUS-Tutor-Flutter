@@ -185,7 +185,7 @@ class StudentFeesController extends GetxController {
           log(data.toString());
         }
       }).catchError((error) {
-        if (error is dio.DioError) {
+        if (error is dio.DioException) {
           isPaymentProcessing(false);
 
           final errorData = Map<String, dynamic>.from(error.response?.data);
@@ -194,7 +194,7 @@ class StudentFeesController extends GetxController {
 
           errorData["errors"].forEach((key, messages) {
             for (var message in messages) {
-              combinedMessage = combinedMessage + "$message\n";
+              combinedMessage = "$combinedMessage$message\n";
             }
           });
           CustomSnackBar().snackBarError(combinedMessage);
@@ -207,7 +207,7 @@ class StudentFeesController extends GetxController {
     try {
       Map<String, dynamic> data;
       final response = await _dio.get(
-          EdusApi.studentPaymentSuccessCallback + "/Fees/$transactionId",
+          "${EdusApi.studentPaymentSuccessCallback}/Fees/$transactionId",
           options: dio.Options(
             headers: Utils.setHeader(userController.token.value.toString()),
           ));

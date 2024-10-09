@@ -5,7 +5,7 @@ import 'package:photo_view/photo_view.dart';
 class ImagePreviewPage extends StatefulWidget {
   final String? imageUrl;
   final String? title;
-  const ImagePreviewPage({Key? key, this.imageUrl, this.title}) : super(key: key);
+  const ImagePreviewPage({super.key, this.imageUrl, this.title});
 
   @override
   _ImagePreviewPageState createState() => _ImagePreviewPageState();

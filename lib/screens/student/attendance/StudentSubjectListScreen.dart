@@ -30,12 +30,15 @@ class StudentSubjectListScreen extends StatefulWidget {
   dynamic subjectCode;
 
   StudentSubjectListScreen(
-      {Key? key, this.id, this.token, this.schoolId, this.subjectCode}) : super(key: key);
+      {super.key, this.id, this.token, this.schoolId, this.subjectCode});
 
   @override
   _StudentSubjectListScreenState createState() =>
       _StudentSubjectListScreenState(
-          id: id, token: token, schoolId: schoolId ?? '', subjectCode: subjectCode);
+          id: id,
+          token: token,
+          schoolId: schoolId ?? '',
+          subjectCode: subjectCode);
 }
 
 class _StudentSubjectListScreenState extends State<StudentSubjectListScreen> {
@@ -110,7 +113,8 @@ class _StudentSubjectListScreenState extends State<StudentSubjectListScreen> {
                     ),
                     itemBuilder: (context, recordIndex) {
                       Record record = _userController
-                          .studentRecord.value.records?[recordIndex] ?? Record();
+                              .studentRecord.value.records?[recordIndex] ??
+                          Record();
                       return GestureDetector(
                         behavior: HitTestBehavior.translucent,
                         onTap: () async {
@@ -164,7 +168,9 @@ class _StudentSubjectListScreenState extends State<StudentSubjectListScreen> {
                         ),
                       );
                     },
-                    itemCount: _userController.studentRecord.value.records?.length ?? 0,
+                    itemCount:
+                        _userController.studentRecord.value.records?.length ??
+                            0,
                   ),
                 ),
                 Container(
@@ -216,7 +222,8 @@ class _StudentSubjectListScreenState extends State<StudentSubjectListScreen> {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     onTap: (() {
-                                      a = snapshot.data?.subjects[index].subjectId;
+                                      a = snapshot
+                                          .data?.subjects[index].subjectId;
                                       String? subjectName = snapshot
                                           .data?.subjects[index].subjectName;
                                       Navigator.push(
@@ -231,7 +238,8 @@ class _StudentSubjectListScreenState extends State<StudentSubjectListScreen> {
                                           )));
                                     }),
                                     child: SubjectRowLayout(
-                                        snapshot.data?.subjects[index] ?? Subject()),
+                                        snapshot.data?.subjects[index] ??
+                                            Subject()),
                                   );
                                 },
                               );
@@ -239,7 +247,8 @@ class _StudentSubjectListScreenState extends State<StudentSubjectListScreen> {
                               return Utils.noDataWidget();
                             }
                           } else {
-                            return const Center(child: CupertinoActivityIndicator());
+                            return const Center(
+                                child: CupertinoActivityIndicator());
                           }
                         },
                       ),

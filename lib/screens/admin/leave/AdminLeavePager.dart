@@ -12,7 +12,7 @@ class AdminLeavePage extends StatefulWidget {
   String url;
   String endPoint;
 
-  AdminLeavePage(this.url, this.endPoint, {Key? key}) : super(key: key);
+  AdminLeavePage(this.url, this.endPoint, {super.key});
 
   @override
   _AdminLeavePageState createState() => _AdminLeavePageState();

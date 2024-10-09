@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 import 'fees_report_search_widget.dart';
 
 class AdminFeesWaiverReport extends StatefulWidget {
-  const AdminFeesWaiverReport({Key? key}) : super(key: key);
+  const AdminFeesWaiverReport({super.key});
 
   @override
   _AdminFeesWaiverReportState createState() => _AdminFeesWaiverReportState();
@@ -56,7 +56,7 @@ class _AdminFeesWaiverReportState extends State<AdminFeesWaiverReport> {
         children: [
           FeesReportSearchWidget(
             onTap: (dateTime, classId, sectionId) {
-              if (dateTime == null || dateTime == "") {
+              if (dateTime == "") {
                 Utils.showToast("Select a date first");
               } else {
                 Map data = {
@@ -91,8 +91,7 @@ class _AdminFeesWaiverReportState extends State<AdminFeesWaiverReport> {
                           alignment: Alignment.centerRight,
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
-                            "Total" ": " +
-                                double.parse(total.toString()).toStringAsFixed(2),
+                            "Total: ${double.parse(total.toString()).toStringAsFixed(2)}",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium
@@ -133,7 +132,7 @@ class _AdminFeesWaiverReportState extends State<AdminFeesWaiverReport> {
 class FineReportWidget extends StatelessWidget {
   final WaiverReport fineReport;
 
-  const FineReportWidget(this.fineReport, {Key? key}) : super(key: key);
+  const FineReportWidget(this.fineReport, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -155,8 +154,11 @@ class FineReportWidget extends StatelessWidget {
                       Text(
                         'Admission No.'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -178,8 +180,11 @@ class FineReportWidget extends StatelessWidget {
                       Text(
                         'Roll'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -201,8 +206,11 @@ class FineReportWidget extends StatelessWidget {
                       Text(
                         'Waiver'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -225,8 +233,11 @@ class FineReportWidget extends StatelessWidget {
                       Text(
                         'Due Date'.tr,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w500, fontSize: 12),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                       const SizedBox(
                         height: 10.0,

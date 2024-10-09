@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 
 class FeesReportSearchWidget extends StatefulWidget {
   final Function(String, int, int)? onTap;
-  const FeesReportSearchWidget({Key? key, this.onTap}) : super(key: key);
+  const FeesReportSearchWidget({super.key, this.onTap});
   @override
   _FeesReportSearchWidgetState createState() => _FeesReportSearchWidgetState();
 }
@@ -71,16 +71,14 @@ class _FeesReportSearchWidgetState extends State<FeesReportSearchWidget> {
             rule = ruleValue;
             classes = getAllClass(int.parse(_id ?? ''));
             classes?.then((value) {
-
               // _selectedClass = value.classes[0].name;
-               _selectedClass = AllClasses.classes[0].name??"X";
-                classId = AllClasses.classes[0].id??0;
-                sections = getAllSection(int.parse(_id ?? ''), classId);
-                sections?.then((sectionValue) {
-                  _selectedSection = sectionValue.sections[0].name;
-                  sectionId = sectionValue.sections[0].id;
-                });
-
+              _selectedClass = AllClasses.classes[0].name ?? "X";
+              classId = AllClasses.classes[0].id ?? 0;
+              sections = getAllSection(int.parse(_id ?? ''), classId);
+              sections?.then((sectionValue) {
+                _selectedSection = sectionValue.sections[0].name;
+                sectionId = sectionValue.sections[0].id;
+              });
             });
           });
         });
@@ -113,7 +111,7 @@ class _FeesReportSearchWidgetState extends State<FeesReportSearchWidget> {
                       builder: (BuildContext context, Widget? child) {
                         return Theme(
                           data: Theme.of(context).copyWith(
-                            primaryColor: Color(0xff053EFF),
+                            primaryColor: const Color(0xff053EFF),
                             appBarTheme: const AppBarTheme(
                               color: Color(0xff053EFF),
                             ),
@@ -137,7 +135,8 @@ class _FeesReportSearchWidgetState extends State<FeesReportSearchWidget> {
                       enabled: false,
                       style: Theme.of(context).textTheme.headlineMedium,
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 10),
                         hintText: "Select Date",
                         hintStyle: Theme.of(context).textTheme.headlineMedium,
                       ),
@@ -147,7 +146,7 @@ class _FeesReportSearchWidgetState extends State<FeesReportSearchWidget> {
                 const SizedBox(
                   height: 10,
                 ),
-                 getClassDropdown(AllClasses.classes),
+                getClassDropdown(AllClasses.classes),
                 const SizedBox(
                   height: 10,
                 ),
@@ -218,7 +217,8 @@ class _FeesReportSearchWidgetState extends State<FeesReportSearchWidget> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15),
+        style:
+            Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15),
         onChanged: (value) {
           setState(() {
             _selectedClass = value.toString();
@@ -258,7 +258,8 @@ class _FeesReportSearchWidgetState extends State<FeesReportSearchWidget> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15),
+        style:
+            Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15),
         onChanged: (value) {
           setState(() {
             _selectedSection = value.toString();

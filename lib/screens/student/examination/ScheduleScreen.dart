@@ -22,7 +22,7 @@ import 'package:intl/intl.dart';
 class ScheduleScreen extends StatefulWidget {
   var id;
 
-  ScheduleScreen({Key? key, this.id}) : super(key: key);
+  ScheduleScreen({super.key, this.id});
 
   @override
   _ScheduleScreenState createState() => _ScheduleScreenState(id: id);
@@ -122,10 +122,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             ),
           );
         }).toList(),
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 15.0),
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(fontSize: 15.0),
         onChanged: (value) {
           setState(() {
-
             _selected = value;
 
             examId = getExamCode(exams, value.toString());
@@ -163,14 +165,15 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'Date'.tr + ': ',
+                          '${'Date'.tr}: ',
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium
                               ?.copyWith(fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          DateFormat.yMMMEd().format(value[0].date ?? DateTime(2000)),
+                          DateFormat.yMMMEd()
+                              .format(value[0].date ?? DateTime(2000)),
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ],
@@ -189,7 +192,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  'Subject'.tr + ': ',
+                                  '${'Subject'.tr}: ',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium
@@ -218,7 +221,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  'Time'.tr + ': ',
+                                  '${'Time'.tr}: ',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium
@@ -373,13 +376,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   Future<ExamRoutineReport> getExamRoutineReport(id) async {
     print("Exam type Id $id");
-    final response =
-        await http.post(Uri.parse(EdusApi.getStudentRoutineReport),
-            headers: Utils.setHeader(_token.toString()),
-            body: jsonEncode({
-              'exam': id,
-               "student_id":studentId
-            }));
+    final response = await http.post(Uri.parse(EdusApi.getStudentRoutineReport),
+        headers: Utils.setHeader(_token.toString()),
+        body: jsonEncode({'exam': id, "student_id": studentId}));
     if (response.statusCode == 200) {
       return examRoutineReportFromJson(response.body);
     } else {

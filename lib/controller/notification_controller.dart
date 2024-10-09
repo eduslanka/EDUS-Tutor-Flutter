@@ -27,60 +27,60 @@ class NotificationController extends GetxController {
   Rx<int> notificationCount = 0.obs;
 
   Future<UserNotificationList> getNotifications() async {
-  await getIdToken();
-  try {
-    isLoading(true);
-    final response = await http.get(
-      Uri.parse(EdusApi.getMyNotifications(_id)),
-      headers: Utils.setHeader(_token.toString()),
-    );
+    await getIdToken();
+    try {
+      isLoading(true);
+      final response = await http.get(
+        Uri.parse(EdusApi.getMyNotifications(_id)),
+        headers: Utils.setHeader(_token.toString()),
+      );
 
-    print(EdusApi.getMyNotifications(_id));
-    print(_token.toString());
+      print(EdusApi.getMyNotifications(_id));
+      print(_token.toString());
 
-    if (response.statusCode == 200) {
-      var jsonData = jsonDecode(response.body);
-      userNotificationList.value =
-          UserNotificationList.fromJson(jsonData['data']);
-      notificationCount.value = jsonData['data']['unread_notification'];
+      if (response.statusCode == 200) {
+        var jsonData = jsonDecode(response.body);
+        userNotificationList.value =
+            UserNotificationList.fromJson(jsonData['data']);
+        notificationCount.value = jsonData['data']['unread_notification'];
+        isLoading(false);
+        return userNotificationList.value;
+      } else {
+        isLoading(false);
+        throw Exception('Failed to load notifications');
+      }
+    } catch (e, t) {
       isLoading(false);
-      return userNotificationList.value!;
-    } else {
-      isLoading(false);
-      throw Exception('Failed to load notifications');
+      print(e);
+      print(t);
+      throw Exception(e.toString());
     }
-  } catch (e,t) {
-    isLoading(false);
-    print(e);
-    print(t);
-    throw Exception(e.toString());
   }
-}
+
   Future readNotification() async {
-    try{
- await getIdToken();
-    var response = await http.post(
-        Uri.parse(EdusApi.readMyNotifications(_id.value,0)),
-        headers: Utils.setHeader(_token.toString()), body:jsonEncode({
-        'id': 217
-      }),);
-       
-        print(_id.value);
-         print(response.body);
-    if (response.statusCode == 200) {
-      Map notifications = jsonDecode(response.body) as Map;
-      bool status = notifications['data']['status'] ?? false;
-      print(status);
+    try {
+      await getIdToken();
+      var response = await http.post(
+        Uri.parse(EdusApi.readMyNotifications(_id.value, 0)),
+        headers: Utils.setHeader(_token.toString()),
+        body: jsonEncode({'id': 217}),
+      );
+
+      print(_id.value);
       print(response.body);
-      return status;
-    } else {
-      debugPrint('Error retrieving from api');
-    }
-    }catch(e,t){
+      if (response.statusCode == 200) {
+        Map notifications = jsonDecode(response.body) as Map;
+        bool status = notifications['data']['status'] ?? false;
+        print(status);
+        print(response.body);
+        return status;
+      } else {
+        debugPrint('Error retrieving from api');
+      }
+    } catch (e, t) {
       print(e);
       print(t);
     }
-   
   }
 
   Future getIdToken() async {
