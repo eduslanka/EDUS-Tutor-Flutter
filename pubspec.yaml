@@ -84,6 +84,7 @@ dependencies:
     path: ./age
   themify_flutter:
     path: ./themify_flutter
+  video_player: ^2.9.2
 
 dev_dependencies:
   flutter_test:

@@ -79,10 +79,6 @@ class _LaunchWebViewState extends State<LaunchWebView> {
             flexibleSpace: Container(
               padding: EdgeInsets.only(top: 20.h),
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(AppConfig.appToolbarBackground),
-                  fit: BoxFit.cover,
-                ),
                 color: const Color(0xff053EFF),
               ),
               child: Row(
