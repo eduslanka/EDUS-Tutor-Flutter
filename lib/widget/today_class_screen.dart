@@ -10,12 +10,14 @@ class TodayClassScreen extends StatefulWidget {
   final TodayClassResponse? studentResponse;
   final TeacherTodayClassResponse? teachersResponse;
   final String rule;
+  final bool isAllow;
 
   const TodayClassScreen({
     super.key,
     this.studentResponse,
     this.teachersResponse,
     required this.rule,
+    required this.isAllow,
   });
 
   @override
@@ -25,7 +27,11 @@ class TodayClassScreen extends StatefulWidget {
 class _TodayClassScreenState extends State<TodayClassScreen> {
   Future<void> googleMeet(String meetUrl) async {
     if (await canLaunch(meetUrl)) {
-      await launch(meetUrl);
+      if (widget.isAllow) {
+        await launch(meetUrl);
+      } else {
+        Utils.showToast('Action denied. Contact Admin...!.');
+      }
     } else {
       throw 'Could not launch $meetUrl';
     }

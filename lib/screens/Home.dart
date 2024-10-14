@@ -411,6 +411,7 @@ class _HomeState extends State<Home> {
                         rule: _rule ?? '0',
                         teachersResponse:
                             _systemController.teacherTodayClassResponse.value,
+                        isAllow: _systemController.isAllow.value,
                       ),
                       GridView.builder(
                         shrinkWrap: true,

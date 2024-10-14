@@ -98,7 +98,7 @@ class Login {
         }
         return message;
       } else {
-        message = "Error: ${response.statusCode}";
+        message = " ${jsonDecode(response.body)['message']}";
       }
     } catch (e, t) {
       debugPrint(e.toString());

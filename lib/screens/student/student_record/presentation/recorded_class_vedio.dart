@@ -40,7 +40,10 @@ class RecordedClassVideosScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             final recordedClass = filteredClasses[index];
 
-            return RecordedClassCard(recordedClass: recordedClass);
+            return RecordedClassCard(
+              recordedClass: recordedClass,
+              isAllow: _controller.isAllow.value,
+            );
           },
         );
       }),

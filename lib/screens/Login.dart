@@ -326,9 +326,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ));
         Navigator.push(context, route);
       },
-      child: SizedBox(
+      child: const SizedBox(
         width: double.infinity,
-        child: const Center(
+        child: Center(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,

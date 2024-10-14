@@ -20,6 +20,7 @@ class SystemController extends GetxController {
   Rx<Quote> quote = Quote().obs;
   Rx<TodayClassResponse> todayClassResponse =
       TodayClassResponse(success: false, classes: []).obs;
+  Rx<bool> isAllow = true.obs;
   Rx<TeacherTodayClassResponse> teacherTodayClassResponse =
       TeacherTodayClassResponse(
     success: false,
@@ -144,6 +145,10 @@ class SystemController extends GetxController {
     }
   }
 
+  Future<void> check() async {
+    isAllow.value = await isAllowTheUser();
+  }
+
   Future getSchoolId() async {
     await Utils.getStringValue('schoolId').then((value) async {
       _schoolId.value = value ?? '';
@@ -161,7 +166,7 @@ class SystemController extends GetxController {
     if (!kDebugMode) {
       checkForUpdate();
     }
-
+    check();
     //  fetchTodayClasses();
     super.onInit();
   }

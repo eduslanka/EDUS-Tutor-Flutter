@@ -4,6 +4,7 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../../app_service/app_service.dart';
 import '../../../../../utils/Utils.dart';
 import '../model/student_record_model.dart';
 import 'package:http/http.dart' as http;
@@ -15,13 +16,18 @@ class RecordedClassController extends GetxController {
   var isLoading = false.obs;
   var recordedClasses = <RecordedClass>[].obs;
   var errorMessage = ''.obs;
-
+  var isAllow = false.obs;
   final Dio _dio = Dio();
 
   @override
   void onInit() {
     super.onInit();
     fetchRecordedClasses();
+    check();
+  }
+
+  Future<void> check() async {
+    isAllow.value = await isAllowTheUser();
   }
 
   Future<void> fetchRecordedClasses() async {

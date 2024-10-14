@@ -236,6 +236,7 @@ class _EditProfileState extends State<EditProfile> {
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
+          labelStyle: TextStyle(color: Colors.black),
           // Default border when not focused
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5.0),

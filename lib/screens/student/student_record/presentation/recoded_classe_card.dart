@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:edus_tutor/config/app_size.dart';
 
+import '../../../../utils/Utils.dart';
 import '../../../../webview/launch_webview.dart';
 import '../data/model/student_record_model.dart';
 import 'video_player_page.dart';
 
 class RecordedClassCard extends StatelessWidget {
   final RecordedClass recordedClass;
-
+  final bool isAllow;
   const RecordedClassCard({
     Key? key,
     required this.recordedClass,
+    required this.isAllow,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LaunchWebView(
-              launchUrl: recordedClass.downloadPath ?? '',
-              title: recordedClass.className,
+        if (isAllow) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LaunchWebView(
+                launchUrl: recordedClass.downloadPath ?? '',
+                title: recordedClass.className,
+              ),
             ),
-          ),
-        );
+          );
+        } else {
+          Utils.showToast('Action denied. Contact Admin...!.');
+        }
       },
       child: Card(
         color: Colors.white,
