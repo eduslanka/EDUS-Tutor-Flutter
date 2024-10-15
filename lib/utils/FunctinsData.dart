@@ -99,7 +99,7 @@ class AppFunction {
     'Homework',
     'Lesson',
     'Exams',
-    'Record',
+    'Recordings',
     // 'Timeline',
     'Attendance',
     //'Leave',
@@ -502,7 +502,7 @@ class AppFunction {
                 page: LeaveStudentHome(studentLeaves, studentLeavesIcons,
                     id: id)));
         break;
-      case 'Record':
+      case 'Recordings':
         Navigator.push(context, ScaleRoute(page: RecordedClassesScreen()));
         break;
       // case 'Transport':

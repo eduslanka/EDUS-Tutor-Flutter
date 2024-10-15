@@ -1,3 +1,4 @@
+import 'package:edus_tutor/utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,20 +36,29 @@ class RecordedClassesScreen extends StatelessWidget {
         }
 
         return ListView.builder(
-          padding: EdgeInsets.all(8.0),
+          //padding: EdgeInsets.all(8.0),
           itemCount: classes.length,
           itemBuilder: (context, index) {
             final className = classes[index];
 
             return ListTile(
-              title: Text(
-                className,
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+              title: Container(
+                decoration: Utils.gradientBtnDecoration,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    className,
+                    style: const TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
                 ),
               ),
-              trailing: const Icon(Icons.arrow_forward_ios),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Utils.baseBlue,
+              ),
               onTap: () {
                 // Navigate to the screen showing the list of recorded videos for that class
                 Get.to(() => RecordedClassVideosScreen(className: className));

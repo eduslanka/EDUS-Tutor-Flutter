@@ -49,7 +49,7 @@ class RecordedClassCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 5.0),
-                    Text('Teacher: ${recordedClass.teacher}'),
+                    //Text('Teacher: ${recordedClass.teacher}'),
                     Text('Date: ${recordedClass.dateOfClass}'),
                     Text('Time: ${recordedClass.classTime ?? 'N/A'}'),
                     Text('Day: ${recordedClass.dayOfWeek?.trim() ?? 'N/A'}'),
