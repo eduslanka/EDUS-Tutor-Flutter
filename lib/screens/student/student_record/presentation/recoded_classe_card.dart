@@ -10,10 +10,10 @@ class RecordedClassCard extends StatelessWidget {
   final RecordedClass recordedClass;
   final bool isAllow;
   const RecordedClassCard({
-    Key? key,
+    super.key,
     required this.recordedClass,
     required this.isAllow,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class RecordedClassCard extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => LaunchWebView(
-                launchUrl: recordedClass.downloadPath ?? '',
+                launchUrl: recordedClass.downloadPath,
                 title: recordedClass.className,
               ),
             ),
@@ -37,7 +37,7 @@ class RecordedClassCard extends StatelessWidget {
         color: Colors.white,
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         elevation: 3,
-        child: Container(
+        child: SizedBox(
           width: screenWidth(390, context),
           // height: 140,
           child: Padding(
@@ -61,7 +61,7 @@ class RecordedClassCard extends StatelessWidget {
                       ),
                   ],
                 ),
-                Icon(
+                const Icon(
                   Icons.play_circle_fill_outlined,
                   color: Colors.black,
                 )
