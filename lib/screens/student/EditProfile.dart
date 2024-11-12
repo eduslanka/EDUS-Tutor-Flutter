@@ -60,37 +60,56 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
-  Future updateData({String? fieldName, String? value}) async {
-    setState(() => _isLoading = true);
-    _token = await Utils.getStringValue('token') ?? '';
-    _id = await Utils.getStringValue('id') ?? '';
+ Future updateData({String? fieldName, String? value}) async {
+  if (!mounted) return; // Add this line
+  setState(() => _isLoading = true);
+  
+  _token = await Utils.getStringValue('token') ?? '';
+  _id = await Utils.getStringValue('id') ?? '';
 
-    DIO.FormData formData = DIO.FormData.fromMap({
-      "field_name": fieldName,
-      fieldName ?? '': value,
-      "id": _userDetails.studentData?.user?.id,
-      if (_file != null)
-        "student_photo": await DIO.MultipartFile.fromFile(_file!.path),
-    });
+  DIO.FormData formData = DIO.FormData.fromMap({
+    "field_name": fieldName,
+    fieldName ?? '': value,
+    "id": _userDetails.studentData?.user?.id,
+    if (_file != null)
+      "student_photo": await DIO.MultipartFile.fromFile(_file!.path),
+  });
 
-    try {
-      var response = await _dio.post(
-        EdusApi.updateStudent,
-        options: DIO.Options(headers: Utils.setHeader(_token)),
-        data: formData,
-      );
+  try {
+    var response = await _dio.post(
+      EdusApi.updateStudent,
+      options: DIO.Options(headers: Utils.setHeader(_token)),
+      data: formData,
+    );
 
-      if (response.data['data']['flag'] == true && _file != null) {
-        await getProfile();
-        Utils.saveStringValue(
-            "image", _userDetails.studentData?.user?.studentPhoto ?? '');
-      }
-    } catch (e) {
-      Utils.showToast('Failed to update profile');
-    } finally {
+    if (response.data['data']['flag'] == true && _file != null) {
+      await getProfile();
+      Utils.saveStringValue(
+          "image", _userDetails.studentData?.user?.studentPhoto ?? '');
+    }
+  } catch (e) {
+    Utils.showToast('Failed to update profile');
+  } finally {
+    if (mounted) {
       setState(() => _isLoading = false);
     }
   }
+}
+
+Future saveAll() async {
+  if (_formKey.currentState?.validate() ?? false) {
+    await updateData(fieldName: 'first_name', value: _firstNameCtrl.text);
+    await updateData(fieldName: 'last_name', value: _lastNameCtrl.text);
+    await updateData(fieldName: 'current_address', value: _addressCtrl.text);
+    await updateData(fieldName: 'date_of_birth', value: _dobController.text);
+    if (_file != null) await updateData(fieldName: 'student_photo');
+    
+    if (mounted) {
+      Utils.showToast('Profile updated successfully');
+      Navigator.of(context).pop(widget.updateData!(1));
+    }
+  }
+}
 
   Future pickDocument() async {
     final ImagePicker picker = ImagePicker();
@@ -108,17 +127,17 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
-  Future saveAll() async {
-    if (_formKey.currentState?.validate() ?? false) {
-      await updateData(fieldName: 'first_name', value: _firstNameCtrl.text);
-      await updateData(fieldName: 'last_name', value: _lastNameCtrl.text);
-      await updateData(fieldName: 'current_address', value: _addressCtrl.text);
-      await updateData(fieldName: 'date_of_birth', value: _dobController.text);
-      if (_file != null) await updateData(fieldName: 'student_photo');
-      Utils.showToast('Profile updated successfully');
-      Navigator.of(context).pop(widget.updateData!(1));
-    }
-  }
+  // Future saveAll() async {
+  //   if (_formKey.currentState?.validate() ?? false) {
+  //     await updateData(fieldName: 'first_name', value: _firstNameCtrl.text);
+  //     await updateData(fieldName: 'last_name', value: _lastNameCtrl.text);
+  //     await updateData(fieldName: 'current_address', value: _addressCtrl.text);
+  //     await updateData(fieldName: 'date_of_birth', value: _dobController.text);
+  //     if (_file != null) await updateData(fieldName: 'student_photo');
+  //     Utils.showToast('Profile updated successfully');
+  //     Navigator.of(context).pop(widget.updateData!(1));
+  //   }
+  // }
 
   @override
   void initState() {
