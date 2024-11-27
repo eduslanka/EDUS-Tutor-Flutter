@@ -37,6 +37,14 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
     }
   }
 
+  Future<void> googleMeetTeacher(String meetUrl) async {
+    if (await canLaunch(meetUrl)) {
+      await launch(meetUrl);
+    } else {
+      throw 'Could not launch $meetUrl';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final classLen = widget.rule == '2'
@@ -224,9 +232,9 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
             }
           } else if (!isStudent && teacherClass?.status == 'Join') {
             if (teacherClass?.cancelOrRescheduleStatus != 'false') {
-              googleMeet(teacherClass?.rescheduleMeetLink ?? '');
+              googleMeetTeacher(teacherClass?.rescheduleMeetLink ?? '');
             } else {
-              googleMeet(teacherClass?.meetLink ?? '');
+              googleMeetTeacher(teacherClass?.meetLink ?? '');
             }
           } else if (isStudent &&
               studentClass?.cancelOrRescheduleStatus != 'false' &&

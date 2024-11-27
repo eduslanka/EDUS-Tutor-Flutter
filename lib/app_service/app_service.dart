@@ -44,7 +44,7 @@ Future<bool> isAllowTheUser() async {
         'password': password,
       },
     );
-
+    print(response.body);
     final user = StudentModel.fromJson(jsonDecode(response.body));
 
     return user.user.activeStatus == 1 || user.studentHaveDueFees == false;

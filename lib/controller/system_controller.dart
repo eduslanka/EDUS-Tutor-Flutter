@@ -129,6 +129,7 @@ class SystemController extends GetxController {
       );
 
       if (response.statusCode == 200) {
+        print(response.body);
         teacherTodayClassResponse.value =
             TeacherTodayClassResponse.fromJson(json.decode(response.body));
       } else {
