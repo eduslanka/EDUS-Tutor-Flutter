@@ -64,7 +64,9 @@ class _LaunchWebViewState extends State<LaunchWebView> {
 
   @override
   void dispose() {
-    webViewController?.stopLoading();
+    if (webViewController != null) {
+      webViewController!.stopLoading();
+    }
     super.dispose();
   }
 

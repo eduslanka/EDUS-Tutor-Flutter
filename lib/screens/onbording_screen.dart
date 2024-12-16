@@ -226,32 +226,47 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
       children: [
         const Text('Contact Us'),
         h16,
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-                onTap: () {
-                  // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
-                  UrlLauncher.launch(
-                      'https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
-                },
-                child: SvgPicture.asset(
-                  'assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',
-                  height: 30,
-                  width: 40,
-                )),
-            w16,
-            GestureDetector(
-                onTap: () {
-                  UrlLauncher.launch("tel:+94774487774");
-                },
-                child: SvgPicture.asset(
-                  'assets/config/phone-call-svgrepo-com.svg',
-                  height: 30,
-                  width: 40,
-                ))
-          ],
+        // Row(
+        //   crossAxisAlignment: CrossAxisAlignment.center,
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     GestureDetector(
+        //         onTap: () {
+        //           // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+        //           UrlLauncher.launch(
+        //               'https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+        //         },
+        //         child: SvgPicture.asset(
+        //           'assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',
+        //           height: 30,
+        //           width: 40,
+        //         )),
+        //     w16,
+        //     GestureDetector(
+        //         onTap: () {
+        //           UrlLauncher.launch("tel:+94774487774");
+        //         },
+        //         child: SvgPicture.asset(
+        //           'assets/config/phone-call-svgrepo-com.svg',
+        //           height: 30,
+        //           width: 40,
+        //         ))
+        //   ],
+        // )
+
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => LaunchWebView(
+                          launchUrl: 'https://wiki.edustutor.com/',
+                        )));
+          },
+          child: Container(
+              width: screenWidth(100, context),
+              height: screenHeight(60, context),
+              child: Image.asset('assets/config/edus-wiki-logo.png')),
         )
       ],
     );
