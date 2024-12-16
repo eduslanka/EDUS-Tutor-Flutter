@@ -10,6 +10,7 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:edus_tutor/utils/model/SystemSettings.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/student_model.dart';
 import '../model/teacher_today_class_model.dart';
 import '../model/today_class_model.dart';
 import 'package:in_app_update/in_app_update.dart';
@@ -143,6 +144,29 @@ class SystemController extends GetxController {
           success: false, data: TodayClassData(todayClass: []), message: '');
       debugPrint('trace tree $t');
       //throw Exception('Failed to load today classes: $e');
+    }
+  }
+
+  Future<bool> isAllowTheUser() async {
+    try {
+      final email = await Utils.getStringValue('email');
+      final password = await Utils.getStringValue('password');
+      final response = await http.post(
+        Uri.parse(EdusApi.login),
+        body: {
+          'email': email,
+          'password': password,
+        },
+      );
+
+      final user = StudentModel.fromJson(jsonDecode(response.body));
+
+      return user.user.activeStatus == 1 || user.studentHaveDueFees == false;
+    } catch (e, t) {
+      print(e);
+      print(t);
+
+      return false;
     }
   }
 

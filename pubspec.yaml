@@ -55,7 +55,7 @@ dependencies:
   device_info_plus: ^9.0.3
   #package_info_plus: ^4.1.0
   get: ^4.6.6
-  google_fonts: ^5.1.0
+  # google_fonts: ^5.1.0
   badges: ^3.1.2
   stripe_sdk: ^5.0.0
   flutter_portal: ^1.1.4

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:edus_tutor/webview/launch_webview.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -111,6 +112,7 @@ class AppFunction {
     //  'Dormitory',
 
     'More',
+    'Edus Resources'
   ];
   static var studentIcons = [
     //  'assets/images/routine.png',
@@ -124,7 +126,6 @@ class AppFunction {
     'assets/images/examination.png',
     'assets/images/onlineexam.png',
     'assets/images/attendance.png',
-
     //   'assets/images/leave.png',
 
     //  'assets/images/teacher.png',
@@ -134,6 +135,7 @@ class AppFunction {
 
     'assets/images/fees_icon.png',
     'assets/images/addhw.png',
+    'assets/config/edus-wiki-logo.png'
   ];
 
   static var teachers = [
@@ -558,6 +560,14 @@ class AppFunction {
             ),
           ),
         );
+        break;
+      case 'Edus Resources':
+        Navigator.push(
+            context,
+            ScaleRoute(
+                page: const LaunchWebView(
+              launchUrl: 'https://wiki.edustutor.com/',
+            )));
         break;
       // case 'Online Exam':
       //   Navigator.push(
