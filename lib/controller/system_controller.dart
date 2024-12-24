@@ -160,7 +160,7 @@ class SystemController extends GetxController {
       );
 
       final user = StudentModel.fromJson(jsonDecode(response.body));
-
+      // await Utils.saveStringValue('edNo', user.user.);
       return user.user.activeStatus == 1 || user.studentHaveDueFees == false;
     } catch (e, t) {
       print(e);

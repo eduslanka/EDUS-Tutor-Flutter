@@ -32,7 +32,7 @@ class Login {
     dynamic fullName;
     dynamic phone;
     dynamic isBlock;
-
+    dynamic edNumber;
     bool isNullOrEmpty(Object o) => o == "";
 
     try {
@@ -57,8 +57,10 @@ class Login {
         token = user['data']['accessToken'];
         fullName = user['data']['user']['full_name'] ?? "";
         phone = user['data']['user']['phone_number'] ?? "";
+
         if (rule == 2 || rule == "2") {
           studentId = user['data']['userDetails']['s_id'];
+          edNumber = user['data']['userDetails']['ed_number'];
         }
         if (rule == 1 || rule == 4 || rule == 5) {
           image = user['data']['userDetails']['staff_photo'] == null
@@ -88,7 +90,7 @@ class Login {
           saveStringValue('lang', 'en');
           saveStringValue('token', token.toString());
           saveBooleanValue('isBlock', isBlock);
-
+          saveStringValue('edNumber', edNumber);
           if (rule == 2 || rule == "2") {
             saveIntValue('studentId', int.parse(studentId.toString()));
           }
