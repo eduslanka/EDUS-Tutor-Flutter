@@ -115,7 +115,9 @@ class _StudentHomeworkState extends State<StudentHomework> {
                           },
                         );
                       } else {
-                        return Utils.noDataWidget();
+                        return Utils.noDataWidget(
+                            text:
+                                'There are no new homework at this time. Please use this opportunity to review and reinforce your understanding of previous lessons.');
                       }
                     } else {
                       return const Center(

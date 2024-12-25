@@ -97,13 +97,17 @@ class Utils extends GetxController {
     );
   }
 
-  static Widget noDataWidget() {
+  static Widget noDataWidget({String text = 'No data available'}) {
     return Center(
-      child: Text(
-        'No data available',
-        style: Get.textTheme.titleMedium?.copyWith(
-          fontSize: 16,
-          fontWeight: FontWeight.normal,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: Get.textTheme.titleMedium?.copyWith(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     );

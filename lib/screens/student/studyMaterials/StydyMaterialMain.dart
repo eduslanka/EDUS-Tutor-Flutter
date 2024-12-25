@@ -108,7 +108,12 @@ class _StudentStudyMaterialMainState extends State<StudentStudyMaterialMain> {
                         },
                       );
                     } else {
-                      return Utils.noDataWidget();
+                      return Utils.noDataWidget(
+                          text: widget.type == "as"
+                              ? 'There are no new assignments scheduled for this period. Please use this time to complete any outstanding work or review previous materials'
+                              : widget.type == "sy"
+                                  ? 'The syllabus for this course is currently being updated. Please check back soon for the latest information and materials.'
+                                  : 'There are currently no files available for download. Please check back later for any updates.');
                     }
                   } else {
                     return const Center(child: CupertinoActivityIndicator());
