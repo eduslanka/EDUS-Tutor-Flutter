@@ -18,11 +18,12 @@ import 'package:http/http.dart' as http;
 import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
 import 'package:edus_tutor/utils/Utils.dart';
 import 'package:edus_tutor/utils/apis/Apis.dart';
-import 'package:edus_tutor/utils/exception/DioException.dart';
 import 'package:edus_tutor/utils/model/Classes.dart';
 import 'package:edus_tutor/utils/model/Section.dart';
 import 'package:edus_tutor/utils/model/TeacherSubject.dart';
 import 'package:edus_tutor/utils/permission_check.dart';
+
+import '../../../widget/common_drop_down.dart';
 
 class AddContentScreeen extends StatefulWidget {
   const AddContentScreeen({super.key});
@@ -429,41 +430,51 @@ class _AddContentScreeenState extends State<AddContentScreeen> {
   }
 
   Widget getContentTypeDropdown() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(
-          color: Colors.blueAccent,
-          width: 0.5,
-        ),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton(
-          elevation: 0,
-          isExpanded: true,
-          items: contentType.map((item) {
-            return DropdownMenuItem<String>(
-              value: item,
-              child: Text(
-                item,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            );
-          }).toList(),
-          style: Theme.of(context)
-              .textTheme
-              .headlineMedium
-              ?.copyWith(fontSize: 15.0),
-          onChanged: (value) {
-            setState(() {
-              _selectedContentType = '$value';
-            });
-          },
-          value: _selectedContentType,
-        ),
-      ),
+    return CustomBottomSheetDropdown(
+      items: contentType,
+      selectedValue: _selectedContentType,
+      onChanged: (value) {
+        setState(() {
+          _selectedContentType = '$value';
+        });
+      },
+      hintText: 'Select a Content type',
     );
+    // Container(
+    //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.circular(5),
+    //     border: Border.all(
+    //       color: Colors.blueAccent,
+    //       width: 0.5,
+    //     ),
+    //   ),
+    //   child: DropdownButtonHideUnderline(
+    //     child: DropdownButton(
+    //       elevation: 0,
+    //       isExpanded: true,
+    //       items: contentType.map((item) {
+    //         return DropdownMenuItem<String>(
+    //           value: item,
+    //           child: Text(
+    //             item,
+    //             style: Theme.of(context).textTheme.headlineMedium,
+    //           ),
+    //         );
+    //       }).toList(),
+    //       style: Theme.of(context)
+    //           .textTheme
+    //           .headlineMedium
+    //           ?.copyWith(fontSize: 15.0),
+    //       onChanged: (value) {
+    //         setState(() {
+    //           _selectedContentType = '$value';
+    //         });
+    //       },
+    //       value: _selectedContentType,
+    //     ),
+    //   ),
+    // );
   }
 
   void uploadContent() async {

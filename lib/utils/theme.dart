@@ -1,92 +1,107 @@
-// // Flutter imports:
-// import 'package:flutter/material.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
 
-// // Package imports:
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:google_fonts/google_fonts.dart';
+// Package imports:
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// ThemeData basicTheme() {
-//   TextTheme basicTextTheme(TextTheme base) {
-//     return base.copyWith(
-//       headlineSmall: GoogleFonts.poppins(
-//         textStyle: base.headlineSmall?.copyWith(
-//           fontSize: 16.sp,
-//           fontWeight: FontWeight.w600,
-//           color: const Color(0xFF415094),
-//         ),
-//       ),
-//       titleMedium: GoogleFonts.poppins(
-//         textStyle: base.titleMedium?.copyWith(
-//           fontSize: 16.sp,
-//           fontWeight: FontWeight.w500,
-//           color: const Color(0xFF415094),
-//         ),
-//       ),
-//       titleSmall: GoogleFonts.poppins(
-//         textStyle: base.titleMedium?.copyWith(
-//           fontSize: 14.sp,
-//           fontWeight: FontWeight.w500,
-//           color: Colors.black87,
-//         ),
-//       ),
-//       titleLarge: GoogleFonts.poppins(
-//         textStyle: base.titleLarge?.copyWith(
-//           fontSize: 14.sp,
-//           fontWeight: FontWeight.w500,
-//           color: const Color(0xFF415094),
-//         ),
-//       ),
-//       headlineMedium: GoogleFonts.poppins(
-//         textStyle: base.headlineSmall?.copyWith(
-//           fontSize: 12.sp,
-//           fontWeight: FontWeight.w300,
-//           color: Colors.black,
-//         ),
-//       ),
-//       displaySmall: GoogleFonts.poppins(
-//         textStyle: base.headlineSmall?.copyWith(
-//           fontSize: 22.sp,
-//           color: Colors.grey,
-//         ),
-//       ),
-//       bodySmall: GoogleFonts.poppins(
-//         textStyle: base.bodySmall?.copyWith(
-//           color: const Color(0xFFCCC5AF),
-//         ),
-//       ),
-//       bodyMedium: GoogleFonts.poppins(
-//         textStyle: base.bodyMedium?.copyWith(
-//           color: const Color(0xFF807A6B),
-//         ),
-//       ),
-//     );
-//   }
+ThemeData basicTheme() {
+  TextTheme basicTextTheme(TextTheme base) {
+    const String fontFamily = 'Poppins'; // Use your custom Poppins font file
+    return base.copyWith(
+      headlineSmall: base.headlineSmall?.copyWith(
+        fontFamily: fontFamily,
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w600,
+        color: Colors.black, // Black text
+      ),
+      titleMedium: base.titleMedium?.copyWith(
+        fontFamily: fontFamily,
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w500,
+        color: Colors.black, // Black text
+      ),
+      titleSmall: base.titleMedium?.copyWith(
+        fontFamily: fontFamily,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        color: Colors.black, // Black text
+      ),
+      titleLarge: base.titleLarge?.copyWith(
+        fontFamily: fontFamily,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        color: Colors.black, // Black text
+      ),
+      headlineMedium: base.headlineSmall?.copyWith(
+        fontFamily: fontFamily,
+        fontSize: 12.sp,
+        fontWeight: FontWeight.w300,
+        color: Colors.black, // Black text
+      ),
+      displaySmall: base.headlineSmall?.copyWith(
+        fontFamily: fontFamily,
+        fontSize: 22.sp,
+        color: Colors.black, // Black text
+      ),
+      bodySmall: base.bodySmall?.copyWith(
+        fontFamily: fontFamily,
+        fontSize: 12.sp,
+        color: Colors.black, // Black text
+      ),
+      bodyMedium: base.bodyMedium?.copyWith(
+        fontFamily: fontFamily,
+        fontSize: 14.sp,
+        color: Colors.black, // Black text
+      ),
+    );
+  }
 
-//   final ThemeData base = ThemeData.light();
-//   return base.copyWith(
-//       textTheme: basicTextTheme(base.textTheme),
-//       //textTheme: Typography().white,
-//       primaryColor: Colors.indigo,
-//       //primaryColor: Color(0xff4829b2),
-//       indicatorColor: const Color(0xFF807A6B),
-//       scaffoldBackgroundColor: const Color(0xFFF5F5F5),
-//       iconTheme: IconThemeData(
-//         color: Colors.white,
-//         size: ScreenUtil().setSp(30.0),
-//       ),
-//       tabBarTheme: base.tabBarTheme.copyWith(
-//         labelColor: const Color(0xffce107c),
-//         unselectedLabelColor: Colors.grey,
-//       ),
-//       colorScheme: const ColorScheme(
-//         brightness: Brightness.light,
-//         primary: Colors.red,
-//         onPrimary: Colors.green,
-//         secondary: Colors.grey,
-//         onSecondary: Colors.black12,
-//         error: Colors.red,
-//         onError: Colors.redAccent,
-//         surface: Colors.grey,
-//         onSurface: Colors.blueGrey,
-//       ));
-// }
+  final ThemeData base = ThemeData.light();
+  return base.copyWith(
+    textTheme: basicTextTheme(base.textTheme),
+    primaryColor: const Color(0xFF053EFF), // Blue
+    scaffoldBackgroundColor: Colors.white, // White background
+    iconTheme: IconThemeData(
+      color: Colors.white, // White icons
+      size: ScreenUtil().setSp(24.0), // Adjusted size
+    ),
+    tabBarTheme: base.tabBarTheme.copyWith(
+      labelColor: Colors.black, // Black for selected tabs
+      unselectedLabelColor: Colors.black54, // Semi-black for unselected tabs
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF053EFF), // Blue button background
+        foregroundColor: Colors.white, // White text on button
+        textStyle: const TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 14, // Base button text size
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    ),
+    appBarTheme: AppBarTheme(
+      backgroundColor: const Color(0xFF053EFF), // Blue app bar
+      titleTextStyle: const TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 18, // App bar title font size
+        fontWeight: FontWeight.w600,
+        color: Colors.white, // White text
+      ),
+      iconTheme: const IconThemeData(color: Colors.white), // White icons
+    ),
+    colorScheme: const ColorScheme(
+      brightness: Brightness.light,
+      primary: Color(0xFF053EFF), // Blue primary color
+      onPrimary: Colors.white, // White text/icons on blue
+      secondary: Color(0xFF053EFF), // Secondary blue
+      onSecondary: Colors.white, // White text/icons on secondary
+      background: Colors.white, // White background
+      onBackground: Colors.black, // Black text/icons on white
+      surface: Colors.white, // White surface (e.g., cards)
+      onSurface: Colors.black, // Black text/icons on surfaces
+      error: Colors.red, // Error red
+      onError: Colors.white, // White text/icons on error
+    ),
+  );
+}

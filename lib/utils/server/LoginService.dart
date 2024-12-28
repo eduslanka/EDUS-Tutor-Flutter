@@ -92,9 +92,10 @@ class Login {
           saveStringValue('lang', 'en');
           saveStringValue('token', token.toString());
           saveBooleanValue('isBlock', isBlock);
-          saveStringValue('edNumber', edNumber);
+
           if (rule == 2 || rule == "2") {
             saveIntValue('studentId', int.parse(studentId.toString()));
+            saveStringValue('edNumber', edNumber);
           }
           final SystemController systemController = Get.put(SystemController());
           await systemController.getSystemSettings();
