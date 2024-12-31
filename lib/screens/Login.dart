@@ -285,7 +285,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           isResponse = false;
                         });
-                        Utils.showToast(result);
+                        if (result == 'un expected error') {
+                          Utils.showCommentDialog(context);
+                        } else {
+                          Utils.showToast(result);
+                        }
                       });
                     } else {
                       setState(() {
