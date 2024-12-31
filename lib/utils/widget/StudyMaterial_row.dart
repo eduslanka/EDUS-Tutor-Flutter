@@ -60,10 +60,16 @@ class StudyMaterialListRow extends StatelessWidget {
                       uploadedContent.uploadFile == ''
                   ? Container()
                   : InkWell(
-                      onTap: (() {
-                        PermissionCheck().checkPermissions(context);
-                        showDownloadAlertDialog(
-                            context, uploadedContent.contentTitle ?? '');
+                      onTap: (() async {
+                        final isAllow =
+                            await Utils.getBooleanValue(Utils.isAllowKey);
+                        if (isAllow) {
+                          PermissionCheck().checkPermissions(context);
+                          showDownloadAlertDialog(
+                              context, uploadedContent.contentTitle ?? '');
+                        } else {
+                          Utils.showCommentDialog(context);
+                        }
                       }),
                       child: Text(
                         'Download',

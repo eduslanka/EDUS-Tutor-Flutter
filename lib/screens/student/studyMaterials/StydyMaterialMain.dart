@@ -144,7 +144,7 @@ class _StudentStudyMaterialMainState extends State<StudentStudyMaterialMain> {
 
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
-
+      print('$url ====>>> ${jsonData['data']['uploadContents']}');
       return UploadedContentList.fromJson(jsonData['data']['uploadContents']);
     } else {
       throw Exception('failed to load');

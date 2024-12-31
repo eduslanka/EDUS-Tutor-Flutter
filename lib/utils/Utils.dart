@@ -23,6 +23,32 @@ class Utils extends GetxController {
     return prefs.setString(key, value);
   }
 
+  static const isAllowKey = 'isAllow';
+  static void showCommentDialog(BuildContext context,
+      {String title = 'Action denied', String message = 'contact Admin'}) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent closing by tapping outside
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   static Future<bool> saveIntValue(String key, int value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 

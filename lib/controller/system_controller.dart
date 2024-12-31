@@ -158,10 +158,12 @@ class SystemController extends GetxController {
           'password': password,
         },
       );
-
+      print(response.body);
       final user = StudentModel.fromJson(jsonDecode(response.body));
       // await Utils.saveStringValue('edNo', user.user.);
-      return user.user.activeStatus == 1 || user.studentHaveDueFees == false;
+      await Utils.saveBooleanValue(Utils.isAllowKey,
+          user.user.activeStatus == 1 && user.studentHaveDueFees == false);
+      return user.user.activeStatus == 1 && user.studentHaveDueFees == false;
     } catch (e, t) {
       print(e);
       print(t);
