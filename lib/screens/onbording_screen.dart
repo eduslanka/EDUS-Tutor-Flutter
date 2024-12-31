@@ -239,9 +239,9 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
               children: [
                 GestureDetector(
                     onTap: () {
-                      // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                      // var url = Uri.parse('https://wa.me/+94704411717?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
                       UrlLauncher.launch(
-                          'https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                          'https://wa.me/+94704411717?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
                     },
                     child: SvgPicture.asset(
                       'assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',
@@ -251,7 +251,7 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
                 w16,
                 GestureDetector(
                     onTap: () {
-                      UrlLauncher.launch("tel:+94774487774");
+                      UrlLauncher.launch("tel:+94704411717");
                     },
                     child: SvgPicture.asset(
                       'assets/config/phone-call-svgrepo-com.svg',
