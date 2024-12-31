@@ -26,8 +26,10 @@ class TodayClassScreen extends StatefulWidget {
 
 class _TodayClassScreenState extends State<TodayClassScreen> {
   Future<void> googleMeet(String meetUrl) async {
+    final isActive = await Utils.getBooleanValue(Utils.isAllowKey);
+
     if (await canLaunch(meetUrl)) {
-      if (widget.isAllow) {
+      if (isActive) {
         await launch(meetUrl);
       } else {
         Utils.showToast('Action denied. Contact Admin...!.');

@@ -17,8 +17,9 @@ class RecordedClassCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        if (isAllow) {
+      onTap: () async {
+        final isActive = await Utils.getBooleanValue(Utils.isAllowKey);
+        if (isActive) {
           Navigator.push(
             context,
             MaterialPageRoute(
