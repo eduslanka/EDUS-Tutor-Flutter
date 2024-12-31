@@ -167,7 +167,7 @@ class SystemController extends GetxController {
     } catch (e, t) {
       print(e);
       print(t);
-
+      await Utils.saveBooleanValue(Utils.isAllowKey, false);
       return false;
     }
   }
