@@ -28,7 +28,7 @@ class Login {
     dynamic isAdministrator;
     dynamic token;
     dynamic studentId;
-    dynamic message;
+    dynamic message = 'un expected error';
     dynamic fullName;
     dynamic phone;
     dynamic isBlock;
