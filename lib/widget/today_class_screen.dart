@@ -32,7 +32,7 @@ class _TodayClassScreenState extends State<TodayClassScreen> {
       if (isActive) {
         await launch(meetUrl);
       } else {
-        Utils.showToast('Action denied. Contact Admin...!.');
+        Utils.showCommentDialog(context);
       }
     } else {
       throw 'Could not launch $meetUrl';
