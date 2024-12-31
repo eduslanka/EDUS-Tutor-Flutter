@@ -222,36 +222,55 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
   }
 
   Widget contactUs() {
-    return Column(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Contact Us'),
-        h8,
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+        Column(
           children: [
-            GestureDetector(
-                onTap: () {
-                  // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
-                  UrlLauncher.launch(
-                      'https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
-                },
-                child: SvgPicture.asset(
-                  'assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',
-                  height: 30,
-                  width: 40,
-                )),
-            w16,
-            GestureDetector(
-                onTap: () {
-                  UrlLauncher.launch("tel:+94774487774");
-                },
-                child: SvgPicture.asset(
-                  'assets/config/phone-call-svgrepo-com.svg',
-                  height: 30,
-                  width: 40,
-                )),
-            w8,
+            const Text(
+              'Contact Us',
+              style: TextStyle(fontSize: 12),
+            ),
+            h8,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                      UrlLauncher.launch(
+                          'https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                    },
+                    child: SvgPicture.asset(
+                      'assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',
+                      height: 25,
+                      width: 40,
+                    )),
+                w16,
+                GestureDetector(
+                    onTap: () {
+                      UrlLauncher.launch("tel:+94774487774");
+                    },
+                    child: SvgPicture.asset(
+                      'assets/config/phone-call-svgrepo-com.svg',
+                      height: 25,
+                      width: 40,
+                    )),
+                w8,
+              ],
+            ),
+          ],
+        ),
+        w16,
+        Column(
+          children: [
+            const Text(
+              'Edus Resources',
+              style: TextStyle(fontSize: 12),
+            ),
+            h8,
             InkWell(
               onTap: () {
                 Navigator.push(
@@ -263,9 +282,9 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
               },
               child: Container(
                   width: screenWidth(80, context),
-                  height: 30,
+                  height: 25,
                   child: Image.asset('assets/config/edus-wiki-logo.png')),
-            )
+            ),
           ],
         )
       ],
