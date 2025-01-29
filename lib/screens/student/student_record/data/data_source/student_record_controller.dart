@@ -4,7 +4,6 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../../app_service/app_service.dart';
 import '../../../../../utils/Utils.dart';
 import '../../../../../utils/model/student_user_model.dart';
 import '../model/student_record_model.dart';
