@@ -12,7 +12,8 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:open_filex/open_filex.dart';
+import 'package:open_file/open_file.dart';
+// import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 
 // Project imports:
@@ -389,7 +390,7 @@ class _ContentRowState extends State<ContentRow> {
           } else {
             var file =
                 await DefaultCacheManager().getSingleFile(EdusApi.root + url);
-            OpenFilex.open(file.path);
+            OpenFile.open(file.path);
             print('File ::::::::: $file');
 
             Utils.showToast(

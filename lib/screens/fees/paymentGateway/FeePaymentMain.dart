@@ -132,21 +132,21 @@ class _FeePaymentMainState extends State<FeePaymentMain> {
   }
 
   Future callRazorPayService() async {
-    await RazorpayServices().openRazorpay(
-      razorpayKey: razorPayApiKey,
-      contactNumber: "",
-      emailId: "",
-      amount: double.parse(widget.amount.toString()),
-      userName: "",
-      successListener: (PaymentResponse paymentResponse) {
-        /// here manage code for success payment. ///
-        if (paymentResponse.paymentStatus) {}
-      },
-      failureListener: (PaymentResponse paymentResponse) {
-        /// here manage code for failure or error in payment. ///
-        if (paymentResponse.paymentStatus) {}
-      },
-    );
+    // await RazorpayServices().openRazorpay(
+    //   razorpayKey: razorPayApiKey,
+    //   contactNumber: "",
+    //   emailId: "",
+    //   amount: double.parse(widget.amount.toString()),
+    //   userName: "",
+    //   successListener: (PaymentResponse paymentResponse) {
+    //     /// here manage code for success payment. ///
+    //     if (paymentResponse.paymentStatus) {}
+    //   },
+    //   failureListener: (PaymentResponse paymentResponse) {
+    //     /// here manage code for failure or error in payment. ///
+    //     if (paymentResponse.paymentStatus) {}
+    //   },
+    // );
   }
 
   Map<String, dynamic>? paymentIntentData;

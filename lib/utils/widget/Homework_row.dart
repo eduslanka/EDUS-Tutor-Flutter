@@ -10,7 +10,8 @@ import 'package:dio/dio.dart';
 //import 'package:file_utils/file_utils.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:open_filex/open_filex.dart';
+import 'package:open_file/open_file.dart';
+// import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 
 // Project imports:
@@ -660,7 +661,7 @@ class _StudentHomeworkRowState extends State<StudentHomeworkRow> {
           } else {
             var file =
                 await DefaultCacheManager().getSingleFile(EdusApi.root + url);
-            OpenFilex.open(file.path);
+            OpenFile.open(file.path);
 
             Utils.showToast(
                 "Download Completed. File is also available in your download folder.");

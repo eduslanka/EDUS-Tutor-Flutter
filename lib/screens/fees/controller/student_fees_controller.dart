@@ -233,27 +233,27 @@ class StudentFeesController extends GetxController {
   }
 
   Future callRazorPayService(String amount, trxId) async {
-    await RazorpayServices().openRazorpay(
-      razorpayKey: razorPayApiKey,
-      contactNumber:
-          addPaymentModel.value.invoiceInfo?.studentInfo?.user?.phoneNumber ??
-              "",
-      emailId:
-          addPaymentModel.value.invoiceInfo?.studentInfo?.user?.email ?? "",
-      amount: double.parse(amount.toString()),
-      userName: "",
-      successListener: (PaymentResponse paymentResponse) async {
-        if (paymentResponse.paymentStatus) {
-          await confirmPaymentCallBack(trxId.toString());
-        }
-      },
-      failureListener: (PaymentResponse paymentResponse) {
-        if (!paymentResponse.paymentStatus) {
-          isPaymentProcessing.value = false;
-          CustomSnackBar().snackBarError(paymentResponse.message);
-        }
-      },
-    );
+    // await RazorpayServices().openRazorpay(
+    //   razorpayKey: razorPayApiKey,
+    //   contactNumber:
+    //       addPaymentModel.value.invoiceInfo?.studentInfo?.user?.phoneNumber ??
+    //           "",
+    //   emailId:
+    //       addPaymentModel.value.invoiceInfo?.studentInfo?.user?.email ?? "",
+    //   amount: double.parse(amount.toString()),
+    //   userName: "",
+    //   successListener: (PaymentResponse paymentResponse) async {
+    //     if (paymentResponse.paymentStatus) {
+    //       await confirmPaymentCallBack(trxId.toString());
+    //     }
+    //   },
+    //   failureListener: (PaymentResponse paymentResponse) {
+    //     if (!paymentResponse.paymentStatus) {
+    //       isPaymentProcessing.value = false;
+    //       CustomSnackBar().snackBarError(paymentResponse.message);
+    //     }
+    //   },
+    // );
   }
 
   Future<StudentAddPaymentModel> getFeesInvoice(invoiceId) async {
