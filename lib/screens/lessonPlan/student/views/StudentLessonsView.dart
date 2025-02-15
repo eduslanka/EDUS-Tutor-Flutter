@@ -487,7 +487,9 @@ class _StudentLessonsViewState extends State<StudentLessonsView> {
                                         ],
                                       );
                                     } else {
-                                      return Utils.noDataWidget();
+                                      return Utils.noDataWidget(
+                                          text:
+                                              'There are no new lesson plans available at this time. Please continue to review and practice the material from previous lessons.');
                                     }
                                   }
                                   return const CupertinoActivityIndicator();

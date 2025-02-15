@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 // Flutter imports:
+import 'package:edus_tutor/config/app_size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,8 @@ import 'package:edus_tutor/utils/model/Section.dart';
 import 'package:edus_tutor/utils/model/TeacherSubject.dart';
 import 'package:edus_tutor/utils/permission_check.dart';
 import 'package:edus_tutor/utils/widget/image_pick_dialog.dart';
+
+import '../../../widget/common_drop_down.dart';
 
 class AddHomeworkScrren extends StatefulWidget {
   const AddHomeworkScrren({super.key});
@@ -135,45 +138,52 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
         controller: scrollController,
         child: getContent(context),
       ),
-      // bottomNavigationBar: Column(
-      //   mainAxisAlignment: MainAxisAlignment.end,
-      //   crossAxisAlignment: CrossAxisAlignment.end,
-      //   mainAxisSize: MainAxisSize.min,
-      //   children: [
-      //     GestureDetector(
-      //       child: Padding(
-      //         padding: const EdgeInsets.all(10.0),
-      //         child: Container(
-      //           alignment: Alignment.center,
-      //           width: MediaQuery.of(context).size.width,
-      //           height: 50.0,
-      //           decoration: Utils.gradientBtnDecoration,
-      //           child: Text(
-      //             "Save".tr,
-      //             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-      //                 color: Colors.white, fontSize: ScreenUtil().setSp(14)),
-      //           ),
-      //         ),
-      //       ),
-      //       onTap: () {
-      //
-      //         String mark = markController.text;
-      //         String description = descriptionController.text;
-      //
-      //         if (mark.isNotEmpty && description.isNotEmpty) {
-      //           setState(() {
-      //             isResponse = true;
-      //           });
-      //           uploadHomework();
-      //         } else {
-      //           Utils.showToast('Check all the field'.tr);
-      //         }
-      //       },
-      //     ),
-      //     isResponse == true ? const LinearProgressIndicator(backgroundColor: Colors.transparent) : const Text(''),
-      //     5.verticalSpace,
-      //   ],
-      // ),
+      bottomNavigationBar: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          GestureDetector(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                height: 50.0,
+                decoration: Utils.gradientBtnDecoration,
+                child: Text(
+                  "Save".tr,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: Colors.white, fontSize: ScreenUtil().setSp(14)),
+                ),
+              ),
+            ),
+            onTap: () {
+              String mark = markController.text;
+              String description = descriptionController.text;
+
+              if (mark.isNotEmpty &&
+                  description.isNotEmpty &&
+                  _selectedClass != null &&
+                  _selectedClass?.isNotEmpty == true &&
+                  _selectedSection != null &&
+                  _selectedSubject != null) {
+                setState(() {
+                  isResponse = true;
+                });
+                uploadHomework();
+              } else {
+                Utils.showToast('Check all the field'.tr);
+              }
+            },
+          ),
+          // isResponse == true
+          //     ? const LinearProgressIndicator(
+          //         backgroundColor: Colors.transparent)
+          //     : const Text(''),
+          5.verticalSpace,
+        ],
+      ),
     );
   }
 
@@ -188,7 +198,9 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
                 //physics: const NeverScrollableScrollPhysics(),
                 // shrinkWrap: true,
                 children: <Widget>[
+                  h8,
                   getClassDropdown(snapshot.data.classes),
+                  h8,
                   FutureBuilder<SectionList>(
                     future: sections,
                     builder: (context, secSnap) {
@@ -205,9 +217,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
                       }
                     },
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  h8,
                   FutureBuilder<TeacherSubjectList>(
                     future: subjects,
                     builder: (context, subSnap) {
@@ -224,6 +234,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
                       }
                     },
                   ),
+                  h8
                 ],
               );
             } else {
@@ -231,9 +242,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
             }
           },
         ),
-        const SizedBox(
-          height: 5,
-        ),
+
         InkWell(
           onTap: () {
             DatePicker.showDatePicker(
@@ -265,20 +274,21 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
               },
             );
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Container(
+            width: screenWidth(390, context),
+            height: 50,
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6), border: Border.all()),
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                    child: Text(
-                      _selectedaAssignDate ?? 'Assign Date'.tr,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(fontSize: ScreenUtil().setSp(12)),
-                    ),
+                  child: Text(
+                    _selectedaAssignDate ?? 'Assign Date'.tr,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium
+                        ?.copyWith(fontSize: ScreenUtil().setSp(12)),
                   ),
                 ),
                 Icon(
@@ -290,18 +300,8 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Container(
-            height: 1,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
+
+        h8,
         InkWell(
           onTap: () {
             DatePicker.showDatePicker(
@@ -333,20 +333,21 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
               },
             );
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Container(
+            width: screenWidth(390, context),
+            height: 50,
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6), border: Border.all()),
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                    child: Text(
-                      _selectedSubmissionDate ?? 'Submission Date'.tr,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(fontSize: ScreenUtil().setSp(12)),
-                    ),
+                  child: Text(
+                    _selectedSubmissionDate ?? 'Submission Date'.tr,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium
+                        ?.copyWith(fontSize: ScreenUtil().setSp(12)),
                   ),
                 ),
                 Icon(
@@ -358,38 +359,29 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Container(
-            height: 1,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
+
+        h8,
         InkWell(
           onTap: () {
             //pickDocument();
             imagePickFrom();
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Container(
+            width: screenWidth(390, context),
+            height: 50,
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6), border: Border.all()),
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      _file == null ? 'Select file'.tr : _file?.path ?? '',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(fontSize: ScreenUtil().setSp(12)),
-                      maxLines: 2,
-                    ),
+                  child: Text(
+                    _file == null ? 'Select file'.tr : _file?.path ?? '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium
+                        ?.copyWith(fontSize: ScreenUtil().setSp(12)),
+                    maxLines: 2,
                   ),
                 ),
                 Text('Browse'.tr,
@@ -401,15 +393,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Container(
-            height: 1,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-            ),
-          ),
-        ),
+
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: TextFormField(
@@ -442,35 +426,36 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
                 )),
           ),
         ),
-        GestureDetector(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
-              height: 50.0,
-              decoration: Utils.gradientBtnDecoration,
-              child: Text(
-                "Save".tr,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: Colors.white, fontSize: ScreenUtil().setSp(14)),
-              ),
-            ),
-          ),
-          onTap: () {
-            String mark = markController.text;
-            String description = descriptionController.text;
+        // GestureDetector(
+        //   child: Padding(
+        //     padding: const EdgeInsets.all(10.0),
+        //     child: Container(
+        //       alignment: Alignment.center,
+        //       width: MediaQuery.of(context).size.width,
+        //       height: 50.0,
+        //       decoration: Utils.gradientBtnDecoration,
+        //       child: Text(
+        //         "Save".tr,
+        //         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+        //             color: Colors.white, fontSize: ScreenUtil().setSp(14)),
+        //       ),
+        //     ),
+        //   ),
+        //   onTap: () {
+        //     String mark = markController.text;
+        //     String description = descriptionController.text;
 
-            if (mark.isNotEmpty && description.isNotEmpty) {
-              setState(() {
-                isResponse = true;
-              });
-              uploadHomework();
-            } else {
-              Utils.showToast('Check all the field'.tr);
-            }
-          },
-        ),
+        //     if (mark.isNotEmpty && description.isNotEmpty) {
+        //       setState(() {
+        //         isResponse = true;
+        //       });
+        //       uploadHomework();
+        //     } else {
+        //       Utils.showToast('Check all the field'.tr);
+        //     }
+        //   },
+        // ),
+
         isResponse == true
             ? const LinearProgressIndicator(backgroundColor: Colors.transparent)
             : const Text(''),
@@ -481,118 +466,131 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
   }
 
   Widget getClassDropdown(List<Classes> classes) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-      child: DropdownButton(
-        elevation: 0,
-        isExpanded: true,
-        items: AllClasses.classes.map((item) {
-          return DropdownMenuItem<String>(
-            value: item.name,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0, bottom: 10),
-              child: Text(
-                item.name ?? '',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ),
-          );
-        }).toList(),
-        style: Theme.of(context)
-            .textTheme
-            .headlineMedium
-            ?.copyWith(fontSize: ScreenUtil().setSp(14)),
-        onChanged: (value) {
-          setState(() {
-            _selectedClass = value;
+    //  List<String> classNames = classes.map((e) => e.name?.toString() ?? '').toList();
 
-            int classIndex = AllClasses.classes
-                .indexWhere((element) => value == element.name);
-            //classId = getCode(classes, '$value');
-            classId = AllClasses.classes[classIndex].id;
+    return CustomBottomSheetDropdown(
+      items: AllClasses.classes.map((e) => e.name ?? '').toList(),
+      selectedValue: _selectedClass,
+      onChanged: (value) {
+        setState(() {
+          _selectedClass = value;
 
-            sections = getAllSection(int.parse(_id ?? ''), classId);
-            sections?.then((sectionValue) {
-              _selectedSection = sectionValue.sections[0].name;
-              sectionId = sectionValue.sections[0].id;
-            });
+          int classIndex =
+              AllClasses.classes.indexWhere((element) => value == element.name);
+          classId = AllClasses.classes[classIndex].id;
+
+          sections = getAllSection(int.parse(_id ?? ''), classId);
+          sections?.then((sectionValue) {
+            _selectedSection = sectionValue.sections[0].name;
+            sectionId = sectionValue.sections[0].id;
           });
-        },
-        value: _selectedClass,
-      ),
+        });
+      },
+      hintText: 'Select a Class',
     );
   }
 
   Widget getSectionDropdown(List<Section> sectionlist) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-      child: DropdownButton(
-        elevation: 0,
-        isExpanded: true,
-        items: sectionlist.map((item) {
-          return DropdownMenuItem<String>(
-            value: item.name,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0, bottom: 10),
-              child: Text(item.name ?? '',
-                  style: Theme.of(context).textTheme.headlineMedium),
-            ),
-          );
-        }).toList(),
-        style: Theme.of(context)
-            .textTheme
-            .headlineMedium
-            ?.copyWith(fontSize: ScreenUtil().setSp(15.0)),
-        onChanged: (value) {
-          setState(() {
-            _selectedSection = '$value';
+    return CustomBottomSheetDropdown(
+      items: sectionlist.map((e) => e.name ?? '').toList(),
+      selectedValue: _selectedSection,
+      onChanged: (value) {
+        setState(() {
+          _selectedSection = '$value';
 
-            sectionId = getCode(sectionlist, '$value');
-          });
-        },
-        value: _selectedSection,
-      ),
+          sectionId = getCode(sectionlist, '$value');
+        });
+      },
+      hintText: 'Select a Section',
     );
+    // Container(
+    //   width: screenWidth(390, context),
+    //   height: 50,
+    //   padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+    //   decoration: BoxDecoration(
+    //       borderRadius: BorderRadius.circular(6), border: Border.all()),
+    //   child: DropdownButton(
+    //     elevation: 0,
+    //     isExpanded: true,
+    //     underline: Container(),
+    //     items: sectionlist.map((item) {
+    //       return DropdownMenuItem<String>(
+    //         value: item.name,
+    //         child: Text(item.name ?? '',
+    //             style: Theme.of(context).textTheme.headlineMedium),
+    //       );
+    //     }).toList(),
+    //     style: Theme.of(context)
+    //         .textTheme
+    //         .headlineMedium
+    //         ?.copyWith(fontSize: ScreenUtil().setSp(15.0)),
+    //     onChanged: (value) {
+    //       setState(() {
+    //         _selectedSection = '$value';
+
+    //         sectionId = getCode(sectionlist, '$value');
+    //       });
+    //     },
+    //     value: _selectedSection,
+    //   ),
+    // );
   }
 
   Widget getSubjectDropdown(List<TeacherSubject> subjectList) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-      child: DropdownButton(
-        elevation: 0,
-        isExpanded: true,
-        items: subjectList.map((item) {
-          return DropdownMenuItem<String>(
-            value: item.subjectName,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0, bottom: 10),
-              child: Text(
-                item.subjectName ?? '',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ),
-          );
-        }).toList(),
-        style: Theme.of(context)
-            .textTheme
-            .headlineMedium
-            ?.copyWith(fontSize: 15.0),
-        onChanged: (value) {
-          setState(() {
-            _selectedSubject = '$value';
-            //subjectId = getSubjectId(subjectList, '$value');
-            int subjectIndex = subjectList
-                .indexWhere((element) => element.subjectName == value);
-            subjectId = subjectList[subjectIndex].subjectId;
-            print("Subject code : $subjectId");
-          });
-        },
-        value: _selectedSubject,
-      ),
+    return CustomBottomSheetDropdown(
+      items: subjectList.map((e) => e.subjectName ?? '').toList(),
+      selectedValue: _selectedSubject,
+      onChanged: (value) {
+        setState(() {
+          _selectedSubject = '$value';
+          subjectId = getSubjectId(subjectList, '$value');
+          int subjectIndex =
+              subjectList.indexWhere((element) => element.subjectName == value);
+          subjectId = subjectList[subjectIndex].subjectId;
+          print("Subject code : $subjectId");
+        });
+      },
+      hintText: 'Select a Subject',
     );
+    // Container(
+    //   width: screenWidth(390, context),
+    //   height: 50,
+    //   padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+    //   decoration: BoxDecoration(
+    //       borderRadius: BorderRadius.circular(6), border: Border.all()),
+    //   child: DropdownButton(
+    //     elevation: 0,
+    //     isExpanded: true,
+    //     underline: SizedBox(),
+    //     items: subjectList.map((item) {
+    //       return DropdownMenuItem<String>(
+    //         value: item.subjectName,
+    //         child: Padding(
+    //           padding: const EdgeInsets.only(left: 8.0, bottom: 10),
+    //           child: Text(
+    //             item.subjectName ?? '',
+    //             style: Theme.of(context).textTheme.headlineMedium,
+    //           ),
+    //         ),
+    //       );
+    //     }).toList(),
+    //     style: Theme.of(context)
+    //         .textTheme
+    //         .headlineMedium
+    //         ?.copyWith(fontSize: 15.0),
+    //     onChanged: (value) {
+    //       setState(() {
+    //         _selectedSubject = '$value';
+    //         //subjectId = getSubjectId(subjectList, '$value');
+    //         int subjectIndex = subjectList
+    //             .indexWhere((element) => element.subjectName == value);
+    //         subjectId = subjectList[subjectIndex].subjectId;
+    //         print("Subject code : $subjectId");
+    //       });
+    //     },
+    //     value: _selectedSubject,
+    //   ),
+    // );
   }
 
   void uploadHomework() async {
@@ -609,6 +607,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
       if (_file != null)
         "homework_file": await MultipartFile.fromFile(_file?.path ?? ''),
     });
+    print(formData.fields);
     response = await dio.post(
       EdusApi.uploadHomework,
       data: formData,
@@ -647,6 +646,7 @@ class _AddHomeworkScrrenState extends State<AddHomeworkScrren> {
         headers: Utils.setHeader(_token.toString()));
 
     if (response.statusCode == 200) {
+      print(response.body);
       var jsonData = jsonDecode(response.body);
       if (rule == "1" || rule == "5") {
         return AdminClassList.fromJson(jsonData['data']['teacher_classes']);

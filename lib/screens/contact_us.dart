@@ -28,7 +28,7 @@ class HelpDeskMenu extends StatelessWidget {
             _contactRow(
                 'Academic Coordinator (Individual Classes)', '+94704411717'),
             _contactRow('Technical Support', '+94701677488'),
-            _contactRow('Student Consultant', '+94774487774'),
+            _contactRow('Student Consultant', '+94704411717'),
           ],
         ),
       ),
@@ -56,7 +56,7 @@ class HelpDeskMenu extends StatelessWidget {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                        // var url = Uri.parse('https://wa.me/+94704411717?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
                         UrlLauncher.launch(
                             'https://wa.me/$number?text=👋 Hi! My name is $stName, and my admission number is $stId. I\'m reaching out because I need your support. 📑 Can you please assist me?');
                       },

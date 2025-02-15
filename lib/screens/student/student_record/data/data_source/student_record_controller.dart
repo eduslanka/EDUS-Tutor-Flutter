@@ -4,8 +4,8 @@ import 'package:edus_tutor/utils/apis/Apis.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../../app_service/app_service.dart';
 import '../../../../../utils/Utils.dart';
+import '../../../../../utils/model/student_user_model.dart';
 import '../model/student_record_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,6 +28,31 @@ class RecordedClassController extends GetxController {
 
   Future<void> check() async {
     isAllow.value = await isAllowTheUser();
+  }
+
+  Future<bool> isAllowTheUser() async {
+    try {
+      final email = await Utils.getStringValue('email');
+      final password = await Utils.getStringValue('password');
+      final response = await http.post(
+        Uri.parse(EdusApi.login),
+        body: {
+          'email': email,
+          'password': password,
+        },
+      );
+      print(response.body);
+      final user = StudentModel.fromJson(jsonDecode(response.body));
+      // await Utils.saveStringValue('edNo', user.user.);
+      await Utils.saveBooleanValue(Utils.isAllowKey,
+          user.user.activeStatus == 1 && user.studentHaveDueFees == false);
+      return user.user.activeStatus == 1 && user.studentHaveDueFees == false;
+    } catch (e, t) {
+      print(e);
+      print(t);
+      await Utils.saveBooleanValue(Utils.isAllowKey, false);
+      return false;
+    }
   }
 
   Future<void> fetchRecordedClasses() async {

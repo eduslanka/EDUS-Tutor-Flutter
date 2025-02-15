@@ -34,6 +34,7 @@ class _SettingScreenState extends State<SettingScreen> {
   final GlobalKey _scaffold = GlobalKey();
   String _fullName = '';
   String _id = 'XXXX';
+  String edNumber = '';
   @override
   void initState() {
     super.initState();
@@ -47,6 +48,11 @@ class _SettingScreenState extends State<SettingScreen> {
     Utils.getStringValue('full_name').then((value) {
       setState(() {
         _fullName = value ?? 'Mr/s x';
+      });
+    });
+    Utils.getStringValue('edNumber').then((value) {
+      setState(() {
+        edNumber = value ?? 'XXXX';
       });
     });
     Utils.getStringValue('id').then((value) {
@@ -144,7 +150,7 @@ class _SettingScreenState extends State<SettingScreen> {
               Navigator.of(context).push(ScaleRoute(
                   page: HelpDeskMenu(
                 stName: _fullName,
-                stId: _id,
+                stId: edNumber,
               )));
             },
             leading: CircleAvatar(

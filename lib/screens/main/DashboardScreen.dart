@@ -167,46 +167,49 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 context,
                 controller: persistentTabController,
                 screens: [
-                  isBlock
-                      ? const FeeReminderScreen()
-                      : widget.role == "3"
-                          ? ChildHome(
-                              AppFunction.students,
-                              AppFunction.studentIcons,
-                              widget.childUID,
-                              widget.image,
-                              widget.token,
-                              widget.childName)
-                          : Home(widget.titles, widget.images, widget.role),
+                  // isBlock
+                  //     ? const FeeReminderScreen()
+                  //     :
+                  widget.role == "3"
+                      ? ChildHome(
+                          AppFunction.students,
+                          AppFunction.studentIcons,
+                          widget.childUID,
+                          widget.image,
+                          widget.token,
+                          widget.childName)
+                      : Home(widget.titles, widget.images, widget.role),
                   NotificationScreen(_id),
                   widget.role == "4"
                       ? const StudentSubjectAttendanceHome(
                           isHome: true,
                         )
                       : const DBStudentFees(),
-                  isBlock
-                      ? const FeeReminderScreen()
-                      : widget.role == "4"
-                          ? const TeacherMyRoutineScreen(
-                              isHome: true,
-                            )
-                          : DBStudentRoutine(
-                              id: widget.role == "3"
-                                  ? widget.childUID.toString()
-                                  : _id.toString(),
-                              isHome: false,
-                            ),
-                  isBlock
-                      ? const FeeReminderScreen()
-                      : widget.role == "4"
-                          ? DBTeacherHW(
-                              AppFunction.homework, AppFunction.homeworkIcons)
-                          : DBStudentProfile(
-                              id: widget.role == "3"
-                                  ? widget.childUID.toString()
-                                  : _id.toString(),
-                              image: widget.image,
-                            ),
+                  // isBlock
+                  //     ? const FeeReminderScreen()
+                  //     :
+                  widget.role == "4"
+                      ? const TeacherMyRoutineScreen(
+                          isHome: true,
+                        )
+                      : DBStudentRoutine(
+                          id: widget.role == "3"
+                              ? widget.childUID.toString()
+                              : _id.toString(),
+                          isHome: false,
+                        ),
+                  // isBlock
+                  //     ? const FeeReminderScreen()
+                  //     :
+                  widget.role == "4"
+                      ? DBTeacherHW(
+                          AppFunction.homework, AppFunction.homeworkIcons)
+                      : DBStudentProfile(
+                          id: widget.role == "3"
+                              ? widget.childUID.toString()
+                              : _id.toString(),
+                          image: widget.image,
+                        ),
                 ],
                 items: [
                   PersistentBottomNavBarItem(

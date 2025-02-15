@@ -46,7 +46,7 @@ class FeeReminderScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                       horizontal: screenWidth(60, context)),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical:  12),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(24),
                         color: Utils.baseBlue),
@@ -59,7 +59,8 @@ class FeeReminderScreen extends StatelessWidget {
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.w500),
-                        ),w8,
+                        ),
+                        w8,
                         const Icon(
                           Icons.arrow_forward,
                           color: Colors.white,
@@ -96,9 +97,9 @@ class FeeReminderScreen extends StatelessWidget {
           children: [
             GestureDetector(
                 onTap: () {
-                  // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                  // var url = Uri.parse('https://wa.me/+94704411717?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
                   UrlLauncher.launch(
-                      'https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                      'https://wa.me/+94704411717?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
                 },
                 child: SvgPicture.asset(
                   'assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',
@@ -108,7 +109,7 @@ class FeeReminderScreen extends StatelessWidget {
             w16,
             GestureDetector(
                 onTap: () {
-                  UrlLauncher.launch("tel:+94774487774");
+                  UrlLauncher.launch("tel:+94704411717");
                 },
                 child: SvgPicture.asset(
                   'assets/config/phone-call-svgrepo-com.svg',

@@ -165,7 +165,7 @@ class _HomeState extends State<Home> {
         rtlValue = value;
       });
     });
-
+    _systemController.check();
     //init settings for android
     var initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');

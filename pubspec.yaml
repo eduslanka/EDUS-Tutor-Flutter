@@ -23,6 +23,7 @@ dependencies:
   flutter_local_notifications: ^17.2.2
   webview_flutter: ^4.2.1
   http: ^1.1.0
+  open_filex: ^4.6.0
   # open_filex: ^4.6.0
   open_file: ^3.5.10
   path_provider: ^2.1.1
@@ -85,6 +86,7 @@ dependencies:
     path: ./age
   themify_flutter:
     path: ./themify_flutter
+  video_player: ^2.9.2
   fluttertoast: ^8.2.12
   
 

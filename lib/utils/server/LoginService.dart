@@ -28,11 +28,12 @@ class Login {
     dynamic isAdministrator;
     dynamic token;
     dynamic studentId;
-    dynamic message;
+    dynamic message = 'un expected error';
     dynamic fullName;
     dynamic phone;
     dynamic isBlock;
-
+    dynamic edNumber;
+    // dynamic studentFullName;
     bool isNullOrEmpty(Object o) => o == "";
 
     try {
@@ -57,8 +58,11 @@ class Login {
         token = user['data']['accessToken'];
         fullName = user['data']['user']['full_name'] ?? "";
         phone = user['data']['user']['phone_number'] ?? "";
+
         if (rule == 2 || rule == "2") {
           studentId = user['data']['userDetails']['s_id'];
+          edNumber = user['data']['userDetails']['ed_number'];
+          fullName = user['data']['userDetails']['full_name'];
         }
         if (rule == 1 || rule == 4 || rule == 5) {
           image = user['data']['userDetails']['staff_photo'] == null
@@ -91,6 +95,7 @@ class Login {
 
           if (rule == 2 || rule == "2") {
             saveIntValue('studentId', int.parse(studentId.toString()));
+            saveStringValue('edNumber', edNumber);
           }
           final SystemController systemController = Get.put(SystemController());
           await systemController.getSystemSettings();

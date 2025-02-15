@@ -285,7 +285,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           isResponse = false;
                         });
-                        Utils.showToast(result);
+                        if (result == 'un expected error') {
+                          Utils.showCommentDialog(context);
+                        } else {
+                          Utils.showToast(result);
+                        }
                       });
                     } else {
                       setState(() {
@@ -370,7 +374,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             GestureDetector(
                 onTap: () {
-                  // var url = Uri.parse('https://wa.me/+94774487774?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                  // var url = Uri.parse('https://wa.me/+94704411717?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
                   UrlLauncher.launch(
                       'https://wa.me/+94701677488?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
                 },

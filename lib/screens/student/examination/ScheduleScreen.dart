@@ -91,7 +91,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ],
               );
             } else {
-              return Utils.noDataWidget();
+              return Utils.noDataWidget(
+                  text:
+                      'There are currently no scheduled exams. Please use this time to review your notes and study past materials.');
             }
           } else {
             return const Center(

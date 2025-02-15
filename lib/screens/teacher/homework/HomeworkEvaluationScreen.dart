@@ -51,8 +51,8 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
             int.tryParse(widget.sectionId.toString()) ?? 0,
             int.tryParse(widget.homeworkId.toString()) ?? 0);
         homeWorks = fetchHomeworkDetails(
-            int.tryParse(widget.classId) ?? 0,
-            int.tryParse(widget.sectionId) ?? 0,
+            int.tryParse(widget.classId.toString()) ?? 0,
+            int.tryParse(widget.sectionId.toString()) ?? 0,
             int.tryParse(widget.homeworkId.toString()) ?? 0);
       });
     });
@@ -497,6 +497,8 @@ class _HomeworkEvaluationScreenState extends State<HomeworkEvaluationScreen> {
       return StudentEvaluationList.fromJson(
           jsonData['data']['student_homeworks']);
     } else {
+      print(EdusApi.homeworkEvaluationList(classId, sectionId, homeworkId));
+      print(response.body);
       throw Exception('failed to load');
     }
   }

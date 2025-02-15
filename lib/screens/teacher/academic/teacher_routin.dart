@@ -143,7 +143,7 @@ class _TeacherMyRoutineScreenState extends State<TeacherMyRoutineScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 0.0),
                     child: Text(
-                      widget.isHome ? "Classes".tr : "TimeTable".tr,
+                      widget.isHome ? "TimeTable".tr : "TimeTable".tr,
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium

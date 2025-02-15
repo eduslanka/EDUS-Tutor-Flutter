@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:edus_tutor/config/app_size.dart';
 
 import '../../../../utils/Utils.dart';
-import '../../../../webview/launch_webview.dart';
 import '../data/model/student_record_model.dart';
 import 'video_player_page.dart';
 
@@ -18,19 +17,23 @@ class RecordedClassCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        if (isAllow) {
+      onTap: () async {
+        final isActive = await Utils.getBooleanValue(Utils.isAllowKey);
+        if (isActive) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => LaunchWebView(
-                launchUrl: recordedClass.downloadPath,
-                title: recordedClass.className,
+              builder: (context) => GoogleDriveVideoPlayer(
+                driveLink: recordedClass.downloadPath,
+                title: recordedClass.onlineClassTopic ?? '',
+                // title: recordedClass.className,
               ),
             ),
           );
         } else {
-          Utils.showToast('Action denied. Contact Admin...!.');
+          Utils.showCommentDialog(
+            context,
+          );
         }
       },
       child: Card(

@@ -71,7 +71,9 @@ class _NoticeScreenState extends State<NoticeScreen> {
                 },
               );
             } else {
-              return Utils.noDataWidget();
+              return Utils.noDataWidget(
+                  text:
+                      'There are currently no updates or announcements at this time. Please check back later for any new information.');
             }
           } else {
             return const Center(

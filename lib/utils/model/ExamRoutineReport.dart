@@ -98,8 +98,8 @@ class ExamType {
   String? title;
 
   factory ExamType.fromJson(Map<String, dynamic> json) => ExamType(
-        id: json["id"],
-        title: json["title"],
+        id: json["id"] ?? '',
+        title: json["title"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
