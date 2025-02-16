@@ -36,6 +36,10 @@
             <meta-data
                 android:name="com.google.android.gms.wallet.api.enabled"
                 android:value="true" />
+                <meta-data
+    android:name="io.flutter.embedding.android.EnableImpeller"
+    android:value="false"/>
+
             <!-- Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash
                  screen fades out. A splash screen is useful to avoid any visual
@@ -68,15 +72,16 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <provider
-            android:name="com.pichillilorenzo.flutter_inappwebview.InAppWebViewFileProvider"
-            android:authorities="${applicationId}.flutter_inappwebview.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
+<!-- <provider
+    android:name="com.pichillilorenzo.flutter_inappwebview_android.InAppWebViewFileProvider"
+    android:authorities="${applicationId}.flutter_inappwebview_android.fileprovider"
+    android:exported="false"
+    android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/provider_paths" />
+</provider> -->
+
 
         <service
             android:name="org.jitsi.meet.sdk.ConnectionService"
