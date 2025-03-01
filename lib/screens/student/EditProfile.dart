@@ -2,11 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:edus_tutor/config/app_size.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker_fork/flutter_cupertino_date_picker_fork.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as DIO;
 import 'package:edus_tutor/utils/CustomAppBarWidget.dart';
@@ -127,17 +125,6 @@ Future saveAll() async {
     }
   }
 
-  // Future saveAll() async {
-  //   if (_formKey.currentState?.validate() ?? false) {
-  //     await updateData(fieldName: 'first_name', value: _firstNameCtrl.text);
-  //     await updateData(fieldName: 'last_name', value: _lastNameCtrl.text);
-  //     await updateData(fieldName: 'current_address', value: _addressCtrl.text);
-  //     await updateData(fieldName: 'date_of_birth', value: _dobController.text);
-  //     if (_file != null) await updateData(fieldName: 'student_photo');
-  //     Utils.showToast('Profile updated successfully');
-  //     Navigator.of(context).pop(widget.updateData!(1));
-  //   }
-  // }
 
   @override
   void initState() {

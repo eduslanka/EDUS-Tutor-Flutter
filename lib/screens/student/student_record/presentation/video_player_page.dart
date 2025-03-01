@@ -30,23 +30,32 @@ class _GoogleDriveVideoPlayerState extends State<GoogleDriveVideoPlayer> {
     final regex = RegExp(r'd/(.*?)/');
     final match = regex.firstMatch(driveLink);
     final fileId = match?.group(1);
-
+    print('drive link ${driveLink}');
     if (fileId == null) throw Exception("Invalid Google Drive link");
-
-    final exportUrl = "https://drive.google.com/uc?id=$fileId&export=download";
+    final apiKey = "AIzaSyD4Ozr2Trkmkode-ND4p0lEYrCMmKKJMDA";
+    final exportUrl =
+        "https://www.googleapis.com/drive/v3/files/$fileId?alt=media&key=$apiKey";
+    // final exportUrl = "https://drive.google.com/uc?id=$fileId&export=download";
+    //  final exportUrl = "https://drive.google.com/uc?export=download&id=1N4Axh6LglNQQkb1sVNoF_gsBGHO7RPGR";
 
     final response = await http.head(Uri.parse(exportUrl));
+    print('response header ${response.headers}');
+    print('response ${response.body}');
     if (response.statusCode == 200) {
       return exportUrl;
     } else {
       throw Exception("Unable to access Google Drive file.");
     }
   }
+String getGoogleDriveStreamUrl(String fileId) {
+  return "https://drive.google.com/file/d/$fileId/preview";
+}
 
   Future<void> _initializeVideoPlayer() async {
     try {
-      final directUrl = await getDirectVideoUrl(widget.driveLink);
-
+      final directUrl = await getDirectVideoUrl(
+          widget.driveLink);
+      print(directUrl);
       final controller = VideoPlayerController.network(directUrl);
       await controller.initialize();
       if (mounted) {
@@ -63,6 +72,7 @@ class _GoogleDriveVideoPlayerState extends State<GoogleDriveVideoPlayer> {
           _isLoading = false;
         });
       }
+      print('Error: ${e.toString()}');
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: ${e.toString()}')),

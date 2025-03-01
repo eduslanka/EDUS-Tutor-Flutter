@@ -45,8 +45,8 @@ android {
 
     defaultConfig {
         applicationId = "com.edus.edustutor"
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdk = 24
+        targetSdk = 34
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled true
@@ -54,10 +54,10 @@ android {
 
    signingConfigs {
     release {
-        keyAlias = 'upload'
-        keyPassword = '123456'
-        storeFile = file('/Users/ifix/Work/Edus/EDUS-Tutor-Flutter/android/app/eduslms.jks')
-        storePassword = '123456'
+        keyAlias = keystoreProperties['alias']
+        keyPassword = keystoreProperties['keyPassword']
+        storeFile = keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+        storePassword = keystoreProperties['storePassword']
     }
 }
 
