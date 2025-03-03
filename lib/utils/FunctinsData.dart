@@ -112,7 +112,7 @@ class AppFunction {
     //  'Dormitory',
 
     'More',
-    'Edus Resources'
+    'EDUS Resources'
   ];
   static var studentIcons = [
     //  'assets/images/routine.png',

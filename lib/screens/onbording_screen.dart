@@ -267,7 +267,7 @@ class _OnbordingScreenState extends State<OnbordingScreen> {
         Column(
           children: [
             const Text(
-              'Edus Resources',
+              'EDUS Resources',
               style: TextStyle(fontSize: 12),
             ),
             h8,

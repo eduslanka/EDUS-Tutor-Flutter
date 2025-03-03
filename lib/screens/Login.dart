@@ -376,7 +376,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onTap: () {
                   // var url = Uri.parse('https://wa.me/+94704411717?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
                   UrlLauncher.launch(
-                      'https://wa.me/+94701677488?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
+                      'https://wa.me/+94707771609?text=👋 Hi, I would like to join EDUS Classes. Please help me to register as a student.');
                 },
                 child: SvgPicture.asset(
                   'assets/config/whats-app-whatsapp-whatsapp-icon-svgrepo-com.svg',
@@ -386,7 +386,7 @@ class _LoginScreenState extends State<LoginScreen> {
             w16,
             GestureDetector(
                 onTap: () {
-                  UrlLauncher.launch("tel:+94701677488");
+                  UrlLauncher.launch("tel:+94707771609");
                 },
                 child: SvgPicture.asset(
                   'assets/config/phone-call-svgrepo-com.svg',
