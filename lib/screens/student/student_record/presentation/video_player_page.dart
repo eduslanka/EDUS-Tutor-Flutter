@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../../webview/launch_webview.dart';
+
 class GoogleDriveVideoPlayer extends StatefulWidget {
   final String driveLink;
   final String title;
@@ -44,7 +46,10 @@ class _GoogleDriveVideoPlayerState extends State<GoogleDriveVideoPlayer> {
     if (response.statusCode == 200) {
       return exportUrl;
     } else {
-      throw Exception("Unable to access Google Drive file.");
+      Navigator.pop(context);
+     await Navigator.push(context, MaterialPageRoute(builder: (_)=>LaunchWebView(launchUrl: driveLink,)));
+      // throw Exception("Unable to access Google Drive file.");
+      return'';
     }
   }
 String getGoogleDriveStreamUrl(String fileId) {
@@ -74,9 +79,9 @@ String getGoogleDriveStreamUrl(String fileId) {
       }
       print('Error: ${e.toString()}');
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.toString()}')),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text('Error: ${e.toString()}')),
+      // );
     }
   }
 
